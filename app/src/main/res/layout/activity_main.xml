@@ -4,9 +4,10 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="right"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/restart_button"
@@ -21,36 +22,52 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Quit" />
+
     </LinearLayout>
 
     <com.example.palace.view
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50" />
+        android:layout_weight="1" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/takepile"
-            android:layout_width="match_parent"
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take Pile" />
+            android:layout_weight="0"
+            android:text="Button" />
 
-        <Button
-            android:id="@+id/playcard"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play Card" />
+            android:layout_weight="0"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Switch " />
+            <Button
+                android:id="@+id/takepile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Take Pile" />
+
+            <Button
+                android:id="@+id/playcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Play Card" />
+
+            <Button
+                android:id="@+id/switchcard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Switch " />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
