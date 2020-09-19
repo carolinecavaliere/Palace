@@ -13,6 +13,7 @@ public class view extends SurfaceView {
     Paint cardBackPaint = new Paint();
     Paint textPaint = new Paint();
     Paint cardOutlinePaint = new Paint();
+    float displayConvert = getResources().getDisplayMetrics().density;
 
     public view(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -27,12 +28,13 @@ public class view extends SurfaceView {
         cardOutlinePaint.setColor(Color.BLACK);
         cardOutlinePaint.setStyle(Paint.Style.STROKE);
         cardOutlinePaint.setStrokeWidth(10);
+
     }
 
     @Override
     public void onDraw(Canvas canvas){
         setBackgroundColor(Color.GREEN);
-        canvas.drawRect(1000,500, 1100, 650, cardPaint);
+        canvas.drawRect(displayConvert*1000,displayConvert*500, displayConvert*1100, displayConvert*650, cardPaint);
     }
 
 }
