@@ -28,6 +28,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="50" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/takepile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Pile" />
+
+        <Button
+            android:id="@+id/playcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play Card" />
+
+        <Button
+            android:id="@+id/switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Switch " />
+    </LinearLayout>
+
 </LinearLayout>
 
 
