@@ -34,15 +34,13 @@ public class view extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas){
         setBackgroundColor(Color.GREEN);
-        canvas.drawRect(displayConvert*1000,displayConvert*500, displayConvert*1100, displayConvert*650, cardPaint);
+        canvas.drawRect(displayConvert*500,displayConvert*300, displayConvert*600, displayConvert*450, cardPaint);
         /**
          External Citation
-         Date: 14 September 2015
-         Problem: Could not get the background color of my button
-         to change
+         Date: 19 September 2020
+         Problem: had to make pixels universal across devices
          Resource:
-         http://stackoverflow.com/questions/7957494/change-
-         background-color-of-a-button-in-an-android-application
+         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
          Solution: I used the example code from this post.
          */
 
