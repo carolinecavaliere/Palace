@@ -50,7 +50,7 @@ public class view extends SurfaceView {
     }
 
     public void drawCard(Canvas canvas, float left, float top, int rank){
-        if(rank==-1){
+        if(rank==-1){ //card back case
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
 
         }
