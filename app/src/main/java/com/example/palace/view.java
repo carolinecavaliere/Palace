@@ -35,6 +35,17 @@ public class view extends SurfaceView {
     public void onDraw(Canvas canvas){
         setBackgroundColor(Color.GREEN);
         canvas.drawRect(displayConvert*1000,displayConvert*500, displayConvert*1100, displayConvert*650, cardPaint);
+        /**
+         External Citation
+         Date: 14 September 2015
+         Problem: Could not get the background color of my button
+         to change
+         Resource:
+         http://stackoverflow.com/questions/7957494/change-
+         background-color-of-a-button-in-an-android-application
+         Solution: I used the example code from this post.
+         */
+
     }
 
 }
