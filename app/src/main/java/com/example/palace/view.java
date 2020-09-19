@@ -33,7 +33,7 @@ public class view extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        setBackgroundColor(Color.GREEN);
+        setBackgroundColor(0xFF31B94D);
         canvas.drawRect(displayConvert*500,displayConvert*350, displayConvert*550, displayConvert*450, cardPaint);
         /**
          External Citation
