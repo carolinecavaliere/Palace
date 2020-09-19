@@ -38,7 +38,6 @@ public class view extends SurfaceView {
         cardOutlinePaint.setColor(Color.BLACK);
         cardOutlinePaint.setStyle(Paint.Style.STROKE);
         cardOutlinePaint.setStrokeWidth(10);
-
     }
 
     @Override
@@ -50,6 +49,8 @@ public class view extends SurfaceView {
     }
 
     public void drawCard(Canvas canvas, float left, float top, int rank){
+
+        canvas.drawRect(displayConvert*left,displayConvert*top, displayConvert*(left+75), displayConvert*(top+100), cardOutlinePaint);
         if(rank==-1){
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
 
@@ -72,7 +73,6 @@ public class view extends SurfaceView {
                 canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
         }
-        canvas.drawRect(displayConvert*left,displayConvert*top, displayConvert*(left+75), displayConvert*(top+100), cardOutlinePaint);
         setBackgroundColor(0xFF31B94D);
         canvas.drawRect(displayConvert*500,displayConvert*350, displayConvert*550, displayConvert*450, cardPaint);
         /**
