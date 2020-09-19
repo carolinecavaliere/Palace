@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -14,6 +15,14 @@ public class view extends SurfaceView {
     Paint textPaint = new Paint();
     Paint cardOutlinePaint = new Paint();
     float displayConvert = getResources().getDisplayMetrics().density;
+    /**
+     External Citation
+     Date: 19 September 2020
+     Problem: had to make pixels universal across devices
+     Resource:
+     https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
+     Solution: I used the example code from this post.
+     */
 
     public view(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -24,7 +33,8 @@ public class view extends SurfaceView {
         cardBackPaint.setStyle(Paint.Style.FILL);
         cardBackPaint.setColor(Color.RED);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(20);
+        textPaint.setTextSize(40);
+        textPaint.setTypeface(Typeface.SANS_SERIF);
         cardOutlinePaint.setColor(Color.BLACK);
         cardOutlinePaint.setStyle(Paint.Style.STROKE);
         cardOutlinePaint.setStrokeWidth(10);
@@ -33,16 +43,44 @@ public class view extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        setBackgroundColor(Color.GREEN);
-        canvas.drawRect(displayConvert*1000,displayConvert*500, displayConvert*1100, displayConvert*650, cardPaint);
+        setBackgroundColor(0xFF31B94D);
+        drawCard(canvas, 500, 350, 10);
+
+
+    }
+
+    public void drawCard(Canvas canvas, float left, float top, int rank){
+        if(rank==-1){ //card back case
+            canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
+
+        }
+        else {
+            canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardPaint);
+            if(rank>1&&rank<11){
+                canvas.drawText(""+rank,displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            }
+            else if(rank==11){
+                canvas.drawText("J",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            }
+            else if(rank==12){
+                canvas.drawText("Q",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            }
+            else if(rank==13){
+                canvas.drawText("K",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            }
+            else if(rank==14){
+                canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            }
+        }
+        canvas.drawRect(displayConvert*left,displayConvert*top, displayConvert*(left+75), displayConvert*(top+100), cardOutlinePaint);
+        setBackgroundColor(0xFF31B94D);
+        canvas.drawRect(displayConvert*500,displayConvert*350, displayConvert*550, displayConvert*450, cardPaint);
         /**
          External Citation
-         Date: 14 September 2015
-         Problem: Could not get the background color of my button
-         to change
+         Date: 19 September 2020
+         Problem: had to make pixels universal across devices
          Resource:
-         http://stackoverflow.com/questions/7957494/change-
-         background-color-of-a-button-in-an-android-application
+         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
          Solution: I used the example code from this post.
          */
 
