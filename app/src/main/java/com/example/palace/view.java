@@ -56,7 +56,7 @@ public class view extends SurfaceView {
         }
         else {
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardPaint);
-            if(rank>1&&rank<11){
+            if(rank>1&&rank<11){//standard cards
                 canvas.drawText(""+rank,displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
             else if(rank==11){
