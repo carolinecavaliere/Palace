@@ -43,17 +43,16 @@ public class view extends SurfaceView {
     @Override
     public void onDraw(Canvas canvas){
         setBackgroundColor(0xFF31B94D);
-        drawCard(canvas, 500, 350, 10);
-
+        drawCard(canvas, 600, 350, 10);
+        drawCard(canvas, 400, 350, 14);
+        drawCard(canvas, 200, 350, 11);
 
     }
 
-    public void drawCard(Canvas canvas, float left, float top, int rank){
-
+    public void drawCard(Canvas canvas, float left, float top, int rank) {
         canvas.drawRect(displayConvert*left,displayConvert*top, displayConvert*(left+75), displayConvert*(top+100), cardOutlinePaint);
         if(rank==-1){
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
-
         }
         else {
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardPaint);
@@ -74,7 +73,6 @@ public class view extends SurfaceView {
             }
         }
         setBackgroundColor(0xFF31B94D);
-        canvas.drawRect(displayConvert*500,displayConvert*350, displayConvert*550, displayConvert*450, cardPaint);
         /**
          External Citation
          Date: 19 September 2020
