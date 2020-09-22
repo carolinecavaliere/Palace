@@ -14,18 +14,19 @@
             android:layout_weight="50" />
 
         <LinearLayout
+            android:id="@+id/gameButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="20"
-            android:layout_marginBottom="20"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/playcard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10"
+                android:layout_marginBottom="15dp"
                 android:background="#CC49E3"
                 android:text="Play Card" />
 
@@ -39,10 +40,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/optionButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20"
-            android:layout_marginRight="20"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:gravity="right"
             android:orientation="vertical">
 
