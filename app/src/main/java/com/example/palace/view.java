@@ -33,7 +33,7 @@ public class view extends SurfaceView {
         cardBackPaint.setStyle(Paint.Style.FILL);
         cardBackPaint.setColor(Color.RED);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(40);
+        textPaint.setTextSize(displayConvert * 20f);
         textPaint.setTypeface(Typeface.SANS_SERIF);
         cardOutlinePaint.setColor(Color.BLACK);
         cardOutlinePaint.setStyle(Paint.Style.STROKE);
@@ -42,22 +42,25 @@ public class view extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        setBackgroundColor(0xFF31B94D);//"pool table" green
-        drawCard(canvas, 600, 350, 10);
-        drawCard(canvas, 400, 350, 14);
-        drawCard(canvas, 200, 350, 11);
+        setBackgroundColor(0xFF31B94D);
+        super.onDraw(canvas);
+
+        float x = (canvas.getWidth()/2f);
+        float y = (canvas.getHeight()/2f);
+
+        drawCard(canvas, x, y, 10);
 
     }
 
     public void drawCard(Canvas canvas, float left, float top, int rank) {
-        canvas.drawRect(displayConvert*left,displayConvert*top, displayConvert*(left+75), displayConvert*(top+100), cardOutlinePaint);
+        canvas.drawRect(left,top, (left + displayConvert*75), (top + displayConvert*100), cardOutlinePaint);
         if(rank==-1){
             canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
         }
         else {
-            canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardPaint);
+            canvas.drawRect(left, top, (displayConvert*75 + left), displayConvert * 100 + top, cardPaint);
             if(rank>1&&rank<11){//standard cards
-                canvas.drawText(""+rank,displayConvert*(left+10),displayConvert*(top+25),textPaint);
+                canvas.drawText(""+rank,displayConvert*10 + left,displayConvert*25 + top,textPaint);
             }
             else if(rank==11){
                 canvas.drawText("J",displayConvert*(left+10),displayConvert*(top+25),textPaint);
@@ -72,7 +75,15 @@ public class view extends SurfaceView {
                 canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
         }
-
+        setBackgroundColor(0xFF31B94D);
+        /**
+         External Citation
+         Date: 19 September 2020
+         Problem: had to make pixels universal across devices
+         Resource:
+         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
+         Solution: I used the example code from this post.
+         */
 
     }
 
