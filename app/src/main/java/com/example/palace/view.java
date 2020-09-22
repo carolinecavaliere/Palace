@@ -42,7 +42,7 @@ public class view extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        setBackgroundColor(0xFF31B94D);
+        setBackgroundColor(0xFF31B94D);//"pool table" green
         drawCard(canvas, 600, 350, 10);
         drawCard(canvas, 400, 350, 14);
         drawCard(canvas, 200, 350, 11);
@@ -72,15 +72,7 @@ public class view extends SurfaceView {
                 canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
         }
-        setBackgroundColor(0xFF31B94D);
-        /**
-         External Citation
-         Date: 19 September 2020
-         Problem: had to make pixels universal across devices
-         Resource:
-         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
-         Solution: I used the example code from this post.
-         */
+
 
     }
 
