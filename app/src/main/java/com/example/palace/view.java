@@ -55,24 +55,24 @@ public class view extends SurfaceView {
     public void drawCard(Canvas canvas, float left, float top, int rank) {
         canvas.drawRect(left,top, (left + displayConvert*75), (top + displayConvert*100), cardOutlinePaint);
         if(rank==-1){
-            canvas.drawRect(displayConvert * left, displayConvert * top, displayConvert * (left + 75), displayConvert * (top + 100), cardBackPaint);
+            canvas.drawRect(left, top, (displayConvert*75) + left, (displayConvert * 100) + top, cardBackPaint);
         }
         else {
-            canvas.drawRect(left, top, (displayConvert*75 + left), displayConvert * 100 + top, cardPaint);
+            canvas.drawRect(left, top, (displayConvert*75) + left, (displayConvert * 100) + top, cardPaint);
             if(rank>1&&rank<11){//standard cards
-                canvas.drawText(""+rank,displayConvert*10 + left,displayConvert*25 + top,textPaint);
+                canvas.drawText(""+rank,(displayConvert*10) + left,(displayConvert*25) + top,textPaint);
             }
             else if(rank==11){
-                canvas.drawText("J",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+                canvas.drawText("J",(displayConvert*10) + left,(displayConvert*25)+top,textPaint);
             }
             else if(rank==12){
-                canvas.drawText("Q",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+                canvas.drawText("Q",(displayConvert*10) + left,(displayConvert*25)+top,textPaint);
             }
             else if(rank==13){
-                canvas.drawText("K",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+                canvas.drawText("K",(displayConvert*10) + left,(displayConvert*25)+top,textPaint);
             }
             else if(rank==14){
-                canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+                canvas.drawText("A",(displayConvert*10) + left,(displayConvert*25)+top,textPaint);
             }
         }
         setBackgroundColor(0xFF31B94D);
