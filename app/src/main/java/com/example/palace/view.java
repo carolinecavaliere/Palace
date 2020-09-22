@@ -8,6 +8,9 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
+/**
+ * This class draws the players' cards onto the screen in the proper format for Palace.
+ */
 public class view extends SurfaceView {
 
     Paint cardPaint = new Paint();
@@ -17,8 +20,6 @@ public class view extends SurfaceView {
     float displayConvert = getResources().getDisplayMetrics().density;
     float cardWidth = displayConvert * 75;
     float cardHeight = displayConvert * 100;
-
-
     /**
      External Citation
      Date: 19 September 2020
@@ -46,7 +47,7 @@ public class view extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        setBackgroundColor(0xFF31B94D);
+        setBackgroundColor(0xFF31B94D);//"pool table" green
         super.onDraw(canvas);
 
         float xCenter = (canvas.getWidth()/2f);
@@ -75,7 +76,7 @@ public class view extends SurfaceView {
 
     public void drawCard(Canvas canvas, float left, float top, int rank) {
         canvas.drawRect(left,top, (left + displayConvert*75), (top + displayConvert*100), cardOutlinePaint);
-        if(rank <= -1){
+        if(rank <= -1){//if the rank is -1 the card is flipped over
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
             textPaint.setTextSize(displayConvert*40f);
             canvas.drawText(""+ (-1)*rank, left + cardWidth/3,top + cardHeight/2, textPaint);
@@ -86,28 +87,20 @@ public class view extends SurfaceView {
             if(rank>1&&rank<11){//standard cards
                 canvas.drawText(""+ rank,displayConvert*10 + left,displayConvert*25 + top,textPaint);
             }
-            else if(rank==11){
+            else if(rank==11){//jack
                 canvas.drawText("J",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
-            else if(rank==12){
+            else if(rank==12){//queen
                 canvas.drawText("Q",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
-            else if(rank==13){
+            else if(rank==13){//king
                 canvas.drawText("K",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
-            else if(rank==14){
+            else if(rank==14){//ace
                 canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
             }
         }
-        setBackgroundColor(0xFF31B94D);
-        /**
-         External Citation
-         Date: 19 September 2020
-         Problem: had to make pixels universal across devices
-         Resource:
-         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
-         Solution: I used the example code from this post.
-         */
+
 
     }
 
