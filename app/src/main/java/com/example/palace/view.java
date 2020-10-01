@@ -48,7 +48,7 @@ public class view extends SurfaceView {
      * Draws on a given canvas. In this case, surfaceView
      *
      * @Jimi Hayes
-     * 
+     *
      * @param canvas
      */
     @Override
@@ -99,53 +99,35 @@ public class view extends SurfaceView {
      * @param rank
      */
     public void drawCard(Canvas canvas, float left, float top, int rank) {
-        canvas.drawRect(left,top, (left + displayConvert*75), (top + displayConvert*100), cardOutlinePaint);
-        if(rank <= -1) {
+        canvas.drawRect(left, top, (left + displayConvert * 75), (top + displayConvert * 100), cardOutlinePaint);
+        if (rank <= -1) {
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
             textPaint.setTextSize(displayConvert * 40f);
             if (rank > -10 && rank <= -1) {
                 canvas.drawText("" + (-1) * rank, left + cardWidth / 3, top + cardHeight / 2, textPaint);
                 textPaint.setTextSize(displayConvert * 20f);
-            }
-            else if (rank <= -10 && rank >= -52) {
+            } else if (rank <= -10 && rank >= -52) {
                 canvas.drawText("" + (-1) * rank, left + cardWidth / 5, top + cardHeight / 2, textPaint);
                 textPaint.setTextSize(displayConvert * 20f);
-            }
-            else {
+            } else {
                 textPaint.setTextSize(displayConvert * 20f);
             }
-        }
-        else if (rank == 0) {
+        } else if (rank == 0) {
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
-        }
-        else {
+        } else {
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardPaint);
-            if(rank>1&&rank<11){//standard cards
-                canvas.drawText(""+ rank,displayConvert*10 + left,displayConvert*25 + top,textPaint);
-            }
-            else if(rank==11){
-                canvas.drawText("J",displayConvert*10 + left,displayConvert*25 + top,textPaint);
-            }
-            else if(rank==12){
-                canvas.drawText("Q",displayConvert*10 + left,displayConvert*25 + top,textPaint);
-            }
-            else if(rank==13){
-                canvas.drawText("K",displayConvert*10 + left,displayConvert*25 + top,textPaint);
-            }
-            else if(rank==14){
-                canvas.drawText("A",displayConvert*10 + left,displayConvert*25 + top,textPaint);
+            if (rank > 1 && rank < 11) {//standard cards
+                canvas.drawText("" + rank, displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 11) {
+                canvas.drawText("J", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 12) {
+                canvas.drawText("Q", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 13) {
+                canvas.drawText("K", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 14) {
+                canvas.drawText("A", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
             }
         }
-        setBackgroundColor(0xFF31B94D);
-        /**
-         External Citation
-         Date: 19 September 2020
-         Problem: had to make pixels universal across devices
-         Resource:
-         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
-         Solution: I used the example code from this post.
-         */
-
     }
 
 }
