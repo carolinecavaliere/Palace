@@ -45,8 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="20dp"
-            android:layout_weight="0"
-            android:background="#952A2A">
+            android:layout_weight="1"
+            android:background="#952A2A"
+            android:fadeScrollbars="true"
+            android:scrollbarAlwaysDrawHorizontalTrack="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,6 +137,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="end" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/cardback" />
 
             </LinearLayout>
         </HorizontalScrollView>
