@@ -67,7 +67,6 @@ public class view extends SurfaceView {
         drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, -40);
         drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, 10);
 
-
         //draw opponent's cards
         drawCard(canvas, xCenter - cardWidth/2, yMargin, 6);
         drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin, 11);
@@ -79,9 +78,9 @@ public class view extends SurfaceView {
         drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 4);
         drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 12);
 
-        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
-        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
-        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
+        //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
+        //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
+        //drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
 
 
     }
