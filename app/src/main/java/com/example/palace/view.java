@@ -44,6 +44,13 @@ public class view extends SurfaceView {
         cardOutlinePaint.setStrokeWidth(10);
     }
 
+    /**
+     * Draws on a given canvas. In this case, surfaceView
+     *
+     * @Jimi Hayes
+     *
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas){
         setBackgroundColor(0xFF31B94D);
@@ -54,61 +61,72 @@ public class view extends SurfaceView {
         float xRight = canvas.getHeight();
         float yBottom = canvas.getHeight();
         float xMargin = displayConvert*100;
-        float yMargin = displayConvert*160;
+        float yMargin = displayConvert*200;
 
         //draw deck and pile
-        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter, -50);
-        drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter, 10);
-
+        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, -40);
+        drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, 10);
 
         //draw opponent's cards
-        drawCard(canvas, xCenter - cardWidth/2, yMargin, 10);
-        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yMargin, 10);
-        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yMargin, 10);
-        drawCard(canvas, xCenter + cardWidth * 4 - cardWidth/2, yMargin, -3);
+        drawCard(canvas, xCenter - cardWidth/2, yMargin, 6);
+        drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin, 11);
+        drawCard(canvas, xCenter - cardWidth*2 - cardWidth/2, yMargin, 5);
+        drawCard(canvas, xCenter - cardWidth/2, yMargin - displayConvert*150, -3);
 
         //draw player's cards
-        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin, 10);
-        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin, 10);
-        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin, 10);
+        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin - displayConvert*100 , 4);
+        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 4);
+        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 12);
+
+        //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
+        //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
+        //drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
+
+
     }
 
+    /**
+     * Draws a card with a value. If the card value is between 1 and 14, it will display the values
+     * Ace through King accordingly. Any negative number will draw a facedown card with that positive
+     * of that number. 0 will draw a blank face down card.
+     *
+     * @Jimi Hayes
+     *
+     * @param canvas
+     * @param left
+     * @param top
+     * @param rank
+     */
     public void drawCard(Canvas canvas, float left, float top, int rank) {
-        canvas.drawRect(left,top, (left + displayConvert*75), (top + displayConvert*100), cardOutlinePaint);
-        if(rank <= -1){
+        canvas.drawRect(left, top, (left + displayConvert * 75), (top + displayConvert * 100), cardOutlinePaint);
+        if (rank <= -1) {
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
-            textPaint.setTextSize(displayConvert*40f);
-            canvas.drawText(""+ (-1)*rank, left + cardWidth/3,top + cardHeight/2, textPaint);
-            textPaint.setTextSize(displayConvert *20f);
-        }
-        else {
+            textPaint.setTextSize(displayConvert * 40f);
+            if (rank > -10 && rank <= -1) {
+                canvas.drawText("" + (-1) * rank, left + cardWidth / 3, top + cardHeight / 2, textPaint);
+                textPaint.setTextSize(displayConvert * 20f);
+            } else if (rank <= -10 && rank >= -52) {
+                canvas.drawText("" + (-1) * rank, left + cardWidth / 5, top + cardHeight / 2, textPaint);
+                textPaint.setTextSize(displayConvert * 20f);
+            } else {
+                textPaint.setTextSize(displayConvert * 20f);
+            }
+        } else if (rank == 0) {
+            canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
+        } else {
             canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardPaint);
-            if(rank>1&&rank<11){//standard cards
-                canvas.drawText(""+ rank,displayConvert*10 + left,displayConvert*25 + top,textPaint);
-            }
-            else if(rank==11){
-                canvas.drawText("J",displayConvert*(left+10),displayConvert*(top+25),textPaint);
-            }
-            else if(rank==12){
-                canvas.drawText("Q",displayConvert*(left+10),displayConvert*(top+25),textPaint);
-            }
-            else if(rank==13){
-                canvas.drawText("K",displayConvert*(left+10),displayConvert*(top+25),textPaint);
-            }
-            else if(rank==14){
-                canvas.drawText("A",displayConvert*(left+10),displayConvert*(top+25),textPaint);
+            if (rank > 1 && rank < 11) {//standard cards
+                canvas.drawText("" + rank, displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 11) {
+                canvas.drawText("J", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 12) {
+                canvas.drawText("Q", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 13) {
+                canvas.drawText("K", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+            } else if (rank == 14) {
+                canvas.drawText("A", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
             }
         }
-        setBackgroundColor(0xFF31B94D);
-        /**
-         External Citation
-         Date: 19 September 2020
-         Problem: had to make pixels universal across devices
-         Resource:
-         https://stackoverflow.com/questions/6391823/drawing-drawables-to-a-canvas-in-dp-units
-         Solution: I used the example code from this post.
-         */
-
     }
 
 }
