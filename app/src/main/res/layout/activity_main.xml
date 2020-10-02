@@ -141,9 +141,11 @@
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    app:srcCompat="@drawable/jc" />
+                    android:layout_height="150dp"
+                    android:adjustViewBounds="true"
+                    android:clickable="true"
+                    android:cropToPadding="true"
+                    app:srcCompat="@drawable/a_c" />
 
             </LinearLayout>
         </HorizontalScrollView>
