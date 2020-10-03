@@ -1,6 +1,8 @@
 package com.example.palace;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,14 +11,76 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class view extends SurfaceView {
+    int displayConvert = (int)getResources().getDisplayMetrics().density;
+    int cardWidth = displayConvert * 110;
+    int cardHeight = displayConvert * 140;
 
-    Paint cardPaint = new Paint();
-    Paint cardBackPaint = new Paint();
-    Paint textPaint = new Paint();
-    Paint cardOutlinePaint = new Paint();
-    float displayConvert = getResources().getDisplayMetrics().density;
-    float cardWidth = displayConvert * 75;
-    float cardHeight = displayConvert * 100;
+    Bitmap cardback = null;
+
+    Bitmap ace_clubs = null;
+    Bitmap ace_diamonds = null;
+    Bitmap ace_hearts = null;
+    Bitmap ace_spades = null;
+
+    Bitmap king_clubs = null;
+    Bitmap king_diamonds = null;
+    Bitmap king_hearts = null;
+    Bitmap king_spades = null;
+
+    Bitmap queen_clubs = null;
+    Bitmap queen_diamonds = null;
+    Bitmap queen_hearts = null;
+    Bitmap queen_spades = null;
+
+    Bitmap jack_clubs = null;
+    Bitmap jack_diamonds = null;
+    Bitmap jack_hearts = null;
+    Bitmap jack_spades = null;
+
+    Bitmap ten_clubs = null;
+    Bitmap ten_diamonds = null;
+    Bitmap ten_hearts = null;
+    Bitmap ten_spades = null;
+
+    Bitmap nine_clubs = null;
+    Bitmap nine_diamonds = null;
+    Bitmap nine_hearts = null;
+    Bitmap nine_spades = null;
+
+    Bitmap eight_clubs = null;
+    Bitmap eight_diamonds = null;
+    Bitmap eight_hearts = null;
+    Bitmap eight_spades = null;
+
+    Bitmap seven_clubs = null;
+    Bitmap seven_diamonds = null;
+    Bitmap seven_hearts = null;
+    Bitmap seven_spades = null;
+
+    Bitmap six_clubs = null;
+    Bitmap six_diamonds = null;
+    Bitmap six_hearts = null;
+    Bitmap six_spades = null;
+
+    Bitmap five_clubs = null;
+    Bitmap five_diamonds = null;
+    Bitmap five_hearts = null;
+    Bitmap five_spades = null;
+
+    Bitmap four_clubs = null;
+    Bitmap four_diamonds = null;
+    Bitmap four_hearts = null;
+    Bitmap four_spades = null;
+
+    Bitmap three_clubs = null;
+    Bitmap three_diamonds = null;
+    Bitmap three_hearts = null;
+    Bitmap three_spades = null;
+
+    Bitmap two_clubs = null;
+    Bitmap two_diamonds = null;
+    Bitmap two_hearts = null;
+    Bitmap two_spades = null;
 
 
     /**
@@ -32,16 +96,126 @@ public class view extends SurfaceView {
         super(context, attrs);
         setWillNotDraw(false);
 
-        cardPaint.setStyle(Paint.Style.FILL);
-        cardPaint.setColor(Color.WHITE);
-        cardBackPaint.setStyle(Paint.Style.FILL);
-        cardBackPaint.setColor(Color.RED);
-        textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(displayConvert *20f);
-        textPaint.setTypeface(Typeface.SANS_SERIF);
-        cardOutlinePaint.setColor(Color.BLACK);
-        cardOutlinePaint.setStyle(Paint.Style.STROKE);
-        cardOutlinePaint.setStrokeWidth(10);
+        ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
+        ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
+        ace_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.a_d);
+        ace_diamonds = Bitmap.createScaledBitmap(ace_diamonds, cardWidth, cardHeight, true);
+        ace_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.a_h);
+        ace_hearts = Bitmap.createScaledBitmap(ace_hearts, cardWidth, cardHeight, true);
+        ace_spades = BitmapFactory.decodeResource(getResources(), R.drawable.a_s);
+        ace_spades = Bitmap.createScaledBitmap(ace_spades, cardWidth, cardHeight, true);
+
+        king_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.kc);
+        king_clubs = Bitmap.createScaledBitmap(king_clubs, cardWidth, cardHeight, true);
+        king_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.kd);
+        king_diamonds = Bitmap.createScaledBitmap(king_diamonds, cardWidth, cardHeight, true);
+        king_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.kh);
+        king_hearts = Bitmap.createScaledBitmap(king_hearts, cardWidth, cardHeight, true);
+        king_spades = BitmapFactory.decodeResource(getResources(), R.drawable.ks);
+        king_spades = Bitmap.createScaledBitmap(king_spades, cardWidth, cardHeight, true);
+
+        queen_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.qc);
+        queen_clubs = Bitmap.createScaledBitmap(queen_clubs, cardWidth, cardHeight, true);
+        queen_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.qd);
+        queen_diamonds = Bitmap.createScaledBitmap(queen_diamonds, cardWidth, cardHeight, true);
+        queen_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.qh);
+        queen_hearts = Bitmap.createScaledBitmap(queen_hearts, cardWidth, cardHeight, true);
+        queen_spades = BitmapFactory.decodeResource(getResources(), R.drawable.qs);
+        queen_spades = Bitmap.createScaledBitmap(queen_spades, cardWidth, cardHeight, true);
+
+        jack_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.jc);
+        jack_clubs = Bitmap.createScaledBitmap(jack_clubs, cardWidth, cardHeight, true);
+        jack_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.jd);
+        jack_diamonds = Bitmap.createScaledBitmap(jack_diamonds, cardWidth, cardHeight, true);
+        jack_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.jh);
+        jack_hearts = Bitmap.createScaledBitmap(jack_hearts, cardWidth, cardHeight, true);
+        jack_spades = BitmapFactory.decodeResource(getResources(), R.drawable.js);
+        jack_spades = Bitmap.createScaledBitmap(jack_spades, cardWidth, cardHeight, true);
+
+        ten_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.ten_c);
+        ten_clubs = Bitmap.createScaledBitmap(ten_clubs, cardWidth, cardHeight, true);
+        ten_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.ten_d);
+        ten_diamonds = Bitmap.createScaledBitmap(ten_diamonds, cardWidth, cardHeight, true);
+        ten_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.ten_h);
+        ten_hearts = Bitmap.createScaledBitmap(ten_hearts, cardWidth, cardHeight, true);
+        ten_spades = BitmapFactory.decodeResource(getResources(), R.drawable.ten_s);
+        ten_spades = Bitmap.createScaledBitmap(ten_spades, cardWidth, cardHeight, true);
+
+        nine_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.nine_c);
+        nine_clubs = Bitmap.createScaledBitmap(nine_clubs, cardWidth, cardHeight, true);
+        nine_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.nine_d);
+        nine_diamonds = Bitmap.createScaledBitmap(nine_diamonds, cardWidth, cardHeight, true);
+        nine_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.nine_h);
+        nine_hearts = Bitmap.createScaledBitmap(nine_hearts, cardWidth, cardHeight, true);
+        nine_spades = BitmapFactory.decodeResource(getResources(), R.drawable.nine_s);
+        nine_spades = Bitmap.createScaledBitmap(nine_spades, cardWidth, cardHeight, true);
+
+        eight_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.eight_h);
+        eight_clubs = Bitmap.createScaledBitmap(eight_clubs, cardWidth, cardHeight, true);
+        eight_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.eight_d);
+        eight_diamonds = Bitmap.createScaledBitmap(eight_diamonds, cardWidth, cardHeight, true);
+        eight_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.eight_h);
+        eight_hearts = Bitmap.createScaledBitmap(eight_hearts, cardWidth, cardHeight, true);
+        eight_spades = BitmapFactory.decodeResource(getResources(), R.drawable.eight_s);
+        eight_spades = Bitmap.createScaledBitmap(eight_spades, cardWidth, cardHeight, true);
+
+        seven_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.seven_c);
+        seven_clubs = Bitmap.createScaledBitmap(seven_clubs, cardWidth, cardHeight, true);
+        seven_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.seven_d);
+        seven_diamonds = Bitmap.createScaledBitmap(seven_diamonds, cardWidth, cardHeight, true);
+        seven_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.seven_h);
+        seven_hearts = Bitmap.createScaledBitmap(seven_hearts, cardWidth, cardHeight, true);
+        seven_spades = BitmapFactory.decodeResource(getResources(), R.drawable.seven_s);
+        seven_spades = Bitmap.createScaledBitmap(seven_spades, cardWidth, cardHeight, true);
+
+        six_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.six_c);
+        six_clubs = Bitmap.createScaledBitmap(six_clubs, cardWidth, cardHeight, true);
+        six_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.six_d);
+        six_diamonds = Bitmap.createScaledBitmap(six_diamonds, cardWidth, cardHeight, true);
+        six_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.six_h);
+        six_hearts = Bitmap.createScaledBitmap(six_hearts, cardWidth, cardHeight, true);
+        six_spades = BitmapFactory.decodeResource(getResources(), R.drawable.six_s);
+        six_spades = Bitmap.createScaledBitmap(six_spades, cardWidth, cardHeight, true);
+
+        five_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.five_c);
+        five_clubs = Bitmap.createScaledBitmap(five_clubs, cardWidth, cardHeight, true);
+        five_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.five_d);
+        five_diamonds = Bitmap.createScaledBitmap(five_diamonds, cardWidth, cardHeight, true);
+        five_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.five_h);
+        five_hearts = Bitmap.createScaledBitmap(five_hearts, cardWidth, cardHeight, true);
+        five_spades = BitmapFactory.decodeResource(getResources(), R.drawable.five_s);
+        five_spades = Bitmap.createScaledBitmap(five_spades, cardWidth, cardHeight, true);
+
+        four_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.four_c);
+        four_clubs = Bitmap.createScaledBitmap(four_clubs, cardWidth, cardHeight, true);
+        four_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.four_d);
+        four_diamonds = Bitmap.createScaledBitmap(four_diamonds, cardWidth, cardHeight, true);
+        four_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.four_h);
+        four_hearts = Bitmap.createScaledBitmap(four_hearts, cardWidth, cardHeight, true);
+        four_spades = BitmapFactory.decodeResource(getResources(), R.drawable.four_s);
+        four_spades = Bitmap.createScaledBitmap(four_spades, cardWidth, cardHeight, true);
+
+        three_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.three_c);
+        three_clubs = Bitmap.createScaledBitmap(three_clubs, cardWidth, cardHeight, true);
+        three_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.three_d);
+        three_diamonds = Bitmap.createScaledBitmap(three_diamonds, cardWidth, cardHeight, true);
+        three_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.three_h);
+        three_hearts = Bitmap.createScaledBitmap(three_hearts, cardWidth, cardHeight, true);
+        three_spades = BitmapFactory.decodeResource(getResources(), R.drawable.three_s);
+        three_spades = Bitmap.createScaledBitmap(three_spades, cardWidth, cardHeight, true);
+
+        two_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.two_c);
+        two_clubs = Bitmap.createScaledBitmap(two_clubs, cardWidth, cardHeight, true);
+        two_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.two_d);
+        two_diamonds= Bitmap.createScaledBitmap(two_diamonds, cardWidth, cardHeight, true);
+        two_hearts = BitmapFactory.decodeResource(getResources(), R.drawable.two_h);
+        two_hearts = Bitmap.createScaledBitmap(two_hearts, cardWidth, cardHeight, true);
+        two_spades = BitmapFactory.decodeResource(getResources(), R.drawable.two_s);
+        two_spades = Bitmap.createScaledBitmap(two_spades, cardWidth, cardHeight, true);
+
+        cardback = BitmapFactory.decodeResource(getResources(), R.drawable.cardback);
+        cardback = Bitmap.createScaledBitmap(cardback, cardWidth, cardHeight, true);
+
     }
 
     /**
@@ -64,19 +238,19 @@ public class view extends SurfaceView {
         float yMargin = displayConvert*200;
 
         //draw deck and pile
-        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, -40);
-        drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, 10);
+        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, "diamonds",  -1);
+        drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, "spades", 7);
 
         //draw opponent's cards
-        drawCard(canvas, xCenter - cardWidth/2, yMargin, 6);
-        drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin, 11);
-        drawCard(canvas, xCenter - cardWidth*2 - cardWidth/2, yMargin, 5);
-        drawCard(canvas, xCenter - cardWidth/2, yMargin - displayConvert*150, -3);
+        drawCard(canvas, xCenter - cardWidth/2, yMargin, "clubs", 4);
+        drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin, "hearts", 13);
+        drawCard(canvas, xCenter - cardWidth*2 - cardWidth/2, yMargin, "diamonds", 5);
+        drawCard(canvas, xCenter - cardWidth/2, yMargin - displayConvert*150, "diamonds", -1);
 
         //draw player's cards
-        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin - displayConvert*100 , 4);
-        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 4);
-        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*100, 12);
+        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin - displayConvert*130 , "diamonds", 14);
+        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130, "clubs", 7);
+        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130, "hearts", 12);
 
         //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
         //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
@@ -96,37 +270,128 @@ public class view extends SurfaceView {
      * @param left
      * @param top
      * @param rank
+     * @param suit
      */
-    public void drawCard(Canvas canvas, float left, float top, int rank) {
-        canvas.drawRect(left, top, (left + displayConvert * 75), (top + displayConvert * 100), cardOutlinePaint);
-        if (rank <= -1) {
-            canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
-            textPaint.setTextSize(displayConvert * 40f);
-            if (rank > -10 && rank <= -1) {
-                canvas.drawText("" + (-1) * rank, left + cardWidth / 3, top + cardHeight / 2, textPaint);
-                textPaint.setTextSize(displayConvert * 20f);
-            } else if (rank <= -10 && rank >= -52) {
-                canvas.drawText("" + (-1) * rank, left + cardWidth / 5, top + cardHeight / 2, textPaint);
-                textPaint.setTextSize(displayConvert * 20f);
-            } else {
-                textPaint.setTextSize(displayConvert * 20f);
-            }
-        } else if (rank == 0) {
-            canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardBackPaint);
-        } else {
-            canvas.drawRect(left, top, cardWidth + left, cardHeight + top, cardPaint);
-            if (rank > 1 && rank < 11) {//standard cards
-                canvas.drawText("" + rank, displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+    public void drawCard(Canvas canvas, float left, float top, String suit, int rank) {
+        //canvas.drawRect(left, top, (left + displayConvert * 75), (top + displayConvert * 100), cardOutlinePaint);
+        if (rank == -1) {
+            canvas.drawBitmap(cardback, left, top, null);
+        }
+        else if(suit.equals("clubs")) {
+            if (rank == 2) {
+                canvas.drawBitmap(two_clubs, left, top, null);
+            } else if (rank == 3) {
+                canvas.drawBitmap(three_clubs, left, top, null);
+            } else if (rank == 4) {
+                canvas.drawBitmap(four_clubs, left, top, null);
+            } else if (rank == 5) {
+                canvas.drawBitmap(five_clubs, left, top, null);
+            } else if (rank == 6) {
+                canvas.drawBitmap(six_clubs, left, top, null);
+            } else if (rank == 7) {
+                canvas.drawBitmap(seven_clubs, left, top, null);
+            } else if (rank == 8) {
+                canvas.drawBitmap(eight_clubs, left, top, null);
+            } else if (rank == 9) {
+                canvas.drawBitmap(nine_clubs, left, top, null);
+            } else if (rank == 10) {
+                canvas.drawBitmap(ten_clubs, left, top, null);
             } else if (rank == 11) {
-                canvas.drawText("J", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+                canvas.drawBitmap(jack_clubs, left, top, null);
             } else if (rank == 12) {
-                canvas.drawText("Q", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+                canvas.drawBitmap(queen_clubs, left, top, null);
             } else if (rank == 13) {
-                canvas.drawText("K", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+                canvas.drawBitmap(king_clubs, left, top, null);
             } else if (rank == 14) {
-                canvas.drawText("A", displayConvert * 10 + left, displayConvert * 25 + top, textPaint);
+                canvas.drawBitmap(ace_clubs, left, top, null);
             }
         }
-    }
-
-}
+        else if(suit.equals("diamonds")) {
+            if (rank == 2) {
+                canvas.drawBitmap(two_diamonds, left, top, null);
+            } else if (rank == 3) {
+                canvas.drawBitmap(three_diamonds, left, top, null);
+            } else if (rank == 4) {
+                canvas.drawBitmap(four_diamonds, left, top, null);
+            } else if (rank == 5) {
+                canvas.drawBitmap(five_diamonds, left, top, null);
+            } else if (rank == 6) {
+                canvas.drawBitmap(six_diamonds, left, top, null);
+            } else if (rank == 7) {
+                canvas.drawBitmap(seven_diamonds, left, top, null);
+            } else if (rank == 8) {
+                canvas.drawBitmap(eight_diamonds, left, top, null);
+            } else if (rank == 9) {
+                canvas.drawBitmap(nine_diamonds, left, top, null);
+            } else if (rank == 10) {
+                canvas.drawBitmap(ten_diamonds, left, top, null);
+            } else if (rank == 11) {
+                canvas.drawBitmap(jack_diamonds, left, top, null);
+            } else if (rank == 12) {
+                canvas.drawBitmap(queen_diamonds, left, top, null);
+            } else if (rank == 13) {
+                canvas.drawBitmap(king_diamonds, left, top, null);
+            } else if (rank == 14) {
+                canvas.drawBitmap(ace_diamonds, left, top, null);
+            }
+        }
+        else if(suit.equals("hearts")){
+            if (rank == 2) {
+                canvas.drawBitmap(two_hearts, left, top, null);
+            } else if (rank == 3) {
+                canvas.drawBitmap(three_hearts, left, top, null);
+            } else if (rank == 4) {
+                canvas.drawBitmap(four_hearts, left, top, null);
+            } else if (rank == 5) {
+                canvas.drawBitmap(five_hearts, left, top, null);
+            } else if (rank == 6) {
+                canvas.drawBitmap(six_hearts, left, top, null);
+            } else if (rank == 7) {
+                canvas.drawBitmap(seven_hearts, left, top, null);
+            } else if (rank == 8) {
+                canvas.drawBitmap(eight_hearts, left, top, null);
+            } else if (rank == 9) {
+                canvas.drawBitmap(nine_hearts, left, top, null);
+            } else if (rank == 10) {
+                canvas.drawBitmap(ten_hearts, left, top, null);
+            } else if (rank == 11) {
+                canvas.drawBitmap(jack_hearts, left, top, null);
+            } else if (rank == 12) {
+                canvas.drawBitmap(queen_hearts, left, top, null);
+            } else if (rank == 13) {
+                canvas.drawBitmap(king_hearts, left, top, null);
+            } else if (rank == 14) {
+                canvas.drawBitmap(ace_hearts, left, top, null);
+            }
+        }
+        else if(suit.equals("spades")){
+            if (rank == 2) {
+                canvas.drawBitmap(two_spades, left, top, null);
+            } else if (rank == 3) {
+                canvas.drawBitmap(three_spades, left, top, null);
+            } else if (rank == 4) {
+                canvas.drawBitmap(four_spades, left, top, null);
+            } else if (rank == 5) {
+                canvas.drawBitmap(five_spades, left, top, null);
+            } else if (rank == 6) {
+                canvas.drawBitmap(six_spades, left, top, null);
+            } else if (rank == 7) {
+                canvas.drawBitmap(seven_spades, left, top, null);
+            } else if (rank == 8) {
+                canvas.drawBitmap(eight_spades, left, top, null);
+            } else if (rank == 9) {
+                canvas.drawBitmap(nine_spades, left, top, null);
+            } else if (rank == 10) {
+                canvas.drawBitmap(ten_spades, left, top, null);
+            } else if (rank == 11) {
+                canvas.drawBitmap(jack_spades, left, top, null);
+            } else if (rank == 12) {
+                canvas.drawBitmap(queen_spades, left, top, null);
+            } else if (rank == 13) {
+                canvas.drawBitmap(king_spades, left, top, null);
+            } else if (rank == 14) {
+                canvas.drawBitmap(ace_spades, left, top, null);
+            }
+        }
+        }
+        }
