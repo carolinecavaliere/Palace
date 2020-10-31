@@ -2,13 +2,15 @@ package com.example.palace;
 
 import android.util.Log;
 
+import com.example.palace.game.infoMsg.GameState;
+
 import java.util.ArrayList;
 
 /**
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * 10/20/2020
  */
-public class PalaceGameState {
+public class PalaceGameState extends GameState {
 
     private int numPlayers;
 

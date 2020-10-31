@@ -1,10 +1,22 @@
 package com.example.palace;
 
+import com.example.palace.game.GamePlayer;
+import com.example.palace.game.actionMsg.GameAction;
+
 /**
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * This class models the instance in which the player chooses to or must take the play pile.
  */
-public class PalaceTakePileAction {
+public class PalaceTakePileAction extends GameAction {
+
+    /**
+     * constructor for GameAction
+     *
+     * @param player the player who created the action
+     */
+    public PalaceTakePileAction(GamePlayer player) {
+        super(player);
+    }
 
     public boolean takePile(int playerID, PalaceGameState palaceGameState) {
         if (palaceGameState.getPlayPileNumCards() > 0 && playerID == palaceGameState.getTurn()) {

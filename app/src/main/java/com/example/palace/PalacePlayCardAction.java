@@ -1,13 +1,25 @@
 
 package com.example.palace;
 
+import com.example.palace.game.GamePlayer;
+import com.example.palace.game.actionMsg.GameAction;
+
 /**
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * This class models a player playing a card/cards to the play pile. It handles
  * cases in which the player's selected card(s) cannot legally be played, and
  * adds a new card to the player's hand when appropriate after they play a legal card(s)
  */
-public class PalacePlayCardAction {
+public class PalacePlayCardAction extends GameAction {
+    /**
+     * constructor for GameAction
+     *
+     * @param player the player who created the action
+     */
+    public PalacePlayCardAction(GamePlayer player) {
+        super(player);
+    }
+
     public boolean playCard(int playerId, PalaceGameState state) {
         if (state.getTurn() != playerId) {//not a valid move if it is not that player's turn
             return false;
