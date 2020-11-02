@@ -1,7 +1,6 @@
 
-package com.example.palace;
+package com.example.palace.game;
 
-import com.example.palace.game.GamePlayer;
 import com.example.palace.game.actionMsg.GameAction;
 
 /**

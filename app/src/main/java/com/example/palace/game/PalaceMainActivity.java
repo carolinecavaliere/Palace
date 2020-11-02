@@ -1,4 +1,4 @@
-package com.example.palace;
+package com.example.palace.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 

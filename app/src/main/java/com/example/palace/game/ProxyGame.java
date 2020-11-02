@@ -5,10 +5,10 @@ import android.util.Log;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import edu.up.cs301.game.actionMsg.GameAction;
-import edu.up.cs301.game.infoMsg.GameInfo;
-import edu.up.cs301.game.util.IPCoder;
-import edu.up.cs301.game.util.NetworkObjectPasser;
+import com.example.palace.game.actionMsg.GameAction;
+import com.example.palace.game.infoMsg.GameInfo;
+import com.example.palace.game.util.IPCoder;
+import com.example.palace.game.util.NetworkObjectPasser;
 
 /**
  * A Game object that is used as a proxy for the real game that is on another
