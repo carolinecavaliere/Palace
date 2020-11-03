@@ -1,4 +1,4 @@
-package com.example.palace.game;
+package com.example.palace.game.palace;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,9 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+
+import com.example.palace.game.R;
+
 //nonsense
 public class view extends SurfaceView {
     int displayConvert = (int)getResources().getDisplayMetrics().density;

@@ -1,4 +1,4 @@
-package com.example.palace.game;
+package com.example.palace.game.palace;
 
 import java.util.ArrayList;
 import java.util.Collections;

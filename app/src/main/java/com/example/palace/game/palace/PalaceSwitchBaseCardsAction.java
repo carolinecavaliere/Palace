@@ -1,5 +1,6 @@
-package com.example.palace.game;
+package com.example.palace.game.palace;
 
+import com.example.palace.game.GamePlayer;
 import com.example.palace.game.actionMsg.GameAction;
 
 import java.util.ArrayList;
