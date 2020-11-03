@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
-
+//nonsense
 public class view extends SurfaceView {
     int displayConvert = (int)getResources().getDisplayMetrics().density;
     int cardWidth = displayConvert * 110;
