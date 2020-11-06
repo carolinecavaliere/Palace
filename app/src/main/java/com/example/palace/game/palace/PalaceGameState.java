@@ -43,6 +43,8 @@ public class PalaceGameState extends GameState {
     private ArrayList<PalaceCard> playPilePalaceCards;
 
     private ArrayList<PalaceCard> selectedPalaceCards; // array of selected cards
+    private PalaceCard cardToBeSelected;
+    private PalaceCard topCardSelected;
 
     private PalaceCard drawPileTopPalaceCard;
     private PalaceCard playPileTopPalaceCard;
@@ -85,37 +87,6 @@ public class PalaceGameState extends GameState {
             deck= new PalaceDeckOfCards(2, this);
         }
 
-        //temp fix for dealDeck()
-//        p1Hand.add(new Card(1,14)); //Assigned a specific card to test purposes
-//        p1Hand.add(deck.getNextCard());
-//        p1Hand.add(deck.getNextCard());
-//        p1TopCards.add(deck.getNextCard());
-//        p1TopCards.add(deck.getNextCard());
-//        p1TopCards.add(deck.getNextCard());
-//        p1BottomCards.add(deck.getNextCard());
-//        p1BottomCards.add(deck.getNextCard());
-//        p1BottomCards.add(deck.getNextCard());
-//
-//        p2Hand.add(deck.getNextCard());
-//        p2Hand.add(deck.getNextCard());
-//        p2Hand.add(deck.getNextCard());
-//        p2TopCards.add(deck.getNextCard());
-//        p2TopCards.add(deck.getNextCard());
-//        p2TopCards.add(deck.getNextCard());
-//        p2BottomCards.add(deck.getNextCard());
-//        p2BottomCards.add(deck.getNextCard());
-//        p2BottomCards.add(deck.getNextCard());
-//
-//        playPileTopCard = deck.getNextCard();
-//        drawPileTopCard = deck.getNextCard();
-//
-//        playPileCards.add(playPileTopCard);
-//
-//        p1numCards = p1Hand.size();
-//        p2numCards = p2Hand.size();
-//        p3numCards = p3Hand.size();
-//        p4numCards = p4Hand.size();
-//        playPileNumCards = playPileCards.size();
         deck.DealDeck();
     }
 
@@ -422,6 +393,20 @@ public class PalaceGameState extends GameState {
         this.playPileNumCards = playPileNumCards;
     }
 
+    public PalaceCard getCardToBeSelected(){
+        return cardToBeSelected;
+    }
+    public void setCardToBeSelected(PalaceCard card){
+        this.cardToBeSelected = card;
+    }
+
+    public PalaceCard getTopCardSelected() {
+        return topCardSelected;
+    }
+
+    public void setTopCardSelected(PalaceCard topCardSelected) {
+        this.topCardSelected = topCardSelected;
+    }
 
     //adders and removers
     public void addToPlayPile(PalaceCard add){

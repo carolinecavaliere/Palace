@@ -13,7 +13,7 @@ import android.view.SurfaceView;
 import com.example.palace.game.R;
 
 //nonsense
-public class view extends SurfaceView {
+public class PalaceView extends SurfaceView {
     int displayConvert = (int)getResources().getDisplayMetrics().density;
     int cardWidth = displayConvert * 110;
     int cardHeight = displayConvert * 140;
@@ -95,7 +95,7 @@ public class view extends SurfaceView {
      Solution: I used the example code from this post.
      */
 
-    public view(Context context, AttributeSet attrs) {
+    public PalaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
 
