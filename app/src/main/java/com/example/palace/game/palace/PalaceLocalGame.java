@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class PalaceLocalGame extends LocalGame {
     private PalaceGameState palaceGame;
 
-    public PalaceLocalGame(){
-        palaceGame = new PalaceGameState(players.length);
+    public PalaceLocalGame(int pNum){
+        palaceGame = new PalaceGameState(pNum);
     }
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {

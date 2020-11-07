@@ -55,7 +55,7 @@ View.OnClickListener {
 	private Game game = null;
 
 	// an array containing references to all the players that are playing the game
-	private GamePlayer[] players = null;
+	protected GamePlayer[] players = null;
 
 	// tells which player, if any, is running in the GUI
 	private GamePlayer guiPlayer = null;

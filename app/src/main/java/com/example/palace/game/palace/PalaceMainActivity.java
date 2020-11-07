@@ -64,6 +64,6 @@ public class PalaceMainActivity extends GameMainActivity {
      */
     @Override
     public LocalGame createLocalGame() {
-        return new PalaceLocalGame();
+        return new PalaceLocalGame(2);
     }
 }
