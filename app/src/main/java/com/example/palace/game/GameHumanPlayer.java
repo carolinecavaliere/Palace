@@ -39,7 +39,7 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	protected int playerNum; // my player ID
 	protected String name; // my player's name
 	protected String[] allPlayerNames; // the names of all the player
-	private Handler myHandler; // my thread's handler
+	protected Handler myHandler; // my thread's handler
 	private GameMainActivity myActivity; // the current activity
 	private GameTimer myTimer = new GameTimer(this); // my player's timer
 	private boolean gameOver; // whether the game is over
@@ -185,7 +185,7 @@ public abstract class GameHumanPlayer implements GamePlayer, Tickable {
 	 * 			the (int representation) of the background color,
 	 * 			or "transparent" if the color could not be deduced
 	 */
-	private static int getBackgroundColor(View v) {
+	protected static int getBackgroundColor(View v) {
 		 int color = Color.TRANSPARENT;
          Drawable background = v.getBackground();
          if (background instanceof ColorDrawable) {

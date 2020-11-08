@@ -20,7 +20,15 @@ public class PalaceGameState extends GameState {
     private int p4numCards;
 
     private ArrayList<PalaceCard> p1Hand;
+    private PalaceCard displayCard1P1;
+    private PalaceCard displayCard2P1;
+    private PalaceCard displayCard3P1;
+
     private ArrayList<PalaceCard> p2Hand;
+    private PalaceCard displayCard1P2;
+    private PalaceCard displayCard2P2;
+    private PalaceCard displayCard3P2;
+
     private ArrayList<PalaceCard> p3Hand;
     private ArrayList<PalaceCard> p4Hand;
 
@@ -72,7 +80,9 @@ public class PalaceGameState extends GameState {
         p4BottomPalaceCards = new ArrayList<PalaceCard>();
 
         p1Hand = new ArrayList<PalaceCard>();
+
         p2Hand = new ArrayList<PalaceCard>();
+
         p3Hand = new ArrayList<PalaceCard>();
         p4Hand = new ArrayList<PalaceCard>();
 
@@ -88,6 +98,13 @@ public class PalaceGameState extends GameState {
         }
 
         deck.DealDeck();
+        displayCard1P1 = p1Hand.get(0);
+        displayCard2P1 = p1Hand.get(1);
+        displayCard3P1 = p1Hand.get(2);
+        displayCard1P2 = p2Hand.get(0);
+        displayCard2P2 = p2Hand.get(1);
+        displayCard3P2 = p2Hand.get(2);
+
     }
 
     public PalaceGameState(PalaceGameState orig)//copy constructor
@@ -406,6 +423,54 @@ public class PalaceGameState extends GameState {
 
     public void setTopCardSelected(PalaceCard topCardSelected) {
         this.topCardSelected = topCardSelected;
+    }
+
+    public PalaceCard getDisplayCard1P1() {
+        return displayCard1P1;
+    }
+
+    public void setDisplayCard1P1(PalaceCard displayCard1P1) {
+        this.displayCard1P1 = displayCard1P1;
+    }
+
+    public PalaceCard getDisplayCard2P1() {
+        return displayCard2P1;
+    }
+
+    public void setDisplayCard2P1(PalaceCard displayCard2P1) {
+        this.displayCard2P1 = displayCard2P1;
+    }
+
+    public PalaceCard getDisplayCard3P1() {
+        return displayCard3P1;
+    }
+
+    public void setDisplayCard3P1(PalaceCard displayCard3P1) {
+        this.displayCard3P1 = displayCard3P1;
+    }
+
+    public PalaceCard getDisplayCard1P2() {
+        return displayCard1P2;
+    }
+
+    public void setDisplayCard1P2(PalaceCard displayCard1P2) {
+        this.displayCard1P2 = displayCard1P2;
+    }
+
+    public PalaceCard getDisplayCard2P2() {
+        return displayCard2P2;
+    }
+
+    public void setDisplayCard2P2(PalaceCard displayCard2P2) {
+        this.displayCard2P2 = displayCard2P2;
+    }
+
+    public PalaceCard getDisplayCard3P2() {
+        return displayCard3P2;
+    }
+
+    public void setDisplayCard3P2(PalaceCard displayCard3P2) {
+        this.displayCard3P2 = displayCard3P2;
     }
 
     //adders and removers

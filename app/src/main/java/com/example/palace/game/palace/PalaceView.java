@@ -14,76 +14,86 @@ import com.example.palace.game.R;
 
 //nonsense
 public class PalaceView extends SurfaceView {
-    int displayConvert = (int)getResources().getDisplayMetrics().density;
-    int cardWidth = displayConvert * 110;
-    int cardHeight = displayConvert * 140;
+    private int displayConvert = (int)getResources().getDisplayMetrics().density;
+    private int cardWidth = displayConvert * 110;
+    private int cardHeight = displayConvert * 140;
 
-    Bitmap cardback = null;
+    public PalaceGameState getState() {
+        return state;
+    }
 
-    Bitmap ace_clubs = null;
-    Bitmap ace_diamonds = null;
-    Bitmap ace_hearts = null;
-    Bitmap ace_spades = null;
+    public void setState(PalaceGameState state) {
+        this.state = state;
+    }
 
-    Bitmap king_clubs = null;
-    Bitmap king_diamonds = null;
-    Bitmap king_hearts = null;
-    Bitmap king_spades = null;
+    private PalaceGameState state;
 
-    Bitmap queen_clubs = null;
-    Bitmap queen_diamonds = null;
-    Bitmap queen_hearts = null;
-    Bitmap queen_spades = null;
+    private Bitmap cardback = null;
 
-    Bitmap jack_clubs = null;
-    Bitmap jack_diamonds = null;
-    Bitmap jack_hearts = null;
-    Bitmap jack_spades = null;
+    private Bitmap ace_clubs = null;
+    private Bitmap ace_diamonds = null;
+    private Bitmap ace_hearts = null;
+    private Bitmap ace_spades = null;
 
-    Bitmap ten_clubs = null;
-    Bitmap ten_diamonds = null;
-    Bitmap ten_hearts = null;
-    Bitmap ten_spades = null;
+    private Bitmap king_clubs = null;
+    private Bitmap king_diamonds = null;
+    private Bitmap king_hearts = null;
+    private Bitmap king_spades = null;
 
-    Bitmap nine_clubs = null;
-    Bitmap nine_diamonds = null;
-    Bitmap nine_hearts = null;
-    Bitmap nine_spades = null;
+    private Bitmap queen_clubs = null;
+    private Bitmap queen_diamonds = null;
+    private Bitmap queen_hearts = null;
+    private Bitmap queen_spades = null;
 
-    Bitmap eight_clubs = null;
-    Bitmap eight_diamonds = null;
-    Bitmap eight_hearts = null;
-    Bitmap eight_spades = null;
+    private Bitmap jack_clubs = null;
+    private Bitmap jack_diamonds = null;
+    private Bitmap jack_hearts = null;
+    private Bitmap jack_spades = null;
 
-    Bitmap seven_clubs = null;
-    Bitmap seven_diamonds = null;
-    Bitmap seven_hearts = null;
-    Bitmap seven_spades = null;
+    private Bitmap ten_clubs = null;
+    private Bitmap ten_diamonds = null;
+    private Bitmap ten_hearts = null;
+    private Bitmap ten_spades = null;
 
-    Bitmap six_clubs = null;
-    Bitmap six_diamonds = null;
-    Bitmap six_hearts = null;
-    Bitmap six_spades = null;
+    private Bitmap nine_clubs = null;
+    private Bitmap nine_diamonds = null;
+    private Bitmap nine_hearts = null;
+    private Bitmap nine_spades = null;
 
-    Bitmap five_clubs = null;
-    Bitmap five_diamonds = null;
-    Bitmap five_hearts = null;
-    Bitmap five_spades = null;
+    private Bitmap eight_clubs = null;
+    private Bitmap eight_diamonds = null;
+    private Bitmap eight_hearts = null;
+    private Bitmap eight_spades = null;
 
-    Bitmap four_clubs = null;
-    Bitmap four_diamonds = null;
-    Bitmap four_hearts = null;
-    Bitmap four_spades = null;
+    private Bitmap seven_clubs = null;
+    private Bitmap seven_diamonds = null;
+    private Bitmap seven_hearts = null;
+    private Bitmap seven_spades = null;
 
-    Bitmap three_clubs = null;
-    Bitmap three_diamonds = null;
-    Bitmap three_hearts = null;
-    Bitmap three_spades = null;
+    private Bitmap six_clubs = null;
+    private Bitmap six_diamonds = null;
+    private Bitmap six_hearts = null;
+    private Bitmap six_spades = null;
 
-    Bitmap two_clubs = null;
-    Bitmap two_diamonds = null;
-    Bitmap two_hearts = null;
-    Bitmap two_spades = null;
+    private Bitmap five_clubs = null;
+    private Bitmap five_diamonds = null;
+    private Bitmap five_hearts = null;
+    private Bitmap five_spades = null;
+
+    private Bitmap four_clubs = null;
+    private Bitmap four_diamonds = null;
+    private Bitmap four_hearts = null;
+    private Bitmap four_spades = null;
+
+    private Bitmap three_clubs = null;
+    private Bitmap three_diamonds = null;
+    private Bitmap three_hearts = null;
+    private Bitmap three_spades = null;
+
+    private Bitmap two_clubs = null;
+    private Bitmap two_diamonds = null;
+    private Bitmap two_hearts = null;
+    private Bitmap two_spades = null;
 
 
     /**
@@ -98,6 +108,8 @@ public class PalaceView extends SurfaceView {
     public PalaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
+
+
 
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
@@ -241,19 +253,21 @@ public class PalaceView extends SurfaceView {
         float yMargin = displayConvert*200;
 
         //draw deck and pile
-        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, "diamonds",  -1);
-        drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, "spades", 7);
+        drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, 1,  -1);
+        if(!(state.getPlayPileTopPalaceCard()==null)){
+            drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, state.getPlayPileTopPalaceCard().getSuit(), state.getPlayPileTopPalaceCard().getRank());
+        }
 
         //draw opponent's cards
-        drawCard(canvas, xCenter - cardWidth/2, yMargin, "clubs", 4);
-        drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin, "hearts", 13);
-        drawCard(canvas, xCenter - cardWidth*2 - cardWidth/2, yMargin, "diamonds", 5);
-        drawCard(canvas, xCenter - cardWidth/2, yMargin - displayConvert*150, "diamonds", -1);
+        drawCard(canvas, xCenter - cardWidth/2, yMargin, state.getP2TopPalaceCards().get(0).getSuit(),state.getP2TopPalaceCards().get(0).getRank());
+        drawCard(canvas, xCenter + cardWidth*2 - cardWidth/2, yMargin,state.getP2TopPalaceCards().get(1).getSuit(),state.getP2TopPalaceCards().get(1).getRank());
+        drawCard(canvas, xCenter - cardWidth*2 - cardWidth/2, yMargin, state.getP2TopPalaceCards().get(2).getSuit(),state.getP2TopPalaceCards().get(2).getRank());
+        drawCard(canvas, xCenter - cardWidth/2, yMargin - displayConvert*150, 1, -1);
 
         //draw player's cards
-        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin - displayConvert*130 , "diamonds", 14);
-        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130, "clubs", 7);
-        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130, "hearts", 12);
+        drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin - displayConvert*130 , state.getP1TopPalaceCards().get(0).getSuit(),state.getP1TopPalaceCards().get(0).getRank());
+        drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130,  state.getP1TopPalaceCards().get(1).getSuit(),state.getP1TopPalaceCards().get(1).getRank());
+        drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin - displayConvert*130, state.getP1TopPalaceCards().get(2).getSuit(),state.getP1TopPalaceCards().get(2).getRank());
 
         //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
         //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
@@ -275,12 +289,12 @@ public class PalaceView extends SurfaceView {
      * @param rank
      * @param suit
      */
-    public void drawCard(Canvas canvas, float left, float top, String suit, int rank) {
+    public void drawCard(Canvas canvas, float left, float top, int suit, int rank) {
         //canvas.drawRect(left, top, (left + displayConvert * 75), (top + displayConvert * 100), cardOutlinePaint);
         if (rank == -1) {
             canvas.drawBitmap(cardback, left, top, null);
         }
-        else if(suit.equals("clubs")) {
+        else if(suit==3) {
             if (rank == 2) {
                 canvas.drawBitmap(two_clubs, left, top, null);
             } else if (rank == 3) {
@@ -309,7 +323,7 @@ public class PalaceView extends SurfaceView {
                 canvas.drawBitmap(ace_clubs, left, top, null);
             }
         }
-        else if(suit.equals("diamonds")) {
+        else if(suit==1) {
             if (rank == 2) {
                 canvas.drawBitmap(two_diamonds, left, top, null);
             } else if (rank == 3) {
@@ -338,7 +352,7 @@ public class PalaceView extends SurfaceView {
                 canvas.drawBitmap(ace_diamonds, left, top, null);
             }
         }
-        else if(suit.equals("hearts")){
+        else if(suit==2){
             if (rank == 2) {
                 canvas.drawBitmap(two_hearts, left, top, null);
             } else if (rank == 3) {
@@ -367,7 +381,7 @@ public class PalaceView extends SurfaceView {
                 canvas.drawBitmap(ace_hearts, left, top, null);
             }
         }
-        else if(suit.equals("spades")){
+        else if(suit==4){
             if (rank == 2) {
                 canvas.drawBitmap(two_spades, left, top, null);
             } else if (rank == 3) {
