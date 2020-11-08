@@ -2,6 +2,7 @@ package com.example.palace.game.palace;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
@@ -64,6 +65,7 @@ public class PalaceMainActivity extends GameMainActivity {
      */
     @Override
     public LocalGame createLocalGame() {
-        return new PalaceLocalGame(2);
+        GameConfig config = createDefaultConfig();
+        return new PalaceLocalGame(config.getNumPlayers());
     }
 }
