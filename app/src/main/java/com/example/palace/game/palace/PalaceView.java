@@ -8,12 +8,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.example.palace.game.R;
 
 //nonsense
-public class PalaceView extends SurfaceView {
+//OnClickListener on this view should make all of this view clickable.
+public class PalaceView extends SurfaceView implements View.OnClickListener, View.OnTouchListener {
     private int displayConvert = (int)getResources().getDisplayMetrics().density;
     private int cardWidth = displayConvert * 110;
     private int cardHeight = displayConvert * 140;
@@ -108,8 +111,6 @@ public class PalaceView extends SurfaceView {
     public PalaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
-
-
 
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
@@ -417,4 +418,38 @@ public class PalaceView extends SurfaceView {
             }
         }
         }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    /**
+     * https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
+     * @param view
+     * @param motionEvent
+     * @return
+     */
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+
+        switch(motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //Check if the x and y position of the touch is inside the bitmap
+                if( x > bitmapXPosition && x < bitmapXPosition + bitmapWidth && y > bitmapYPosition
+                        && y < bitmapYPosition + bitmapHeight ) {
+                    //Bitmap touched
+                    /*
+                    Just replace bitmapXPosition and bitmapYPosition with the coordinates you use
+                    to draw the bitmap, and bitmapWidth and bitmapHeight with the width and height
+                    you use to draw it.
+                     */
+                }
+                return true;
         }
+
+        return false;
+    }
+}
