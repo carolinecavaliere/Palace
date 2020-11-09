@@ -109,8 +109,6 @@ public class PalaceView extends SurfaceView {
         super(context, attrs);
         setWillNotDraw(false);
 
-
-
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
         ace_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.a_d);
@@ -266,14 +264,28 @@ public class PalaceView extends SurfaceView {
             drawCard(canvas, xCenter - cardWidth / 2, yMargin - displayConvert * 150, 1, -1);
 
             //draw player's cards
-            drawCard(canvas, xCenter - cardWidth / 2, yBottom - (yMargin) - displayConvert * 130 - cardHeight, state.getP1TopPalaceCards().get(0).getSuit(), state.getP1TopPalaceCards().get(0).getRank());
-            drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yBottom - (yMargin) - displayConvert * 130 - cardHeight, state.getP1TopPalaceCards().get(1).getSuit(), state.getP1TopPalaceCards().get(1).getRank());
-            drawCard(canvas, xCenter - cardWidth * 2 - cardWidth / 2, yBottom - (yMargin) - displayConvert * 130 - cardHeight, state.getP1TopPalaceCards().get(2).getSuit(), state.getP1TopPalaceCards().get(2).getRank());
+            float playerTopCardLeftX = xCenter - cardWidth / 2;
+            float playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+            float playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
+            float playerTopCardRightY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+            float playerCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
+            float playerCenterTopCardY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+
+            drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY, state.getP1TopPalaceCards().get(0).getSuit(), state.getP1TopPalaceCards().get(0).getRank());
+            drawCard(canvas, playerTopCardRightX , playerTopCardRightY , state.getP1TopPalaceCards().get(1).getSuit(), state.getP1TopPalaceCards().get(1).getRank());
+            drawCard(canvas, playerCenterTopCardX, playerCenterTopCardY , state.getP1TopPalaceCards().get(2).getSuit(), state.getP1TopPalaceCards().get(2).getRank());
 
             //draw player's hand
-            drawCard(canvas, xCenter - cardWidth / 2, yBottom - yMargin - displayConvert * 130, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
-            drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yBottom - yMargin - displayConvert * 130, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
-            drawCard(canvas, xCenter - cardWidth * 2 - cardWidth / 2, yBottom - yMargin - displayConvert * 130, state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
+            float handTopCardLeftX = xCenter - cardWidth / 2;
+            float handTopCardLeftY = yBottom - yBottom - yMargin - displayConvert * 130;
+            float handTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
+            float handTopCardRightY = yBottom - yMargin - displayConvert * 130;
+            float handCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
+            float handCenterTopCardY = yBottom - yMargin - displayConvert * 130;
+            
+            drawCard(canvas, handTopCardLeftX, handTopCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+            drawCard(canvas, handTopCardRightX, handTopCardRightY, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
+            drawCard(canvas, handCenterTopCardX, handCenterTopCardY , state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
 
             //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
             //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
@@ -417,4 +429,20 @@ public class PalaceView extends SurfaceView {
             }
         }
         }
-        }
+
+    public int getCardWidth() {
+        return cardWidth;
+    }
+
+    public void setCardWidth(int cardWidth) {
+        this.cardWidth = cardWidth;
+    }
+
+    public int getCardHeight() {
+        return cardHeight;
+    }
+
+    public void setCardHeight(int cardHeight) {
+        this.cardHeight = cardHeight;
+    }
+}

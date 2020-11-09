@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.content.Context;
+import android.util.AttributeSet;
+
 
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
@@ -17,6 +20,12 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button playCard;
     private Button quit;
     private Button restart;
+
+
+    // card dimensions
+    private int cardWidth = view.getCardWidth();
+    private int cardHeight = view.getCardHeight();
+
 
     /**
      * constructor
@@ -87,6 +96,21 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+
+        float bitmapXPosition = 0;
+        float bitmapYPosition = 0;
+
+        switch(motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //Check if the x and y position of the touch is inside the bitmap
+
+                if( x > bitmapXPosition && x < bitmapXPosition + cardWidth && y > bitmapYPosition && y < bitmapYPosition + cardHeight ) {
+                    //Bitmap touched
+                }
+                return true;
+        }
 
         return false;
     }
