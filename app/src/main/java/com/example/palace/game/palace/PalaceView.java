@@ -4,9 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -30,15 +27,17 @@ public class PalaceView extends SurfaceView {
     private float playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
     private float playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
     private float playerTopCardRightY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
-    private float playerCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
-    private float playerCenterTopCardY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+    private float playerTopCardCenterX = xCenter - cardWidth * 2 - cardWidth / 2;
+    private float playerTopCardCenterY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
 
     //draw player's hand
     private float handTopCardLeftX = xCenter - cardWidth / 2;
     private float handTopCardLeftY = yBottom - yBottom - yMargin - displayConvert * 130;
     private float handTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
     private float handTopCardRightY = yBottom - yMargin - displayConvert * 130;
-    private float handCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
+    private float handTopCardCenterX = xCenter - cardWidth * 2 - cardWidth / 2;
+    private float handTopCardCenterY = yBottom - yMargin - displayConvert * 130;
+
 
     public int getDisplayConvert() {
         return displayConvert;
@@ -128,20 +127,20 @@ public class PalaceView extends SurfaceView {
         this.playerTopCardRightY = playerTopCardRightY;
     }
 
-    public float getPlayerCenterTopCardX() {
-        return playerCenterTopCardX;
+    public float getPlayerTopCardCenterX() {
+        return playerTopCardCenterX;
     }
 
-    public void setPlayerCenterTopCardX(float playerCenterTopCardX) {
-        this.playerCenterTopCardX = playerCenterTopCardX;
+    public void setPlayerTopCardCenterX(float playerTopCardCenterX) {
+        this.playerTopCardCenterX = playerTopCardCenterX;
     }
 
-    public float getPlayerCenterTopCardY() {
-        return playerCenterTopCardY;
+    public float getPlayerTopCardCenterY() {
+        return playerTopCardCenterY;
     }
 
-    public void setPlayerCenterTopCardY(float playerCenterTopCardY) {
-        this.playerCenterTopCardY = playerCenterTopCardY;
+    public void setPlayerTopCardCenterY(float playerTopCardCenterY) {
+        this.playerTopCardCenterY = playerTopCardCenterY;
     }
 
     public float getHandTopCardLeftX() {
@@ -176,23 +175,21 @@ public class PalaceView extends SurfaceView {
         this.handTopCardRightY = handTopCardRightY;
     }
 
-    public float getHandCenterTopCardX() {
-        return handCenterTopCardX;
+    public float getHandTopCardCenterX() {
+        return handTopCardCenterX;
     }
 
-    public void setHandCenterTopCardX(float handCenterTopCardX) {
-        this.handCenterTopCardX = handCenterTopCardX;
+    public void setHandTopCardCenterX(float handTopCardCenterX) {
+        this.handTopCardCenterX = handTopCardCenterX;
     }
 
-    public float getHandCenterTopCardY() {
-        return handCenterTopCardY;
+    public float getHandTopCardCenterY() {
+        return handTopCardCenterY;
     }
 
-    public void setHandCenterTopCardY(float handCenterTopCardY) {
-        this.handCenterTopCardY = handCenterTopCardY;
+    public void setHandTopCardCenterY(float handTopCardCenterY) {
+        this.handTopCardCenterY = handTopCardCenterY;
     }
-
-    private float handCenterTopCardY = yBottom - yMargin - displayConvert * 130;
 
     public PalaceGameState getState() {
         return state;
@@ -443,24 +440,24 @@ public class PalaceView extends SurfaceView {
              playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
              playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
              playerTopCardRightY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
-             playerCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
-             playerCenterTopCardY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+             playerTopCardCenterX = xCenter - cardWidth * 2 - cardWidth / 2;
+             playerTopCardCenterY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
 
             drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY, state.getP1TopPalaceCards().get(0).getSuit(), state.getP1TopPalaceCards().get(0).getRank());
             drawCard(canvas, playerTopCardRightX , playerTopCardRightY , state.getP1TopPalaceCards().get(1).getSuit(), state.getP1TopPalaceCards().get(1).getRank());
-            drawCard(canvas, playerCenterTopCardX, playerCenterTopCardY , state.getP1TopPalaceCards().get(2).getSuit(), state.getP1TopPalaceCards().get(2).getRank());
+            drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY, state.getP1TopPalaceCards().get(2).getSuit(), state.getP1TopPalaceCards().get(2).getRank());
 
             //draw player's hand
              handTopCardLeftX = xCenter - cardWidth / 2;
              handTopCardLeftY = yBottom - yBottom - yMargin - displayConvert * 130;
              handTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
              handTopCardRightY = yBottom - yMargin - displayConvert * 130;
-             handCenterTopCardX = xCenter - cardWidth * 2 - cardWidth / 2;
-             handCenterTopCardY = yBottom - yMargin - displayConvert * 130;
+             handTopCardCenterX = xCenter - cardWidth * 2 - cardWidth / 2;
+             handTopCardCenterY = yBottom - yMargin - displayConvert * 130;
 
             drawCard(canvas, handTopCardLeftX, handTopCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
             drawCard(canvas, handTopCardRightX, handTopCardRightY, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
-            drawCard(canvas, handCenterTopCardX, handCenterTopCardY , state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
+            drawCard(canvas, handTopCardCenterX, handTopCardCenterY, state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
 
             //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
             //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);

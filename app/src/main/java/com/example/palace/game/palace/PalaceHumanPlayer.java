@@ -4,13 +4,10 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.content.Context;
-import android.util.AttributeSet;
 
 
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
-import com.example.palace.game.GamePlayer;
 import com.example.palace.game.R;
 import com.example.palace.game.infoMsg.GameInfo;
 
@@ -112,19 +109,76 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float y = motionEvent.getY();
         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
 
-
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //Check if the x and y position of the touch is inside the bitmap
-                if( x > view.getHandTopCardLeftX() && x < view.getHandTopCardLeftX() + cardWidth && y > view.getHandCenterTopCardY() && y < view.getHandCenterTopCardY() + cardHeight ) {
+
+                // First card shown in the view hand
+                if( x > view.getHandTopCardLeftX() &&
+                        x < view.getHandTopCardLeftX() + cardWidth &&
+                        y > view.getHandTopCardLeftY() &&
+                        y < view.getHandTopCardLeftY() + cardHeight ) {
                     //Bitmap touched
                     //cardSelectedAction
                     //how does it know which card is there (rank,value)
                         // - state.getP1TopCards().get(1)
                     state.setCardToBeSelected(state.getP1Hand().get(0));
                     this.game.sendAction(selectcard);
-
                 }
+
+                //second Card shown in the view hand
+                if( x > view.getHandTopCardCenterX() &&
+                        x < view.getHandTopCardCenterX() + cardWidth &&
+                        y > view.getHandTopCardCenterY() &&
+                        y < view.getHandTopCardCenterY() + cardHeight ) {
+                    //Bitmap touched
+                    state.setCardToBeSelected(state.getP1Hand().get(1));
+                    this.game.sendAction(selectcard);
+                }
+
+                //third card shown in the view hand
+                if( x > view.getHandTopCardRightX() &&
+                        x < view.getHandTopCardRightX() + cardWidth &&
+                        y > view.getHandTopCardRightY() &&
+                        y < view.getHandTopCardRightY() + cardHeight ) {
+                    //Bitmap touched
+                    state.setCardToBeSelected(state.getP1Hand().get(2));
+                    this.game.sendAction(selectcard);
+                }
+
+                // First card shown in the view top
+                if( x > view.getPlayerTopCardLeftX() &&
+                        x < view.getPlayerTopCardLeftX() + cardWidth &&
+                        y > view.getPlayerTopCardLeftY() &&
+                        y < view.getPlayerTopCardLeftY() + cardHeight ) {
+                    //Bitmap touched
+                    state.setCardToBeSelected(state.getP1TopPalaceCards().get(0));
+                    this.game.sendAction(selectcard);
+                }
+
+                //second Card shown in the view top
+                if( x > view.getPlayerTopCardCenterX() &&
+                        x < view.getPlayerTopCardCenterX() + cardWidth &&
+                        y > view.getPlayerTopCardCenterY() &&
+                        y < view.getPlayerTopCardCenterY() + cardHeight ) {
+                    //Bitmap touched
+                    state.setCardToBeSelected(state.getP1TopPalaceCards().get(1));
+                    this.game.sendAction(selectcard);
+                }
+
+                //third card shown in the view top
+                if( x > view.getPlayerTopCardRightX() &&
+                        x < view.getPlayerTopCardRightX() + cardWidth &&
+                        y > view.getPlayerTopCardRightY() &&
+                        y < view.getPlayerTopCardRightY() + cardHeight ) {
+                    //Bitmap touched
+                    state.setCardToBeSelected(state.getP1TopPalaceCards().get(2));
+                    this.game.sendAction(selectcard);
+                }
+
+
+
+
                 return true;
         }
 
