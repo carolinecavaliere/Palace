@@ -21,7 +21,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button quit;
     private Button restart;
 
-
+    private PalaceGameState state = view.getState();
     // card dimensions
     private int cardWidth = view.getCardWidth();
     private int cardHeight = view.getCardHeight();
@@ -94,11 +94,24 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         }
     }
 
+    /**
+     * @param palaceView
+     * @param motionEvent
+     * @return
+     *
+     * External Citation
+     *      Date: 8 November 2020
+     *      Problem: How to map a bitmap
+     *      Resource:
+     * https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
+     *      Solution: I used the example code from this post.
+     */
     @Override
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
+
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -106,7 +119,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                 if( x > view.getHandTopCardLeftX() && x < view.getHandTopCardLeftX() + cardWidth && y > view.getHandCenterTopCardY() && y < view.getHandCenterTopCardY() + cardHeight ) {
                     //Bitmap touched
                     //cardSelectedAction
-                    //
+                    //how does it know which card is there (rank,value)
+                        // - state.getP1TopCards().get(1)
+                    state.setCardToBeSelected(state.getP1Hand().get(0));
+                    this.game.sendAction(selectcard);
 
                 }
                 return true;
