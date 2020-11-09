@@ -95,19 +95,19 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
+    public boolean onTouch(View palaceView, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
-
-        float bitmapXPosition = 0;
-        float bitmapYPosition = 0;
+        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //Check if the x and y position of the touch is inside the bitmap
-
-                if( x > bitmapXPosition && x < bitmapXPosition + cardWidth && y > bitmapYPosition && y < bitmapYPosition + cardHeight ) {
+                if( x > view.getHandTopCardLeftX() && x < view.getHandTopCardLeftX() + cardWidth && y > view.getHandCenterTopCardY() && y < view.getHandCenterTopCardY() + cardHeight ) {
                     //Bitmap touched
+                    //cardSelectedAction
+                    //
+
                 }
                 return true;
         }
