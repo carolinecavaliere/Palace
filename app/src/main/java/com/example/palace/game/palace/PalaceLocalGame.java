@@ -129,19 +129,19 @@ public class PalaceLocalGame extends LocalGame {
         }
         else if(action instanceof PalaceSelectCardAction){
             if (palaceGame.getCardToBeSelected().getRank() >= palaceGame.getPlayPileTopPalaceCard().getRank()) {
-                if (palaceGame.getTurn() == 1 && palaceGame.getP1Hand().contains(palaceGame)) {  // looks at player 1's hand
+                if (palaceGame.getTurn() == 1 && palaceGame.getP1Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 1's hand
                     palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put arraylist into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 2 && palaceGame.getP2Hand().contains(palaceGame)) {  // looks at player 2's hand
+                else if (palaceGame.getTurn() == 2 && palaceGame.getP2Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 2's hand
                     palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 3 && palaceGame.getP3Hand().contains(palaceGame)) {  // looks at player 3's hand
+                else if (palaceGame.getTurn() == 3 && palaceGame.getP3Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 3's hand
                     palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 4 && palaceGame.getP4Hand().contains(palaceGame)) {  // looks at player 4's hand
+                else if (palaceGame.getTurn() == 4 && palaceGame.getP4Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 4's hand
                     palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
                     return true;
                 }
