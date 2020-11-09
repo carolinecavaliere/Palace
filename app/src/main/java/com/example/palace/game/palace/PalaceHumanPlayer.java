@@ -101,7 +101,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      *      Problem: How to map a bitmap
      *      Resource:
      * https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
-     *      Solution: I used the example code from this post.
+     *      Solution: I used the example code from this post and modified it to fit our cards drawn
      */
     @Override
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
@@ -110,7 +110,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
 
         switch(motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN:  // touch/tap action
                 //Check if the x and y position of the touch is inside the bitmap
 
                 // First card shown in the view hand
@@ -119,9 +119,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getHandTopCardLeftY() &&
                         y < view.getHandTopCardLeftY() + cardHeight ) {
                     //Bitmap touched
-                    //cardSelectedAction
-                    //how does it know which card is there (rank,value)
-                        // - state.getP1TopCards().get(1)
+                    //Q.)how does it know which card is there (rank,value)?
+                    //A.)state.getP1TopCards().get(1)
                     state.setCardToBeSelected(state.getP1Hand().get(0));
                     this.game.sendAction(selectcard);
                 }
@@ -175,13 +174,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     state.setCardToBeSelected(state.getP1TopPalaceCards().get(2));
                     this.game.sendAction(selectcard);
                 }
-
-
-
-
                 return true;
         }
-
         return false;
     }
 
