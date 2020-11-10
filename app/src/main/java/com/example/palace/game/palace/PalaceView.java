@@ -23,12 +23,12 @@ public class PalaceView extends SurfaceView {
     private float yMargin;
 
     //draw player's cards
-    private float playerTopCardCenterX = xCenter - cardWidth / 2;
-    private float playerTopCardCenterY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
-    private float playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
-    private float playerTopCardRightY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
-    private float playerTopCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
-    private float playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+    private float playerTopCardCenterX;
+    private float playerTopCardCenterY;
+    private float playerTopCardRightX;
+    private float playerTopCardRightY;
+    private float playerTopCardLeftX;
+    private float playerTopCardLeftY;
 
     //draw player's hand
     private float playerHandCardCenterX = xCenter - cardWidth / 2;
@@ -449,7 +449,7 @@ public class PalaceView extends SurfaceView {
 
             //draw player's hand
              playerHandCardCenterX = xCenter - cardWidth / 2;
-             playerHandCardCenterY = yBottom - yBottom - yMargin - displayConvert * 130;
+             playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
              playerHandCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
              playerHandCardRightY = yBottom - yMargin - displayConvert * 130;
              playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
