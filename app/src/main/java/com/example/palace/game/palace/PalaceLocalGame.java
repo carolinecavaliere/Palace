@@ -123,21 +123,24 @@ public class PalaceLocalGame extends LocalGame {
             return false;
         }
         else if(action instanceof PalaceSelectCardAction){
-            if (palaceGame.getCardToBeSelected().getRank() >= palaceGame.getPlayPileTopPalaceCard().getRank()) {
-                if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 1's hand
-                    palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put arraylist into GameState variable
+            PalaceSelectCardAction select = (PalaceSelectCardAction) action;
+            PalaceCard chosenCard = select.getCardSelected();
+
+            if (chosenCard.getRank() >= palaceGame.getPlayPileTopPalaceCard().getRank()) {
+                if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
+                    palaceGame.addToSelectedCards(chosenCard); // put arraylist into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 2's hand
-                    palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
+                else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
+                    palaceGame.addToSelectedCards(chosenCard); // put into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 3's hand
-                    palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
+                else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
+                    palaceGame.addToSelectedCards(chosenCard); // put into GameState variable
                     return true;
                 }
-                else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(palaceGame.getCardToBeSelected())) {  // looks at player 4's hand
-                    palaceGame.addToSelectedCards(palaceGame.getCardToBeSelected()); // put into GameState variable
+                else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
+                    palaceGame.addToSelectedCards(chosenCard); // put into GameState variable
                     return true;
                 }
                 else {

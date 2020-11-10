@@ -12,6 +12,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         PalaceGameState state = new PalaceGameState((PalaceGameState)info);
+        PalaceSelectCardAction selectCardAction;
         if(state.getTurn()!=this.playerNum)
         {
             return;
@@ -27,38 +28,39 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             else
             {
                 if (this.playerNum == 0){
-                    state.setCardToBeSelected(state.getP1Hand().get(((int)Math.random()*state.getP1numCards())));
+                    selectCardAction = new PalaceSelectCardAction(this, state.getP1Hand().get(((int)Math.random()*state.getP1numCards())), state.getSelectedPalaceCards());
                 }
                 else if (this.playerNum == 1){
-                    state.setCardToBeSelected(state.getP2Hand().get(((int)Math.random()*state.getP2numCards())));
+                    selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(((int)Math.random()*state.getP2numCards())), state.getSelectedPalaceCards());
                 }
                 else if (this.playerNum == 2){
-                    state.setCardToBeSelected(state.getP3Hand().get(((int)Math.random()*state.getP3numCards())));
+                    selectCardAction = new PalaceSelectCardAction(this, state.getP3Hand().get(((int)Math.random()*state.getP3numCards())), state.getSelectedPalaceCards());
                 }
                 else if (this.playerNum == 3){
-                    state.setCardToBeSelected(state.getP4Hand().get(((int)Math.random()*state.getP4numCards())));
+                    selectCardAction = new PalaceSelectCardAction(this, state.getP4Hand().get(((int)Math.random()*state.getP4numCards())), state.getSelectedPalaceCards());
                 }
                 else {
                     return;
                 }
                 while (state.getCardToBeSelected().getRank()<state.getPlayPileTopPalaceCard().getRank()){
                     if (this.playerNum == 0){
-                        state.setCardToBeSelected(state.getP1Hand().get(((int)Math.random()*state.getP1numCards())));
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP1Hand().get(((int)Math.random()*state.getP1numCards())), state.getSelectedPalaceCards());
+
                     }
                     else if (this.playerNum == 1){
-                        state.setCardToBeSelected(state.getP2Hand().get(((int)Math.random()*state.getP2numCards())));
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(((int)Math.random()*state.getP2numCards())), state.getSelectedPalaceCards());
                     }
                     else if (this.playerNum == 2){
-                        state.setCardToBeSelected(state.getP3Hand().get(((int)Math.random()*state.getP3numCards())));
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP3Hand().get(((int)Math.random()*state.getP3numCards())), state.getSelectedPalaceCards());
                     }
                     else if (this.playerNum == 3){
-                        state.setCardToBeSelected(state.getP4Hand().get(((int)Math.random()*state.getP4numCards())));
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP4Hand().get(((int)Math.random()*state.getP4numCards())), state.getSelectedPalaceCards());
                     }
                     else {
                         return;
                     }
                 }
-                PalaceSelectCardAction selectCardAction = new PalaceSelectCardAction(this);
+
                 this.game.sendAction(selectCardAction);
                 PalacePlayCardAction play = new PalacePlayCardAction(this);
                 this.game.sendAction(play);
