@@ -19,8 +19,6 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
     private int cardWidth = displayConvert * 110;
     private int cardHeight = displayConvert * 140;
 
-    Paint highlightPaint = new Paint(); // create a new paint object
-
     private float xCenter;
     private float yCenter;
     private float xRight;
@@ -49,7 +47,9 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
     private boolean playerHandCardCenterTouched = false;// to check if this card has been touched
     private boolean playerHandCardRightTouched = false;// to check if this card has been touched
     private boolean playerHandCardLeftTouched = false;// to check if this card has been touched
+    //private boolean playerHandEmpty = false; // expand on this later. This would allow top and bottom cards to be selected
 
+    Paint highlightPaint = new Paint(); // create a new paint object
 
     public int getDisplayConvert() {
         return displayConvert;
@@ -494,8 +494,11 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
              */
 
             // rectangle for the top middle card
-            Rect highlightRect = new Rect((int)playerTopCardCenterX, (int)playerTopCardCenterY,
-                    (int)playerTopCardCenterX+cardWidth, (int)playerTopCardCenterY+cardHeight);
+            Rect highlightRect = new Rect(
+                    (int)playerTopCardCenterX,
+                    (int)playerTopCardCenterY,
+                    (int)playerTopCardCenterX+cardWidth,
+                    (int)playerTopCardCenterY+cardHeight);
             if (playerTopCardCenterTouched == true) { // if that card area has been touched...
                 canvas.drawRect(highlightRect, highlightPaint); //... draw the rectangle.
             }
