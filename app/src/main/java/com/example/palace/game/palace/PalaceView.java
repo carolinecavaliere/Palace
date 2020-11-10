@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 
 import com.example.palace.game.R;
 
-//nonsense
+
 public class PalaceView extends SurfaceView {
     private int displayConvert = (int)getResources().getDisplayMetrics().density;
     private int cardWidth = displayConvert * 110;
