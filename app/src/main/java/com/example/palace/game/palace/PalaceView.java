@@ -15,12 +15,11 @@ import com.example.palace.game.R;
 
 //nonsense
 public class PalaceView extends SurfaceView implements View.OnTouchListener{
-    private PalaceHumanPlayer humanPlayer;
     private int displayConvert = (int)getResources().getDisplayMetrics().density;
     private int cardWidth = displayConvert * 110;
     private int cardHeight = displayConvert * 140;
 
-    Paint highlightPaint = new Paint();
+    Paint highlightPaint = new Paint(); // create a new paint object
 
     private float xCenter;
     private float yCenter;
@@ -36,9 +35,9 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
     private float playerTopCardRightY;
     private float playerTopCardLeftX;
     private float playerTopCardLeftY;
-    private boolean playerTopCardCenterTouched = false;
-    private boolean playerTopCardRightTouched = false;
-    private boolean playerTopCardLeftTouched = false;
+    private boolean playerTopCardCenterTouched = false; // to check if this card has been touched
+    private boolean playerTopCardRightTouched = false; // to check if this card has been touched
+    private boolean playerTopCardLeftTouched = false;// to check if this card has been touched
 
     //draw player's hand
     private float playerHandCardCenterX;
@@ -47,9 +46,9 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
     private float playerHandCardRightY;
     private float playerHandCardLeftX;
     private float playerHandCardLeftY;
-    private boolean playerHandCardCenterTouched = false;
-    private boolean playerHandCardRightTouched = false;
-    private boolean playerHandCardLeftTouched = false;
+    private boolean playerHandCardCenterTouched = false;// to check if this card has been touched
+    private boolean playerHandCardRightTouched = false;// to check if this card has been touched
+    private boolean playerHandCardLeftTouched = false;// to check if this card has been touched
 
 
     public int getDisplayConvert() {
@@ -295,7 +294,7 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
         super(context, attrs);
         setWillNotDraw(false);
 
-        highlightPaint.setColor(0xCC9FFFF3);
+        highlightPaint.setColor(0xCC9FFFF3); // this is the color of our highlighted box
 
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
@@ -431,7 +430,7 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
         setBackgroundColor(0xFF31B94D);
         super.onDraw(canvas);
 
-        setOnTouchListener(this);
+        setOnTouchListener(this); // listens for the user's tap!
 
         xCenter = (canvas.getWidth()/2f);
         yCenter = (canvas.getHeight()/2f);
@@ -494,11 +493,11 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
              *     private float playerTopCardCenterY;
              */
 
+            // rectangle for the top middle card
             Rect highlightRect = new Rect((int)playerTopCardCenterX, (int)playerTopCardCenterY,
                     (int)playerTopCardCenterX+cardWidth, (int)playerTopCardCenterY+cardHeight);
-
-            if (playerTopCardCenterTouched == true) {
-                canvas.drawRect(highlightRect, highlightPaint);
+            if (playerTopCardCenterTouched == true) { // if that card area has been touched...
+                canvas.drawRect(highlightRect, highlightPaint); //... draw the rectangle.
             }
         }
 
