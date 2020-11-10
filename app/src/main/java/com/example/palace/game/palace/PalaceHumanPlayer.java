@@ -174,6 +174,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardRightY() &&
                         y < view.getPlayerTopCardRightY() + cardHeight ) {
                     //Bitmap touched
+
                     state.setCardToBeSelected(state.getP1TopPalaceCards().get(2));
                     this.game.sendAction(selectcard);
                 }

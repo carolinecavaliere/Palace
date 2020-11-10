@@ -4,16 +4,23 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
+import android.graphics.Rect;
 
 import com.example.palace.game.R;
 
 //nonsense
-public class PalaceView extends SurfaceView {
+public class PalaceView extends SurfaceView implements View.OnTouchListener{
+    private PalaceHumanPlayer humanPlayer;
     private int displayConvert = (int)getResources().getDisplayMetrics().density;
     private int cardWidth = displayConvert * 110;
     private int cardHeight = displayConvert * 140;
+
+    Paint highlightPaint = new Paint();
 
     private float xCenter;
     private float yCenter;
@@ -29,6 +36,9 @@ public class PalaceView extends SurfaceView {
     private float playerTopCardRightY;
     private float playerTopCardLeftX;
     private float playerTopCardLeftY;
+    private boolean playerTopCardCenterTouched = false;
+    private boolean playerTopCardRightTouched = false;
+    private boolean playerTopCardLeftTouched = false;
 
     //draw player's hand
     private float playerHandCardCenterX;
@@ -37,6 +47,9 @@ public class PalaceView extends SurfaceView {
     private float playerHandCardRightY;
     private float playerHandCardLeftX;
     private float playerHandCardLeftY;
+    private boolean playerHandCardCenterTouched = false;
+    private boolean playerHandCardRightTouched = false;
+    private boolean playerHandCardLeftTouched = false;
 
 
     public int getDisplayConvert() {
@@ -282,6 +295,8 @@ public class PalaceView extends SurfaceView {
         super(context, attrs);
         setWillNotDraw(false);
 
+        highlightPaint.setColor(0xFF9FFFF3);
+
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
         ace_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.a_d);
@@ -416,6 +431,8 @@ public class PalaceView extends SurfaceView {
         setBackgroundColor(0xFF31B94D);
         super.onDraw(canvas);
 
+        setOnTouchListener(this);
+
         xCenter = (canvas.getWidth()/2f);
         yCenter = (canvas.getHeight()/2f);
         xRight = canvas.getHeight();
@@ -462,7 +479,30 @@ public class PalaceView extends SurfaceView {
             //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
             //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
             //drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
+
+            // Drawing a box around the card we touched
+            /**
+             *     private boolean playerTopCardCenterTouched = false;
+             *     private boolean playerTopCardRightTouched = false;
+             *     private boolean playerTopCardLeftTouched = false;
+             *
+             *     private boolean playerHandCardCenterTouched = false;
+             *     private boolean playerHandCardRightTouched = false;
+             *     private boolean playerHandCardLeftTouched = false;
+             *
+             *     private float playerTopCardCenterX;
+             *     private float playerTopCardCenterY;
+             */
+
+            Rect highlightRect = new Rect((int)playerTopCardCenterX, (int)playerTopCardCenterY,
+                    (int)playerTopCardCenterX+cardWidth, (int)playerTopCardCenterY+cardHeight);
+
+            if (playerHandCardCenterTouched == true) {
+                canvas.drawRect(highlightRect, highlightPaint);
+            }
         }
+
+
 
     }
 
@@ -616,5 +656,98 @@ public class PalaceView extends SurfaceView {
 
     public void setCardHeight(int cardHeight) {
         this.cardHeight = cardHeight;
+    }
+
+    @Override
+    public boolean onTouch(View palaceView, MotionEvent motionEvent) {
+        float x = motionEvent.getX();
+        float y = motionEvent.getY();
+
+        switch(motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:  // touch/tap action
+                //Check if the x and y position of the touch is inside the bitmap
+                // First card shown in the view hand
+                if( x > getPlayerHandCardCenterX() &&
+                        x < getPlayerHandCardCenterX() + cardWidth &&
+                        y > getPlayerHandCardCenterY() &&
+                        y < getPlayerHandCardCenterY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerHandCardCenterTouched == false) {
+                        playerHandCardCenterTouched = true;
+                    } else {
+                        playerHandCardCenterTouched = false;
+                    }
+                }
+
+                //second Card shown in the view hand
+                if( x > getPlayerHandCardLeftX() &&
+                        x < getPlayerHandCardLeftX() + cardWidth &&
+                        y > getPlayerHandCardLeftY() &&
+                        y < getPlayerHandCardLeftY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerHandCardLeftTouched == false) {
+                        playerHandCardLeftTouched = true;
+                    } else {
+                        playerHandCardLeftTouched = false;
+                    }
+                }
+
+                //third card shown in the view hand
+                if( x > getPlayerHandCardRightX() &&
+                        x < getPlayerHandCardRightX() + cardWidth &&
+                        y > getPlayerHandCardRightY() &&
+                        y < getPlayerHandCardRightY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerHandCardRightTouched == false) {
+                        playerHandCardRightTouched = true;
+                    } else {
+                        playerHandCardRightTouched = false;
+                    }
+                }
+
+                // First card shown in the view top
+                if( x > getPlayerTopCardCenterX() &&
+                        x < getPlayerTopCardCenterX() + cardWidth &&
+                        y > getPlayerTopCardCenterY() &&
+                        y < getPlayerTopCardCenterY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerTopCardCenterTouched == false) {
+                        playerTopCardCenterTouched = true;
+                    } else {
+                        playerTopCardCenterTouched = false;
+                    }
+                }
+
+                //second Card shown in the view top
+                if( x > getPlayerTopCardLeftX() &&
+                        x < getPlayerTopCardLeftX() + cardWidth &&
+                        y > getPlayerTopCardLeftY() &&
+                        y < getPlayerTopCardLeftY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerTopCardLeftTouched == false) {
+                        playerTopCardLeftTouched = true;
+                    } else {
+                        playerTopCardLeftTouched = false;
+                    }
+                }
+
+                //third card shown in the view top
+                if( x > getPlayerTopCardRightX() &&
+                        x < getPlayerTopCardRightX() + cardWidth &&
+                        y > getPlayerTopCardRightY() &&
+                        y < getPlayerTopCardRightY() + cardHeight ) {
+                    //Bitmap touched
+                    if (playerTopCardRightTouched == false) {
+                        playerTopCardRightTouched = true;
+                    } else {
+                        playerTopCardRightTouched = false;
+                    }
+                }
+                return true;
+        }
+
+        invalidate();
+
+        return false;
     }
 }
