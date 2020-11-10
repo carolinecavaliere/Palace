@@ -295,7 +295,7 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
         super(context, attrs);
         setWillNotDraw(false);
 
-        highlightPaint.setColor(0xFF9FFFF3);
+        highlightPaint.setColor(0xCC9FFFF3);
 
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
@@ -497,7 +497,7 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
             Rect highlightRect = new Rect((int)playerTopCardCenterX, (int)playerTopCardCenterY,
                     (int)playerTopCardCenterX+cardWidth, (int)playerTopCardCenterY+cardHeight);
 
-            if (playerHandCardCenterTouched == true) {
+            if (playerTopCardCenterTouched == true) {
                 canvas.drawRect(highlightRect, highlightPaint);
             }
         }
