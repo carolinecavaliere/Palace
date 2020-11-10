@@ -105,6 +105,9 @@ public class PalaceGameState extends GameState {
         displayCard2P2 = p2Hand.get(1);
         displayCard3P2 = p2Hand.get(2);
 
+        cardToBeSelected = new PalaceCard(4, 14);//default is ace of spades
+        topCardSelected = new PalaceCard(4,14);
+
     }
 
     public PalaceGameState(PalaceGameState orig)//copy constructor
@@ -191,7 +194,7 @@ public class PalaceGameState extends GameState {
             this.selectedPalaceCards.add(new PalaceCard(orig.getSelectedPalaceCards().get(i)));
         }
 
-        drawPileTopPalaceCard = new PalaceCard(orig.getDrawPileTopPalaceCard());
+
         playPileTopPalaceCard = new PalaceCard(orig.getPlayPileTopPalaceCard());
         cardToBeSelected = new PalaceCard(orig.getCardToBeSelected());
         topCardSelected = new PalaceCard(orig.getTopCardSelected());

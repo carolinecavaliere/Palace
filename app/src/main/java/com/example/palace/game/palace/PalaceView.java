@@ -455,10 +455,21 @@ public class PalaceView extends SurfaceView {
              playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
              playerHandCardLeftY = yBottom - yMargin - displayConvert * 130;
 
-            drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
-            drawCard(canvas, playerHandCardRightX, playerHandCardRightY, state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
-            drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
-
+             if (state.getP1Hand().size()>=3) {
+                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
+                 drawCard(canvas, playerHandCardRightX, playerHandCardRightY, state.getP1Hand().get(2).getSuit(), state.getP1Hand().get(2).getRank());
+                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+             }
+             else if (state.getP1Hand().size()==2){
+                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY, state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
+             }
+             else if (state.getP1Hand().size()==1){
+                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY, state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+             }
+             else {
+                 assert state.getP1Hand().isEmpty();
+             }
             //drawCard(canvas, xCenter - cardWidth/2, yBottom - yMargin + displayConvert*50, 10);
             //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
             //drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
