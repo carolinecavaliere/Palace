@@ -51,6 +51,7 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
 
     Paint highlightPaint = new Paint(); // create a new paint object
 
+
     public int getDisplayConvert() {
         return displayConvert;
     }

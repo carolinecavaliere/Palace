@@ -1,9 +1,11 @@
 package com.example.palace.game.palace;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.graphics.Canvas;
 
 
 import com.example.palace.game.GameHumanPlayer;
@@ -111,6 +113,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float x = motionEvent.getX();
         float y = motionEvent.getY();
         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
+        Canvas canvas = new Canvas();
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:  // touch/tap action
@@ -179,6 +182,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                 }
                 return true;
         }
+        //view.invalidate();
         return false;
     }
 
