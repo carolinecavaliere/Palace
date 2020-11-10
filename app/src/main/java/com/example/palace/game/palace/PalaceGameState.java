@@ -64,7 +64,7 @@ public class PalaceGameState extends GameState {
     public PalaceGameState(int numPlayers)
     {
         this.numPlayers = numPlayers;
-        turn = 1;
+        turn = 0;
         playPilePalaceCards = new ArrayList<PalaceCard>();
 
         p1TopPalaceCards = new ArrayList<PalaceCard>();
@@ -193,6 +193,9 @@ public class PalaceGameState extends GameState {
 
         drawPileTopPalaceCard = new PalaceCard(orig.getDrawPileTopPalaceCard());
         playPileTopPalaceCard = new PalaceCard(orig.getPlayPileTopPalaceCard());
+        cardToBeSelected = new PalaceCard(orig.getCardToBeSelected());
+        topCardSelected = new PalaceCard(orig.getTopCardSelected());
+
         playPilePalaceCards = orig.getPlayPilePalaceCards();
 
         this.drawPileNumCards = orig.getDrawPileNumCards();

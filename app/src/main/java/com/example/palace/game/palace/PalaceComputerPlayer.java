@@ -12,7 +12,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         PalaceGameState state = new PalaceGameState((PalaceGameState)info);
-        if(state.getTurn()!=this.playerNum-1)
+        if(state.getTurn()!=this.playerNum)
         {
             return;
         }

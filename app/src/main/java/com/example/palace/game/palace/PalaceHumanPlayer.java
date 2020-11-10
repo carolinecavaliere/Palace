@@ -110,7 +110,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
-        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
+
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:  // touch/tap action
@@ -124,6 +124,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     //Bitmap touched
                     //Q.)how does it know which card is there (rank,value)?
                     //A.)state.getP1TopCards().get(1)
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1Hand().get(1));
                     this.game.sendAction(selectcard);
                 }
@@ -134,6 +135,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardLeftY() &&
                         y < view.getPlayerHandCardLeftY() + cardHeight ) {
                     //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1Hand().get(0));
                     this.game.sendAction(selectcard);
                 }
@@ -144,6 +146,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardRightY() &&
                         y < view.getPlayerHandCardRightY() + cardHeight ) {
                     //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1Hand().get(2));
                     this.game.sendAction(selectcard);
                 }
@@ -154,6 +157,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardCenterY() &&
                         y < view.getPlayerTopCardCenterY() + cardHeight ) {
                     //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1TopPalaceCards().get(1));
                     this.game.sendAction(selectcard);
                 }
@@ -164,6 +168,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardLeftY() &&
                         y < view.getPlayerTopCardLeftY() + cardHeight ) {
                     //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1TopPalaceCards().get(0));
                     this.game.sendAction(selectcard);
                 }
@@ -174,6 +179,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardRightY() &&
                         y < view.getPlayerTopCardRightY() + cardHeight ) {
                     //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this);
                     state.setCardToBeSelected(state.getP1TopPalaceCards().get(2));
                     this.game.sendAction(selectcard);
                 }
