@@ -23,20 +23,20 @@ public class PalaceView extends SurfaceView {
     private float yMargin;
 
     //draw player's cards
-    private float playerTopCardCenterX;
-    private float playerTopCardCenterY;
-    private float playerTopCardRightX;
-    private float playerTopCardRightY;
-    private float playerTopCardLeftX;
-    private float playerTopCardLeftY;
+    private float playerTopCardCenterX = xCenter - cardWidth / 2;
+    private float playerTopCardCenterY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+    private float playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
+    private float playerTopCardRightY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
+    private float playerTopCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
+    private float playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
 
     //draw player's hand
-    private float playerHandCardCenterX;
-    private float playerHandCardCenterY;
-    private float playerHandCardRightX;
-    private float playerHandCardRightY;
-    private float playerHandCardLeftX;
-    private float playerHandCardLeftY;
+    private float playerHandCardCenterX = xCenter - cardWidth / 2;
+    private float playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
+    private float playerHandCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
+    private float playerHandCardRightY = yBottom - yMargin - displayConvert * 130;
+    private float playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
+    private float playerHandCardLeftY = yBottom - yMargin - displayConvert * 130;
 
 
     public int getDisplayConvert() {
@@ -449,7 +449,7 @@ public class PalaceView extends SurfaceView {
 
             //draw player's hand
              playerHandCardCenterX = xCenter - cardWidth / 2;
-             playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
+             playerHandCardCenterY = yBottom - yBottom - yMargin - displayConvert * 130;
              playerHandCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
              playerHandCardRightY = yBottom - yMargin - displayConvert * 130;
              playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
