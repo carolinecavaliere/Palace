@@ -31,12 +31,12 @@ public class PalaceView extends SurfaceView {
     private float playerTopCardLeftY;
 
     //draw player's hand
-    private float playerHandCardCenterX = xCenter - cardWidth / 2;
-    private float playerHandCardCenterY = yBottom - yBottom - yMargin - displayConvert * 130;
-    private float playerHandCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
-    private float playerHandCardRightY = yBottom - yMargin - displayConvert * 130;
-    private float playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
-    private float playerHandCardLeftY = yBottom - yMargin - displayConvert * 130;
+    private float playerHandCardCenterX;
+    private float playerHandCardCenterY;
+    private float playerHandCardRightX;
+    private float playerHandCardRightY;
+    private float playerHandCardLeftX;
+    private float playerHandCardLeftY;
 
 
     public int getDisplayConvert() {
