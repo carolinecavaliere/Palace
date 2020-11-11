@@ -33,6 +33,55 @@ public class PalaceView extends SurfaceView implements View.OnTouchListener{
     private float playerTopCardRightY;
     private float playerTopCardLeftX;
     private float playerTopCardLeftY;
+
+    public boolean isPlayerTopCardCenterTouched() {
+        return playerTopCardCenterTouched;
+    }
+
+    public void setPlayerTopCardCenterTouched(boolean playerTopCardCenterTouched) {
+        this.playerTopCardCenterTouched = playerTopCardCenterTouched;
+    }
+
+    public boolean isPlayerTopCardRightTouched() {
+        return playerTopCardRightTouched;
+    }
+
+    public void setPlayerTopCardRightTouched(boolean playerTopCardRightTouched) {
+        this.playerTopCardRightTouched = playerTopCardRightTouched;
+    }
+
+    public boolean isPlayerTopCardLeftTouched() {
+        return playerTopCardLeftTouched;
+    }
+
+    public void setPlayerTopCardLeftTouched(boolean playerTopCardLeftTouched) {
+        this.playerTopCardLeftTouched = playerTopCardLeftTouched;
+    }
+
+    public boolean isPlayerHandCardCenterTouched() {
+        return playerHandCardCenterTouched;
+    }
+
+    public void setPlayerHandCardCenterTouched(boolean playerHandCardCenterTouched) {
+        this.playerHandCardCenterTouched = playerHandCardCenterTouched;
+    }
+
+    public boolean isPlayerHandCardRightTouched() {
+        return playerHandCardRightTouched;
+    }
+
+    public void setPlayerHandCardRightTouched(boolean playerHandCardRightTouched) {
+        this.playerHandCardRightTouched = playerHandCardRightTouched;
+    }
+
+    public boolean isPlayerHandCardLeftTouched() {
+        return playerHandCardLeftTouched;
+    }
+
+    public void setPlayerHandCardLeftTouched(boolean playerHandCardLeftTouched) {
+        this.playerHandCardLeftTouched = playerHandCardLeftTouched;
+    }
+
     private boolean playerTopCardCenterTouched = false; // to check if this card has been touched
     private boolean playerTopCardRightTouched = false; // to check if this card has been touched
     private boolean playerTopCardLeftTouched = false;// to check if this card has been touched

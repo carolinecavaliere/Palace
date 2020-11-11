@@ -127,8 +127,15 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     //Bitmap touched
                     //Q.)how does it know which card is there (rank,value)?
                     //A.)state.getP1TopCards().get(1)
-                    state.setCardToBeSelected(state.getP1Hand().get(1));
-                    this.game.sendAction(selectcard);
+                    if (view.isPlayerHandCardCenterTouched() == false) {
+                        view.setPlayerHandCardCenterTouched(true);
+                    } else {
+                        view.setPlayerHandCardCenterTouched(false);
+                    }
+                    if(view.isPlayerHandCardCenterTouched() == true) {
+                        state.setCardToBeSelected(state.getP1Hand().get(1));
+                        this.game.sendAction(selectcard);
+                    }
                 }
 
                 //second Card shown in the view hand
@@ -137,6 +144,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardLeftY() &&
                         y < view.getPlayerHandCardLeftY() + cardHeight ) {
                     //Bitmap touched
+
                     state.setCardToBeSelected(state.getP1Hand().get(0));
                     this.game.sendAction(selectcard);
                 }
