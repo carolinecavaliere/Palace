@@ -1,5 +1,7 @@
 package com.example.palace.game.palace;
 
+import android.util.Log;
+
 import com.example.palace.game.GamePlayer;
 import com.example.palace.game.LocalGame;
 import com.example.palace.game.actionMsg.GameAction;
@@ -47,6 +49,7 @@ public class PalaceLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
+        Log.d("makeMove", "makeMove: made");
         if(action instanceof PalacePlayCardAction){
             if (palaceGame.getSelectedPalaceCards().isEmpty()) {//not a valid move if a card isn't selected
                 return false;
