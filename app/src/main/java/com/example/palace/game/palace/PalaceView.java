@@ -425,8 +425,8 @@ public class PalaceView extends SurfaceView {
         if(state!=null) {
         //draw deck and pile
         drawCard(canvas, xCenter + 120 - cardWidth/2, yCenter - cardHeight/2, 1,  -1);
-        if(!(state.getPlayPileTopPalaceCard()==null)){
-            drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, state.getPlayPileTopPalaceCard().getSuit(), state.getPlayPileTopPalaceCard().getRank());
+        if(!(state.getPlayPilePalaceCards().isEmpty())){
+            drawCard(canvas, xCenter - 120 - cardWidth/2, yCenter - cardHeight/2, state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size()-1).getSuit(), state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size()-1).getRank());
         }
 
             //draw opponent's cards
@@ -531,6 +531,7 @@ public class PalaceView extends SurfaceView {
             } else if (rank == 14) {
                 canvas.drawBitmap(ace_clubs, left, top, null);
             }
+
         }
         else if(suit==1) {
             if (rank == 2) {

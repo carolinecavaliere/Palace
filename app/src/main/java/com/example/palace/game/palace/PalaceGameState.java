@@ -57,7 +57,7 @@ public class PalaceGameState extends GameState {
     private PalaceCard topCardSelected;
 
     private PalaceCard drawPileTopPalaceCard;
-    private PalaceCard playPileTopPalaceCard;
+
 
     private int drawPileNumCards;
 
@@ -198,8 +198,6 @@ public class PalaceGameState extends GameState {
             this.selectedPalaceCards.add(new PalaceCard(orig.getSelectedPalaceCards().get(i)));
         }
 
-
-        playPileTopPalaceCard = new PalaceCard(orig.getPlayPileTopPalaceCard());
         cardToBeSelected = new PalaceCard(orig.getCardToBeSelected());
         topCardSelected = new PalaceCard(orig.getTopCardSelected());
 
@@ -325,7 +323,7 @@ public class PalaceGameState extends GameState {
     }
     public void clearPlayPileCards(){
         this.playPilePalaceCards.clear();
-        this.playPileTopPalaceCard = null;
+
     }
 
     public void setDeck(PalaceDeckOfCards deck) {
@@ -402,14 +400,6 @@ public class PalaceGameState extends GameState {
 
     public void setDrawPileTopPalaceCard(PalaceCard drawPileTopPalaceCard) {
         this.drawPileTopPalaceCard = drawPileTopPalaceCard;
-    }
-
-    public PalaceCard getPlayPileTopPalaceCard() {
-        return playPileTopPalaceCard;
-    }
-
-    public void setPlayPileTopPalaceCard(PalaceCard playPileTopPalaceCard) {
-        this.playPileTopPalaceCard = playPileTopPalaceCard;
     }
 
     public int getDrawPileNumCards() {
@@ -492,12 +482,22 @@ public class PalaceGameState extends GameState {
     }
 
     //adders and removers
-    public void addToPlayPile(PalaceCard add){
+    public ArrayList<PalaceCard> addToPlayPile(PalaceCard add){
         playPilePalaceCards.add(add);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<playPilePalaceCards.size(); i++){
+            temp.add(new PalaceCard(playPilePalaceCards.get(i)));
+        }
+        return temp;
     }
 
-    public void addToP1Hand(PalaceCard add){
+    public ArrayList<PalaceCard> addToP1Hand(PalaceCard add){
         p1Hand.add(add);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p1Hand.size(); i++){
+            temp.add(new PalaceCard(p1Hand.get(i)));
+        }
+        return temp;
     }
 
     public void addToP2Hand(PalaceCard add){
@@ -544,20 +544,49 @@ public class PalaceGameState extends GameState {
         p4BottomPalaceCards.add(add);
     }
 
-    public void addToSelectedCards(PalaceCard add){
+    public ArrayList<PalaceCard> addToSelectedCards(PalaceCard add){
         selectedPalaceCards.add(add);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<selectedPalaceCards.size(); i++){
+            temp.add(new PalaceCard(selectedPalaceCards.get(i)));
+        }
+        return temp;
     }
 
-    public void removeFromPlayPile(PalaceCard remove){
+    public ArrayList<PalaceCard> removeFromPlayPile(PalaceCard remove){
         playPilePalaceCards.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<playPilePalaceCards.size(); i++){
+            temp.add(new PalaceCard(playPilePalaceCards.get(i)));
+        }
+        return temp;
     }
 
-    public void removeFromPlayPile(int remove){
+    public ArrayList<PalaceCard> removeFromPlayPile(int remove){
         playPilePalaceCards.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<playPilePalaceCards.size(); i++){
+            temp.add(new PalaceCard(playPilePalaceCards.get(i)));
+        }
+        return temp;
     }
 
-    public void removeFromP1Hand(PalaceCard remove){
+    public ArrayList<PalaceCard> removeFromP1Hand(PalaceCard remove){
         p1Hand.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p1Hand.size(); i++){
+            temp.add(new PalaceCard(p1Hand.get(i)));
+        }
+        return temp;
+    }
+
+    public ArrayList<PalaceCard> removeFromP1Hand(int remove){
+        p1Hand.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p1Hand.size(); i++){
+            temp.add(new PalaceCard(p1Hand.get(i)));
+        }
+        return temp;
     }
 
     public void removeFromP2Hand(PalaceCard remove){
@@ -604,8 +633,13 @@ public class PalaceGameState extends GameState {
         p4BottomPalaceCards.remove(remove);
     }
 
-    public void removeFromSelectedCards(PalaceCard remove){
+    public ArrayList<PalaceCard> removeFromSelectedCards(PalaceCard remove){
         selectedPalaceCards.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<selectedPalaceCards.size(); i++){
+            temp.add(new PalaceCard(selectedPalaceCards.get(i)));
+        }
+        return temp;
     }
 
 
@@ -613,7 +647,7 @@ public class PalaceGameState extends GameState {
         String ret =  "Number of Players: " + numPlayers + "\n" +
                 "Next Card in the Draw Pile: " + drawPileTopPalaceCard + "\n" +
                 "Number of Cards in Play Pile: " + playPileNumCards + "\n" +
-                "Current Card in Play Pile: " + playPileTopPalaceCard + "\n" +
+                "Current Card in Play Pile: " + playPilePalaceCards.get(playPilePalaceCards.size()-1) + "\n" +
 
                 "Player 1: \n"  +
                 "Number of Cards in Hand: " + p1numCards + "\n" +

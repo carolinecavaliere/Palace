@@ -42,7 +42,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                 else {
                     return;
                 }
-                while (state.getCardToBeSelected().getRank()<state.getPlayPileTopPalaceCard().getRank()){
+                while (state.getCardToBeSelected().getRank()<state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size()-1).getRank()){
                     if (this.playerNum == 0){
                         selectCardAction = new PalaceSelectCardAction(this, state.getP1Hand().get(((int)Math.random()*state.getP1numCards())), state.getSelectedPalaceCards());
 

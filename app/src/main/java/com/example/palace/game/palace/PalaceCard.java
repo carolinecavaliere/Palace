@@ -65,7 +65,7 @@ public class PalaceCard extends ArrayList<PalaceCard> {
      * @return
      */
     public static List<Integer> getValidRank() {
-        return Arrays.asList(2,3,4,5,6,7,8,9,10,11,12,13,14);
+        return Arrays.asList(2,3,4,5,6,7,8,9,10,11,12,13,14,15);
     }
 
     /**
@@ -76,6 +76,22 @@ public class PalaceCard extends ArrayList<PalaceCard> {
     public PalaceCard(int suit, int rank) { // card constructor
         setSuit(suit);
         setRank(rank);
+    }
+
+    @Override
+    public boolean equals(Object O){
+        if (O instanceof PalaceCard) {
+            PalaceCard c = (PalaceCard)O;
+            if(this.rank == c.rank && this.suit == c.suit){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return this.equals(O);
+        }
     }
 
     /**

@@ -214,7 +214,6 @@ public class PalaceDeckOfCards {
         state.addToPlayPile(deck.get(0));
         deck.remove(0);
         state.setPlayPileNumCards(1);
-        state.setPlayPileTopPalaceCard(state.getPlayPilePalaceCards().get(0));
     }
 
     public PalaceCard getNextCard() {
