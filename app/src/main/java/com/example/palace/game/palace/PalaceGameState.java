@@ -123,7 +123,13 @@ public class PalaceGameState extends GameState {
         this.p4numCards = orig.getP4numCards();
 
         this.p1Hand = new ArrayList<PalaceCard>();
+        displayCard1P1 = new PalaceCard(orig.getDisplayCard1P1());
+        displayCard2P1 = new PalaceCard(orig.getDisplayCard2P1());
+        displayCard3P1 = new PalaceCard(orig.getDisplayCard3P1());
         this.p2Hand = new ArrayList<PalaceCard>();
+        displayCard1P2 = new PalaceCard(orig.getDisplayCard1P2());
+        displayCard2P2 = new PalaceCard(orig.getDisplayCard2P2());
+        displayCard3P2 = new PalaceCard(orig.getDisplayCard3P2());
         this.p3Hand = new ArrayList<>(orig.getP3Hand().size());
         this.p4Hand = new ArrayList<>(orig.getP4Hand().size());
 
