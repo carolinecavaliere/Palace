@@ -264,11 +264,12 @@ public class PalaceLocalGame extends LocalGame {
             }
         }
         else if (action instanceof PalaceDisplayNextCards) {
-            if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1numCards()/3 - 1) {
+            if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1numCards()/3 &&
+                palaceGame.getP1numCards() % 3 != 0) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
             }
             return true;
-            }
+        }
         else if (action instanceof  PalaceDisplayPreviousCards) {
             if (palaceGame.getNumDisplayHand() - 1 >= 0) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() - 1);
