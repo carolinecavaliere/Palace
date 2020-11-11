@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 import com.example.palace.game.GameHumanPlayer;
@@ -17,6 +18,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button playCard;
     private Button quit;
     private Button restart;
+    private Button nextCards;
+    private Button previousCards;
 
     private PalaceGameState state;
     // card dimensions
@@ -68,12 +71,17 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         playCard = (Button)activity.findViewById(R.id.playcard);
         quit = (Button)activity.findViewById(R.id.quit_button);
         restart = (Button)activity.findViewById(R.id.restart_button);
+        nextCards = (Button)activity.findViewById(R.id.nextThreeCards);
+        previousCards = (Button)activity.findViewById(R.id.previousThreeCards);
 
         view.setOnTouchListener(this);
         takePile.setOnClickListener(this);
         playCard.setOnClickListener(this);
         quit.setOnClickListener(this);
         restart.setOnClickListener(this);
+        nextCards.setOnClickListener(this);
+        previousCards.setOnClickListener(this);
+
     }
 
     @Override
@@ -92,6 +100,15 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalacePlayCardAction playcard = new PalacePlayCardAction(this);
             this.game.sendAction(playcard);
         }
+        else if (button.equals(nextCards)){
+            PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
+            this.game.sendAction(nextcards);
+        }
+        else if (button.equals((previousCards))) {
+            PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
+            this.game.sendAction(previousCards);
+        }
+
     }
 
     /**

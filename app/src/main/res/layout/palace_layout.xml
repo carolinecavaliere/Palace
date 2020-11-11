@@ -15,28 +15,64 @@
             android:layout_weight="50" />
 
         <LinearLayout
-            android:id="@+id/gameButtons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
+            android:id="@+id/playOptions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/playcard"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/gameButtons"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:background="#CC49E3"
-                android:text="Play Card" />
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/takepile"
-                android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/playcard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:background="#CC49E3"
+                    android:text="Play Card" />
+
+                <Button
+                    android:id="@+id/takepile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#DD5050"
+                    android:text="Take Pile" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#DD5050"
-                android:text="Take Pile" />
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/handCardOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/nextThreeCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="Next Cards" />
+
+                <Button
+                    android:id="@+id/previousThreeCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Previous Cards" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class PalaceGameState extends GameState {
 
+    private int numDisplayHand;
+
     private int numPlayers;
 
     private int p1numCards;
@@ -63,6 +65,7 @@ public class PalaceGameState extends GameState {
 
     public PalaceGameState(int numPlayers)
     {
+        numDisplayHand = 0;
         this.numPlayers = numPlayers;
         turn = 0;
         playPilePalaceCards = new ArrayList<PalaceCard>();
@@ -112,6 +115,7 @@ public class PalaceGameState extends GameState {
 
     public PalaceGameState(PalaceGameState orig)//copy constructor
     {
+        this.numDisplayHand = orig.getNumDisplayHand();
         this.numPlayers = orig.getNumPlayers();
         this.p1numCards = orig.getP1numCards();
         this.p2numCards = orig.getP2numCards();
@@ -208,6 +212,14 @@ public class PalaceGameState extends GameState {
     }
 
     //getters and setters
+
+    public int getNumDisplayHand() {
+        return numDisplayHand;
+    }
+
+    public void setNumDisplayHand(int numDisplayHand) {
+        this.numDisplayHand = numDisplayHand;
+    }
 
     public ArrayList<PalaceCard> getSelectedPalaceCards() {
         return selectedPalaceCards;
