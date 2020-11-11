@@ -127,7 +127,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
         float x = motionEvent.getX();
         float y = motionEvent.getY();
-
+        int cardToGet = state.getNumDisplayHand()*3;
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:  // touch/tap action
@@ -141,7 +141,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     //Bitmap touched
                     //Q.)how does it know which card is there (rank,value)?
                     //A.)state.getP1TopCards().get(1)
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand() + 1), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet + 1), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
 
@@ -151,7 +151,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardLeftY() &&
                         y < view.getPlayerHandCardLeftY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand()), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
 
@@ -161,7 +161,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardRightY() &&
                         y < view.getPlayerHandCardRightY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand() + 2), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet + 2), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
 
