@@ -456,8 +456,8 @@ public class PalaceView extends SurfaceView {
              playerHandCardLeftY = yBottom - yMargin - displayConvert * 130;
 
             int cardToGet = state.getNumDisplayHand()*3;
-            if (state.getP1Hand().size()>=3) {
-                if (state.getP1numCards() % 3 == 0) {
+            if (state.getP1numCards()>=3) {
+                if (state.getNumDisplayHand() < state.getP1numCards()/3) {
                     drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY, state.getP1Hand().get(cardToGet + 1).getSuit(), state.getP1Hand().get(cardToGet + 1).getRank());
                     drawCard(canvas, playerHandCardRightX, playerHandCardRightY, state.getP1Hand().get(cardToGet + 2).getSuit(), state.getP1Hand().get(cardToGet + 2).getRank());
                     drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY, state.getP1Hand().get(cardToGet).getSuit(), state.getP1Hand().get(cardToGet).getRank());

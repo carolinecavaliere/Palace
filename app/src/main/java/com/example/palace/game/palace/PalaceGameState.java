@@ -323,7 +323,7 @@ public class PalaceGameState extends GameState {
     }
     public void clearPlayPileCards(){
         this.playPilePalaceCards.clear();
-
+        playPileNumCards = 0;
     }
 
     public void setDeck(PalaceDeckOfCards deck) {

@@ -124,30 +124,43 @@ public class PalaceLocalGame extends LocalGame {
         else if(action instanceof PalaceSelectCardAction){
             PalaceSelectCardAction select = (PalaceSelectCardAction) action;
             PalaceCard chosenCard = select.getCardSelected();
-
-            if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size()-1).getRank()) {
-                if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
-                    return true;
-                }
-                else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
-                    return true;
-                }
-                else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
-                    return true;
-                }
-                else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
-                    return true;
-                }
-                else {
+            if (palaceGame.getPlayPileNumCards() > 0) {
+                if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        return true;
+                    } else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        return true;
+                    } else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        return true;
+                    } else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
                     return false;
                 }
             }
             else {
-                return false;
+                if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
+                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    return true;
+                } else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
+                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    return true;
+                } else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
+                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    return true;
+                } else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
+                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         else if(action instanceof PalaceSwitchBaseCardsAction){
@@ -210,9 +223,8 @@ public class PalaceLocalGame extends LocalGame {
                         palaceGame.setP1numCards(palaceGame.getP1numCards() + 1);
                     }
 //                    for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {
-//                        palaceGame.setPlayPilePalaceCards(palaceGame.removeFromPlayPile(0));
-//                        palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() - 1);
-//                    }
+//                        palaceGame.removeFromPlayPile(0);
+//                        palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() - 1); }
                     palaceGame.clearPlayPileCards();
                     return true;
                 }
@@ -250,12 +262,14 @@ public class PalaceLocalGame extends LocalGame {
             else {
                 return false;
             }
-        } else if (action instanceof PalaceDisplayNextCards) {
+        }
+        else if (action instanceof PalaceDisplayNextCards) {
             if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1numCards()/3 - 1) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
             }
             return true;
-        } else if (action instanceof  PalaceDisplayPreviousCards) {
+            }
+        else if (action instanceof  PalaceDisplayPreviousCards) {
             if (palaceGame.getNumDisplayHand() - 1 >= 0) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() - 1);
             }
