@@ -16,6 +16,9 @@ public class PalaceDeckOfCards {
     PalaceDeckOfCards(int numDecks, PalaceGameState palaceGameState){
         state = palaceGameState;
         state.setDrawPileNumCards(0);
+
+        // add a card to the arrayList that represents a deck of cards. Do this twice if
+        // the number of decks we want is 2
         for(int i = 0; i<numDecks; i++){
             deck.add(new PalaceCard(1, 14));
             deck.add(new PalaceCard(2, 14));
@@ -81,9 +84,12 @@ public class PalaceDeckOfCards {
             deck.add(new PalaceCard(2, 2));
             deck.add(new PalaceCard(3, 2));
             deck.add(new PalaceCard(4, 2));
+
+            // initialize the int number of cards in the deck
             state.setDrawPileNumCards(state.getDrawPileNumCards() + 52);
         }
-        ShuffleDeck(deck);
+
+        ShuffleDeck(deck); // shuffle the deck of cards in a random order
     }
 
     /**
@@ -106,6 +112,11 @@ public class PalaceDeckOfCards {
         Collections.shuffle(myDeck);
     }
 
+    /**
+     * Set up the game by dealing cards to the computer and user.
+     * User and computer gets 3 cards in their initial hand, 3 cards in their visible top hand,
+     *  and 3 non-visible cards in their bottom hand
+     */
     public static void DealDeck(){
         for (int i=0; i<3; i++){
             if(state.getNumPlayers()==2){
@@ -226,6 +237,10 @@ public class PalaceDeckOfCards {
         state.setPlayPileNumCards(1);
     }
 
+    /**
+     * This method draws a card from the "deck" arraylist of card objects
+     * @return a card object
+     */
     public PalaceCard getNextCard() {
         cardCount++;
         return deck.get(cardCount);

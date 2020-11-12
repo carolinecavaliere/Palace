@@ -8,7 +8,8 @@ import java.util.ArrayList;
 
 /**
  * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
- * The state of the Palace game. This class holds all necessary information about the state of the game.
+ * The state of the Palace game. This class holds all necessary information about the state of
+ * the game.
  */
 public class PalaceGameState extends GameState {
 

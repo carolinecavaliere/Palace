@@ -44,7 +44,8 @@ public class PalaceMainActivity extends GameMainActivity {
         });
 
         //playerTypes.add(new GamePlayerType("Smart Computer Player"){
-        //public GamePlayer createPlayer(String name){ return new PalaceSmartComputerPlayer(name);}});
+        //public GamePlayer createPlayer(String name){ return new PalaceSmartComputerPlayer(name)
+        // ;}});
 
 
         // Create a game configuration class for Palace:

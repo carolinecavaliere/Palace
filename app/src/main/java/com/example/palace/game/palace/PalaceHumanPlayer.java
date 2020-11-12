@@ -260,6 +260,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         myHandler.postDelayed(new Unflash(savedColor), duration);
     }
 
+    /**
+     * Class that will revert back to the old background color after flashing the screen
+     */
     private class Unflash implements Runnable {
         private int oldColor;
 

@@ -77,6 +77,8 @@ public class PalaceLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+
+        // A user decides to play their selected card
         if (action instanceof PalacePlayCardAction) {
             boolean changeTurn = false;
             //not a valid move if a card isn't selected
@@ -263,6 +265,8 @@ public class PalaceLocalGame extends LocalGame {
                 return true;
             }
             return false;
+
+            // A user decides to select card(s)
         } else if (action instanceof PalaceSelectCardAction) {
             PalaceSelectCardAction select = (PalaceSelectCardAction) action;
             PalaceCard chosenCard = select.getCardSelected();
@@ -490,6 +494,8 @@ public class PalaceLocalGame extends LocalGame {
                     return false;
                 }
             }
+
+            // A user decides to switch what they want their top hand to be before playing
         } else if (action instanceof PalaceSwitchBaseCardsAction) {
             int index;
             ArrayList<PalaceCard> handPalaceCards;
@@ -537,6 +543,8 @@ public class PalaceLocalGame extends LocalGame {
             } else {
                 return false;
             }
+
+            // A user decides to take the entire play pile!
         } else if (action instanceof PalaceTakePileAction) {
             if (palaceGame.getPlayPileNumCards() > 0) {
                 if (palaceGame.getTurn() == 0) {
@@ -579,12 +587,16 @@ public class PalaceLocalGame extends LocalGame {
             } else {
                 return false;
             }
+
+            // A user needs to scroll through their cards they collected
         } else if (action instanceof PalaceDisplayNextCards) {
             if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1numCards() / 3 &&
                     (palaceGame.getP1numCards() % 3 != 0 || palaceGame.getP1numCards() / 3 > 1)) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
             }
             return true;
+
+            // A user needs to scroll back through their cards they collected
         } else if (action instanceof PalaceDisplayPreviousCards) {
             if (palaceGame.getNumDisplayHand() - 1 >= 0) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() - 1);
