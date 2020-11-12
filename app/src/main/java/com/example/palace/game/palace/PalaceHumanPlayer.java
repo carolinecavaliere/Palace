@@ -121,7 +121,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             System.exit(0);
         } else if (button.equals(restart)) {
             myActivity.recreate(); // restart the game!
-            flash(Color.RED, 100);
+            //flash(Color.RED, 100);
         } else if (button.equals(takePile)) {
             PalaceTakePileAction takepile = new PalaceTakePileAction(this);
             this.game.sendAction(takepile);
