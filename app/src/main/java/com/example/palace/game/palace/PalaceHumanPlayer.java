@@ -107,12 +107,20 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      * sent to the game.
      *
      * @param button the button that was clicked
+     *
+     * External Citation:
+     *  Date: 11 November 2020
+     *  Problem: How do we reset the game?
+     *  Resource:
+     *  https://stackoverflow.com/questions/22213357/making-a-restart-button-for-an-android-app-game
+     *  Solution: Used code snippet from the forum
      */
     @Override
     public void onClick(View button) {
         if (button.equals(quit)) {
             System.exit(0);
         } else if (button.equals(restart)) {
+            myActivity.recreate(); // restart the game!
             flash(Color.RED, 100);
         } else if (button.equals(takePile)) {
             PalaceTakePileAction takepile = new PalaceTakePileAction(this);
