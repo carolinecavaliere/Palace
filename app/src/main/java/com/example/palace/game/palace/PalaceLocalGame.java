@@ -153,6 +153,12 @@ public class PalaceLocalGame extends LocalGame {
                         }
                         palaceGame.clearSelectedCards();
                     }
+                    if(palaceGame.getTurn()==palaceGame.getNumPlayers()-1){
+                        palaceGame.setTurn(0);
+                    }
+                    else{
+                        palaceGame.setTurn(palaceGame.getTurn()+1);
+                    }
                     return true;
                 }
             }
