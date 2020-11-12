@@ -12,6 +12,17 @@ import java.util.ArrayList;
  */
 public class PalaceGameState extends GameState {
 
+    //temporary fix for drawPileNumCards
+    private int tempDeck;
+
+    public int getTempDeck() {
+        return tempDeck;
+    }
+
+    public void setTempDeck(int tempDeck) {
+        this.tempDeck = tempDeck;
+    }
+
     private int numDisplayHand;
     private int numPlayers;
     private int p1numCards;
@@ -109,6 +120,7 @@ public class PalaceGameState extends GameState {
         displayCard2P2 = p2Hand.get(1);
         displayCard3P2 = p2Hand.get(2);
 
+        tempDeck = 33;
         cardToBeSelected = new PalaceCard(4, 14);//default is ace of spades
         topCardSelected = new PalaceCard(4,14);
 
@@ -632,8 +644,14 @@ public class PalaceGameState extends GameState {
     public void removeFromP1TopCards(PalaceCard remove){
         p1TopPalaceCards.remove(remove);
     }
+    public void removeFromP1TopCards(int remove){
+        p1TopPalaceCards.remove(remove);
+    }
 
     public void removeFromP2TopCards(PalaceCard remove){
+        p2TopPalaceCards.remove(remove);
+    }
+    public void removeFromP2TopCards(int remove){
         p2TopPalaceCards.remove(remove);
     }
 

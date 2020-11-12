@@ -131,7 +131,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         else {
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
-                for (int i = 0; i < state.getP2numCards(); i++) {
+                for (int i = 0; i < state.getP2Hand().size(); i++) {
                     if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         isBigger = true;
                     }
@@ -147,6 +147,31 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                 while (cardToSelect == null || cardToSelect.getRank() < state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                     cardToSelect = state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
+            }
+            else if (state.getP2Hand().isEmpty()){
+                if (state.getPlayPilePalaceCards().isEmpty()) {
+                    cardToSelect = state.getP2TopPalaceCards().get((int) (Math.random() * state.getP2TopPalaceCards().size()));
+                }
+                else {
+                    for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
+                        if (state.getP2TopPalaceCards().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                            isBigger = true;
+                        }
+                    }
+                    if (isBigger) {
+                        while (cardToSelect == null || cardToSelect.getRank() < state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                            cardToSelect = state.getP2TopPalaceCards().get((int) (Math.random() * state.getP2TopPalaceCards().size()));
+                        }
+                    }
+                    else {
+                        PalaceTakePileAction take = new PalaceTakePileAction(this);
+                        Log.d("compPlayer", "took the pile");
+                        this.game.sendAction(take);
+                    }
+                }
+            }
+            else if (state.getP2TopPalaceCards().isEmpty()) {
+                cardToSelect = state.getP2BottomPalaceCards().get((int) (Math.random() * state.getP2TopPalaceCards().size()));
             }
             else {
                 cardToSelect = state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));

@@ -227,10 +227,8 @@ public class PalaceDeckOfCards {
     }
 
     public PalaceCard getNextCard() {
-        PalaceCard toReturn = deck.get(0);
-        state.setDrawPileNumCards(state.getDrawPileNumCards() - 1);
-        deck.remove(0);
-        return toReturn;
+        cardCount++;
+        return deck.get(cardCount);
     }
 
     public void drawCard(int player) {

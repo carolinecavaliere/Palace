@@ -193,14 +193,14 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     this.game.sendAction(selectcard);
                 }
 
-                int localCardToGet = state.getNumDisplayHand()*3;
+                //int localCardToGet = state.getNumDisplayHand()*3;
                 // First card shown in the view top
                 if( x > view.getPlayerTopCardCenterX() &&
                         x < view.getPlayerTopCardCenterX() + cardWidth &&
                         y > view.getPlayerTopCardCenterY() &&
                         y < view.getPlayerTopCardCenterY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(localCardToGet+1), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(1), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
 
@@ -210,7 +210,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardLeftY() &&
                         y < view.getPlayerTopCardLeftY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(localCardToGet), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(0), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
 
@@ -220,7 +220,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardRightY() &&
                         y < view.getPlayerTopCardRightY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(localCardToGet+2), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(2), state.getSelectedPalaceCards());
                     this.game.sendAction(selectcard);
                 }
                 return true;
