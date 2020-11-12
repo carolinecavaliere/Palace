@@ -596,13 +596,37 @@ public class PalaceGameState extends GameState {
     public void removeFromP2Hand(PalaceCard remove){
         p2Hand.remove(remove);
     }
+    public ArrayList<PalaceCard> removeFromP2Hand(int remove){
+        p2Hand.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p2Hand.size(); i++){
+            temp.add(new PalaceCard(p2Hand.get(i)));
+        }
+        return temp;
+    }
 
     public void removeFromP3Hand(PalaceCard remove){
         p3Hand.remove(remove);
     }
+    public ArrayList<PalaceCard> removeFromP3Hand(int remove){
+        p4Hand.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p4Hand.size(); i++){
+            temp.add(new PalaceCard(p4Hand.get(i)));
+        }
+        return temp;
+    }
 
     public void removeFromP4Hand(PalaceCard remove){
         p4Hand.remove(remove);
+    }
+    public ArrayList<PalaceCard> removeFromP4Hand(int remove){
+        p4Hand.remove(remove);
+        ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
+        for(int i = 0; i<p4Hand.size(); i++){
+            temp.add(new PalaceCard(p4Hand.get(i)));
+        }
+        return temp;
     }
 
     public void removeFromP1TopCards(PalaceCard remove){
