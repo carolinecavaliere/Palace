@@ -649,7 +649,7 @@ public class PalaceGameState extends GameState {
     /**
      * formats the state of the game in text form
      *
-     * @return 
+     * @return
      */
     public String toString() {
         String ret =  "Number of Players: " + numPlayers + "\n" +
