@@ -4,16 +4,23 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.example.palace.game.R;
 
 
-public class PalaceView extends SurfaceView {
+public class PalaceView extends SurfaceView implements View.OnTouchListener {
     private int displayConvert = (int)getResources().getDisplayMetrics().density;
     private int cardWidth = displayConvert * 110;
     private int cardHeight = displayConvert * 140;
+
+    Paint highlightPaint = new Paint(); // create a new paint object
+
 
     private float xCenter;
     private float yCenter;
@@ -283,6 +290,8 @@ public class PalaceView extends SurfaceView {
         super(context, attrs);
         setWillNotDraw(false);
 
+        highlightPaint.setColor(0xCC9FFFF3); // this is the color of our highlighted box
+
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
         ace_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.a_d);
@@ -417,6 +426,9 @@ public class PalaceView extends SurfaceView {
         setBackgroundColor(0xFF31B94D);
         super.onDraw(canvas);
 
+        setOnTouchListener(this); // listens for the user's tap!
+
+
         xCenter = (canvas.getWidth()/2f);
         yCenter = (canvas.getHeight()/2f);
         xRight = canvas.getHeight();
@@ -481,6 +493,16 @@ public class PalaceView extends SurfaceView {
             //drawCard(canvas, xCenter + cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 2);
             //drawCard(canvas, xCenter - cardWidth *2 - cardWidth/2, yBottom - yMargin + displayConvert*50, 8);
         }
+        // rectangle for the top middle card
+        Rect highlightRect = new Rect(
+                (int)playerTopCardCenterX,
+                (int)playerTopCardCenterY,
+                (int)playerTopCardCenterX+cardWidth,
+                (int)playerTopCardCenterY+cardHeight);
+        if (state.isPlayerTopCardCenterTouched() == true) { // if that card area has been touched...
+            canvas.drawRect(highlightRect, highlightPaint); //... draw the rectangle.
+        }
+
 
     }
 
@@ -635,5 +657,10 @@ public class PalaceView extends SurfaceView {
 
     public void setCardHeight(int cardHeight) {
         this.cardHeight = cardHeight;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return false;
     }
 }
