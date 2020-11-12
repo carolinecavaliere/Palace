@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
+ * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
+ *
  * This class models a deck of cards and handles actions such as shuffling and dealing
  * the deck(s)
  */
@@ -85,6 +86,10 @@ public class PalaceDeckOfCards {
         ShuffleDeck(deck);
     }
 
+    /**
+     * copy constructor for the deck of cards
+     * @param orig
+     */
     public PalaceDeckOfCards(PalaceDeckOfCards orig){
         deck = new ArrayList<PalaceCard>();
         for(int i = 0; i<orig.deck.size(); i++){
@@ -92,6 +97,11 @@ public class PalaceDeckOfCards {
             this.state = orig.state;
         }
     }
+
+    /**
+     * shuffles the deck of cards
+     * @param myDeck
+     */
     public static void ShuffleDeck(ArrayList<PalaceCard> myDeck){
         Collections.shuffle(myDeck);
     }

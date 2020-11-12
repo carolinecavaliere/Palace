@@ -5,13 +5,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
 import com.example.palace.game.R;
 import com.example.palace.game.infoMsg.GameInfo;
 
+/**
+ * @author Caroline Cavaliere, Jimi Hayes, Chloe Gan, Nathaniel Pon
+ * This class allows for human player to play Palace by interacting with the GUI.
+ */
 public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
     private PalaceView view;
     private Button takePile;
@@ -22,26 +24,35 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button previousCards;
 
     private PalaceGameState state;
+
     // card dimensions
     private int cardWidth;
     private int cardHeight;
 
+    private GameMainActivity myActivity;//android activity being run
 
     /**
      * constructor
      *
      * @param name the name of the player
      */
-    private GameMainActivity myActivity;
     public PalaceHumanPlayer(String name) {
         super(name);
     }
 
+    /**
+     * @return GUI's top view object
+     */
     @Override
     public View getTopView() {
         return myActivity.findViewById(R.id.top_gui_layout);
     }
 
+    /**
+     * callback method for when a message is sent
+     *
+     * @param info
+     */
     @Override
     public void receiveInfo(GameInfo info) {
         if(!(info instanceof PalaceGameState))
@@ -58,6 +69,11 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         }
     }
 
+    /**
+     * callback method for setting the GUI
+     *
+     * @param activity the activity being run
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
         // remember the activity
@@ -74,6 +90,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         nextCards = (Button)activity.findViewById(R.id.nextThreeCards);
         previousCards = (Button)activity.findViewById(R.id.previousThreeCards);
 
+        //listen for button presses and card taps
         view.setOnTouchListener(this);
         takePile.setOnClickListener(this);
         playCard.setOnClickListener(this);
@@ -84,6 +101,13 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
     }
 
+    /**
+     * this method is called when the user clicks any of the buttons on screen and
+     * creates a new action depending on which button is pressed. The action is then
+     * sent to the game.
+     *
+     * @param button the button that was clicked
+     */
     @Override
     public void onClick(View button) {
         if(button.equals(quit)){
@@ -112,6 +136,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     }
 
     /**
+     * this method is called when the user taps on the card they would like to
+     * select to play. When the view is tapped, a new PalaceSelectCardAction is sent
+     * to the game.
+     *
      * @param palaceView
      * @param motionEvent
      * @return
@@ -120,7 +148,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      *      Date: 8 November 2020
      *      Problem: How to map a bitmap
      *      Resource:
-     * https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
+     *      https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
      *      Solution: I used the example code from this post and modified it to fit our cards drawn
      */
     @Override
@@ -199,33 +227,30 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         return false;
     }
 
+    /**
+     * overriden to flash the background of the PalaceView red.
+     *
+     * @param color
+     * 			the color to flash
+     * @param duration
+     *          how long the flash lasts
+     */
     @Override
     protected void flash(int color, int duration){
-        // get the top view, ignoring if null
         if (view == null) return;
-
-        // save the original background color; set the new background
-        // color
         int savedColor = getBackgroundColor(view);
         view.setBackgroundColor(color);
 
-        // set up a timer event to set the background color back to
-        // the original.
         myHandler.postDelayed(new Unflash(savedColor), duration);
     }
 
     private class Unflash implements Runnable {
-
-        // the original color
         private int oldColor;
 
-        // constructor
         public Unflash(int oldColor) {
             this.oldColor = oldColor;
         }
 
-        // method to run at the appropriate time: sets background color
-        // back to the original
         public void run() {
             if (view== null) return;
             view.setBackgroundColor(oldColor);

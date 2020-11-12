@@ -4,11 +4,23 @@ import com.example.palace.game.GameComputerPlayer;
 import com.example.palace.game.GamePlayer;
 import com.example.palace.game.infoMsg.GameInfo;
 
+/**
+ * A dumb AI for Palace
+ *
+ * @author Jimi Hayes, Caroline Cavaliere, Nathaniel Pon, Chloe Gan
+ */
+
 public class PalaceComputerPlayer extends GameComputerPlayer {
     public PalaceComputerPlayer(String name) {
         super(name);
     }
 
+    /**
+     * callback method
+     *
+     * @param info
+     * 		the information (containing the game's state)
+     */
     @Override
     protected void receiveInfo(GameInfo info) {
         PalaceGameState state = new PalaceGameState((PalaceGameState)info);
@@ -20,7 +32,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         else
         {
             double rand = Math.random();
-            if(rand<0.2)
+            if(rand<0.2)//dumb AI randomly takes the pile
             {
                 PalaceTakePileAction take = new PalaceTakePileAction(this);
                 this.game.sendAction(take);

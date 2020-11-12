@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class PalaceSwitchBaseCardsAction extends GameAction {
 
     /**
-     * constructor for GameAction
+     * constructor
      *
      * @param player the player who created the action
      */

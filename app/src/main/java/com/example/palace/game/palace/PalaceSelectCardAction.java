@@ -12,14 +12,24 @@ import java.util.ArrayList;
  */
 public class PalaceSelectCardAction extends GameAction {
 
-    /**
-     * constructor for GameAction
-     *
-     * @param player the player who created the action
-     */
-
     private PalaceCard cardSelected;
     private ArrayList<PalaceCard> cardsSelected;
+
+
+    /**
+     * construct
+     * @param player
+     * @param c PalaceCard selected
+     * @param l ArrayList of PalaceCards that have been selected
+     */
+    public PalaceSelectCardAction(GamePlayer player, PalaceCard c, ArrayList<PalaceCard> l) {
+
+        super(player);
+        this.cardSelected = c;
+        this.cardsSelected = l;
+    }
+
+    //getters
 
     public PalaceCard getCardSelected() {
         return cardSelected;
@@ -29,12 +39,4 @@ public class PalaceSelectCardAction extends GameAction {
         return cardsSelected;
     }
 
-    public PalaceSelectCardAction(GamePlayer player, PalaceCard c, ArrayList<PalaceCard> l) {
-
-        super(player);
-        this.cardSelected = c;
-        this.cardsSelected = l;
-    }
-
-    //add instance variable/parameter, getter method
 }

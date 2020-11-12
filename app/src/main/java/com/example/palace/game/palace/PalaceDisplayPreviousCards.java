@@ -11,7 +11,7 @@ import com.example.palace.game.actionMsg.GameAction;
  */
 public class PalaceDisplayPreviousCards extends GameAction {
     /**
-     * constructor for GameAction
+     * constructor
      *
      * @param player the player who created the action
      */

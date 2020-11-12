@@ -21,9 +21,7 @@ public class PalaceMainActivity extends GameMainActivity {
     private static final int PORT_NUMBER = 2278;
 
     /**
-     * Create the default configuration for this game:
-     * - one human player vs. one computer player
-     * - minimum of 1 player, maximum of 2
+     * create the default configuration for this game:
      *
      * @return
      * 		the new configuration object, representing the default configuration
@@ -34,7 +32,7 @@ public class PalaceMainActivity extends GameMainActivity {
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // Pig has two player types:  human and computer
+        // Palace has two player types:  human and computer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new PalaceHumanPlayer(name);
@@ -48,14 +46,14 @@ public class PalaceMainActivity extends GameMainActivity {
             //public GamePlayer createPlayer(String name){ return new PalaceSmartComputerPlayer(name);}});
 
 
-        // Create a game configuration class for Pig:
+        // Create a game configuration class for Palace:
         GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Palace", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
         return defaultConfig;
-    }//createDefaultConfig
+    }
 
     /**
      * create a local game

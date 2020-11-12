@@ -5,14 +5,14 @@ import com.example.palace.game.GamePlayer;
 import com.example.palace.game.actionMsg.GameAction;
 
 /**
- * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
+ * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * This class models a player playing a card/cards to the play pile. It handles
  * cases in which the player's selected card(s) cannot legally be played, and
  * adds a new card to the player's hand when appropriate after they play a legal card(s)
  */
 public class PalacePlayCardAction extends GameAction {
     /**
-     * constructor for GameAction
+     * constructor
      *
      * @param player the player who created the action
      */

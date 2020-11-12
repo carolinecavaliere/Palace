@@ -7,21 +7,21 @@ import com.example.palace.game.infoMsg.GameState;
 import java.util.ArrayList;
 
 /**
- * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
- * 10/20/2020
+ * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
+ * The state of the Palace game. This class holds all necessary information about the state of the game.
  */
 public class PalaceGameState extends GameState {
 
     private int numDisplayHand;
-
     private int numPlayers;
-
     private int p1numCards;
     private int p2numCards;
     private int p3numCards;
     private int p4numCards;
 
     private ArrayList<PalaceCard> p1Hand;
+
+    //cards displayed in user's hand
     private PalaceCard displayCard1P1;
     private PalaceCard displayCard2P1;
     private PalaceCard displayCard3P1;
@@ -34,7 +34,7 @@ public class PalaceGameState extends GameState {
     private ArrayList<PalaceCard> p3Hand;
     private ArrayList<PalaceCard> p4Hand;
 
-    private int turn;
+    private int turn;//keeps track of whose turn it is
 
     private PalaceDeckOfCards deck;
 
@@ -53,16 +53,17 @@ public class PalaceGameState extends GameState {
     private ArrayList<PalaceCard> playPilePalaceCards;
 
     private ArrayList<PalaceCard> selectedPalaceCards; // array of selected cards
-    private PalaceCard cardToBeSelected;
-    private PalaceCard topCardSelected;
+    private PalaceCard cardToBeSelected; //individual card selected by player
+    private PalaceCard topCardSelected; //card chosen to swap with hand card
 
     private PalaceCard drawPileTopPalaceCard;
-
-
     private int drawPileNumCards;
-
     private int playPileNumCards;
 
+    /**
+     * PalaceGameState constructor
+     * @param numPlayers
+     */
     public PalaceGameState(int numPlayers)
     {
         numDisplayHand = 0;
@@ -113,7 +114,11 @@ public class PalaceGameState extends GameState {
 
     }
 
-    public PalaceGameState(PalaceGameState orig)//copy constructor
+    /**
+     * copy constructor for PalaceGameState
+     * @param orig
+     */
+    public PalaceGameState(PalaceGameState orig)
     {
         this.numDisplayHand = orig.getNumDisplayHand();
         this.numPlayers = orig.getNumPlayers();
@@ -163,7 +168,6 @@ public class PalaceGameState extends GameState {
         }
 
         this.turn = orig.getTurn();
-
         this.deck = new PalaceDeckOfCards(1,orig);
 
         for(int i = 0; i<orig.getP1TopPalaceCards().size() ; i++)
@@ -206,14 +210,13 @@ public class PalaceGameState extends GameState {
 
         cardToBeSelected = new PalaceCard(orig.getCardToBeSelected());
         topCardSelected = new PalaceCard(orig.getTopCardSelected());
-
         playPilePalaceCards = orig.getPlayPilePalaceCards();
-
         this.drawPileNumCards = orig.getDrawPileNumCards();
         this.playPileNumCards = orig.getPlayPileNumCards();
 
         Log.d("GameState","Gamestate successfully created.");
     }
+
 
     //getters and setters
 
@@ -488,6 +491,7 @@ public class PalaceGameState extends GameState {
     }
 
     //adders and removers
+
     public ArrayList<PalaceCard> addToPlayPile(PalaceCard add){
         playPilePalaceCards.add(add);
         ArrayList<PalaceCard> temp = new ArrayList<PalaceCard>();
@@ -506,48 +510,42 @@ public class PalaceGameState extends GameState {
         return temp;
     }
 
-    public void addToP2Hand(PalaceCard add){
-        p2Hand.add(add);
-    }
+    public void addToP2Hand(PalaceCard add){ p2Hand.add(new PalaceCard(add)); }
 
-    public void addToP3Hand(PalaceCard add){
-        p3Hand.add(add);
-    }
+    public void addToP3Hand(PalaceCard add){ p3Hand.add(new PalaceCard(add)); }
 
-    public void addToP4Hand(PalaceCard add){
-        p4Hand.add(add);
-    }
+    public void addToP4Hand(PalaceCard add){ p4Hand.add(new PalaceCard(add)); }
 
     public void addToP1TopCards(PalaceCard add){
-        p1TopPalaceCards.add(add);
+        p1TopPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP2TopCards(PalaceCard add){
-        p2TopPalaceCards.add(add);
+        p2TopPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP3TopCards(PalaceCard add){
-        p3TopPalaceCards.add(add);
+        p3TopPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP4TopCards(PalaceCard add){
-        p4TopPalaceCards.add(add);
+        p4TopPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP1Bottom(PalaceCard add){
-        p1BottomPalaceCards.add(add);
+        p1BottomPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP2Bottom(PalaceCard add){
-        p2BottomPalaceCards.add(add);
+        p2BottomPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP3Bottom(PalaceCard add){
-        p3BottomPalaceCards.add(add);
+        p3BottomPalaceCards.add(new PalaceCard(add));
     }
 
     public void addToP4Bottom(PalaceCard add){
-        p4BottomPalaceCards.add(add);
+        p4BottomPalaceCards.add(new PalaceCard(add));
     }
 
     public ArrayList<PalaceCard> addToSelectedCards(PalaceCard add){
@@ -648,7 +646,11 @@ public class PalaceGameState extends GameState {
         return temp;
     }
 
-
+    /**
+     * formats the state of the game in text form
+     *
+     * @return 
+     */
     public String toString() {
         String ret =  "Number of Players: " + numPlayers + "\n" +
                 "Next Card in the Draw Pile: " + drawPileTopPalaceCard + "\n" +

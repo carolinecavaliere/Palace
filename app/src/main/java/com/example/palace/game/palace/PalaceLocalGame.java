@@ -1,26 +1,45 @@
 package com.example.palace.game.palace;
 
 import android.util.Log;
-
 import com.example.palace.game.GamePlayer;
 import com.example.palace.game.LocalGame;
 import com.example.palace.game.actionMsg.GameAction;
 import com.example.palace.game.infoMsg.GameState;
-
 import java.util.ArrayList;
 
+/**
+ * @author Jimi Hayes, Nathaniel Pon, Caroline Cavaliere, Chloe Gan
+ * controls the play of the game
+ */
 public class PalaceLocalGame extends LocalGame {
+
     private PalaceGameState palaceGame;
 
+    /**
+     * constructor makes a new game states
+     * @param pNum
+     */
     public PalaceLocalGame(int pNum){
         palaceGame = new PalaceGameState(pNum);
     }
+
+    /**
+     * sends updated state to player
+     *
+     * @param p player being sent the updated state
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
         PalaceGameState game = new PalaceGameState(palaceGame);
         p.sendInfo(game);
     }
 
+    /**
+     * indicates whether the given player can take an action right now.
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
+     */
     @Override
     protected boolean canMove(int playerIdx) {
 
@@ -34,6 +53,10 @@ public class PalaceLocalGame extends LocalGame {
         }
     }
 
+    /**
+     * checks if the game is over
+     * @return the message that tells who has won, or null if it's not over yet
+     */
     @Override
     protected String checkIfGameOver() {
         if(palaceGame.getP1BottomPalaceCards().isEmpty()){
@@ -47,6 +70,13 @@ public class PalaceLocalGame extends LocalGame {
         }
     }
 
+    /**
+     * method called when a new action is sent by a player
+     *
+     * @param action
+     * 			The move that the player has sent to the game
+     * @return
+     */
     @Override
     protected boolean makeMove(GameAction action) {
         if(action instanceof PalacePlayCardAction){
@@ -64,18 +94,17 @@ public class PalaceLocalGame extends LocalGame {
                 for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
                     if (palaceGame.getTurn() == 0) {
                         int index = palaceGame.getP1Hand().indexOf(palaceGame.getSelectedPalaceCards().get(i));
-                        palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
-                        palaceGame.setP1Hand(palaceGame.removeFromP1Hand(index));
+                        palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));//adds selected cards to play pile
+                        palaceGame.setP1Hand(palaceGame.removeFromP1Hand(index));//removes played cards from player's hand
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
                         palaceGame.setP1numCards(palaceGame.getP1numCards() - 1);
                         if (palaceGame.getP1Hand().size() < 3) {//adds new card to the player's hand
                             for (int j = palaceGame.getP1numCards(); j < 3; j++) {
-                                //palaceGame.getDeck().drawCard(1);
                                 palaceGame.addToP1Hand(palaceGame.getDeck().getNextCard());
                             }
                             palaceGame.setP1numCards(3);
                         }
-                        palaceGame.clearSelectedCards();
+                        palaceGame.clearSelectedCards();//no more cards are selected now
                     }
                     else if (palaceGame.getTurn() == 1) {
                         palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
@@ -219,13 +248,10 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getPlayPileNumCards() > 0) {
                 if (palaceGame.getTurn() == 0) {
                     for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {
-                        palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.getPlayPilePalaceCards().get(i)));
+                        palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.getPlayPilePalaceCards().get(i)));//adds pile to player's hand
                         palaceGame.setP1numCards(palaceGame.getP1numCards() + 1);
                     }
-//                    for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {
-//                        palaceGame.removeFromPlayPile(0);
-//                        palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() - 1); }
-                    palaceGame.clearPlayPileCards();
+                    palaceGame.clearPlayPileCards();//play pile is gone now
                     return true;
                 }
                 else if (palaceGame.getTurn() == 1) {
