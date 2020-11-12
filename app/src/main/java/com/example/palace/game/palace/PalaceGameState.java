@@ -118,7 +118,7 @@ public class PalaceGameState extends GameState {
         displayCard2P2 = p2Hand.get(1);
         displayCard3P2 = p2Hand.get(2);
 
-        tempDeck = 33;
+        tempDeck = 10;
         cardToBeSelected = new PalaceCard(4, 14);//default is ace of spades
         topCardSelected = new PalaceCard(4, 14);
 
