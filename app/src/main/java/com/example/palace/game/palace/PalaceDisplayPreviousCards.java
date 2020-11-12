@@ -5,9 +5,8 @@ import com.example.palace.game.actionMsg.GameAction;
 
 /**
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
- * This class models a player playing a card/cards to the play pile. It handles
- * cases in which the player's selected card(s) cannot legally be played, and
- * adds a new card to the player's hand when appropriate after they play a legal card(s)
+ * This class displays the previous set of cards in the player's hand, assuming that the player
+ * has more than 3 cards in their hand. (Will eventually be switched out with a scrollbar)
  */
 public class PalaceDisplayPreviousCards extends GameAction {
     /**

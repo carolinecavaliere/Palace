@@ -156,16 +156,36 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getPlayPileNumCards() > 0) {
                 if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
                     if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
-                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                            palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        }
+                        else {
+                                palaceGame.removeFromSelectedCards(chosenCard);
+                        }
                         return true;
                     } else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
-                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                            palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        }
+                        else {
+                            palaceGame.removeFromSelectedCards(chosenCard);
+                        }
                         return true;
                     } else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
-                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                            palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        }
+                        else {
+                            palaceGame.removeFromSelectedCards(chosenCard);
+                        }
                         return true;
                     } else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
-                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                            palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                        }
+                        else {
+                            palaceGame.removeFromSelectedCards(chosenCard);
+                        }
                         return true;
                     } else {
                         return false;
@@ -176,16 +196,36 @@ public class PalaceLocalGame extends LocalGame {
             }
             else {
                 if (palaceGame.getTurn() == 0 && palaceGame.getP1Hand().contains(chosenCard)) {  // looks at player 1's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    }
+                    else {
+                        palaceGame.removeFromSelectedCards(chosenCard);
+                    }
                     return true;
                 } else if (palaceGame.getTurn() == 1 && palaceGame.getP2Hand().contains(chosenCard)) {  // looks at player 2's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    }
+                    else {
+                        palaceGame.removeFromSelectedCards(chosenCard);
+                    }
                     return true;
                 } else if (palaceGame.getTurn() == 2 && palaceGame.getP3Hand().contains(chosenCard)) {  // looks at player 3's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    }
+                    else {
+                        palaceGame.removeFromSelectedCards(chosenCard);
+                    }
                     return true;
                 } else if (palaceGame.getTurn() == 3 && palaceGame.getP4Hand().contains(chosenCard)) {  // looks at player 4's hand
-                    palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                        palaceGame.setSelectedPalaceCards(palaceGame.addToSelectedCards(chosenCard)); // put arraylist into GameState variable
+                    }
+                    else {
+                        palaceGame.removeFromSelectedCards(chosenCard);
+                    }
                     return true;
                 } else {
                     return false;
