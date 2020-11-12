@@ -41,7 +41,7 @@ public class PalaceGameStateTest {
         assertEquals(state.getPlayPileNumCards(), 0);
     }
 
-    /**
+
     @Test
     public void getDrawPileNumCards() {
         PalaceGameState state = new PalaceGameState(4);
@@ -53,7 +53,7 @@ public class PalaceGameStateTest {
                 + state.getP4BottomPalaceCards().size() + state.getPlayPileNumCards());
         assertEquals(total, state.getDrawPileNumCards());
     }
-     **/
+
 
     @Test
     public void addToSelectedCards() {
@@ -107,13 +107,13 @@ public class PalaceGameStateTest {
         assertEquals(card, state.getCardToBeSelected());
     }
 
-    @Test
+    /*@Test
     public void addToPlayPile() {
         PalaceGameState state = new PalaceGameState(4);
         PalaceCard card = new PalaceCard(2,12);
         state.addToPlayPile(card);
         assertEquals(card, state.getPlayPileTopPalaceCard());
-    }
+    }*/
 
     @Test
     public void getP1BottomCard() {
