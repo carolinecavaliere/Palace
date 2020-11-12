@@ -12,6 +12,8 @@ import java.util.stream.Stream;
  *
  * This class models the attributes of a Card
  *
+ * CAVEATS: None
+ *
  * External Citation:
  *  Date: 1 October 2020
  *  Problem: Best way to model a card
@@ -51,11 +53,14 @@ public class PalaceCard extends ArrayList<PalaceCard> {
     /**
      * This method will return a list of valid suits for card object
      * static because it is generic for all card decks
+     *
+     * CAVEAT: None
+     *
      *         // 1 = diamond
      *         // 2 = heart
      *         // 3 = club
      *         // 4 = spade
-     * @return
+     * @return a List array of integers that symbolize the suit of cards
      */
     public static List<Integer> getValidSuits() {
         return Arrays.asList(1,2,3,4);
@@ -64,11 +69,14 @@ public class PalaceCard extends ArrayList<PalaceCard> {
     /**
      * This method will return a list of valid ranks for card object
      * static because it is generic for all card decks
+     *
+     * CAVEAT: None
+     *
      *         // 11 = jack
      *         // 12 = queen
      *         // 13 = king
      *         // 14 = ace
-     * @return
+     * @return a list array of integers for the rank of cards
      */
     public static List<Integer> getValidRank() {
         return Arrays.asList(2,3,4,5,6,7,8,9,10,11,12,13,14,15);
@@ -76,6 +84,7 @@ public class PalaceCard extends ArrayList<PalaceCard> {
 
     /**
      * This is the constructor for a card object
+     * CAVEATS: None
      * @param suit of a card
      * @param rank of a card
      */
@@ -86,8 +95,9 @@ public class PalaceCard extends ArrayList<PalaceCard> {
 
     /**
      * Determines if the object is a card object
+     * CAVEATS: None
      * @param O
-     * @return
+     * @return true if the parameter object is an instance of PalaceCard
      */
     @Override
     public boolean equals(Object O){
@@ -107,7 +117,8 @@ public class PalaceCard extends ArrayList<PalaceCard> {
 
     /**
      * Deep state copy constructor
-     * @param orig
+     * CAVEATS: None
+     * @param orig, an instance of itself
      */
     public PalaceCard(PalaceCard orig) { // deep state constructor
         this.suit = orig.getSuit();
@@ -116,6 +127,7 @@ public class PalaceCard extends ArrayList<PalaceCard> {
 
     /**
      * Print's out the card rank and suit
+     * CAVEATS: None
      * @return String
      */
     public String toString() {

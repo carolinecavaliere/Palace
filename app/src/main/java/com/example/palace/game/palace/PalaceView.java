@@ -13,6 +13,8 @@ import com.example.palace.game.R;
  * @author Caroline Cavaliere, Chloe Gan, Jimi Hayes, Nathaniel Pon
  * <p>
  * This class dictates how the GUI is displayed.
+ *
+ * CAVEATS: Rare instances of it crashing the game. Very rare, will be investigated
  */
 public class PalaceView extends SurfaceView {
     // card dimensions
@@ -125,6 +127,9 @@ public class PalaceView extends SurfaceView {
     /**
      * Constructor for the view.
      * Create the bitmap images for each 52 cards in a deck of cards
+     *
+     * CAVEATS: None
+     *
      * @param context
      * @param attrs
      */
@@ -256,6 +261,8 @@ public class PalaceView extends SurfaceView {
 
     /**
      * draws on a given canvas. In this case, surfaceView
+     *
+     * CAVEATS: None
      *
      * @param canvas
      * @Jimi Hayes
@@ -392,6 +399,8 @@ public class PalaceView extends SurfaceView {
     /**
      * draws a card with a value. If the card value is between 1 and 14, it will display the values
      * Ace through King accordingly. -1 will draw a facedown card.
+     *
+     * CAVEATS: None
      *
      * @param canvas
      * @param left

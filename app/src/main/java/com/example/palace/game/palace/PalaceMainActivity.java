@@ -15,6 +15,14 @@ import com.example.palace.game.GamePlayer;
 
 import java.util.ArrayList;
 
+/**
+ * @author Jimi Hayes, Nathaniel Pon, Caroline Cavaliere, Chloe Gan, Steve Vegdahl
+ *
+ * Actually creates the game for it to pop up on your device
+ *
+ * CAVEATS: None
+ *
+ */
 public class PalaceMainActivity extends GameMainActivity {
 
     // the port number that this game will use when playing over the network
@@ -22,6 +30,8 @@ public class PalaceMainActivity extends GameMainActivity {
 
     /**
      * create the default configuration for this game:
+     *
+     * CAVEATS: None
      *
      * @return the new configuration object, representing the default configuration
      */

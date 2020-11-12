@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * This class models the player's option to switch any of their three top cards
  * with any of their three hand cards at the beginning of the game.
+ *
+ * CAVEATS: Not implemented yet
  */
 public class PalaceSwitchBaseCardsAction extends GameAction {
 

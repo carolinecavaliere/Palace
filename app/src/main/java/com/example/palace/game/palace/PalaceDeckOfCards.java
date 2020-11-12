@@ -6,6 +6,8 @@ import java.util.Collections;
 /**
  * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  *
+ * CAVEATS: Sometimes it creates duplicates of cards and we dont know why yet :(
+ *
  * This class models a deck of cards and handles actions such as shuffling and dealing
  * the deck(s)
  */
@@ -246,6 +248,11 @@ public class PalaceDeckOfCards {
         return deck.get(cardCount);
     }
 
+    /**
+     * Draws a card from the deck and puts it in the players hand
+     * CAVEATS: Not used in code yet
+     * @param player to know which hand to put a card into
+     */
     public void drawCard(int player) {
         if (player == 1) {
             state.addToP1Hand(state.getDrawPileTopPalaceCard());
@@ -259,6 +266,12 @@ public class PalaceDeckOfCards {
         deck.remove(0);
         state.setDrawPileTopPalaceCard(deck.get(0));
     }
+
+    /**
+     * Get the size of the deck of cards
+     * CAVEATS: Not used in code yet
+     * @return number of cards in the deck
+     */
     public int getCardCount() {
         return deck.size();
     }
