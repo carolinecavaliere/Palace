@@ -108,7 +108,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
         }
-
     }
 
     /**
@@ -128,7 +127,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float x = motionEvent.getX();
         float y = motionEvent.getY();
 
-
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:  // touch/tap action
                 //Check if the x and y position of the touch is inside the bitmap
@@ -139,10 +137,32 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardCenterY() &&
                         y < view.getPlayerHandCardCenterY() + cardHeight ) {
                     //Bitmap touched
+                    if (state.isPlayerHandCardCenterTouched() == false) {
+                        state.setPlayerHandCardCenterTouched(true);
+                    } else {
+                        state.setPlayerHandCardCenterTouched(false);
+                    }
+
                     //Q.)how does it know which card is there (rank,value)?
                     //A.)state.getP1TopCards().get(1)
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand() + 1), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+
+                    //if that bitmap is touched and true and the selected cards don't have that card yet,
+                    // we want to add it to the arraylist of cards that are selected
+                    if (state.isPlayerHandCardCenterTouched() == true
+                    && !state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand() +1))) {
+
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this,
+                                state.getP1Hand().get(state.getNumDisplayHand() + 1),
+                                state.getSelectedPalaceCards());
+
+                        this.game.sendAction(selectcard);
+
+                        // else if that bitmap is touched and false (deselected),
+                        // and has that card, we want to remove it from the cards to be selected...
+                    } else if (state.isPlayerHandCardCenterTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand() +1))) {
+                        state.removeFromSelectedCards(state.getP1Hand().get(state.getNumDisplayHand() +1));
+                    }
                 }
 
                 //second Card shown in the view hand
@@ -151,8 +171,23 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardLeftY() &&
                         y < view.getPlayerHandCardLeftY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand()), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+                    if (state.isPlayerHandCardLeftTouched() == false) {
+                        state.setPlayerHandCardLeftTouched(true);
+                    } else {
+                        state.setPlayerHandCardLeftTouched(false);
+                    }
+
+                    if (state.isPlayerHandCardLeftTouched() == true
+                            && !state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand()))) {
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this,
+                                state.getP1Hand().get(state.getNumDisplayHand()),
+                                state.getSelectedPalaceCards());
+                        this.game.sendAction(selectcard);
+                    } else if (state.isPlayerHandCardCenterTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand()))) {
+                        state.removeFromSelectedCards(state.getP1Hand().get(state.getNumDisplayHand()));
+                    }
+
                 }
 
                 //third card shown in the view hand
@@ -161,8 +196,23 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerHandCardRightY() &&
                         y < view.getPlayerHandCardRightY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(state.getNumDisplayHand() + 2), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+                    if (state.isPlayerHandCardRightTouched() == false) {
+                        state.setPlayerHandCardRightTouched(true);
+                    } else {
+                        state.setPlayerHandCardRightTouched(false);
+                    }
+
+                    if (state.isPlayerHandCardRightTouched() == true
+                            && !state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand() + 2))) {
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this,
+                                state.getP1Hand().get(state.getNumDisplayHand() + 2),
+                                state.getSelectedPalaceCards());
+                        this.game.sendAction(selectcard);
+                    } else if (state.isPlayerHandCardCenterTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1Hand().get(state.getNumDisplayHand() +2))) {
+                        state.removeFromSelectedCards(state.getP1Hand().get(state.getNumDisplayHand() +2));
+                    }
+
                 }
 
                 // First card shown in the view top
@@ -171,8 +221,21 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardCenterY() &&
                         y < view.getPlayerTopCardCenterY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(1), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+                    if (state.isPlayerTopCardCenterTouched() == false) {
+                        state.setPlayerTopCardCenterTouched(true);
+                    } else {
+                        state.setPlayerTopCardCenterTouched(false);
+                    }
+
+                    if (state.isPlayerTopCardCenterTouched() == true
+                            && !state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(1))) {
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(1), state.getSelectedPalaceCards());
+                        this.game.sendAction(selectcard);
+                    }else if (state.isPlayerTopCardCenterTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(1))) {
+                        state.removeFromSelectedCards(state.getP1TopPalaceCards().get(1));
+                    }
+
                 }
 
                 //second Card shown in the view top
@@ -181,8 +244,20 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardLeftY() &&
                         y < view.getPlayerTopCardLeftY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(0), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+                    if (state.isPlayerTopCardLeftTouched() == false) {
+                        state.setPlayerTopCardLeftTouched(true);
+                    } else {
+                        state.setPlayerTopCardLeftTouched(false);
+                    }
+
+                    if (state.isPlayerTopCardLeftTouched() == true
+                            && !state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(0))) {
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(0), state.getSelectedPalaceCards());
+                        this.game.sendAction(selectcard);
+                    }else if (state.isPlayerTopCardLeftTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(0))) {
+                        state.removeFromSelectedCards(state.getP1TopPalaceCards().get(0));
+                    }
                 }
 
                 //third card shown in the view top
@@ -191,8 +266,20 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         y > view.getPlayerTopCardRightY() &&
                         y < view.getPlayerTopCardRightY() + cardHeight ) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(2), state.getSelectedPalaceCards());
-                    this.game.sendAction(selectcard);
+                    if (state.isPlayerTopCardRightTouched() == false) {
+                        state.setPlayerTopCardRightTouched(true);
+                    } else {
+                        state.setPlayerTopCardRightTouched(false);
+                    }
+
+                    if (state.isPlayerTopCardRightTouched() == true
+                            && !state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(2))) {
+                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(2), state.getSelectedPalaceCards());
+                        this.game.sendAction(selectcard);
+                    }else if (state.isPlayerTopCardRightTouched() == false
+                            && state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(2))) {
+                        state.removeFromSelectedCards(state.getP1TopPalaceCards().get(2));
+                    }
                 }
                 return true;
         }

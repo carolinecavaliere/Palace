@@ -30,6 +30,7 @@ public class PalaceView extends SurfaceView {
     private float playerTopCardLeftX;
     private float playerTopCardLeftY;
 
+
     //draw player's hand
     private float playerHandCardCenterX;
     private float playerHandCardCenterY;
