@@ -92,12 +92,10 @@ public class PalaceGameState extends GameState {
 
         selectedPalaceCards = new ArrayList<PalaceCard>();
 
-        if(this.numPlayers<=2)
-        {
+        if(this.numPlayers<=2) {
             deck = new PalaceDeckOfCards(1, this);
         }
-        else
-        {
+        else {
             deck= new PalaceDeckOfCards(2, this);
         }
 
@@ -168,7 +166,8 @@ public class PalaceGameState extends GameState {
         }
 
         this.turn = orig.getTurn();
-        this.deck = new PalaceDeckOfCards(1,orig);
+        //this.deck = new PalaceDeckOfCards(1,orig);
+        this.deck = new PalaceDeckOfCards(orig.deck);
 
         for(int i = 0; i<orig.getP1TopPalaceCards().size() ; i++)
         {
@@ -214,9 +213,9 @@ public class PalaceGameState extends GameState {
         this.drawPileNumCards = orig.getDrawPileNumCards();
         this.playPileNumCards = orig.getPlayPileNumCards();
 
+
         Log.d("GameState","Gamestate successfully created.");
     }
-
 
     //getters and setters
 

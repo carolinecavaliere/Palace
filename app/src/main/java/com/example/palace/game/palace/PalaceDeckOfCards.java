@@ -1,7 +1,12 @@
 package com.example.palace.game.palace;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 /**
  * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
@@ -11,12 +16,15 @@ import java.util.Collections;
  */
 public class PalaceDeckOfCards {
     static ArrayList<PalaceCard> deck = new ArrayList<PalaceCard>();//actual array
+
     static PalaceGameState state;
     protected static int cardCount;
-    PalaceDeckOfCards(int numDecks, PalaceGameState palaceGameState){
+
+    public PalaceDeckOfCards(int numDecks, PalaceGameState palaceGameState){
         state = palaceGameState;
         state.setDrawPileNumCards(0);
         for(int i = 0; i<numDecks; i++){
+
             deck.add(new PalaceCard(1, 14));
             deck.add(new PalaceCard(2, 14));
             deck.add(new PalaceCard(3, 14));
@@ -91,11 +99,16 @@ public class PalaceDeckOfCards {
      * @param orig
      */
     public PalaceDeckOfCards(PalaceDeckOfCards orig){
-        deck = new ArrayList<PalaceCard>();
-        for(int i = 0; i<orig.deck.size(); i++){
+        ArrayList<PalaceCard> copyDeck = new ArrayList<PalaceCard>();
+        for (PalaceCard cardHere : orig.deck) {
+            copyDeck.add(cardHere);
+        }
+
+        this.state = orig.state;
+        /*for(int i = 0; i<orig.deck.size(); i++){
             deck.add(new PalaceCard(orig.deck.get(i)));
             this.state = orig.state;
-        }
+        }*/
     }
 
     /**
@@ -227,12 +240,16 @@ public class PalaceDeckOfCards {
     }
 
     public PalaceCard getNextCard() {
-        cardCount++;
+
+        PalaceCard toReturn = deck.get(0);
+        //cardCount++;
         state.setDrawPileNumCards(state.getDrawPileNumCards() - 1);
-        return deck.get(cardCount);
+        deck.remove(0);
+
+        return toReturn;
     }
 
-    public void drawCard(int player) {
+    public PalaceCard drawCard(int player) {
         if (player == 1) {
             state.addToP1Hand(state.getDrawPileTopPalaceCard());
         } else if (player == 2) {
@@ -242,8 +259,10 @@ public class PalaceDeckOfCards {
         } else if (player == 4) {
             state.addToP4Hand(state.getDrawPileTopPalaceCard());
         }
-        deck.remove(0);
+
+        PalaceCard toReturn = deck.remove(0);
         state.setDrawPileTopPalaceCard(deck.get(0));
+        return toReturn;
     }
     public int getCardCount() {
         return deck.size();

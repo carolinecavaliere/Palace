@@ -42,6 +42,7 @@ public class PalaceCard extends ArrayList<PalaceCard> {
         }
     }
 
+
     /**
      * This method will return a list of valid suits for card object
      * static because it is generic for all card decks

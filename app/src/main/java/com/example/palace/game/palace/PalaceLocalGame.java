@@ -97,8 +97,7 @@ public class PalaceLocalGame extends LocalGame {
                 for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
                     if (palaceGame.getTurn() == 0) {
                         if (palaceGame.getP1numCards() > 0) {
-                            int index = palaceGame.getP1Hand().indexOf(palaceGame.
-                                    getSelectedPalaceCards().get(i));
+                            int index = palaceGame.getP1Hand().indexOf(palaceGame.getSelectedPalaceCards().get(i));
                             int sameCards = 0;
                             //adds selected cards to play pile
                             palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
