@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
 import com.example.palace.game.R;
@@ -14,7 +15,8 @@ import com.example.palace.game.infoMsg.GameInfo;
  * @author Caroline Cavaliere, Jimi Hayes, Chloe Gan, Nathaniel Pon
  * This class allows for human player to play Palace by interacting with the GUI.
  */
-public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickListener, View.OnTouchListener {
+public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickListener,
+        View.OnTouchListener {
     private PalaceView view;
     private Button takePile;
     private Button playCard;
@@ -55,12 +57,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      */
     @Override
     public void receiveInfo(GameInfo info) {
-        if(!(info instanceof PalaceGameState))
-        {
+        if (!(info instanceof PalaceGameState)) {
             flash(Color.RED, 20);
             return;
-        }
-        else{
+        } else {
             view.setState((PalaceGameState) info);
             view.invalidate();
             state = (PalaceGameState) info;
@@ -82,13 +82,13 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         // Load the layout resource for our GUI
         activity.setContentView(R.layout.palace_layout);
 
-        view = (PalaceView)activity.findViewById(R.id.surfaceView);
-        takePile = (Button)activity.findViewById(R.id.takepile);
-        playCard = (Button)activity.findViewById(R.id.playcard);
-        quit = (Button)activity.findViewById(R.id.quit_button);
-        restart = (Button)activity.findViewById(R.id.restart_button);
-        nextCards = (Button)activity.findViewById(R.id.nextThreeCards);
-        previousCards = (Button)activity.findViewById(R.id.previousThreeCards);
+        view = (PalaceView) activity.findViewById(R.id.surfaceView);
+        takePile = (Button) activity.findViewById(R.id.takepile);
+        playCard = (Button) activity.findViewById(R.id.playcard);
+        quit = (Button) activity.findViewById(R.id.quit_button);
+        restart = (Button) activity.findViewById(R.id.restart_button);
+        nextCards = (Button) activity.findViewById(R.id.nextThreeCards);
+        previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
@@ -110,25 +110,20 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      */
     @Override
     public void onClick(View button) {
-        if(button.equals(quit)){
+        if (button.equals(quit)) {
             System.exit(0);
-        }
-        else if(button.equals(restart)){
+        } else if (button.equals(restart)) {
             flash(Color.RED, 100);
-        }
-        else if(button.equals(takePile)){
+        } else if (button.equals(takePile)) {
             PalaceTakePileAction takepile = new PalaceTakePileAction(this);
             this.game.sendAction(takepile);
-        }
-        else if(button.equals(playCard)){
+        } else if (button.equals(playCard)) {
             PalacePlayCardAction playcard = new PalacePlayCardAction(this);
             this.game.sendAction(playcard);
-        }
-        else if (button.equals(nextCards)){
+        } else if (button.equals(nextCards)) {
             PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
             this.game.sendAction(nextcards);
-        }
-        else if (button.equals((previousCards))) {
+        } else if (button.equals((previousCards))) {
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
         }
@@ -142,85 +137,107 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      *
      * @param palaceView
      * @param motionEvent
-     * @return
-     *
-     * External Citation
-     *      Date: 8 November 2020
-     *      Problem: How to map a bitmap
-     *      Resource:
-     *      https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
-     *      Solution: I used the example code from this post and modified it to fit our cards drawn
+     * @return External Citation
+     * Date: 8 November 2020
+     * Problem: How to map a bitmap
+     * Resource:
+     * https://stackoverflow.com/questions/18826808/how-to-make-a-bitmap-using-canvas-clickable
+     * Solution: I used the example code from this post and modified it to fit our cards drawn
      */
     @Override
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
-        float x = motionEvent.getX();
-        float y = motionEvent.getY();
-        int cardToGet = state.getNumDisplayHand()*3;
+        float x = motionEvent.getX(); // x position on the screen of the motion event
+        float y = motionEvent.getY(); // y position on the screen of motion event
+        int cardToGet = state.getNumDisplayHand() * 3; // index of the card we want, 0-2
 
-        switch(motionEvent.getAction()) {
+        switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:  // touch/tap action
-                //Check if the x and y position of the touch is inside the bitmap
 
-                // First card shown in the view hand
-                if( x > view.getPlayerHandCardCenterX() &&
+                //Check if the x and y position of the touch is inside the bitmap
+                // Middle card of the user hand shown in the view
+                if (x > view.getPlayerHandCardCenterX() &&
                         x < view.getPlayerHandCardCenterX() + cardWidth &&
                         y > view.getPlayerHandCardCenterY() &&
-                        y < view.getPlayerHandCardCenterY() + cardHeight ) {
+                        y < view.getPlayerHandCardCenterY() + cardHeight) {
                     //Bitmap touched
                     //Q.)how does it know which card is there (rank,value)?
-                    //A.)state.getP1TopCards().get(1)
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet + 1), state.getSelectedPalaceCards());
+                    //A.)ex: state.getP1TopCards().get(index)
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet + 1),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
 
-                //second Card shown in the view hand
-                if( x > view.getPlayerHandCardLeftX() &&
+                // First (left-most) card of the user hand shown in the view
+                if (x > view.getPlayerHandCardLeftX() &&
                         x < view.getPlayerHandCardLeftX() + cardWidth &&
                         y > view.getPlayerHandCardLeftY() &&
-                        y < view.getPlayerHandCardLeftY() + cardHeight ) {
+                        y < view.getPlayerHandCardLeftY() + cardHeight) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
 
-                //third card shown in the view hand
-                if( x > view.getPlayerHandCardRightX() &&
+                //third card (right-most) of the user hand shown in the view
+                if (x > view.getPlayerHandCardRightX() &&
                         x < view.getPlayerHandCardRightX() + cardWidth &&
                         y > view.getPlayerHandCardRightY() &&
-                        y < view.getPlayerHandCardRightY() + cardHeight ) {
+                        y < view.getPlayerHandCardRightY() + cardHeight) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1Hand().get(cardToGet + 2), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet + 2),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
 
                 //int localCardToGet = state.getNumDisplayHand()*3;
-                // First card shown in the view top
-                if( x > view.getPlayerTopCardCenterX() &&
+                // Middle card of the top hand shown in the view
+                if (x > view.getPlayerTopCardCenterX() &&
                         x < view.getPlayerTopCardCenterX() + cardWidth &&
                         y > view.getPlayerTopCardCenterY() &&
-                        y < view.getPlayerTopCardCenterY() + cardHeight ) {
+                        y < view.getPlayerTopCardCenterY() + cardHeight) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(1), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(1),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
 
-                //second Card shown in the view top
-                if( x > view.getPlayerTopCardLeftX() &&
+                // First (left-most) card of the top hand shown in the view
+                if (x > view.getPlayerTopCardLeftX() &&
                         x < view.getPlayerTopCardLeftX() + cardWidth &&
                         y > view.getPlayerTopCardLeftY() &&
-                        y < view.getPlayerTopCardLeftY() + cardHeight ) {
+                        y < view.getPlayerTopCardLeftY() + cardHeight) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(0), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(0),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
 
-                //third card shown in the view top
-                if( x > view.getPlayerTopCardRightX() &&
+                //third card (right-most) of the user hand shown in the view
+                if (x > view.getPlayerTopCardRightX() &&
                         x < view.getPlayerTopCardRightX() + cardWidth &&
                         y > view.getPlayerTopCardRightY() &&
-                        y < view.getPlayerTopCardRightY() + cardHeight ) {
+                        y < view.getPlayerTopCardRightY() + cardHeight) {
                     //Bitmap touched
-                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(this, state.getP1TopPalaceCards().get(2), state.getSelectedPalaceCards());
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(2),
+                            state.getSelectedPalaceCards());
+
                     this.game.sendAction(selectcard);
                 }
                 return true;
@@ -231,13 +248,11 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     /**
      * overriden to flash the background of the PalaceView red.
      *
-     * @param color
-     * 			the color to flash
-     * @param duration
-     *          how long the flash lasts
+     * @param color    the color to flash
+     * @param duration how long the flash lasts
      */
     @Override
-    protected void flash(int color, int duration){
+    protected void flash(int color, int duration) {
         if (view == null) return;
         int savedColor = getBackgroundColor(view);
         view.setBackgroundColor(color);
@@ -253,7 +268,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         }
 
         public void run() {
-            if (view== null) return;
+            if (view == null) return;
             view.setBackgroundColor(oldColor);
         }
     }

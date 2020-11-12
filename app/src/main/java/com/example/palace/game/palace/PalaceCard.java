@@ -9,16 +9,22 @@ import java.util.stream.Stream;
 
 /**
  * @author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
- * Citation: https://www.youtube.com/watch?v=_AUtutrnEP8
+ *
  * This class models the attributes of a Card
+ *
+ * External Citation:
+ *  Date: 1 October 2020
+ *  Problem: Best way to model a card
+ *  Resource: https://www.youtube.com/watch?v=_AUtutrnEP8
+ *  Solution: Used example code from the video
  */
 public class PalaceCard extends ArrayList<PalaceCard> {
     private int suit;
     private int rank;
-    //private Image image;
 
     // getter for suit
     public int getSuit() { return suit; }
+
     // setter for suit
     public void setSuit(int suit) {
         List<Integer> validSuits = getValidSuits();
@@ -69,15 +75,20 @@ public class PalaceCard extends ArrayList<PalaceCard> {
     }
 
     /**
-     *
-     * @param suit
-     * @param rank
+     * This is the constructor for a card object
+     * @param suit of a card
+     * @param rank of a card
      */
     public PalaceCard(int suit, int rank) { // card constructor
         setSuit(suit);
         setRank(rank);
     }
 
+    /**
+     * Determines if the object is a card object
+     * @param O
+     * @return
+     */
     @Override
     public boolean equals(Object O){
         if (O instanceof PalaceCard) {

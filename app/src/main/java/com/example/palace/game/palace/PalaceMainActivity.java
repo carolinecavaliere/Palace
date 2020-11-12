@@ -23,8 +23,7 @@ public class PalaceMainActivity extends GameMainActivity {
     /**
      * create the default configuration for this game:
      *
-     * @return
-     * 		the new configuration object, representing the default configuration
+     * @return the new configuration object, representing the default configuration
      */
     @Override
     public GameConfig createDefaultConfig() {
@@ -36,14 +35,16 @@ public class PalaceMainActivity extends GameMainActivity {
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new PalaceHumanPlayer(name);
-            }});
+            }
+        });
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new PalaceComputerPlayer(name);
-            }});
+            }
+        });
 
         //playerTypes.add(new GamePlayerType("Smart Computer Player"){
-            //public GamePlayer createPlayer(String name){ return new PalaceSmartComputerPlayer(name);}});
+        //public GamePlayer createPlayer(String name){ return new PalaceSmartComputerPlayer(name);}});
 
 
         // Create a game configuration class for Palace:
@@ -58,8 +59,7 @@ public class PalaceMainActivity extends GameMainActivity {
     /**
      * create a local game
      *
-     * @return
-     * 		the local game, a palace game
+     * @return the local game, a palace game
      */
     @Override
     public LocalGame createLocalGame() {
