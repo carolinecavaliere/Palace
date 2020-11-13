@@ -118,7 +118,7 @@ public class PalaceGameState extends GameState {
         displayCard2P2 = p2Hand.get(1);
         displayCard3P2 = p2Hand.get(2);
 
-        tempDeck = 33;
+        tempDeck = 10;
         cardToBeSelected = new PalaceCard(4, 14);//default is ace of spades
         topCardSelected = new PalaceCard(4, 14);
 
@@ -697,7 +697,8 @@ public class PalaceGameState extends GameState {
         String ret = "Number of Players: " + numPlayers + "\n" +
                 "Next Card in the Draw Pile: " + drawPileTopPalaceCard + "\n" +
                 "Number of Cards in Play Pile: " + playPileNumCards + "\n" +
-                "Current Card in Play Pile: " + playPilePalaceCards.get(playPilePalaceCards.size() - 1) + "\n" +
+                "Current Card in Play Pile: " +
+                playPilePalaceCards.get(playPilePalaceCards.size() - 1) + "\n" +
 
                 "Player 1: \n" +
                 "Number of Cards in Hand: " + p1numCards + "\n" +

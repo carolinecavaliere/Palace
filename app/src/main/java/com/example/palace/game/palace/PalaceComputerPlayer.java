@@ -157,9 +157,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
-                    if (state.getP2Hand().get(i).getRank() >
-                            state.getPlayPilePalaceCards().
-                                    get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         isBigger = true;
                     }
                 }

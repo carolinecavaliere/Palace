@@ -382,8 +382,6 @@ public class PalaceView extends SurfaceView {
                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY,
                         state.getP1Hand().get(cardToGet + 1).getSuit(),
                         state.getP1Hand().get(cardToGet + 1).getRank());
-            } else {
-                assert state.getP1Hand().isEmpty();
             }
         }
 
