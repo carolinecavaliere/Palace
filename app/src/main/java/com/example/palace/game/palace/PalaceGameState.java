@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 /**
  * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
+ *
+ * CAVEATS: None
+ *
  * The state of the Palace game. This class holds all necessary information about the state of
  * the game.
  */
@@ -691,7 +694,7 @@ public class PalaceGameState extends GameState {
     /**
      * formats the state of the game in text form
      *
-     * @return
+     * @return string
      */
     public String toString() {
         String ret = "Number of Players: " + numPlayers + "\n" +

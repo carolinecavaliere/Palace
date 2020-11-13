@@ -11,7 +11,10 @@ import java.util.ArrayList;
 
 /**
  * @author Jimi Hayes, Nathaniel Pon, Caroline Cavaliere, Chloe Gan
+ *
  * controls the play of the game
+ *
+ * CAVEATS: None
  */
 public class PalaceLocalGame extends LocalGame {
 
@@ -19,6 +22,8 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * constructor makes a new game states
+     *
+     * CAVEATS: None
      *
      * @param pNum
      */
@@ -28,6 +33,8 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * sends updated state to player
+     *
+     * CAVEATS: None
      *
      * @param p player being sent the updated state
      */
@@ -40,8 +47,10 @@ public class PalaceLocalGame extends LocalGame {
     /**
      * indicates whether the given player can take an action right now.
      *
+     * CAVEATS: None
+     *
      * @param playerIdx the player's player-number (ID)
-     * @return
+     * @return true if the player can move, false if they can't move
      */
     @Override
     protected boolean canMove(int playerIdx) {
@@ -55,6 +64,8 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * checks if the game is over
+     *
+     * CAVEATS: None
      *
      * @return the message that tells who has won, or null if it's not over yet
      */
@@ -72,8 +83,10 @@ public class PalaceLocalGame extends LocalGame {
     /**
      * method called when a new action is sent by a player
      *
+     * CAVEATS: None
+     *
      * @param action The move that the player has sent to the game
-     * @return
+     * @return true if an action has been taken
      */
     @Override
     protected boolean makeMove(GameAction action) {

@@ -9,6 +9,8 @@ import com.example.palace.game.actionMsg.GameAction;
  * This class models a player playing a card/cards to the play pile. It handles
  * cases in which the player's selected card(s) cannot legally be played, and
  * adds a new card to the player's hand when appropriate after they play a legal card(s)
+ *
+ * CAVEATS: None
  */
 public class PalacePlayCardAction extends GameAction {
     /**

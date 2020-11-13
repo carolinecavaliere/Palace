@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * @Author: Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
  * This class models how a player selects a card/cards. (Will be modified once combined with
  * the GUI so that the selected cards are determined by the player's touch actions).
+ *
+ * CAVEATS: None
  */
 public class PalaceSelectCardAction extends GameAction {
 

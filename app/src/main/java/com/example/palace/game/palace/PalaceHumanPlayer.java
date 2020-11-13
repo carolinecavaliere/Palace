@@ -106,6 +106,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      * creates a new action depending on which button is pressed. The action is then
      * sent to the game.
      *
+     * CAVEATS: None
+     *
      * @param button the button that was clicked
      *
      * External Citation:
@@ -143,8 +145,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      * select to play. When the view is tapped, a new PalaceSelectCardAction is sent
      * to the game.
      *
-     * @param palaceView
-     * @param motionEvent
+     * CAVEATS: None
+     *
+     * @param palaceView the view we're editing
+     * @param motionEvent the motion that was done.
      * @return External Citation
      * Date: 8 November 2020
      * Problem: How to map a bitmap
@@ -256,6 +260,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     /**
      * overriden to flash the background of the PalaceView red.
      *
+     * CAVEATS: None
+     *
      * @param color    the color to flash
      * @param duration how long the flash lasts
      */
@@ -269,6 +275,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     }
 
     /**
+     * @author Caroline Cavaliere, Jimi Hayes, Chloe Gan, Nathaniel Pon
+     *
+     * CAVEATS: None
+     *
      * Class that will revert back to the old background color after flashing the screen
      */
     private class Unflash implements Runnable {
