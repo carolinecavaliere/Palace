@@ -378,11 +378,11 @@ public class PalaceView extends SurfaceView {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
-            } else if (state.getP1numCards() % 3 == 1) {
+            } else if (state.getP1Hand().size() % 3 == 1) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
-            } else if (state.getP1numCards() % 3 == 2) {
+            } else if (state.getP1Hand().size() % 3 == 2) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
