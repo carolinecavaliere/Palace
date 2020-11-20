@@ -281,17 +281,25 @@ public class PalaceLocalGame extends LocalGame {
 
             // A user decides to select card(s)
         } else if (action instanceof PalaceSelectCardAction) {
+            // instantiate a SelectCardAction object
             PalaceSelectCardAction select = (PalaceSelectCardAction) action;
+            // retrieve the single card that was selected
             PalaceCard chosenCard = select.getCardSelected();
+            // if the number of cards that were played are greater than zero...
             if (palaceGame.getPlayPileNumCards() > 0) {
                 // looks at player 1's hand
-                if (palaceGame.getTurn() == 0) {
-                    if (palaceGame.getP1Hand().contains(chosenCard)) {
+                if (palaceGame.getTurn() == 0) { // this is player 1
+                    if (palaceGame.getP1Hand().contains(chosenCard)) { // if their hand has the
+                        // card that was selected...
+                        //.. and if their selected card is greater than the most recent card in
+                        // the play pile or is a special card...
                         if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().
                                 get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
                                 (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
+                            //... if the chosen card is not already in the arraylist of selected
+                            // cards..
                             if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                // put arraylist into GameState variable
+                                // ...put arraylist into GameState variable
                                 palaceGame.setSelectedPalaceCards(palaceGame.
                                         addToSelectedCards(chosenCard));
                             } else {
