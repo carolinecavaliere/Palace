@@ -122,12 +122,8 @@ public class PalaceLocalGame extends LocalGame {
                             //adds new card to the player's hand
                             if (palaceGame.getP1Hand().size() < 3) {
                                 for (int j = palaceGame.getP1numCards(); j < 3; j++) {
-                                    if (palaceGame.getTempDeck() > 0) {
-                                        palaceGame.addToP1Hand(palaceGame.getDeck().getNextCard());
-                                        palaceGame.setTempDeck(palaceGame.
-                                                getTempDeck() - 1);
-                                    }
-                                    palaceGame.setP1numCards(3);
+                                    palaceGame.getDeck().drawCard(0);
+                                    palaceGame.setP1numCards(palaceGame.getP1Hand().size());
                                 }
 
                             }
@@ -173,12 +169,8 @@ public class PalaceLocalGame extends LocalGame {
                             //adds new card to the player's hand
                             if (palaceGame.getP2Hand().size() < 3) {
                                 for (int j = palaceGame.getP2numCards(); j < 3; j++) {
-                                    if (palaceGame.getTempDeck() > 0) {
-                                        palaceGame.addToP2Hand(palaceGame.getDeck().getNextCard());
-                                        palaceGame.setTempDeck(palaceGame.
-                                                getTempDeck() - 1);
-                                    }
-                                    palaceGame.setP2numCards(3);
+                                    palaceGame.getDeck().drawCard(1);
+                                    palaceGame.setP2numCards(palaceGame.getP2Hand().size());
                                 }
 
                             }
@@ -223,9 +215,9 @@ public class PalaceLocalGame extends LocalGame {
                             //adds new card to the player's hand
                             if (palaceGame.getP1Hand().size() < 3) {
                                 for (int j = palaceGame.getP1numCards(); j < 3; j++) {
-                                    palaceGame.addToP1Hand(palaceGame.getDeck().getNextCard());
+                                    palaceGame.getDeck().drawCard(2);
                                 }
-                                palaceGame.setP1numCards(3);
+                                palaceGame.setP1numCards(palaceGame.getP3Hand().size());
                             }
                             for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
                                 if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
@@ -260,9 +252,9 @@ public class PalaceLocalGame extends LocalGame {
                         palaceGame.setP4numCards(palaceGame.getP4numCards() - 1);
                         if (palaceGame.getP4Hand().size() < 3) {
                             for (int j = palaceGame.getP4numCards(); j < 3; j++) {
-                                palaceGame.addToP4Hand(palaceGame.getDeck().getNextCard());
+                                palaceGame.getDeck().drawCard(3);
                             }
-                            palaceGame.setP4numCards(3);
+                            palaceGame.setP4numCards(palaceGame.getP4Hand().size());
                         }
                         palaceGame.clearSelectedCards();
                     }

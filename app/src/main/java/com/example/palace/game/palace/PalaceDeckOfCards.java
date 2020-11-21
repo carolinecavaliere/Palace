@@ -243,10 +243,10 @@ public class PalaceDeckOfCards {
      * This method draws a card from the "deck" arraylist of card objects
      * @return a card object
      */
-    public PalaceCard getNextCard() {
+   /** public PalaceCard getNextCard() {
         cardCount++;
         return deck.get(cardCount);
-    }
+    }*/
 
     /**
      * Draws a card from the deck and puts it in the players hand
@@ -254,17 +254,19 @@ public class PalaceDeckOfCards {
      * @param player to know which hand to put a card into
      */
     public void drawCard(int player) {
-        if (player == 1) {
-            state.addToP1Hand(state.getDrawPileTopPalaceCard());
-        } else if (player == 2) {
-            state.addToP2Hand(state.getDrawPileTopPalaceCard());
-        } else if (player == 3) {
-            state.addToP3Hand(state.getDrawPileTopPalaceCard());
-        } else if (player == 4) {
-            state.addToP4Hand(state.getDrawPileTopPalaceCard());
+        if (!(this.deck.isEmpty())) {
+            if (player == 0) {
+                state.addToP1Hand(this.deck.get(0));
+            } else if (player == 1) {
+                state.addToP2Hand(this.deck.get(0));
+            } else if (player == 2) {
+                state.addToP3Hand(this.deck.get(0));
+            } else if (player == 3) {
+                state.addToP4Hand(this.deck.get(0));
+            }
+            deck.remove(0);
+            state.setDrawPileTopPalaceCard(deck.get(0));
         }
-        deck.remove(0);
-        state.setDrawPileTopPalaceCard(deck.get(0));
     }
 
     /**
@@ -274,5 +276,9 @@ public class PalaceDeckOfCards {
      */
     public int getCardCount() {
         return deck.size();
+    }
+
+    public ArrayList<PalaceCard> getDeck(){
+        return deck;
     }
 }
