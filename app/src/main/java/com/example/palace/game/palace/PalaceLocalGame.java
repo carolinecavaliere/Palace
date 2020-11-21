@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 /**
  * @author Jimi Hayes, Nathaniel Pon, Caroline Cavaliere, Chloe Gan
- *
+ * <p>
  * controls the play of the game
- *
+ * <p>
  * CAVEATS: None
  */
 public class PalaceLocalGame extends LocalGame {
@@ -22,7 +22,7 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * constructor makes a new game states
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param pNum
@@ -33,7 +33,7 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * sends updated state to player
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param p player being sent the updated state
@@ -46,7 +46,7 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * indicates whether the given player can take an action right now.
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param playerIdx the player's player-number (ID)
@@ -64,7 +64,7 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * checks if the game is over
-     *
+     * <p>
      * CAVEATS: None
      *
      * @return the message that tells who has won, or null if it's not over yet
@@ -82,7 +82,7 @@ public class PalaceLocalGame extends LocalGame {
 
     /**
      * method called when a new action is sent by a player
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param action The move that the player has sent to the game
@@ -100,13 +100,64 @@ public class PalaceLocalGame extends LocalGame {
             }
             //not a valid move if multiple cards are selected but not the same rank
             else if (palaceGame.getSelectedPalaceCards().size() > 1) {
-                for (int i = 0; i < palaceGame.getSelectedPalaceCards().size() - 1; i++) {
-                    if (palaceGame.getSelectedPalaceCards().get(i).getRank() !=
-                            palaceGame.getSelectedPalaceCards().get(i + 1).getRank()) {
-                        return false;
+                int sameCards = 0;
+                for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
+                    if (palaceGame.getTurn() == 0) {
+                        if (palaceGame.getP1Hand().size() > 0) {
+                            int index = palaceGame.getP1Hand().indexOf(palaceGame.
+                                    getSelectedPalaceCards().get(i));
+                            //adds selected cards to play pile
+                            palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
+                            //removes played cards from player's hand
+                            palaceGame.setP1Hand(palaceGame.removeFromP1Hand(index));
+                            palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
+                            palaceGame.setP1numCards(palaceGame.getP1numCards() - 1);
+                            //adds new card to the player's hand
+                            if (palaceGame.getP1Hand().size() < 3) {
+                                for (int j = palaceGame.getP1numCards(); j < 3; j++) {
+                                    palaceGame.getDeck().drawCard(0);
+                                    palaceGame.setP1numCards(palaceGame.getP1Hand().size());
+                                }
+
+                            }
+                        } else if (palaceGame.getP1Hand().isEmpty() &&
+                                !palaceGame.getP1TopPalaceCards().isEmpty()) {
+                            int index = palaceGame.getP1TopPalaceCards().indexOf(palaceGame.
+                                    getSelectedPalaceCards().get(i));
+                            //adds selected cards to play pile
+                            palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
+                            //removes played cards from player's Top Cards
+                            palaceGame.removeFromP1TopCards(index);
+                            palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
+
+                        }
+                    }
+                    for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                        if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
+                                palaceGame.getSelectedPalaceCards().get(0).getRank()) {
+                            sameCards++;
+                        }
+                    }
+                    if (palaceGame.getSelectedPalaceCards().get(i).getRank() == 10 ||
+                            sameCards == 4) {
+                        palaceGame.clearPlayPileCards();
+                    } else {
+                        changeTurn = true;
                     }
                 }
-            } else {
+                if (changeTurn) {
+                    if (palaceGame.getTurn() == palaceGame.getNumPlayers() - 1) {
+                        palaceGame.setTurn(0);
+                    } else {
+                        palaceGame.setTurn(palaceGame.getTurn() + 1);
+                    }
+                    changeTurn = false;
+                }
+                //no more cards are selected now
+                palaceGame.clearSelectedCards();
+                return true;
+            }
+            else {
                 for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
                     if (palaceGame.getTurn() == 0) {
                         if (palaceGame.getP1Hand().size() > 0) {
@@ -269,8 +320,6 @@ public class PalaceLocalGame extends LocalGame {
                 }
                 return true;
             }
-            return false;
-
             // A user decides to select card(s)
         } else if (action instanceof PalaceSelectCardAction) {
             // instantiate a SelectCardAction object
@@ -353,6 +402,8 @@ public class PalaceLocalGame extends LocalGame {
                             } else {
                                 palaceGame.removeFromSelectedCards(chosenCard);
                             }
+
+
                             return true;
                         } else {
                             return false;
