@@ -177,7 +177,7 @@ public class PalaceGameState extends GameState {
         }
 
         this.turn = orig.getTurn();
-        this.deck = new PalaceDeckOfCards(1, orig);
+        this.deck = new PalaceDeckOfCards(orig.deck);
 
         for (int i = 0; i < orig.getP1TopPalaceCards().size(); i++) {
             this.p1TopPalaceCards.add(new PalaceCard(orig.getP1TopPalaceCards().get(i)));

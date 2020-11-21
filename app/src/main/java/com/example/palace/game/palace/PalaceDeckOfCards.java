@@ -99,11 +99,11 @@ public class PalaceDeckOfCards {
      * @param orig
      */
     public PalaceDeckOfCards(PalaceDeckOfCards orig){
-        deck = new ArrayList<PalaceCard>();
-        for(int i = 0; i<orig.deck.size(); i++){
-            deck.add(new PalaceCard(orig.deck.get(i)));
-            this.state = orig.state;
+        ArrayList<PalaceCard> copyDeck = new ArrayList<PalaceCard>();
+        for(PalaceCard cardHere: orig.deck){
+            copyDeck.add(cardHere);
         }
+        this.state = orig.state;
     }
 
     /**
