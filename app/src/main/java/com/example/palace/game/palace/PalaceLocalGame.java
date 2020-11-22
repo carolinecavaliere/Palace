@@ -664,12 +664,18 @@ public class PalaceLocalGame extends LocalGame {
                             // temporarily hold the top card
                             topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
                             handCardTemp = palaceGame.getP1Hand().get(j);
+                            int indexTop = palaceGame.getP1TopPalaceCards().indexOf(topCardTemp);
+                            int indexHand = palaceGame.getP1Hand().indexOf(handCardTemp);
 
                             // set the top card to be the hand card
-                            palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
+                            //palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
+                            palaceGame.removeFromP1TopCards(indexTop);
+                            palaceGame.addToP1TopCards(handCardTemp);
 
                             // set the hand card to be the temporary card that we were holding
-                            palaceGame.getP1Hand().set(j, topCardTemp);
+                            //palaceGame.getP1Hand().set(j, topCardTemp);
+                            palaceGame.removeFromP1Hand(indexHand);
+                            palaceGame.addToP1Hand(topCardTemp);
 
                         }
                     }
