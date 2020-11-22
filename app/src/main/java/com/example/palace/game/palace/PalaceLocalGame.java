@@ -642,10 +642,11 @@ public class PalaceLocalGame extends LocalGame {
 
             // A user decides to switch what they want their top hand to be before playing
         } else if (action instanceof PalaceSwitchBaseCardsAction) {
-            int index;
-            ArrayList<PalaceCard> toHandPalaceCards;
-            ArrayList<PalaceCard> toTopPalaceCards;
+            int index; // inconsequential code
+            ArrayList<PalaceCard> toHandPalaceCards; // inconsequential code
+            ArrayList<PalaceCard> toTopPalaceCards; // inconsequential code
             PalaceCard topCardTemp;
+            PalaceCard handCardTemp;
 
             // check to see if the topCards were switched. Need to implement code so that this
             // happens in the VERY beginning of the game
@@ -658,13 +659,14 @@ public class PalaceLocalGame extends LocalGame {
                         // if the element in the top is less than the element in the hand...
                         if (palaceGame.getP1TopPalaceCards().get(i).getRank() <
                                 palaceGame.getP1Hand().get(j).getRank()) {
-                            
+
                             //swap
                             // temporarily hold the top card
                             topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
+                            handCardTemp = palaceGame.getP1Hand().get(j);
 
                             // set the top card to be the hand card
-                            palaceGame.getP1TopPalaceCards().set(i, palaceGame.getP1Hand().get(j));
+                            palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
 
                             // set the hand card to be the temporary card that we were holding
                             palaceGame.getP1Hand().set(j, topCardTemp);
@@ -675,36 +677,8 @@ public class PalaceLocalGame extends LocalGame {
                 topCardsSwitched = true;
                 return true;
 
-            } else if (palaceGame.getTurn() == 2) {
-                toHandPalaceCards = palaceGame.getP2Hand();
-                toTopPalaceCards = palaceGame.getP2TopPalaceCards();
-                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(toHandPalaceCards);
-                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
-                return true;
-            } else if (palaceGame.getTurn() == 3) {
-                toHandPalaceCards = palaceGame.getP3Hand();
-                toTopPalaceCards = palaceGame.getP3TopPalaceCards();
-                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(toHandPalaceCards);
-                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
-                return true;
-            } else if (palaceGame.getTurn() == 4) {
-                toHandPalaceCards = palaceGame.getP4Hand();
-                toTopPalaceCards = palaceGame.getP4TopPalaceCards();
-                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(toHandPalaceCards);
-                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
-                return true;
+                // need to add options for other players to switch. But let's get it working
+                // first lol
             } else {
                 return false;
             }
