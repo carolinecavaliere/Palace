@@ -30,6 +30,14 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/switchtop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:autoText="false"
+                    android:text="Switch Top Cards?"
+                    android:textSize="12sp" />
+
+                <Button
                     android:id="@+id/playcard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

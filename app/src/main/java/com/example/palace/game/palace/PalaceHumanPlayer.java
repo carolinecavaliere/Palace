@@ -24,6 +24,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button restart;
     private Button nextCards;
     private Button previousCards;
+    private Button switchTopCards;
 
     private PalaceGameState state;
 
@@ -89,6 +90,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         restart = (Button) activity.findViewById(R.id.restart_button);
         nextCards = (Button) activity.findViewById(R.id.nextThreeCards);
         previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
+        switchTopCards = (Button) activity.findViewById(R.id.switchtop);
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
@@ -98,6 +100,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         restart.setOnClickListener(this);
         nextCards.setOnClickListener(this);
         previousCards.setOnClickListener(this);
+        switchTopCards.setOnClickListener(this);
 
     }
 
@@ -136,6 +139,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         } else if (button.equals((previousCards))) {
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
+        } else if (button.equals(switchTopCards)) {
+            PalaceSwitchBaseCardsAction switchCards = new PalaceSwitchBaseCardsAction(this);
+            this.game.sendAction(switchCards);
         }
 
     }
@@ -161,7 +167,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float x = motionEvent.getX(); // x position on the screen of the motion event
         float y = motionEvent.getY(); // y position on the screen of motion event
         int cardToGet = state.getNumDisplayHand() * 3; // index of the card we want, 0-2
-
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:  // touch/tap action

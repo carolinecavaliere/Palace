@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class PalaceLocalGame extends LocalGame {
 
     private PalaceGameState palaceGame;
+    private boolean topCardsSwitched = false;
 
     /**
      * constructor makes a new game states
@@ -642,47 +643,72 @@ public class PalaceLocalGame extends LocalGame {
             // A user decides to switch what they want their top hand to be before playing
         } else if (action instanceof PalaceSwitchBaseCardsAction) {
             int index;
-            ArrayList<PalaceCard> handPalaceCards;
-            ArrayList<PalaceCard> topPalaceCards;
+            ArrayList<PalaceCard> toHandPalaceCards = new ArrayList<PalaceCard>();
+            ArrayList<PalaceCard> toTopPalaceCards = new ArrayList<PalaceCard>();
+            PalaceCard topCardTemp;
+            PalaceCard handCardTemp;
+
+            // check to see if the topCards were switched
+            if (topCardsSwitched == false && palaceGame.getTurn() == 1) {
+
+                // look at top cards
+                for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
+                    // look at hand cards to compare to top cards
+                    for (int j = 0; j < palaceGame.getP1Hand().size(); j++) {
+                        // if the element in the top is less than the element in the hand...
+                        if (palaceGame.getP1TopPalaceCards().get(i).getRank() <
+                                palaceGame.getP1Hand().get(j).getRank()) {
+                            //swap
+                            topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
+                            palaceGame.getP1TopPalaceCards().set(i, palaceGame.getP1Hand().get(j));
+                            palaceGame.getP1Hand().set(j,palaceGame.getP1TopPalaceCards().get(i));
+
+                        }
+                    }
+                }
+                topCardsSwitched = true;
+                return true;
+
+            }
+
             if (palaceGame.getTurn() == 1) {
-                handPalaceCards = new ArrayList<PalaceCard>(palaceGame.getP1Hand());
-                topPalaceCards = new ArrayList<PalaceCard>(palaceGame.getP1TopPalaceCards());
-                index = topPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                topPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = handPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                handPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(handPalaceCards);
-                palaceGame.setP1TopPalaceCards(topPalaceCards);
+
+                //index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
+                //toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
+                //index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
+                //toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
+                //palaceGame.setP1Hand(toHandPalaceCards);
+                //palaceGame.setP1TopPalaceCards(toTopPalaceCards);
                 return true;
             } else if (palaceGame.getTurn() == 2) {
-                handPalaceCards = palaceGame.getP2Hand();
-                topPalaceCards = palaceGame.getP2TopPalaceCards();
-                index = topPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                topPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = handPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                handPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(handPalaceCards);
-                palaceGame.setP1TopPalaceCards(topPalaceCards);
+                toHandPalaceCards = palaceGame.getP2Hand();
+                toTopPalaceCards = palaceGame.getP2TopPalaceCards();
+                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
+                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
+                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
+                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
+                palaceGame.setP1Hand(toHandPalaceCards);
+                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
                 return true;
             } else if (palaceGame.getTurn() == 3) {
-                handPalaceCards = palaceGame.getP3Hand();
-                topPalaceCards = palaceGame.getP3TopPalaceCards();
-                index = topPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                topPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = handPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                handPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(handPalaceCards);
-                palaceGame.setP1TopPalaceCards(topPalaceCards);
+                toHandPalaceCards = palaceGame.getP3Hand();
+                toTopPalaceCards = palaceGame.getP3TopPalaceCards();
+                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
+                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
+                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
+                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
+                palaceGame.setP1Hand(toHandPalaceCards);
+                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
                 return true;
             } else if (palaceGame.getTurn() == 4) {
-                handPalaceCards = palaceGame.getP4Hand();
-                topPalaceCards = palaceGame.getP4TopPalaceCards();
-                index = topPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                topPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                index = handPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                handPalaceCards.set(index, palaceGame.getTopCardSelected());
-                palaceGame.setP1Hand(handPalaceCards);
-                palaceGame.setP1TopPalaceCards(topPalaceCards);
+                toHandPalaceCards = palaceGame.getP4Hand();
+                toTopPalaceCards = palaceGame.getP4TopPalaceCards();
+                index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
+                toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
+                index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
+                toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
+                palaceGame.setP1Hand(toHandPalaceCards);
+                palaceGame.setP1TopPalaceCards(toTopPalaceCards);
                 return true;
             } else {
                 return false;
