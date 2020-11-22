@@ -262,7 +262,7 @@ public class PalaceView extends SurfaceView {
         cardback = BitmapFactory.decodeResource(getResources(), R.drawable.cardback);
         cardback = Bitmap.createScaledBitmap(cardback, cardWidth, cardHeight, true);
 
-        highlightPaint.setColor(0xCC9FFF3);
+        highlightPaint.setColor(0xCC99FFF3);
         highlightPaint.setStyle(Paint.Style.FILL);
     }
 
