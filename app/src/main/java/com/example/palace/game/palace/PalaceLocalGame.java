@@ -98,7 +98,6 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getSelectedPalaceCards().isEmpty()) {
                 return false;
             }
-            //not a valid move if multiple cards are selected but not the same rank
             else if (palaceGame.getSelectedPalaceCards().size() > 1) {
                 int sameCards = 0;
                 for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
@@ -340,12 +339,19 @@ public class PalaceLocalGame extends LocalGame {
                             //... if the chosen card is not already in the arraylist of selected
                             // cards..
                             if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                // ...put arraylist into GameState variable
-                                palaceGame.setSelectedPalaceCards(palaceGame.
-                                        addToSelectedCards(chosenCard));
+                                if((!(palaceGame.getSelectedPalaceCards().isEmpty()))&&palaceGame.getSelectedPalaceCards()
+                                        .get(0).getRank() != chosenCard.getRank()){
+                                    return false;
+                                }
+                                else {
+                                    // ...put arraylist into GameState variable
+                                    palaceGame.setSelectedPalaceCards(palaceGame.
+                                            addToSelectedCards(chosenCard));
+                                }
                             } else {
                                 palaceGame.removeFromSelectedCards(chosenCard);
                             }
+                            sendUpdatedStateTo(players[0]);
                             return true;
                         } else {
                             return false;
@@ -359,12 +365,19 @@ public class PalaceLocalGame extends LocalGame {
                                     get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
                                     (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
                                 if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                    // put arraylist into GameState variable
-                                    palaceGame.setSelectedPalaceCards(palaceGame.
-                                            addToSelectedCards(chosenCard));
+                                    if((!(palaceGame.getSelectedPalaceCards().isEmpty()))&&palaceGame.getSelectedPalaceCards()
+                                            .get(0).getRank() != chosenCard.getRank()){
+                                        return false;
+                                    }
+                                    else {
+                                        // ...put arraylist into GameState variable
+                                        palaceGame.setSelectedPalaceCards(palaceGame.
+                                                addToSelectedCards(chosenCard));
+                                    }
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
+                                sendUpdatedStateTo(players[0]);
                                 return true;
                             } else {
                                 return false;
@@ -377,12 +390,13 @@ public class PalaceLocalGame extends LocalGame {
                     //for bottom cards
                     else if (palaceGame.getP1numCards() == 0 &&
                             palaceGame.getP1TopPalaceCards().isEmpty()) {
-                        if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                        if (!(palaceGame.getSelectedPalaceCards().contains(chosenCard))) {
                             palaceGame.setSelectedPalaceCards(palaceGame.
                                     addToSelectedCards(chosenCard));
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        sendUpdatedStateTo(players[0]);
                         return true;
                     } else {
                         return false;
@@ -396,14 +410,20 @@ public class PalaceLocalGame extends LocalGame {
                                 get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
                                 (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
                             if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                // put arraylist into GameState variable
-                                palaceGame.setSelectedPalaceCards(palaceGame.
-                                        addToSelectedCards(chosenCard));
+                                if((!(palaceGame.getSelectedPalaceCards().isEmpty()))&&palaceGame.getSelectedPalaceCards()
+                                        .get(0).getRank() != chosenCard.getRank()){
+                                    return false;
+                                }
+                                else {
+                                    // ...put arraylist into GameState variable
+                                    palaceGame.setSelectedPalaceCards(palaceGame.
+                                            addToSelectedCards(chosenCard));
+                                }
                             } else {
                                 palaceGame.removeFromSelectedCards(chosenCard);
                             }
 
-
+                            sendUpdatedStateTo(players[1]);
                             return true;
                         } else {
                             return false;
@@ -417,12 +437,19 @@ public class PalaceLocalGame extends LocalGame {
                                     get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
                                     (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
                                 if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                    // put arraylist into GameState variable
-                                    palaceGame.setSelectedPalaceCards(palaceGame.
-                                            addToSelectedCards(chosenCard));
+                                    if((!(palaceGame.getSelectedPalaceCards().isEmpty()))&&palaceGame.getSelectedPalaceCards()
+                                            .get(0).getRank() != chosenCard.getRank()){
+                                        return false;
+                                    }
+                                    else {
+                                        // ...put arraylist into GameState variable
+                                        palaceGame.setSelectedPalaceCards(palaceGame.
+                                                addToSelectedCards(chosenCard));
+                                    }
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
+                                sendUpdatedStateTo(players[1]);
                                 return true;
                             } else {
                                 return false;
@@ -430,7 +457,6 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             return false;
                         }
-
                     }
                     //for bottom cards
                     else if (palaceGame.getP2numCards() == 0 &&
@@ -441,6 +467,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        sendUpdatedStateTo(players[1]);
                         return true;
                     } else {
                         return false;

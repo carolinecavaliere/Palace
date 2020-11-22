@@ -172,7 +172,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerHandCardCenterX() + cardWidth &&
                             y > view.getPlayerHandCardCenterY() &&
                             y < view.getPlayerHandCardCenterY() + cardHeight &&
-                            state.getP1Hand().size() > 1) {
+                            state.getP1Hand().size() > 1 && !(state.getP1Hand().isEmpty())) {
                         //Bitmap touched
                         //Q.)how does it know which card is there (rank,value)?
                         //A.)ex: state.getP1TopCards().get(index)
@@ -189,7 +189,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerHandCardLeftX() + cardWidth &&
                             y > view.getPlayerHandCardLeftY() &&
                             y < view.getPlayerHandCardLeftY() + cardHeight &&
-                            state.getP1Hand().size() > 0) {
+                            state.getP1Hand().size() > 0 && !(state.getP1Hand().isEmpty())) {
                         //Bitmap touched
                         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
                                 this,
@@ -204,7 +204,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerHandCardRightX() + cardWidth &&
                             y > view.getPlayerHandCardRightY() &&
                             y < view.getPlayerHandCardRightY() + cardHeight &&
-                            state.getP1Hand().size() > 2) {
+                            state.getP1Hand().size() > 2 && !(state.getP1Hand().isEmpty())) {
                         //Bitmap touched
                         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
                                 this,
@@ -220,7 +220,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerTopCardCenterX() + cardWidth &&
                             y > view.getPlayerTopCardCenterY() &&
                             y < view.getPlayerTopCardCenterY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() >= 2) {
+                            state.getP1TopPalaceCards().size() >= 2 && state.getP1Hand().isEmpty()) {
                         //Bitmap touched
                         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
                                 this,
@@ -235,7 +235,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerTopCardLeftX() + cardWidth &&
                             y > view.getPlayerTopCardLeftY() &&
                             y < view.getPlayerTopCardLeftY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() >= 1) {
+                            state.getP1TopPalaceCards().size() >= 1 && state.getP1Hand().isEmpty()) {
                         //Bitmap touched
                         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
                                 this,
@@ -250,7 +250,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                             x < view.getPlayerTopCardRightX() + cardWidth &&
                             y > view.getPlayerTopCardRightY() &&
                             y < view.getPlayerTopCardRightY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() == 3) {
+                            state.getP1TopPalaceCards().size() == 3 && state.getP1Hand().isEmpty()) {
                         //Bitmap touched
                         PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
                                 this,
@@ -259,6 +259,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
                         this.game.sendAction(selectcard);
                     }
+                    view.invalidate();
                     return true;
             }
             return false;

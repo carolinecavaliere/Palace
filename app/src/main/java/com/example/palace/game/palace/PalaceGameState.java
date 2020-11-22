@@ -16,17 +16,6 @@ import java.util.ArrayList;
  */
 public class PalaceGameState extends GameState {
 
-    //temporary fix for drawPileNumCards
-    //private int tempDeck;
-
-    //public int getTempDeck() {
-        //return tempDeck;
-    //}
-
-    //public void setTempDeck(int tempDeck) {
-        //this.tempDeck = tempDeck;
-    //}
-
     private int numDisplayHand;
     private int numPlayers;
     private int p1numCards;

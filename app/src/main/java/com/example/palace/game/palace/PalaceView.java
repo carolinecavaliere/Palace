@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
@@ -114,6 +116,9 @@ public class PalaceView extends SurfaceView {
     private Bitmap two_diamonds = null;
     private Bitmap two_hearts = null;
     private Bitmap two_spades = null;
+
+    private Paint highlightPaint = new Paint();
+    private Rect highlightRect;
 
     /**
      External Citation
@@ -257,6 +262,8 @@ public class PalaceView extends SurfaceView {
         cardback = BitmapFactory.decodeResource(getResources(), R.drawable.cardback);
         cardback = Bitmap.createScaledBitmap(cardback, cardWidth, cardHeight, true);
 
+        highlightPaint.setColor(0xCC9FFF3);
+        highlightPaint.setStyle(Paint.Style.FILL);
     }
 
     /**
@@ -330,23 +337,62 @@ public class PalaceView extends SurfaceView {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
                         state.getP1TopPalaceCards().get(0).getSuit(),
                         state.getP1TopPalaceCards().get(0).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(0))){
+                            highlightRect = new Rect((int)playerTopCardLeftX,
+                                                     (int)playerTopCardLeftY,
+                                                (int)playerTopCardLeftX+cardWidth,
+                                              (int)playerTopCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);
+                        }
                 drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
                         state.getP1TopPalaceCards().get(1).getSuit(),
                         state.getP1TopPalaceCards().get(1).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(1))) {
+                            highlightRect = new Rect((int) playerTopCardCenterX,
+                                    (int) playerTopCardCenterY,
+                                    (int) playerTopCardCenterX + cardWidth,
+                                    (int) playerTopCardCenterY + cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);
+                        }
                 drawCard(canvas, playerTopCardRightX, playerTopCardRightY,
                         state.getP1TopPalaceCards().get(2).getSuit(),
                         state.getP1TopPalaceCards().get(2).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(2))){
+                            highlightRect = new Rect((int)playerTopCardRightX,
+                            (int)playerTopCardRightY,
+                            (int)playerTopCardRightX+cardWidth,
+                            (int)playerTopCardRightY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
+
             } else if (state.getP1TopPalaceCards().size() == 2) {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
                         state.getP1TopPalaceCards().get(0).getSuit(),
                         state.getP1TopPalaceCards().get(0).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(0))){
+                        highlightRect = new Rect((int)playerTopCardLeftX,
+                            (int)playerTopCardLeftY,
+                            (int)playerTopCardLeftX+cardWidth,
+                            (int)playerTopCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
                         state.getP1TopPalaceCards().get(1).getSuit(),
                         state.getP1TopPalaceCards().get(1).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(1))){
+                         highlightRect = new Rect((int)playerTopCardCenterX,
+                            (int)playerTopCardCenterY,
+                            (int)playerTopCardCenterX+cardWidth,
+                            (int)playerTopCardCenterY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             } else if (state.getP1TopPalaceCards().size() == 1) {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
                         state.getP1TopPalaceCards().get(0).getSuit(),
                         state.getP1TopPalaceCards().get(0).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1TopPalaceCards().get(0))){
+                            highlightRect = new Rect((int)playerTopCardLeftX,
+                            (int)playerTopCardLeftY,
+                            (int)playerTopCardLeftX+cardWidth,
+                            (int)playerTopCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             }
 
             //draw player's hand
@@ -361,34 +407,88 @@ public class PalaceView extends SurfaceView {
             if (state.getP1Hand().size() == 2) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(0))){
+                        highlightRect = new Rect((int)playerHandCardLeftX,
+                            (int)playerHandCardLeftY,
+                            (int)playerHandCardLeftX+cardWidth,
+                            (int)playerHandCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY,
                         state.getP1Hand().get(1).getSuit(), state.getP1Hand().get(1).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(1))){
+                        highlightRect = new Rect((int)playerHandCardCenterX,
+                            (int)playerHandCardCenterY,
+                            (int)playerHandCardCenterX+cardWidth,
+                            (int)playerHandCardCenterY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             } else if (state.getP1Hand().size() == 1) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(0))){
+                        highlightRect = new Rect((int)playerHandCardRightX,
+                            (int)playerHandCardRightY,
+                            (int)playerHandCardRightX+cardWidth,
+                            (int)playerHandCardRightY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             } else if (state.getP1Hand().size() == 0) {
 
             } else if (state.getNumDisplayHand() < state.getP1Hand().size() / 3) {
                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY,
                         state.getP1Hand().get(cardToGet + 1).getSuit(),
                         state.getP1Hand().get(cardToGet + 1).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet+1))){
+                        highlightRect = new Rect((int)playerHandCardCenterX,
+                            (int)playerHandCardCenterY,
+                            (int)playerHandCardCenterX+cardWidth,
+                            (int)playerHandCardCenterY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerHandCardRightX, playerHandCardRightY,
                         state.getP1Hand().get(cardToGet + 2).getSuit(),
                         state.getP1Hand().get(cardToGet + 2).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet+2))){
+                        highlightRect = new Rect((int)playerHandCardRightX,
+                            (int)playerHandCardRightY,
+                            (int)playerHandCardRightX+cardWidth,
+                            (int)playerHandCardRightY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet))){
+                        highlightRect = new Rect((int)playerHandCardLeftX,
+                            (int)playerHandCardLeftY,
+                            (int)playerHandCardLeftX+cardWidth,
+                            (int)playerHandCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             } else if (state.getP1Hand().size() % 3 == 1) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet))){
+                        highlightRect = new Rect((int)playerHandCardLeftX,
+                            (int)playerHandCardLeftY,
+                            (int)playerHandCardLeftX+cardWidth,
+                            (int)playerHandCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             } else if (state.getP1Hand().size() % 3 == 2) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(cardToGet).getSuit(),
                         state.getP1Hand().get(cardToGet).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet))){
+                        highlightRect = new Rect((int)playerHandCardLeftX,
+                            (int)playerHandCardLeftY,
+                            (int)playerHandCardLeftX+cardWidth,
+                            (int)playerHandCardLeftY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerHandCardCenterX, playerHandCardCenterY,
                         state.getP1Hand().get(cardToGet + 1).getSuit(),
                         state.getP1Hand().get(cardToGet + 1).getRank());
+                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(cardToGet+1))){
+                        highlightRect = new Rect((int)playerHandCardCenterX,
+                            (int)playerHandCardCenterY,
+                            (int)playerHandCardCenterX+cardWidth,
+                            (int)playerHandCardCenterY+cardHeight);
+                            canvas.drawRect(highlightRect, highlightPaint);}
             }
         }
 
