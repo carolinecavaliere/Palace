@@ -265,6 +265,7 @@ public class PalaceDeckOfCards {
                 state.addToP4Hand(this.deck.get(0));
             }
             deck.remove(0);
+
         }
     }
 
