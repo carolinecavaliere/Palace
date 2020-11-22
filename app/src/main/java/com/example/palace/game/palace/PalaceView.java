@@ -280,9 +280,11 @@ public class PalaceView extends SurfaceView {
         yMargin = displayConvert * 200;
         if (state != null) {
             //draw deck and pile
-            drawCard(canvas, xCenter + 120 - cardWidth / 2,
-                    yCenter - cardHeight / 2,
-                    1,-1);
+            if (!(state.getDrawPileNumCards() == 0)) {
+                drawCard(canvas, xCenter + 120 - cardWidth / 2,
+                        yCenter - cardHeight / 2,
+                        1,-1);
+            }
             if (!(state.getPlayPilePalaceCards().isEmpty())) {
                 drawCard(canvas, xCenter - 120 - cardWidth / 2, yCenter - cardHeight / 2,
                         state.getPlayPilePalaceCards().
