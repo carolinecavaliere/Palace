@@ -643,13 +643,13 @@ public class PalaceLocalGame extends LocalGame {
             // A user decides to switch what they want their top hand to be before playing
         } else if (action instanceof PalaceSwitchBaseCardsAction) {
             int index;
-            ArrayList<PalaceCard> toHandPalaceCards = new ArrayList<PalaceCard>();
-            ArrayList<PalaceCard> toTopPalaceCards = new ArrayList<PalaceCard>();
+            ArrayList<PalaceCard> toHandPalaceCards;
+            ArrayList<PalaceCard> toTopPalaceCards;
             PalaceCard topCardTemp;
-            PalaceCard handCardTemp;
 
-            // check to see if the topCards were switched
-            if (topCardsSwitched == false && palaceGame.getTurn() == 1) {
+            // check to see if the topCards were switched. Need to implement code so that this
+            // happens in the VERY beginning of the game
+            if (topCardsSwitched == false && palaceGame.getTurn() == 0) {
 
                 // look at top cards
                 for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
@@ -658,10 +658,16 @@ public class PalaceLocalGame extends LocalGame {
                         // if the element in the top is less than the element in the hand...
                         if (palaceGame.getP1TopPalaceCards().get(i).getRank() <
                                 palaceGame.getP1Hand().get(j).getRank()) {
+                            
                             //swap
+                            // temporarily hold the top card
                             topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
+
+                            // set the top card to be the hand card
                             palaceGame.getP1TopPalaceCards().set(i, palaceGame.getP1Hand().get(j));
-                            palaceGame.getP1Hand().set(j,palaceGame.getP1TopPalaceCards().get(i));
+
+                            // set the hand card to be the temporary card that we were holding
+                            palaceGame.getP1Hand().set(j, topCardTemp);
 
                         }
                     }
@@ -669,17 +675,6 @@ public class PalaceLocalGame extends LocalGame {
                 topCardsSwitched = true;
                 return true;
 
-            }
-
-            if (palaceGame.getTurn() == 1) {
-
-                //index = toTopPalaceCards.indexOf(palaceGame.getTopCardSelected());
-                //toTopPalaceCards.set(index, palaceGame.getCardToBeSelected());
-                //index = toHandPalaceCards.indexOf(palaceGame.getCardToBeSelected());
-                //toHandPalaceCards.set(index, palaceGame.getTopCardSelected());
-                //palaceGame.setP1Hand(toHandPalaceCards);
-                //palaceGame.setP1TopPalaceCards(toTopPalaceCards);
-                return true;
             } else if (palaceGame.getTurn() == 2) {
                 toHandPalaceCards = palaceGame.getP2Hand();
                 toTopPalaceCards = palaceGame.getP2TopPalaceCards();
