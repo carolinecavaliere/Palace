@@ -390,13 +390,31 @@ public class PalaceLocalGame extends LocalGame {
                                 (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
                             //... if the chosen card is not already in the arraylist of selected
                             // cards..
-                            if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                // ...put arraylist into GameState variable
-                                palaceGame.setSelectedPalaceCards(palaceGame.
-                                        addToSelectedCards(chosenCard));
-                            } else {
-                                palaceGame.removeFromSelectedCards(chosenCard);
+                            if (palaceGame.getSelectedPalaceCards().size() > 1 &&
+                                palaceGame.getSelectedPalaceCards().size() <= 4) {
+                                if (!palaceGame.getSelectedPalaceCards().contains(chosenCard) &&
+                                    palaceGame.getSelectedPalaceCards().get(0).getRank() ==
+                                    chosenCard.getRank()) {
+                                    palaceGame.setSelectedPalaceCards(palaceGame.
+                                            addToSelectedCards(chosenCard));
+                                }
+                                else if (palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                                    palaceGame.removeFromSelectedCards(chosenCard);
+                                }
+                                else {
+                                    return false;
+                                }
                             }
+                            else {
+                                if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
+                                    // ...put arraylist into GameState variable
+                                    palaceGame.setSelectedPalaceCards(palaceGame.
+                                            addToSelectedCards(chosenCard));
+                                } else {
+                                    palaceGame.removeFromSelectedCards(chosenCard);
+                                }
+                            }
+
                             return true;
                         } else {
                             return false;

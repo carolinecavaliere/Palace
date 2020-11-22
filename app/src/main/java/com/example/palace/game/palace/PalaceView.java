@@ -351,6 +351,30 @@ public class PalaceView extends SurfaceView {
                         state.getP1TopPalaceCards().get(0).getRank());
             }
 
+            //draw the face down versions of player's bottom cards
+            if (state.getP1BottomPalaceCards().size() == 3) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
+                        state.getP1BottomPalaceCards().get(0).getSuit(),
+                        state.getP1BottomPalaceCards().get(0).getRank());
+                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
+                        state.getP1BottomPalaceCards().get(1).getSuit(),
+                        state.getP1BottomPalaceCards().get(1).getRank());
+                drawCard(canvas, playerTopCardRightX, playerTopCardRightY,
+                        state.getP1BottomPalaceCards().get(2).getSuit(),
+                        state.getP1BottomPalaceCards().get(2).getRank());
+            } else if (state.getP1BottomPalaceCards().size() == 2) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
+                        state.getP1BottomPalaceCards().get(0).getSuit(),
+                        state.getP1BottomPalaceCards().get(0).getRank());
+                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
+                        state.getP1BottomPalaceCards().get(1).getSuit(),
+                        state.getP1BottomPalaceCards().get(1).getRank());
+            } else if (state.getP1BottomPalaceCards().size() == 1) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
+                        state.getP1BottomPalaceCards().get(0).getSuit(),
+                        state.getP1BottomPalaceCards().get(0).getRank());
+            }
+
             //draw player's hand
             playerHandCardCenterX = xCenter - cardWidth / 2;
             playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
