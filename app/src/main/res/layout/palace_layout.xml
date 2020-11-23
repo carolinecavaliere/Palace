@@ -33,7 +33,10 @@
                     android:id="@+id/switchtop"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:autoText="false"
+                    android:layout_marginBottom="15dp"
+                    android:background="#FFEB3B"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
                     android:text="Switch Top Cards?"
                     android:textSize="12sp" />
 
