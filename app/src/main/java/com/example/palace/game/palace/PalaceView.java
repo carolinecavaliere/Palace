@@ -327,7 +327,8 @@ public class PalaceView extends SurfaceView {
                         state.getP2TopPalaceCards().get(0).getSuit(),
                         state.getP2TopPalaceCards().get(0).getRank());
             }
-            //draw player's cards
+
+            //coordinates for player top and bottom cards
             playerTopCardCenterX = xCenter - cardWidth / 2;
             playerTopCardCenterY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
             playerTopCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
@@ -335,6 +336,57 @@ public class PalaceView extends SurfaceView {
             playerTopCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
             playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
 
+
+            //draw the player's bottom cards
+            if (state.getP1BottomPalaceCards().size() == 3) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(0))){
+                    highlightRect = new Rect((int)playerTopCardLeftX,
+                            (int)playerTopCardLeftY,
+                            (int)playerTopCardLeftX+cardWidth,
+                            (int)playerTopCardLeftY+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(1))) {
+                    highlightRect = new Rect((int) playerTopCardCenterX,
+                            (int) playerTopCardCenterY,
+                            (int) playerTopCardCenterX + cardWidth,
+                            (int) playerTopCardCenterY + cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+                drawCard(canvas, playerTopCardRightX, playerTopCardRightY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(2))){
+                    highlightRect = new Rect((int)playerTopCardRightX,
+                            (int)playerTopCardRightY,
+                            (int)playerTopCardRightX+cardWidth,
+                            (int)playerTopCardRightY+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+            } else if (state.getP1BottomPalaceCards().size() == 2) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(0))){
+                    highlightRect = new Rect((int)playerTopCardLeftX,
+                            (int)playerTopCardLeftY,
+                            (int)playerTopCardLeftX+cardWidth,
+                            (int)playerTopCardLeftY+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(1))) {
+                    highlightRect = new Rect((int) playerTopCardCenterX,
+                            (int) playerTopCardCenterY,
+                            (int) playerTopCardCenterX + cardWidth,
+                            (int) playerTopCardCenterY + cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+
+            } else if (state.getP1BottomPalaceCards().size() == 1) {
+                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);
+                if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(0))){
+                    highlightRect = new Rect((int)playerTopCardLeftX,
+                            (int)playerTopCardLeftY,
+                            (int)playerTopCardLeftX+cardWidth,
+                            (int)playerTopCardLeftY+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+            }
+
+            //draw player top cards
             if (state.getP1TopPalaceCards().size() == 3) {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
                         state.getP1TopPalaceCards().get(0).getSuit(),
@@ -397,30 +449,6 @@ public class PalaceView extends SurfaceView {
                             canvas.drawRect(highlightRect, highlightPaint);}
             }
 
-            //draw the face down versions of player's bottom cards
-            if (state.getP1BottomPalaceCards().size() == 3) {
-                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
-                        state.getP1BottomPalaceCards().get(0).getSuit(),
-                        state.getP1BottomPalaceCards().get(0).getRank());
-                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
-                        state.getP1BottomPalaceCards().get(1).getSuit(),
-                        state.getP1BottomPalaceCards().get(1).getRank());
-                drawCard(canvas, playerTopCardRightX, playerTopCardRightY,
-                        state.getP1BottomPalaceCards().get(2).getSuit(),
-                        state.getP1BottomPalaceCards().get(2).getRank());
-            } else if (state.getP1BottomPalaceCards().size() == 2) {
-                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
-                        state.getP1BottomPalaceCards().get(0).getSuit(),
-                        state.getP1BottomPalaceCards().get(0).getRank());
-                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,
-                        state.getP1BottomPalaceCards().get(1).getSuit(),
-                        state.getP1BottomPalaceCards().get(1).getRank());
-            } else if (state.getP1BottomPalaceCards().size() == 1) {
-                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,
-                        state.getP1BottomPalaceCards().get(0).getSuit(),
-                        state.getP1BottomPalaceCards().get(0).getRank());
-            }
-
             //draw player's hand
             playerHandCardCenterX = xCenter - cardWidth / 2;
             playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
@@ -450,12 +478,13 @@ public class PalaceView extends SurfaceView {
             } else if (state.getP1Hand().size() == 1) {
                 drawCard(canvas, playerHandCardLeftX, playerHandCardLeftY,
                         state.getP1Hand().get(0).getSuit(), state.getP1Hand().get(0).getRank());
-                        if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(0))){
-                        highlightRect = new Rect((int)playerHandCardRightX,
-                            (int)playerHandCardRightY,
-                            (int)playerHandCardRightX+cardWidth,
-                            (int)playerHandCardRightY+cardHeight);
-                            canvas.drawRect(highlightRect, highlightPaint);}
+                if(state.getSelectedPalaceCards().contains(state.getP1Hand().get(0))){
+                    highlightRect = new Rect((int)playerHandCardLeftX,
+                            (int)playerHandCardLeftY,
+                            (int)playerHandCardLeftX+cardWidth,
+                            (int)playerHandCardLeftY+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);}
+
             } else if (state.getP1Hand().size() == 0) {
 
             } else if (state.getNumDisplayHand() < state.getP1Hand().size() / 3) {
