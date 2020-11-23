@@ -20,6 +20,7 @@ public class PalaceLocalGame extends LocalGame {
 
     private PalaceGameState palaceGame;
     private boolean topCardsSwitched = false;
+    private int round = 1;
 
     /**
      * constructor makes a new game states
@@ -645,41 +646,51 @@ public class PalaceLocalGame extends LocalGame {
             int index; // inconsequential code
             ArrayList<PalaceCard> toHandPalaceCards; // inconsequential code
             ArrayList<PalaceCard> toTopPalaceCards; // inconsequential code
-            PalaceCard topCardTemp;
-            PalaceCard handCardTemp;
+
 
             // check to see if the topCards were switched. Need to implement code so that this
             // happens in the VERY beginning of the game
-            if (topCardsSwitched == false && palaceGame.getTurn() == 0) {
-
+            if (topCardsSwitched == false && palaceGame.getTurn() == 0 && round == 1) {
                 // look at top cards
                 for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
                     // look at hand cards to compare to top cards
                     for (int j = 0; j < palaceGame.getP1Hand().size(); j++) {
-                        // if the element in the top is less than the element in the hand...
-                        if (palaceGame.getP1TopPalaceCards().get(i).getRank() <
-                                palaceGame.getP1Hand().get(j).getRank()) {
+                        // hold the top card that we're looking at
+                        PalaceCard topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
 
-                            //swap
-                            // temporarily hold the top card
-                            topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
-                            handCardTemp = palaceGame.getP1Hand().get(j);
-                            int indexTop = palaceGame.getP1TopPalaceCards().indexOf(topCardTemp);
-                            int indexHand = palaceGame.getP1Hand().indexOf(handCardTemp);
+                        // hold the hand card that we're looking at to compare to the top card
+                        // we're holding
+                        PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
 
-                            // set the top card to be the hand card
-                            //palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
-                            palaceGame.removeFromP1TopCards(indexTop);
-                            palaceGame.addToP1TopCards(handCardTemp);
+                        // get indexes of the cards we're holding and want to swap to
+                        int indexTop = palaceGame.getP1TopPalaceCards().indexOf(topCardTemp);
+                        int indexHand = palaceGame.getP1Hand().indexOf(handCardTemp);
+
+                        // if the hand card we're holding is better ranked than the current top
+                        // card we're comparing too, swap them!
+                        int intTop = topCardTemp.getRank();
+                        int intHand = handCardTemp.getRank();
+                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
+                            // swap!
+                            // set the top card to be the hand card we're looking at
+                            //palaceGame.getP1TopPalaceCards().set(indexTop, handCardTemp);
+                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
+                            // we're looking at from the top cards...
+                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
+                            // were holding to the top cards
 
                             // set the hand card to be the temporary card that we were holding
-                            //palaceGame.getP1Hand().set(j, topCardTemp);
-                            palaceGame.removeFromP1Hand(indexHand);
-                            palaceGame.addToP1Hand(topCardTemp);
+                            //palaceGame.getP1Hand().set(indexHand, topCardTemp);
+                            palaceGame.removeFromP1Hand(j); // remove the hand card we we're
+                            // looking at...
+                            palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
+                            // just removed with the top card we had
 
                         }
                     }
                 }
+
+                round = 0; // finished the first round. Can't switch cards anymore after this.
                 topCardsSwitched = true;
                 return true;
 

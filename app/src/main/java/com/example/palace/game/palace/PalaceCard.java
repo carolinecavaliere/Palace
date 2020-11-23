@@ -79,7 +79,7 @@ public class PalaceCard extends ArrayList<PalaceCard> {
      * @return a list array of integers for the rank of cards
      */
     public static List<Integer> getValidRank() {
-        return Arrays.asList(2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+        return Arrays.asList(2,3,4,5,6,7,8,9,10,11,12,13,14);
     }
 
     /**
