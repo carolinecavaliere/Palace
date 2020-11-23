@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class PalaceLocalGame extends LocalGame {
 
     private PalaceGameState palaceGame;
-    private boolean topCardsSwitched = false;
     private int round = 1;
 
     /**
@@ -99,6 +98,7 @@ public class PalaceLocalGame extends LocalGame {
         if (action instanceof PalacePlayCardAction) {
             boolean changeTurn = false;
             boolean bottomCard = false;
+            round = 0; // user can't switch tops cards now
             //not a valid move if a card isn't selected
             if (palaceGame.getSelectedPalaceCards().isEmpty()) {
                 return false;
@@ -664,7 +664,7 @@ public class PalaceLocalGame extends LocalGame {
 
             // check to see if the topCards were switched. Need to implement code so that this
             // happens in the VERY beginning of the game
-            if (topCardsSwitched == false && palaceGame.getTurn() == 0 && round == 1) {
+            if (palaceGame.getTurn() == 0 && round == 1) {
                 // look at top cards
                 for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
                     // look at hand cards to compare to top cards
@@ -676,36 +676,40 @@ public class PalaceLocalGame extends LocalGame {
                         // we're holding
                         PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
 
-                        // get indexes of the cards we're holding and want to swap to
-                        int indexTop = palaceGame.getP1TopPalaceCards().indexOf(topCardTemp);
-                        int indexHand = palaceGame.getP1Hand().indexOf(handCardTemp);
-
-                        // if the hand card we're holding is better ranked than the current top
-                        // card we're comparing too, swap them!
-                        int intTop = topCardTemp.getRank();
-                        int intHand = handCardTemp.getRank();
-                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
+                        // special cards are checked first
+                        if (handCardTemp.getRank() == 2 || handCardTemp.getRank() == 10) {
                             // swap!
-                            // set the top card to be the hand card we're looking at
-                            //palaceGame.getP1TopPalaceCards().set(indexTop, handCardTemp);
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
                             palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
                             // were holding to the top cards
 
-                            // set the hand card to be the temporary card that we were holding
-                            //palaceGame.getP1Hand().set(indexHand, topCardTemp);
+                            palaceGame.removeFromP1Hand(j); // remove the hand card we we're
+                            // looking at...
+                            palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
+                            // just removed with the top card we had
+                        }
+
+                        // if the hand card we're holding is better ranked than the current top
+                        // card we're comparing too, swap them!
+                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
+                            // swap!
+                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
+                            // we're looking at from the top cards...
+                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
+                            // were holding to the top cards
+
                             palaceGame.removeFromP1Hand(j); // remove the hand card we we're
                             // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
 
                         }
+
                     }
                 }
 
                 round = 0; // finished the first round. Can't switch cards anymore after this.
-                topCardsSwitched = true;
                 return true;
 
                 // need to add options for other players to switch. But let's get it working

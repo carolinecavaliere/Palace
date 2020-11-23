@@ -142,6 +142,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         } else if (button.equals(switchTopCards)) {
             PalaceSwitchBaseCardsAction switchCards = new PalaceSwitchBaseCardsAction(this);
             this.game.sendAction(switchCards);
+            button.setVisibility(View.GONE);
         }
 
     }
