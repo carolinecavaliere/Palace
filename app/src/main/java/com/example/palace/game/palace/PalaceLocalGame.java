@@ -704,7 +704,7 @@ public class PalaceLocalGame extends LocalGame {
 
                         // special cards are checked first
                         //NOTE: Not working perfectly yet, will look into
-                        /*if (handCardTemp.getRank() == 2 || handCardTemp.getRank() == 10) {
+                        if ((handCardTemp.getRank() == 10 || handCardTemp.getRank() == 2) || handCardTemp.getRank() > topCardTemp.getRank() ) {
                             // swap!
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
@@ -715,11 +715,11 @@ public class PalaceLocalGame extends LocalGame {
                             // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
-                        }*/
+                        }
 
                         // if the hand card we're holding is better ranked than the current top
                         // card we're comparing too, swap them!
-                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
+                        /*if (handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
@@ -731,7 +731,7 @@ public class PalaceLocalGame extends LocalGame {
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
 
-                        }
+                        }*/
 
                     }
                 }
