@@ -19,7 +19,8 @@ import java.util.ArrayList;
 public class PalaceLocalGame extends LocalGame {
 
     private PalaceGameState palaceGame;
-    private int round = 1;
+    private int round = 1; // signifies that it is the VERY beginning of the game. When this
+    // variable changes, the player can no longer switch their top cards.
 
     /**
      * constructor makes a new game states
@@ -98,7 +99,10 @@ public class PalaceLocalGame extends LocalGame {
         if (action instanceof PalacePlayCardAction) {
             boolean changeTurn = false;
             boolean bottomCard = false;
-            round = 0; // user can't switch tops cards now
+            round = 0; // if by chance the user did not switch their cards at the very
+            // beginning of the game, now they can't switch.
+
+            // tops cards now
             //not a valid move if a card isn't selected
             if (palaceGame.getSelectedPalaceCards().isEmpty()) {
                 return false;
@@ -684,73 +688,56 @@ public class PalaceLocalGame extends LocalGame {
 
             // A user decides to switch what they want their top hand to be before playing
         } else if (action instanceof PalaceSwitchBaseCardsAction) {
-            int index; // inconsequential code
-            ArrayList<PalaceCard> toHandPalaceCards; // inconsequential code
-            ArrayList<PalaceCard> toTopPalaceCards; // inconsequential code
-
-            // check to see if the topCards were switched. Need to implement code so that this
-            // happens in the VERY beginning of the game
             if (palaceGame.getTurn() == 0 && round == 1) {
                 // look at top cards
                 for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
-                    PalaceCard topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
 
                     // look at hand cards to compare to top cards
                     for (int j = 0; j < palaceGame.getP1Hand().size(); j++) {
                         // hold the top card that we're looking at
+                        PalaceCard topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
 
                         // hold the hand card that we're looking at to compare to the top card
                         // we're holding
                         PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
-
-                        // special cards are checked first
-
+                        
                         /**
-                         * //NOTE: Not working perfectly yet, will look into. Need to check the
-                         * logic of checking against a higher hand card or a special card.
-                         * Right now, it won't place special cards in the top b/c they are
-                         * overriden by the hand card being higher than the top card i think.
+                         * //NOTE: Not working perfectly yet, will look into.
+                         *
+                         * It is not changing the top cards to be the best cards possible. Need to
+                         * check the logic of how that works. Perhaps im not swapping it correctly?
+                         *
+                         * Also, will produce duplicates of cards
+                         *
+                         * Also, will not change
                          */
-                        /*if ((handCardTemp.getRank() == 10 ||
+                        // if the hand card we're holding is better ranked than the current top
+                        // card we're comparing too, swap them!
+                        if ((handCardTemp.getRank() == 10 ||
                                 handCardTemp.getRank() == 2) ||
                                 handCardTemp.getRank() > topCardTemp.getRank() ) {
                             // swap!
                             palaceGame.removeFromP1Hand(j); // remove the hand card we we're
-                            // looking at...
+                                                            // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
-                            // just removed with the top card we had
+                                                                // just removed with the top
+                                                                // card we had
 
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
-                            // we're looking at from the top cards...
+                                                                // we're looking at from the top
+                                                                // cards...
                             palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
-                            // were holding to the top cards
-                        }*/
-
-                        // if the hand card we're holding is better ranked than the current top
-                        // card we're comparing too, swap them!
-                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
-                            // swap!
-                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
-                            // we're looking at from the top cards...
-                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
-                            // were holding to the top cards
-
-                            palaceGame.removeFromP1Hand(j); // remove the hand card we we're
-                            // looking at...
-                            palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
-                            // just removed with the top card we had
-
+                                                                     // were holding to the top
+                                                                        // cards
                         }
-
                     }
                 }
-
                 round = 0; // finished the first round. Can't switch cards anymore after this.
                 palaceGame.clearSelectedCards();
                 return true;
 
-                // need to add options for other players to switch. But let's get it working
-                // first lol
+                // Computer AI's are already too smart for this game in my opinion. We don't need
+                // to give them more capability!
             } else {
                 return false;
             }
