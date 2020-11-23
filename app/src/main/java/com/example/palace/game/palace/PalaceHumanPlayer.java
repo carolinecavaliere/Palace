@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
@@ -143,6 +144,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalaceSwitchBaseCardsAction switchCards = new PalaceSwitchBaseCardsAction(this);
             this.game.sendAction(switchCards);
             button.setVisibility(View.GONE);
+            Toast.makeText(myActivity, "You can't switch your top cards out anymore!",
+                    Toast.LENGTH_LONG).show();
         }
 
     }

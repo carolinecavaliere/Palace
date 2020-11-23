@@ -1,6 +1,7 @@
 package com.example.palace.game.palace;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.palace.game.GameComputerPlayer;
 import com.example.palace.game.GamePlayer;
