@@ -660,8 +660,7 @@ public class PalaceLocalGame extends LocalGame {
             int index; // inconsequential code
             ArrayList<PalaceCard> toHandPalaceCards; // inconsequential code
             ArrayList<PalaceCard> toTopPalaceCards; // inconsequential code
-
-
+            
             // check to see if the topCards were switched. Need to implement code so that this
             // happens in the VERY beginning of the game
             if (palaceGame.getTurn() == 0 && round == 1) {
