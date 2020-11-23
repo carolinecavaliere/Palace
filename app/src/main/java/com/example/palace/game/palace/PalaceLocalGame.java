@@ -679,6 +679,7 @@ public class PalaceLocalGame extends LocalGame {
                         // special cards are checked first
                         if (handCardTemp.getRank() == 2 || handCardTemp.getRank() == 10) {
                             // swap!
+                            /*
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
                             palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
@@ -688,13 +689,16 @@ public class PalaceLocalGame extends LocalGame {
                             // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
+                            */
+                            palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
+                            palaceGame.getP1Hand().set(j, topCardTemp);
                         }
 
                         // if the hand card we're holding is better ranked than the current top
                         // card we're comparing too, swap them!
                         if (handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
-                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
+                            /*palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
                             palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
                             // were holding to the top cards
@@ -703,6 +707,9 @@ public class PalaceLocalGame extends LocalGame {
                             // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
+                            */
+                            palaceGame.getP1TopPalaceCards().set(i, handCardTemp);
+                            palaceGame.getP1Hand().set(j, topCardTemp);
 
                         }
 
