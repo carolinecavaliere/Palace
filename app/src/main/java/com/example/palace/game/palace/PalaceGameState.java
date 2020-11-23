@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class PalaceGameState extends GameState {
 
+    private boolean flipped;
+
     private int numDisplayHand;
     private int numPlayers;
     private int p1numCards;
@@ -209,6 +211,14 @@ public class PalaceGameState extends GameState {
 
 
     //getters and setters
+
+    public boolean isFlipped() {
+        return flipped;
+    }
+
+    public void setFlipped(boolean flipped) {
+        this.flipped = flipped;
+    }
 
     public int getNumDisplayHand() {
         return numDisplayHand;
@@ -659,7 +669,7 @@ public class PalaceGameState extends GameState {
         p1BottomPalaceCards.remove(remove);
     }
 
-    public void removeFromP2Bottom(PalaceCard remove) {
+    public void removeFromP2Bottom(int remove) {
         p2BottomPalaceCards.remove(remove);
     }
 

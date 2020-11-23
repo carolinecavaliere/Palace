@@ -108,17 +108,17 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      * this method is called when the user clicks any of the buttons on screen and
      * creates a new action depending on which button is pressed. The action is then
      * sent to the game.
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param button the button that was clicked
-     *
-     * External Citation:
-     *  Date: 11 November 2020
-     *  Problem: How do we reset the game?
-     *  Resource:
-     *  https://stackoverflow.com/questions/22213357/making-a-restart-button-for-an-android-app-game
-     *  Solution: Used code snippet from the forum
+     *               <p>
+     *               External Citation:
+     *               Date: 11 November 2020
+     *               Problem: How do we reset the game?
+     *               Resource:
+     *               https://stackoverflow.com/questions/22213357/making-a-restart-button-for-an-android-app-game
+     *               Solution: Used code snippet from the forum
      */
     @Override
     public void onClick(View button) {
@@ -151,10 +151,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      * this method is called when the user taps on the card they would like to
      * select to play. When the view is tapped, a new PalaceSelectCardAction is sent
      * to the game.
-     *
+     * <p>
      * CAVEATS: None
      *
-     * @param palaceView the view we're editing
+     * @param palaceView  the view we're editing
      * @param motionEvent the motion that was done.
      * @return External Citation
      * Date: 8 November 2020
@@ -169,166 +169,166 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float y = motionEvent.getY(); // y position on the screen of motion event
         int cardToGet = state.getNumDisplayHand() * 3; // index of the card we want, 0-2
 
-            switch (motionEvent.getAction()) {
-                case MotionEvent.ACTION_DOWN:  // touch/tap action
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:  // touch/tap action
 
-                    //Check if the x and y position of the touch is inside the bitmap
-                    // Middle card of the user hand shown in the view
-                    if (x > view.getPlayerHandCardCenterX() &&
-                            x < view.getPlayerHandCardCenterX() + cardWidth &&
-                            y > view.getPlayerHandCardCenterY() &&
-                            y < view.getPlayerHandCardCenterY() + cardHeight &&
-                            state.getP1Hand().size() > 1 && !(state.getP1Hand().isEmpty())) {
-                        //Bitmap touched
-                        //Q.)how does it know which card is there (rank,value)?
-                        //A.)ex: state.getP1TopCards().get(index)
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1Hand().get(cardToGet + 1),
-                                state.getSelectedPalaceCards());
+                //Check if the x and y position of the touch is inside the bitmap
+                // Middle card of the user hand shown in the view
+                if (x > view.getPlayerHandCardCenterX() &&
+                        x < view.getPlayerHandCardCenterX() + cardWidth &&
+                        y > view.getPlayerHandCardCenterY() &&
+                        y < view.getPlayerHandCardCenterY() + cardHeight &&
+                        state.getP1Hand().size() > 1 && !(state.getP1Hand().isEmpty())) {
+                    //Bitmap touched
+                    //Q.)how does it know which card is there (rank,value)?
+                    //A.)ex: state.getP1TopCards().get(index)
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet + 1),
+                            state.getSelectedPalaceCards());
 
-                        this.game.sendAction(selectcard);
-                    }
+                    this.game.sendAction(selectcard);
+                }
 
-                    // First (left-most) card of the user hand shown in the view
-                    if (x > view.getPlayerHandCardLeftX() &&
-                            x < view.getPlayerHandCardLeftX() + cardWidth &&
-                            y > view.getPlayerHandCardLeftY() &&
-                            y < view.getPlayerHandCardLeftY() + cardHeight &&
-                            state.getP1Hand().size() > 0 && !(state.getP1Hand().isEmpty())) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1Hand().get(cardToGet),
-                                state.getSelectedPalaceCards());
+                // First (left-most) card of the user hand shown in the view
+                if (x > view.getPlayerHandCardLeftX() &&
+                        x < view.getPlayerHandCardLeftX() + cardWidth &&
+                        y > view.getPlayerHandCardLeftY() &&
+                        y < view.getPlayerHandCardLeftY() + cardHeight &&
+                        state.getP1Hand().size() > 0 && !(state.getP1Hand().isEmpty())) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet),
+                            state.getSelectedPalaceCards());
+                    this.game.sendAction(selectcard);
+                }
 
-                        this.game.sendAction(selectcard);
-                    }
+                //third card (right-most) of the user hand shown in the view
+                if (x > view.getPlayerHandCardRightX() &&
+                        x < view.getPlayerHandCardRightX() + cardWidth &&
+                        y > view.getPlayerHandCardRightY() &&
+                        y < view.getPlayerHandCardRightY() + cardHeight &&
+                        state.getP1Hand().size() > 2 && !(state.getP1Hand().isEmpty())) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1Hand().get(cardToGet + 2),
+                            state.getSelectedPalaceCards());
 
-                    //third card (right-most) of the user hand shown in the view
-                    if (x > view.getPlayerHandCardRightX() &&
-                            x < view.getPlayerHandCardRightX() + cardWidth &&
-                            y > view.getPlayerHandCardRightY() &&
-                            y < view.getPlayerHandCardRightY() + cardHeight &&
-                            state.getP1Hand().size() > 2 && !(state.getP1Hand().isEmpty())) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1Hand().get(cardToGet + 2),
-                                state.getSelectedPalaceCards());
+                    this.game.sendAction(selectcard);
+                }
 
-                        this.game.sendAction(selectcard);
-                    }
+                //int localCardToGet = state.getNumDisplayHand()*3;
+                // Middle card of the top hand shown in the view
+                if (x > view.getPlayerTopCardCenterX() &&
+                        x < view.getPlayerTopCardCenterX() + cardWidth &&
+                        y > view.getPlayerTopCardCenterY() &&
+                        y < view.getPlayerTopCardCenterY() + cardHeight &&
+                        state.getP1TopPalaceCards().size() >= 2 &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(1),
+                            state.getSelectedPalaceCards());
 
-                    //int localCardToGet = state.getNumDisplayHand()*3;
-                    // Middle card of the top hand shown in the view
-                    if (x > view.getPlayerTopCardCenterX() &&
-                            x < view.getPlayerTopCardCenterX() + cardWidth &&
-                            y > view.getPlayerTopCardCenterY() &&
-                            y < view.getPlayerTopCardCenterY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() >= 2 &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1TopPalaceCards().get(1),
-                                state.getSelectedPalaceCards());
+                    this.game.sendAction(selectcard);
+                }
 
-                        this.game.sendAction(selectcard);
-                    }
+                // First (left-most) card of the top hand shown in the view
+                if (x > view.getPlayerTopCardLeftX() &&
+                        x < view.getPlayerTopCardLeftX() + cardWidth &&
+                        y > view.getPlayerTopCardLeftY() &&
+                        y < view.getPlayerTopCardLeftY() + cardHeight &&
+                        state.getP1TopPalaceCards().size() >= 1 &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(0),
+                            state.getSelectedPalaceCards());
 
-                    // First (left-most) card of the top hand shown in the view
-                    if (x > view.getPlayerTopCardLeftX() &&
-                            x < view.getPlayerTopCardLeftX() + cardWidth &&
-                            y > view.getPlayerTopCardLeftY() &&
-                            y < view.getPlayerTopCardLeftY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() >= 1 &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1TopPalaceCards().get(0),
-                                state.getSelectedPalaceCards());
+                    this.game.sendAction(selectcard);
+                }
 
-                        this.game.sendAction(selectcard);
-                    }
+                //third card (right-most) of the user hand shown in the view
+                if (x > view.getPlayerTopCardRightX() &&
+                        x < view.getPlayerTopCardRightX() + cardWidth &&
+                        y > view.getPlayerTopCardRightY() &&
+                        y < view.getPlayerTopCardRightY() + cardHeight &&
+                        state.getP1TopPalaceCards().size() == 3 &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1TopPalaceCards().get(2),
+                            state.getSelectedPalaceCards());
 
-                    //third card (right-most) of the user hand shown in the view
-                    if (x > view.getPlayerTopCardRightX() &&
-                            x < view.getPlayerTopCardRightX() + cardWidth &&
-                            y > view.getPlayerTopCardRightY() &&
-                            y < view.getPlayerTopCardRightY() + cardHeight &&
-                            state.getP1TopPalaceCards().size() == 3 &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1TopPalaceCards().get(2),
-                                state.getSelectedPalaceCards());
+                    this.game.sendAction(selectcard);
+                }
+                // for Bottom Cards
+                // Middle card of the top hand shown in the view
+                if (x > view.getPlayerTopCardCenterX() &&
+                        x < view.getPlayerTopCardCenterX() + cardWidth &&
+                        y > view.getPlayerTopCardCenterY() &&
+                        y < view.getPlayerTopCardCenterY() + cardHeight &&
+                        state.getP1BottomPalaceCards().size() >= 2 &&
+                        state.getP1TopPalaceCards().isEmpty() &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1BottomPalaceCards().get(1),
+                            state.getSelectedPalaceCards());
 
-                        this.game.sendAction(selectcard);
-                    }
+                    this.game.sendAction(selectcard);
+                }
 
-                    // for Bottom Cards
-                    // Middle card of the top hand shown in the view
-                    if (x > view.getPlayerTopCardCenterX() &&
-                            x < view.getPlayerTopCardCenterX() + cardWidth &&
-                            y > view.getPlayerTopCardCenterY() &&
-                            y < view.getPlayerTopCardCenterY() + cardHeight &&
-                            state.getP1BottomPalaceCards().size() >= 2 &&
-                            state.getP1TopPalaceCards().isEmpty() &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1BottomPalaceCards().get(1),
-                                state.getSelectedPalaceCards());
+                // First (left-most) card of the top hand shown in the view
+                if (x > view.getPlayerTopCardLeftX() &&
+                        x < view.getPlayerTopCardLeftX() + cardWidth &&
+                        y > view.getPlayerTopCardLeftY() &&
+                        y < view.getPlayerTopCardLeftY() + cardHeight &&
+                        state.getP1BottomPalaceCards().size() >= 1 &&
+                        state.getP1TopPalaceCards().isEmpty() &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1BottomPalaceCards().get(0),
+                            state.getSelectedPalaceCards());
 
-                        this.game.sendAction(selectcard);
-                    }
+                    this.game.sendAction(selectcard);
+                }
 
-                    // First (left-most) card of the top hand shown in the view
-                    if (x > view.getPlayerTopCardLeftX() &&
-                            x < view.getPlayerTopCardLeftX() + cardWidth &&
-                            y > view.getPlayerTopCardLeftY() &&
-                            y < view.getPlayerTopCardLeftY() + cardHeight &&
-                            state.getP1BottomPalaceCards().size() >= 1 &&
-                            state.getP1TopPalaceCards().isEmpty() &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1BottomPalaceCards().get(0),
-                                state.getSelectedPalaceCards());
+                //third card (right-most) of the user hand shown in the view
+                if (x > view.getPlayerTopCardRightX() &&
+                        x < view.getPlayerTopCardRightX() + cardWidth &&
+                        y > view.getPlayerTopCardRightY() &&
+                        y < view.getPlayerTopCardRightY() + cardHeight &&
+                        state.getP1BottomPalaceCards().size() == 3 &&
+                        state.getP1TopPalaceCards().isEmpty() &&
+                        state.getP1Hand().isEmpty()) {
+                    //Bitmap touched
+                    PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
+                            this,
+                            state.getP1BottomPalaceCards().get(2),
+                            state.getSelectedPalaceCards());
 
-                        this.game.sendAction(selectcard);
-                    }
+                    this.game.sendAction(selectcard);
+                }
 
-                    //third card (right-most) of the user hand shown in the view
-                    if (x > view.getPlayerTopCardRightX() &&
-                            x < view.getPlayerTopCardRightX() + cardWidth &&
-                            y > view.getPlayerTopCardRightY() &&
-                            y < view.getPlayerTopCardRightY() + cardHeight &&
-                            state.getP1BottomPalaceCards().size() == 3 &&
-                            state.getP1TopPalaceCards().isEmpty() &&
-                            state.getP1Hand().isEmpty()) {
-                        //Bitmap touched
-                        PalaceSelectCardAction selectcard = new PalaceSelectCardAction(
-                                this,
-                                state.getP1BottomPalaceCards().get(2),
-                                state.getSelectedPalaceCards());
 
-                        this.game.sendAction(selectcard);
-                    }
-                    view.invalidate();
-                    return true;
-            }
-            return false;
+                view.invalidate();
+                return true;
+        }
+        return false;
     }
 
     /**
      * overriden to flash the background of the PalaceView red.
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param color    the color to flash
@@ -345,9 +345,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
     /**
      * @author Caroline Cavaliere, Jimi Hayes, Chloe Gan, Nathaniel Pon
-     *
+     * <p>
      * CAVEATS: None
-     *
+     * <p>
      * Class that will revert back to the old background color after flashing the screen
      */
     private class Unflash implements Runnable {

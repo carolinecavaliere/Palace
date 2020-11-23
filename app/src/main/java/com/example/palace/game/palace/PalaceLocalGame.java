@@ -107,7 +107,9 @@ public class PalaceLocalGame extends LocalGame {
             else if (palaceGame.getSelectedPalaceCards().size() > 1) {
                 int sameCards = 0;
                 for (int i = 0; i < palaceGame.getSelectedPalaceCards().size(); i++) {
+                    //player 1
                     if (palaceGame.getTurn() == 0) {
+                        //for hand cards
                         if (palaceGame.getP1Hand().size() > 0) {
                             int index = palaceGame.getP1Hand().indexOf(palaceGame.
                                     getSelectedPalaceCards().get(i));
@@ -123,7 +125,9 @@ public class PalaceLocalGame extends LocalGame {
                                     palaceGame.getDeck().drawCard(0);
                                     palaceGame.setP1numCards(palaceGame.getP1Hand().size());
                                 }
+
                             }
+                            //for top cards
                         } else if (palaceGame.getP1Hand().isEmpty() &&
                                 !palaceGame.getP1TopPalaceCards().isEmpty()) {
                             int index = palaceGame.getP1TopPalaceCards().indexOf(palaceGame.
@@ -263,11 +267,24 @@ public class PalaceLocalGame extends LocalGame {
                         palaceGame.removeFromP1TopCards(index);
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
                         palaceGame.clearSelectedCards();
+                        for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                            if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
+                                    palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                sameCards++;
+                            }
+                        }
+                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
+                                sameCards == 4) {
+                            palaceGame.clearPlayPileCards();
+                        } else {
+                            changeTurn = true;
+                        }
 
                     //for bottom cards
                     } else if (palaceGame.getP1Hand().isEmpty() &&
                             palaceGame.getP1TopPalaceCards().isEmpty() &&
                             !palaceGame.getP1BottomPalaceCards().isEmpty()) {
+                        int sameCards = 0;
                         int index = palaceGame.getP1BottomPalaceCards().indexOf(palaceGame.
                                 getSelectedPalaceCards().get(i));
                         //adds selected cards to play pile
@@ -276,6 +293,16 @@ public class PalaceLocalGame extends LocalGame {
                         palaceGame.removeFromP1Bottom(index);
                         palaceGame.clearSelectedCards();
                         bottomCard = true;
+                        for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                            if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
+                                    palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                sameCards++;
+                            }
+                        }
+                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
+                                sameCards == 4) {
+                            palaceGame.clearPlayPileCards();
+                        }
                     }
                 } else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().size() > 0) {
@@ -660,7 +687,7 @@ public class PalaceLocalGame extends LocalGame {
             int index; // inconsequential code
             ArrayList<PalaceCard> toHandPalaceCards; // inconsequential code
             ArrayList<PalaceCard> toTopPalaceCards; // inconsequential code
-            
+
             // check to see if the topCards were switched. Need to implement code so that this
             // happens in the VERY beginning of the game
             if (palaceGame.getTurn() == 0 && round == 1) {
@@ -709,6 +736,7 @@ public class PalaceLocalGame extends LocalGame {
                 }
 
                 round = 0; // finished the first round. Can't switch cards anymore after this.
+                palaceGame.clearSelectedCards();
                 return true;
 
                 // need to add options for other players to switch. But let's get it working
@@ -761,9 +789,12 @@ public class PalaceLocalGame extends LocalGame {
 
             // A user needs to scroll through their cards they collected
         } else if (action instanceof PalaceDisplayNextCards) {
-            if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1numCards() / 3 &&
-                    (palaceGame.getP1numCards() % 3 != 0 || palaceGame.getP1numCards() / 3 > 1)) {
+            if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1Hand().size() / 3 &&
+                    (palaceGame.getP1Hand().size() % 3 != 0 || palaceGame.getP1Hand().size() / 3 > 1)) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
+            }
+            if (palaceGame.getP1Hand().isEmpty()) {
+                palaceGame.setNumDisplayHand(0);
             }
             return true;
 
@@ -772,6 +803,10 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getNumDisplayHand() - 1 >= 0) {
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() - 1);
             }
+            if (palaceGame.getP1Hand().isEmpty()) {
+                palaceGame.setNumDisplayHand(0);
+            }
+
             return true;
         } else {
             return false;
