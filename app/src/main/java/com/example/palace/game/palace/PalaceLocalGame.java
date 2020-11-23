@@ -693,33 +693,42 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getTurn() == 0 && round == 1) {
                 // look at top cards
                 for (int i = 0; i < palaceGame.getP1TopPalaceCards().size(); i++) {
+                    PalaceCard topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
+
                     // look at hand cards to compare to top cards
                     for (int j = 0; j < palaceGame.getP1Hand().size(); j++) {
                         // hold the top card that we're looking at
-                        PalaceCard topCardTemp = palaceGame.getP1TopPalaceCards().get(i);
 
                         // hold the hand card that we're looking at to compare to the top card
                         // we're holding
                         PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
 
                         // special cards are checked first
-                        //NOTE: Not working perfectly yet, will look into
-                        if ((handCardTemp.getRank() == 10 || handCardTemp.getRank() == 2) || handCardTemp.getRank() > topCardTemp.getRank() ) {
-                            // swap!
-                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
-                            // we're looking at from the top cards...
-                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
-                            // were holding to the top cards
 
+                        /**
+                         * //NOTE: Not working perfectly yet, will look into. Need to check the
+                         * logic of checking against a higher hand card or a special card.
+                         * Right now, it won't place special cards in the top b/c they are
+                         * overriden by the hand card being higher than the top card i think.
+                         */
+                        /*if ((handCardTemp.getRank() == 10 ||
+                                handCardTemp.getRank() == 2) ||
+                                handCardTemp.getRank() > topCardTemp.getRank() ) {
+                            // swap!
                             palaceGame.removeFromP1Hand(j); // remove the hand card we we're
                             // looking at...
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
-                        }
+
+                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
+                            // we're looking at from the top cards...
+                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
+                            // were holding to the top cards
+                        }*/
 
                         // if the hand card we're holding is better ranked than the current top
                         // card we're comparing too, swap them!
-                        /*if (handCardTemp.getRank() > topCardTemp.getRank()) {
+                        if (handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
                             palaceGame.removeFromP1TopCards(i); // remove the top card that we
                             // we're looking at from the top cards...
@@ -731,7 +740,7 @@ public class PalaceLocalGame extends LocalGame {
                             palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
                             // just removed with the top card we had
 
-                        }*/
+                        }
 
                     }
                 }
