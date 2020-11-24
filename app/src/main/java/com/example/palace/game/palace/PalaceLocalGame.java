@@ -284,7 +284,7 @@ public class PalaceLocalGame extends LocalGame {
                             changeTurn = true;
                         }
 
-                        //for bottom cards
+                    //for bottom cards
                     } else if (palaceGame.getP1Hand().isEmpty() &&
                             palaceGame.getP1TopPalaceCards().isEmpty() &&
                             !palaceGame.getP1BottomPalaceCards().isEmpty()) {
@@ -296,7 +296,6 @@ public class PalaceLocalGame extends LocalGame {
                         //removes played cards from player's Top Cards
                         palaceGame.removeFromP1Bottom(index);
                         palaceGame.clearSelectedCards();
-                        palaceGame.setNumDisplayHand(0);
                         bottomCard = true;
                         for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
                             if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
@@ -773,39 +772,31 @@ public class PalaceLocalGame extends LocalGame {
                         // we're holding
                         PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
 
-                        /**
-                         * //NOTE: Not working perfectly yet, will look into.
-                         *
-                         * It is not changing the top cards to be the best cards possible. Need to
-                         * check the logic of how that works. Perhaps im not swapping it correctly?
-                         *
-                         * Also, will produce duplicates of cards
-                         *
-                         * Also, will not change properly
-                         * topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2
-                         *
-                         */
-                        // if the hand card we're holding is better ranked than the current top
-                        // card we're comparing too, swap them!
-
                         if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2) {
-                            break;
+                            // if these top cards are special cards, we don't want to swap them
+                            // out!
+                            break; // don't need to compare so move on
+
+                            // if the hand card we're holding is better ranked than the current top
+                            // card we're comparing too, swap them!
                         } else if (handCardTemp.getRank() == 10 || handCardTemp.getRank() == 2 ||
                                 handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
-                            palaceGame.removeFromP1Hand(j); // remove the hand card we we're
-                                                            // looking at...
-                            palaceGame.addToP1Hand(topCardTemp);//... replace the hand card we
-                                                                // just removed with the top
-                                                                // card we had
+                            // remove the hand card we we're looking at...
+                            palaceGame.removeFromP1Hand(j);
+                            //... replace the hand card we just removed with the top card we had
+                            palaceGame.addToP1Hand(topCardTemp);
 
-                            palaceGame.removeFromP1TopCards(i); // remove the top card that we
-                                                                // we're looking at from the top
-                                                                // cards...
-                            palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
-                                                                     // were holding to the top
-                                                                        // cards
+                            // remove the top card that we we're looking at from the top cards...
+                            palaceGame.removeFromP1TopCards(i);
+                            //... add that hand card we were holding to the top cards
+                            palaceGame.addToP1TopCards(handCardTemp);
 
+                            // roll back i so that it can re-look and compare cards when they've
+                            // shifted
+                            while (i!=0) {
+                                i--;
+                            }
                         }
                     }
                 }
