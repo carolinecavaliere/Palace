@@ -715,8 +715,9 @@ public class PalaceLocalGame extends LocalGame {
                          */
                         // if the hand card we're holding is better ranked than the current top
                         // card we're comparing too, swap them!
-
                         if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2) {
+                            // if these top cards are special cards, we don't want to swap them
+                            // out!
                             break;
                         } else if (handCardTemp.getRank() == 10 || handCardTemp.getRank() == 2 ||
                                 handCardTemp.getRank() > topCardTemp.getRank()) {
@@ -734,12 +735,10 @@ public class PalaceLocalGame extends LocalGame {
                                                                      // were holding to the top
                                                                         // cards
 
-                            if (i == 1) {
+                            // roll back i so that it can re-look and compare cards when they've
+                            // shifted
+                            while (i!=0) {
                                 i--;
-                            } else if (i == 2) {
-                                i = i-2;
-                            } else if (i == 3) {
-                                i = i -3;
                             }
                         }
                     }
