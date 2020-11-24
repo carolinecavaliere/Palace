@@ -700,7 +700,7 @@ public class PalaceLocalGame extends LocalGame {
                         // hold the hand card that we're looking at to compare to the top card
                         // we're holding
                         PalaceCard handCardTemp = palaceGame.getP1Hand().get(j);
-                        
+
                         /**
                          * //NOTE: Not working perfectly yet, will look into.
                          *
@@ -709,13 +709,17 @@ public class PalaceLocalGame extends LocalGame {
                          *
                          * Also, will produce duplicates of cards
                          *
-                         * Also, will not change
+                         * Also, will not change properly
+                         * topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2
+                         *
                          */
                         // if the hand card we're holding is better ranked than the current top
                         // card we're comparing too, swap them!
-                        if ((handCardTemp.getRank() == 10 ||
-                                handCardTemp.getRank() == 2) ||
-                                handCardTemp.getRank() > topCardTemp.getRank() ) {
+
+                        if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2) {
+                            break;
+                        } else if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2 ||
+                                handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
                             palaceGame.removeFromP1Hand(j); // remove the hand card we we're
                                                             // looking at...
