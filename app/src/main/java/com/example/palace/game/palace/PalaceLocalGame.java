@@ -289,12 +289,11 @@ public class PalaceLocalGame extends LocalGame {
                             palaceGame.getP1TopPalaceCards().isEmpty() &&
                             !palaceGame.getP1BottomPalaceCards().isEmpty()) {
                         int sameCards = 0;
-                        int index = palaceGame.getP1BottomPalaceCards().indexOf(palaceGame.
-                                getSelectedPalaceCards().get(i));
+                        PalaceCard randCard = palaceGame.getP1BottomPalaceCards().get(i);
                         //adds selected cards to play pile
-                        palaceGame.addToP1Hand(palaceGame.getSelectedPalaceCards().get(i));
+                        palaceGame.addToP1Hand(randCard);
                         //removes played cards from player's Top Cards
-                        palaceGame.removeFromP1Bottom(index);
+                        palaceGame.removeFromP1Bottom(randCard);
                         palaceGame.clearSelectedCards();
                         bottomCard = true;
                         for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {

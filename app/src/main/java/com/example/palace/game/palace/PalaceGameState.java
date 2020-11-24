@@ -520,6 +520,9 @@ public class PalaceGameState extends GameState {
     public void removeFromP1Bottom(int remove) {
         p1BottomPalaceCards.remove(remove);
     }
+    public void removeFromP1Bottom(PalaceCard remove) {
+        p1BottomPalaceCards.remove(remove);
+    }
 
     public void removeFromP2Bottom(int remove) {
         p2BottomPalaceCards.remove(remove);
