@@ -117,7 +117,7 @@ public class PalaceView extends SurfaceView {
     private Bitmap two_hearts = null;
     private Bitmap two_spades = null;
 
-    private Paint highlightPaint = new Paint();
+    private Paint highlightPaint = new Paint();//for highlighting the selected cards
     private Rect highlightRect;
 
     /**
@@ -345,7 +345,7 @@ public class PalaceView extends SurfaceView {
                     highlightRect = new Rect((int)playerTopCardLeftX,
                             (int)playerTopCardLeftY,
                             (int)playerTopCardLeftX+cardWidth,
-                            (int)playerTopCardLeftY+cardHeight);
+                            (int)playerTopCardLeftY+cardHeight);//if card is selected, highlight it
                     canvas.drawRect(highlightRect, highlightPaint);}
                 drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,1,-1);
                 if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(1))) {

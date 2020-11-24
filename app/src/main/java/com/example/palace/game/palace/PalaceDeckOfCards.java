@@ -129,31 +129,6 @@ public class PalaceDeckOfCards {
                 deck.remove(0);
                 state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
             }
-            else if (state.getNumPlayers()==3){
-                state.addToP1Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP2Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP3Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-            }
-            else{
-                state.addToP1Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP2Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP3Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP4Bottom(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-            }
         }
         for (int i = 0; i<3; i++){
             if(state.getNumPlayers()==2){
@@ -166,38 +141,6 @@ public class PalaceDeckOfCards {
                 state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
                 state.setP2numCards(state.getP2numCards()+1);
             }
-            else if (state.getNumPlayers()==3){
-                state.addToP1Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP1numCards(state.getP1numCards()+1);
-                state.addToP2Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP2numCards(state.getP2numCards()+1);
-                state.addToP3Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP3numCards(state.getP3numCards()+1);
-            }
-            else{
-                state.addToP1Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP1numCards(state.getP1numCards()+1);
-                state.addToP2Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP2numCards(state.getP2numCards()+1);
-                state.addToP3Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP3numCards(state.getP3numCards()+1);
-                state.addToP4Hand(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.setP3numCards(state.getP3numCards()+1);
-            }
         }
         for (int i = 0; i<3; i++){
             if(state.getNumPlayers()==2){
@@ -205,31 +148,6 @@ public class PalaceDeckOfCards {
                 deck.remove(0);
                 state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
                 state.addToP2TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-            }
-            else if (state.getNumPlayers()==3){
-                state.addToP1TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP2TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP3TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-            }
-            else{
-                state.addToP1TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP2TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP3TopCards(deck.get(0));
-                deck.remove(0);
-                state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
-                state.addToP4TopCards(deck.get(0));
                 deck.remove(0);
                 state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
             }
@@ -259,11 +177,7 @@ public class PalaceDeckOfCards {
                 state.addToP1Hand(this.deck.get(0));
             } else if (player == 1) {
                 state.addToP2Hand(this.deck.get(0));
-            } else if (player == 2) {
-                state.addToP3Hand(this.deck.get(0));
-            } else if (player == 3) {
-                state.addToP4Hand(this.deck.get(0));
-            }
+            } 
             deck.remove(0);
 
         }
