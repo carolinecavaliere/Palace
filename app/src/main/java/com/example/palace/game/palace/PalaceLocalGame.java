@@ -718,7 +718,7 @@ public class PalaceLocalGame extends LocalGame {
 
                         if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2) {
                             break;
-                        } else if (topCardTemp.getRank() == 10 || topCardTemp.getRank() == 2 ||
+                        } else if (handCardTemp.getRank() == 10 || handCardTemp.getRank() == 2 ||
                                 handCardTemp.getRank() > topCardTemp.getRank()) {
                             // swap!
                             palaceGame.removeFromP1Hand(j); // remove the hand card we we're
