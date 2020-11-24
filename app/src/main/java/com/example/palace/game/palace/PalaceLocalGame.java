@@ -733,6 +733,14 @@ public class PalaceLocalGame extends LocalGame {
                             palaceGame.addToP1TopCards(handCardTemp);//... add that hand card we
                                                                      // were holding to the top
                                                                         // cards
+
+                            if (i == 1) {
+                                i--;
+                            } else if (i == 2) {
+                                i = i-2;
+                            } else if (i == 3) {
+                                i = i -3;
+                            }
                         }
                     }
                 }
