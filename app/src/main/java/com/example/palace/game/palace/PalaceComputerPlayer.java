@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 
 public class PalaceComputerPlayer extends GameComputerPlayer {
+    PalaceHumanPlayer forTheDelay = new PalaceHumanPlayer("computer");
     public PalaceComputerPlayer(String name) {
         super(name);
     }
@@ -33,9 +34,11 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
+
         if (!(info instanceof PalaceGameState)) {
             return;
         }
+
         PalaceGameState state = new PalaceGameState((PalaceGameState) info);
         PalaceSelectCardAction selectCardAction;
         if (state.getTurn() != this.playerNum) {

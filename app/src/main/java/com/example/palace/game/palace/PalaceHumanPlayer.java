@@ -1,11 +1,14 @@
 package com.example.palace.game.palace;
 
 import android.graphics.Color;
+import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.example.palace.game.GameHumanPlayer;
 import com.example.palace.game.GameMainActivity;
@@ -13,7 +16,7 @@ import com.example.palace.game.R;
 import com.example.palace.game.infoMsg.GameInfo;
 
 import java.lang.ref.WeakReference;
-import java.util.logging.Handler;
+//import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 /**
@@ -38,6 +41,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private int cardHeight;
 
     private GameMainActivity myActivity;//android activity being run
+
     /**
      * Intent: want to set up a delay so that when the user hits play, we want the computer to
      * "think", which consists of pausing the game for a second or two
@@ -49,36 +53,26 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      *
      */
     private static class MyHandler extends Handler {
-        @Override
-        public void publish(LogRecord record) {
-        }
+        public MyHandler(Looper mainLooper) {
 
-        @Override
-        public void flush() {
         }
-
-        @Override
-        public void close() throws SecurityException {
-        }
-
     }
-    private final MyHandler mHandler = new MyHandler();
+    private final MyHandler mHandler = new MyHandler(Looper.getMainLooper());
 
     public static class MyRunnable implements Runnable {
-        private final WeakReference<GameMainActivity> mActivity;
+        PalaceHumanPlayer here = new PalaceHumanPlayer("Computer");
+        private final WeakReference<GameMainActivity> mmActivity;
 
         public MyRunnable(GameMainActivity activity) {
-            mActivity = new WeakReference<>(activity);
+            mmActivity = new WeakReference<>(activity);
         }
 
         @Override
         public void run() {
-            GameMainActivity activity = mActivity.get();
-            if (activity != null) {
-
-            }
         }
     }
+
+
 
     private MyRunnable mRunnable = new MyRunnable(myActivity);
 
@@ -174,14 +168,13 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             System.exit(0);
         } else if (button.equals(restart)) {
             myActivity.recreate(); // restart the game!
-            //flash(Color.RED, 100);
         } else if (button.equals(takePile)) {
             PalaceTakePileAction takepile = new PalaceTakePileAction(this);
             this.game.sendAction(takepile);
         } else if (button.equals(playCard)) {
             PalacePlayCardAction playcard = new PalacePlayCardAction(this);
             this.game.sendAction(playcard);
-            this.myHandler.postDelayed(mRunnable, 2000); // the computer "thinks"
+            timerTicked();
         } else if (button.equals(nextCards)) {
             PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
             this.game.sendAction(nextcards);
@@ -415,5 +408,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     }
 
 
-
+    @Override
+    protected void timerTicked() {
+        super.timerTicked();
+        myHandler.postDelayed(mRunnable, 2000);
+    }
 }
