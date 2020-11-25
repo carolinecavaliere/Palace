@@ -513,7 +513,7 @@ public class PalaceLocalGame extends LocalGame {
                         }
                     }
                     //for bottom cards
-                    else if (palaceGame.getP2numCards() == 0 &&
+                    else if (palaceGame.getP2Hand().isEmpty() &&
                             palaceGame.getP2TopPalaceCards().isEmpty()) {
                         if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
                             palaceGame.setSelectedPalaceCards(palaceGame.
