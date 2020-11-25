@@ -30,7 +30,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
-                    if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         isBigger = true;
                     }
                 }
@@ -42,10 +42,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
             PalaceCard cardToSelect = null;
             if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
-                while (cardToSelect == null ||
-                        cardToSelect.getRank() <
-                                state.getPlayPilePalaceCards().
-                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                while (cardToSelect == null) {
                     cardToSelect =
                             state.getP2Hand().
                                     get(findMinPlayable(state.getP2Hand(), state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size()-1)));
@@ -64,11 +61,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                         }
                     }
                     if (isBigger) {
-                        while (cardToSelect == null ||
-                                cardToSelect.getRank() <
-                                        state.getPlayPilePalaceCards().
-                                                get(state.getPlayPilePalaceCards().size() - 1).
-                                                getRank()) {
+                        while (cardToSelect == null) {
                             cardToSelect =
                                     state.getP2TopPalaceCards().
                                             get(findMinPlayable(state.getP2TopPalaceCards(), state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size()-1)));
