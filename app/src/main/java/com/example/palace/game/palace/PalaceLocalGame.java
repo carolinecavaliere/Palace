@@ -340,7 +340,7 @@ public class PalaceLocalGame extends LocalGame {
                         }
                         //no more cards are selected now
                         palaceGame.clearSelectedCards();
-
+                        //for top cards
                     } else if (palaceGame.getP2Hand().isEmpty() &&
                             !palaceGame.getP2TopPalaceCards().isEmpty()) {
                         int index = palaceGame.getP2TopPalaceCards().indexOf(palaceGame.
@@ -352,27 +352,48 @@ public class PalaceLocalGame extends LocalGame {
                         palaceGame.removeFromP2TopCards(index);
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
                         palaceGame.clearSelectedCards();
-                    } else if (palaceGame.getP1numCards() == 0 &&
-                            palaceGame.getP1TopPalaceCards().isEmpty()) {
-                        if (palaceGame.getPlayPileNumCards() >= 0) {
-                            for (int j = 0; j < palaceGame.getPlayPileNumCards(); j++) {
-                                //adds pile to player's hand
-                                palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.
-                                        getPlayPilePalaceCards().get(j)));
-                                palaceGame.setP1numCards(palaceGame.getP1numCards() + 1);
+                        for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                            if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
+                                    palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                sameCards++;
                             }
-                            palaceGame.clearPlayPileCards();//play pile is gone now
-                            palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.
-                                    getSelectedPalaceCards().get(i)));
+                        }
+                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
+                                sameCards == 4) {
+                            palaceGame.clearPlayPileCards();
+                        } else {
+                            changeTurn = true;
+                        }
+
+                        //for bottom cards
+                    } else if (palaceGame.getP2Hand().isEmpty() &&
+                            palaceGame.getP2TopPalaceCards().isEmpty() &&
+                            !palaceGame.getP2BottomPalaceCards().isEmpty()) {
+                        int sameCards = 0;
+                        PalaceCard randCard = palaceGame.getP2BottomPalaceCards().get(i);
+                        //adds selected cards to play pile
+                        palaceGame.addToP2Hand(randCard);
+                        //removes played cards from player's Top Cards
+                        palaceGame.removeFromP2Bottom(randCard);
+                        palaceGame.clearSelectedCards();
+                        bottomCard = true;
+                        for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                            if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
+                                    palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                sameCards++;
+                            }
+                        }
+                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
+                                sameCards == 4) {
+                            palaceGame.clearPlayPileCards();
                         }
                     }
                 }
                 if (changeTurn) {
-                    if (palaceGame.getTurn() == palaceGame.getNumPlayers() - 1) {
+                    if (palaceGame.getTurn() == 1) {
                         palaceGame.setTurn(0);
                     } else {
-                        palaceGame.setTurn(palaceGame.getTurn() + 1);
-                        changeTurn = false;
+                        palaceGame.setTurn(1);
                     }
                 }
                 return true;
@@ -460,8 +481,7 @@ public class PalaceLocalGame extends LocalGame {
                     }
                 }
                 // looks at player 2's hand
-                else if (palaceGame.getTurn() == 1 &&
-                        palaceGame.getP2Hand().contains(chosenCard)) {
+                else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().contains(chosenCard)) {
                         if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().
                                 get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
@@ -504,7 +524,7 @@ public class PalaceLocalGame extends LocalGame {
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
-                                sendUpdatedStateTo(players[1]);
+                                sendUpdatedStateTo(players[0]);
                                 return true;
                             } else {
                                 return false;
@@ -608,8 +628,7 @@ public class PalaceLocalGame extends LocalGame {
                 }
 
                 // looks at player 2's hand
-                else if (palaceGame.getTurn() == 1 &&
-                        palaceGame.getP2Hand().contains(chosenCard)) {
+                else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().contains(chosenCard)) {
                         if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
                             // put arraylist into GameState variable
