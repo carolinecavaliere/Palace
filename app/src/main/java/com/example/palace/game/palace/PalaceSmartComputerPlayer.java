@@ -44,14 +44,13 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 //determine if a card in the hand can beat the play pile card
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
-                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()
-                        || state.getP2Hand().get(i).getRank() == 2 || state.getP2Hand().get(i).getRank() == 10) {
+                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
                 }
                 //if computer player canNOT beat the play pile card, take the pile
-                if (isBigger == false && !(state.getP2Hand().isEmpty())) {
+                if (isBigger == false) {
                     PalaceTakePileAction take = new PalaceTakePileAction(this);
                     Log.d("compPlayer", "took the pile");
                     this.game.sendAction(take);
@@ -59,9 +58,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
             else if ((!(state.getP2TopPalaceCards().isEmpty()))  && (!(state.getPlayPilePalaceCards().isEmpty()))){
                 for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
-                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()
-                            || state.getP2TopPalaceCards().get(i).getRank() == 2
-                            || state.getP2TopPalaceCards().get(i).getRank() == 10) {
+                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
@@ -81,7 +78,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
                 cardToSelect =
                         state.getP2Hand().
-                                get(findMinPlayable(state.getP2Hand(), state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1)));
+                                get(findMinPlayable(state.getP2Hand(), state.getPlayPilePalaceCards()
+                                        .get(state.getPlayPilePalaceCards().size() - 1)));
                 System.out.println("compPlayer selected from the hand (w/ play pile) " + cardToSelect);
             }
             //check the top palace cards
@@ -124,7 +122,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                     cardToSelect =
                             state.getP2BottomPalaceCards().
                                     get(findMinPlayable(state.getP2BottomPalaceCards(),
-                                            state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1)));
+                                            state.getPlayPilePalaceCards().
+                                                    get(state.getPlayPilePalaceCards().size() - 1)));
                     System.out.println("compPlayer selected " + cardToSelect);
                 }
                 //when the play pile is empty
@@ -209,6 +208,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
      */
     private int findMinPlayable(ArrayList<PalaceCard> selectFrom, PalaceCard playPileTop) {
         int indexOfCurrMax = 0;
+        while(selectFrom.get(indexOfCurrMax).getRank()<playPileTop.getRank()){
+            indexOfCurrMax++;
+        }
         Log.d("compPlayer", "running min playable");
         //evaluate all the cards in the given ArrayList, finding the min value card
         for (int i = 0; i < selectFrom.size(); i++) {

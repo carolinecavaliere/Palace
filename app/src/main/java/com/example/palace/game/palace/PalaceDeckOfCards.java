@@ -91,7 +91,7 @@ public class PalaceDeckOfCards {
             state.setDrawPileNumCards(state.getDrawPileNumCards() + 52);
         }
 
-        //ShuffleDeck(deck); // shuffle the deck of cards in a random order
+        ShuffleDeck(deck); // shuffle the deck of cards in a random order
     }
 
     /**
