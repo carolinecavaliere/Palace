@@ -713,6 +713,7 @@ public class PalaceLocalGame extends LocalGame {
 
             // A user decides to take the entire play pile!
         } else if (action instanceof PalaceTakePileAction) {
+            round = 0;
             if (palaceGame.getPlayPileNumCards() > 0) {
                 if (palaceGame.getTurn() == 0) {
                     for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {

@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.palace.game.GameHumanPlayer;
@@ -26,6 +27,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button nextCards;
     private Button previousCards;
     private Button switchTopCards;
+    private TextView handCardCount = null;
+    private TextView dealDeckCount = null;
+    private TextView playPileCount = null;
+    private TextView compHandCards = null;
 
     private PalaceGameState state;
 
@@ -68,6 +73,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             state = (PalaceGameState) info;
             cardWidth = view.getCardWidth();
             cardHeight = view.getCardHeight();
+            handCardCount.setText("" + "cards in hand: " +state.getP1Hand().size());
+            dealDeckCount.setText("" + "cards in deal deck: " + state.getDeck().getCardCount());
+            playPileCount.setText("" + "cards in play pile: " + state.getPlayPileNumCards());
+            compHandCards.setText("" + "computer hand cards: " + state.getP2Hand().size());
         }
     }
 
@@ -92,6 +101,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         nextCards = (Button) activity.findViewById(R.id.nextThreeCards);
         previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
         switchTopCards = (Button) activity.findViewById(R.id.switchtop);
+        this.handCardCount = (TextView)activity.findViewById(R.id.handcardcount);
+        this.dealDeckCount = (TextView)activity.findViewById(R.id.cardsInDeck);
+        this.playPileCount = (TextView)activity.findViewById(R.id.cardsInPlay);
+        this.compHandCards = (TextView)activity.findViewById(R.id.computerHandCards);
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);

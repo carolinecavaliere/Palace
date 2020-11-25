@@ -354,7 +354,6 @@ public class PalaceView extends SurfaceView {
             playerTopCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
             playerTopCardLeftY = yBottom - (yMargin) - displayConvert * 130 - cardHeight;
 
-
             //draw the player's bottom cards
             if (state.getP1BottomPalaceCards().size() == 3) {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);

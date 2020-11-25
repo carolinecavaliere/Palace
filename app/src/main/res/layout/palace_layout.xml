@@ -71,6 +71,30 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/computerHandCards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/cardsInPlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/cardsInDeck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/handcardcount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
                 <Button
                     android:id="@+id/nextThreeCards"
                     android:layout_width="match_parent"
