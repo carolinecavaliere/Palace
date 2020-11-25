@@ -49,13 +49,28 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                         isBigger = true;
                     }
                 }
+                //if computer player canNOT beat the play pile card, take the pile
+                if (isBigger == false && !(state.getP2Hand().isEmpty())) {
+                    PalaceTakePileAction take = new PalaceTakePileAction(this);
+                    Log.d("compPlayer", "took the pile");
+                    this.game.sendAction(take);
+                }
             }
-            //if computer player canNOT beat the play pile card, take the pile
-            if (isBigger == false && !(state.getP2Hand().isEmpty())) {
-                PalaceTakePileAction take = new PalaceTakePileAction(this);
-                Log.d("compPlayer", "took the pile");
-                this.game.sendAction(take);
+            else if ((!(state.getP2TopPalaceCards().isEmpty()))  && (!(state.getPlayPilePalaceCards().isEmpty()))){
+                for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
+                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                        System.out.println("isBigger is true");
+                        isBigger = true;
+                    }
+                }
+                //if computer player canNOT beat the play pile card, take the pile
+                if (isBigger == false && !(state.getP2TopPalaceCards().isEmpty())) {
+                    PalaceTakePileAction take = new PalaceTakePileAction(this);
+                    Log.d("compPlayer", "took the pile");
+                    this.game.sendAction(take);
+                }
             }
+
 
             //if the computer player CAN beat the play pile card...
             PalaceCard cardToSelect = null;
