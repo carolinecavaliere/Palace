@@ -41,91 +41,94 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         if (state.getTurn() != this.playerNum) {
             return;
         } else {
-                boolean isBigger = false;
-                if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
-                    for (int i = 0; i < state.getP2Hand().size(); i++) {
-                        if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
-                            isBigger = true;
-                        }
+            boolean isBigger = false;
+            if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
+                for (int i = 0; i < state.getP2Hand().size(); i++) {
+                    if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                        isBigger = true;
                     }
                 }
-                if (isBigger == false && !(state.getP2Hand().isEmpty())) {
-                    PalaceTakePileAction take = new PalaceTakePileAction(this);
-                    Log.d("compPlayer", "took the pile");
-                    this.game.sendAction(take);
-                }
-                PalaceCard cardToSelect = null;
-                if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
-                    while (cardToSelect == null ||
-                            cardToSelect.getRank() <
-                                    state.getPlayPilePalaceCards().
-                                            get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
-                        cardToSelect =
-                                state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
-                    }
-                } else if (state.getP2Hand().isEmpty() && (!(state.getP2TopPalaceCards().isEmpty()))) {
-                    if (state.getPlayPilePalaceCards().isEmpty()) {
-                        cardToSelect =
-                                state.getP2TopPalaceCards().
-                                        get((int) (Math.random() * state.getP2TopPalaceCards().size()));
-                    } else {
-                        for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
-                            if (state.getP2TopPalaceCards().get(i).getRank() >
-                                    state.getPlayPilePalaceCards().
-                                            get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
-                                isBigger = true;
-                            }
-                        }
-                        if (isBigger) {
-                            while (cardToSelect == null ||
-                                    cardToSelect.getRank() <
-                                            state.getPlayPilePalaceCards().
-                                                    get(state.getPlayPilePalaceCards().size() - 1).
-                                                    getRank()) {
-                                cardToSelect =
-                                        state.getP2TopPalaceCards().
-                                                get((int) (Math.random() * state.
-                                                        getP2TopPalaceCards().size()));
-                            }
-                        } else {
-                            PalaceTakePileAction take = new PalaceTakePileAction(this);
-                            Log.d("compPlayer", "took the pile");
-                            this.game.sendAction(take);
-                        }
-                    }
-                } else if (state.getP2TopPalaceCards().isEmpty()) {
-                    cardToSelect =
-                            state.getP2BottomPalaceCards().
-                                    get((int) (Math.random() * state.getP2BottomPalaceCards().size()));
-                } else {
+            }
+            if (isBigger == false && !(state.getP2Hand().isEmpty())) {
+                PalaceTakePileAction take = new PalaceTakePileAction(this);
+                Log.d("compPlayer", "took the pile");
+                this.game.sendAction(take);
+            }
+            PalaceCard cardToSelect = null;
+            if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
+                while (cardToSelect == null ||
+                        cardToSelect.getRank() <
+                                state.getPlayPilePalaceCards().
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
-                if (cardToSelect.getRank()==10){
-                }
-                selectCardAction = new PalaceSelectCardAction(this, cardToSelect,
-                        state.getSelectedPalaceCards());
-                this.game.sendAction(selectCardAction);
-
-                //rerun selectCardAction if there are multiple of the same card
-                boolean selectedAllCards = false;
-                int iterations = 0;
-                int playerPile = 0;
-                ArrayList<PalaceCard> temp;
-                if (!state.getP2Hand().isEmpty()) {
-                    for (int i = 0; i < state.getP2Hand().size(); i++) {
-                        if (state.getP2Hand().get(i).getRank() == cardToSelect.getRank() &&
-                                !cardToSelect.equals(state.getP2Hand().get(i))) {
-                            selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(i),
-                                    state.getSelectedPalaceCards());
-                            this.game.sendAction(selectCardAction);
+            } else if (state.getP2Hand().isEmpty() && (!(state.getP2TopPalaceCards().isEmpty()))) {
+                if (state.getPlayPilePalaceCards().isEmpty()) {
+                    cardToSelect =
+                            state.getP2TopPalaceCards().
+                                    get((int) (Math.random() * state.getP2TopPalaceCards().size()));
+                } else {
+                    for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
+                        if (state.getP2TopPalaceCards().get(i).getRank() >
+                                state.getPlayPilePalaceCards().
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                            isBigger = true;
                         }
                     }
+                    if (isBigger) {
+                        while (cardToSelect == null ||
+                                cardToSelect.getRank() <
+                                        state.getPlayPilePalaceCards().
+                                                get(state.getPlayPilePalaceCards().size() - 1).
+                                                getRank()) {
+                            cardToSelect =
+                                    state.getP2TopPalaceCards().
+                                            get((int) (Math.random() * state.
+                                                    getP2TopPalaceCards().size()));
+                        }
+                    } else {
+                        PalaceTakePileAction take = new PalaceTakePileAction(this);
+                        Log.d("compPlayer", "took the pile");
+                        this.game.sendAction(take);
+                    }
                 }
-
-                PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
-                this.game.sendAction(playCardAction);
+            } else if (state.getP2TopPalaceCards().isEmpty() ) {
+                cardToSelect =
+                        state.getP2BottomPalaceCards().
+                                get((int) (Math.random() * state.getP2BottomPalaceCards().size()));
+            } else {
+                cardToSelect =
+                        state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
             }
+            selectCardAction = new PalaceSelectCardAction(this, cardToSelect,
+                    state.getSelectedPalaceCards());
+            this.game.sendAction(selectCardAction);
+
+            //rerun selectCardAction if there are multiple of the same card
+            if (!state.getP2Hand().isEmpty()) {
+                for (int i = 0; i < state.getP2Hand().size(); i++) {
+                    if (state.getP2Hand().get(i).getRank() == cardToSelect.getRank() &&
+                            !cardToSelect.equals(state.getP2Hand().get(i))) {
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(i),
+                                state.getSelectedPalaceCards());
+                        this.game.sendAction(selectCardAction);
+                    }
+                }
+            }
+            else if (state.getP2Hand().isEmpty() && !state.getP2TopPalaceCards().isEmpty()) {
+                for (int i = 0; i < state.getP2Hand().size(); i++) {
+                    if (state.getP2Hand().get(i).getRank() == cardToSelect.getRank() &&
+                            !cardToSelect.equals(state.getP2TopPalaceCards().get(i))) {
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP2TopPalaceCards().get(i),
+                                state.getSelectedPalaceCards());
+                        this.game.sendAction(selectCardAction);
+                    }
+                }
+            }
+            PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
+            this.game.sendAction(playCardAction);
+        }
 
 
     }

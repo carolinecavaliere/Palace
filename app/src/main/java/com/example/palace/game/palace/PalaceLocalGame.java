@@ -107,6 +107,9 @@ public class PalaceLocalGame extends LocalGame {
             if (palaceGame.getSelectedPalaceCards().isEmpty()) {
                 return false;
             }
+            else if (palaceGame.getSelectedPalaceCards().get(0) == null) {
+                return false;
+            }
             //if more than one card was selected
             else if (palaceGame.getSelectedPalaceCards().size() > 1) {
                 int sameCards = 0;
@@ -281,10 +284,13 @@ public class PalaceLocalGame extends LocalGame {
                                 sameCards++;
                             }
                         }
-                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
-                                sameCards == 4) {
-                            palaceGame.clearPlayPileCards();
+                        if (!palaceGame.getPlayPilePalaceCards().isEmpty()) {
+                            if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
+                                    sameCards == 4) {
+                                palaceGame.clearPlayPileCards();
+                            }
                         }
+
                     }
                 } else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().size() > 0) {
@@ -355,17 +361,6 @@ public class PalaceLocalGame extends LocalGame {
                         //removes played cards from player's Top Cards
                         palaceGame.removeFromP2Bottom(randCard);
                         palaceGame.clearSelectedCards();
-                        bottomCard = true;
-                        for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
-                            if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
-                                    palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank()) {
-                                sameCards++;
-                            }
-                        }
-                        if (palaceGame.getPlayPilePalaceCards().get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
-                                sameCards == 4) {
-                            palaceGame.clearPlayPileCards();
-                        }
                     }
                 }
                 if (changeTurn) {
@@ -383,6 +378,9 @@ public class PalaceLocalGame extends LocalGame {
             PalaceSelectCardAction select = (PalaceSelectCardAction) action;
             // retrieve the single card that was selected
             PalaceCard chosenCard = select.getCardSelected();
+            if (chosenCard == null) {
+                return false;
+            }
             // if the number of cards that were played are greater than zero...
             if (!(palaceGame.getPlayPilePalaceCards().isEmpty())) {
                 // looks at player 1's hand
@@ -408,6 +406,7 @@ public class PalaceLocalGame extends LocalGame {
                             } else {
                                 palaceGame.removeFromSelectedCards(chosenCard);
                             }
+                            System.out.println("Selected" + chosenCard);
                             sendUpdatedStateTo(players[0]);
                             return true;
                         } else {
@@ -433,6 +432,7 @@ public class PalaceLocalGame extends LocalGame {
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
+                                System.out.println("Selected" + chosenCard);
                                 sendUpdatedStateTo(players[0]);
                                 return true;
                             } else {
@@ -453,6 +453,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("Selected" + chosenCard);
                         sendUpdatedStateTo(players[0]);
                         return true;
                     } else {
@@ -477,7 +478,7 @@ public class PalaceLocalGame extends LocalGame {
                             } else {
                                 palaceGame.removeFromSelectedCards(chosenCard);
                             }
-
+                            System.out.println("compPlayer selected " + chosenCard);
                             sendUpdatedStateTo(players[1]);
                             return true;
                         } else {
@@ -503,7 +504,8 @@ public class PalaceLocalGame extends LocalGame {
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
-                                sendUpdatedStateTo(players[0]);
+                                System.out.println("compPlayer selected " + chosenCard);
+                                sendUpdatedStateTo(players[1]);
                                 return true;
                             } else {
                                 return false;
@@ -521,6 +523,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("compPlayer selected " + chosenCard);
                         sendUpdatedStateTo(players[1]);
                         return true;
                     } else {
@@ -555,6 +558,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("Selected" + chosenCard);
                         sendUpdatedStateTo(players[0]);
                         return true;
                     } else if (palaceGame.getP1TopPalaceCards().contains(chosenCard)) {
@@ -577,6 +581,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("Selected" + chosenCard);
                         sendUpdatedStateTo(players[0]);
                         return true;
                     } else if (palaceGame.getP1BottomPalaceCards().contains(chosenCard)) {
@@ -599,6 +604,7 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("Selected " + chosenCard);
                         sendUpdatedStateTo(players[0]);
                         return true;
                     } else {
@@ -628,6 +634,8 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("compPlayer selected " + chosenCard);
+                        sendUpdatedStateTo(players[1]);
                         return true;
                     } else if (palaceGame.getP2TopPalaceCards().contains(chosenCard)) {
                         if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
@@ -649,6 +657,8 @@ public class PalaceLocalGame extends LocalGame {
                         } else {
                             palaceGame.removeFromSelectedCards(chosenCard);
                         }
+                        System.out.println("compPlayer selected " + chosenCard);
+                        sendUpdatedStateTo(players[1]);
                         return true;
                     } else {
                         return false;
