@@ -177,7 +177,7 @@ public class PalaceDeckOfCards {
                 state.addToP1Hand(this.deck.get(0));
             } else if (player == 1) {
                 state.addToP2Hand(this.deck.get(0));
-            } 
+            }
             deck.remove(0);
 
         }
