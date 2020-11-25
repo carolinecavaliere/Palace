@@ -321,7 +321,7 @@ public class PalaceLocalGame extends LocalGame {
                         //adds new card to the player's hand
                         if (palaceGame.getP2Hand().size() < 3) {
                             for (int j = palaceGame.getP2numCards(); j < 3; j++) {
-                                palaceGame.getDeck().drawCard(0);
+                                palaceGame.getDeck().drawCard(1);
                                 palaceGame.setP2numCards(palaceGame.getP2Hand().size());
                             }
 
