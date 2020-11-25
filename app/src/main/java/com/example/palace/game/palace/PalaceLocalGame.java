@@ -481,8 +481,7 @@ public class PalaceLocalGame extends LocalGame {
                     }
                 }
                 // looks at player 2's hand
-                else if (palaceGame.getTurn() == 1 &&
-                        palaceGame.getP2Hand().contains(chosenCard)) {
+                else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().contains(chosenCard)) {
                         if (chosenCard.getRank() >= palaceGame.getPlayPilePalaceCards().
                                 get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
@@ -525,7 +524,7 @@ public class PalaceLocalGame extends LocalGame {
                                 } else {
                                     palaceGame.removeFromSelectedCards(chosenCard);
                                 }
-                                sendUpdatedStateTo(players[1]);
+                                sendUpdatedStateTo(players[0]);
                                 return true;
                             } else {
                                 return false;
@@ -629,8 +628,7 @@ public class PalaceLocalGame extends LocalGame {
                 }
 
                 // looks at player 2's hand
-                else if (palaceGame.getTurn() == 1 &&
-                        palaceGame.getP2Hand().contains(chosenCard)) {
+                else if (palaceGame.getTurn() == 1) {
                     if (palaceGame.getP2Hand().contains(chosenCard)) {
                         if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
                             // put arraylist into GameState variable
