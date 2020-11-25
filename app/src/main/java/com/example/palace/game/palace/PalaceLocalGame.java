@@ -741,9 +741,15 @@ public class PalaceLocalGame extends LocalGame {
             }
 
             // A user needs to scroll through their cards they collected
+            //
         } else if (action instanceof PalaceDisplayNextCards) {
             if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1Hand().size() / 3 &&
-                    (palaceGame.getP1Hand().size() % 3 != 0 || palaceGame.getP1Hand().size() / 3 > 1)) {
+                    (palaceGame.getP1Hand().size() % 3 != 0 )|| palaceGame.getP1Hand().size() / 3 > 1) {
+                if (palaceGame.getP1Hand().size() % 3 == 0  && palaceGame.getP1Hand().size() > 1 ) {
+                    int pageCount = palaceGame.getP1Hand().size()/3;
+                    palaceGame.setNumDisplayHand(pageCount-1);
+
+                }
                 palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
             }
             if (palaceGame.getP1Hand().isEmpty()) {
