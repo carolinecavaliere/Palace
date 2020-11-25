@@ -21,8 +21,8 @@ import java.util.stream.Stream;
  *  Solution: Used example code from the video
  */
 public class PalaceCard extends ArrayList<PalaceCard> {
-    private int suit;
-    private int rank;
+    public int suit;
+    public int rank;
 
     // getter for suit
     public int getSuit() { return suit; }

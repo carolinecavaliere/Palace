@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.palace.game.GameComputerPlayer;
 import com.example.palace.game.infoMsg.GameInfo;
+import com.example.palace.game.infoMsg.IllegalMoveInfo;
+import com.example.palace.game.infoMsg.NotYourTurnInfo;
 
 import java.nio.file.ClosedFileSystemException;
 import java.util.ArrayList;
@@ -19,11 +21,17 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
      * <p>
      * CAVEATS: None
      *
+     *
+     * 1. Computer player is not possibly sending an action?
+     * 2. The smart AI might want to do ALL the actions. --> They need to send exactly one action
      * @param info the information (containing the game's state)
      */
     @Override
     protected void receiveInfo(GameInfo info) {
         if (!(info instanceof PalaceGameState)) {
+            if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
+                System.out.println("Reached Here");
+            }
             return;
         }
         PalaceGameState state = new PalaceGameState((PalaceGameState) info);
@@ -162,6 +170,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
     /**
      * finds the minimum value card that's greater than the last card played in the play pile
      *
+     * Why is it picking a card that's not sufficient to play?
+     * Test: don't shuffle cards
      * @param selectFrom
      * @param playPileTop
      * @return
