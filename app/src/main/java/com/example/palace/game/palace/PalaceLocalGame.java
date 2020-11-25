@@ -745,12 +745,16 @@ public class PalaceLocalGame extends LocalGame {
         } else if (action instanceof PalaceDisplayNextCards) {
             if (palaceGame.getNumDisplayHand() + 1 <= palaceGame.getP1Hand().size() / 3 &&
                     (palaceGame.getP1Hand().size() % 3 != 0 )|| palaceGame.getP1Hand().size() / 3 > 1) {
-                if (palaceGame.getP1Hand().size() % 3 == 0  && palaceGame.getP1Hand().size() > 1 ) {
-                    int pageCount = palaceGame.getP1Hand().size()/3;
-                    palaceGame.setNumDisplayHand(pageCount-1);
 
+                // check if the size of the hand is a multiple of 3
+                if (palaceGame.getP1Hand().size() % 3 == 0  && palaceGame.getP1Hand().size() > 1 ) {
+                    // the number of pages we want to display when we hit next
+                    int pageCount = palaceGame.getP1Hand().size()/3;
+                    palaceGame.setNumDisplayHand(pageCount-1); // set the number of pages to display
+                } else {
+                    // if it's not a multiple of 3, then continue as normal 
+                    palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
                 }
-                palaceGame.setNumDisplayHand(palaceGame.getNumDisplayHand() + 1);
             }
             if (palaceGame.getP1Hand().isEmpty()) {
                 palaceGame.setNumDisplayHand(0);
