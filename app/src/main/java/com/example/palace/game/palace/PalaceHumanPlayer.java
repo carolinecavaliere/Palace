@@ -12,6 +12,10 @@ import com.example.palace.game.GameMainActivity;
 import com.example.palace.game.R;
 import com.example.palace.game.infoMsg.GameInfo;
 
+import java.lang.ref.WeakReference;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
 /**
  * @author Caroline Cavaliere, Jimi Hayes, Chloe Gan, Nathaniel Pon
  * This class allows for human player to play Palace by interacting with the GUI.
@@ -34,6 +38,49 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private int cardHeight;
 
     private GameMainActivity myActivity;//android activity being run
+    /**
+     * Intent: want to set up a delay so that when the user hits play, we want the computer to
+     * "think", which consists of pausing the game for a second or two
+     *
+     * Date: 24 November 2020
+     * Problem: How to set a delay
+     * Resource: https://stackoverflow.com/questions/1520887/how-to-pause-sleep-thread-or-process-in-android
+     * Solution: idk yet, it doesn't quite work
+     *
+     */
+    private static class MyHandler extends Handler {
+        @Override
+        public void publish(LogRecord record) {
+        }
+
+        @Override
+        public void flush() {
+        }
+
+        @Override
+        public void close() throws SecurityException {
+        }
+
+    }
+    private final MyHandler mHandler = new MyHandler();
+
+    public static class MyRunnable implements Runnable {
+        private final WeakReference<GameMainActivity> mActivity;
+
+        public MyRunnable(GameMainActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void run() {
+            GameMainActivity activity = mActivity.get();
+            if (activity != null) {
+
+            }
+        }
+    }
+
+    private MyRunnable mRunnable = new MyRunnable(myActivity);
 
     /**
      * constructor
@@ -134,6 +181,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         } else if (button.equals(playCard)) {
             PalacePlayCardAction playcard = new PalacePlayCardAction(this);
             this.game.sendAction(playcard);
+            this.myHandler.postDelayed(mRunnable, 2000); // the computer "thinks"
         } else if (button.equals(nextCards)) {
             PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
             this.game.sendAction(nextcards);
@@ -365,4 +413,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             view.setBackgroundColor(oldColor);
         }
     }
+
+
+
 }
