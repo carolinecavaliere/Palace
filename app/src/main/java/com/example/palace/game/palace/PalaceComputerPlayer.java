@@ -7,10 +7,12 @@ import com.example.palace.game.GameComputerPlayer;
 import com.example.palace.game.GamePlayer;
 import com.example.palace.game.infoMsg.GameInfo;
 
+import java.util.ArrayList;
+
 /**
  * A dumb AI for Palace. It will always play the least value card that can beat the play pile so
  * it won't make any smart moves to take the pile if they wanted to build up their strong cards.
- *
+ * <p>
  * CAVEATS: Sometimes it's hard to beat b/c it always plays the card that it can and sometimes it
  * might be a high card that you can never beat lol.
  *
@@ -24,11 +26,10 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
 
     /**
      * callback method
-     *
+     * <p>
      * CAVEATS: None
      *
      * @param info the information (containing the game's state)
-     *
      */
     @Override
     protected void receiveInfo(GameInfo info) {
@@ -39,8 +40,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         PalaceSelectCardAction selectCardAction;
         if (state.getTurn() != this.playerNum) {
             return;
-        }
-        else {
+        } else {
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
@@ -55,7 +55,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                 this.game.sendAction(take);
             }
             PalaceCard cardToSelect = null;
-            if (!(state.getPlayPilePalaceCards().isEmpty())&&(!(state.getP2Hand().isEmpty()))) {
+            if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
                 while (cardToSelect == null ||
                         cardToSelect.getRank() <
                                 state.getPlayPilePalaceCards().
@@ -63,7 +63,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
-            } else if (state.getP2Hand().isEmpty()&&(!(state.getP2TopPalaceCards().isEmpty()))) {
+            } else if (state.getP2Hand().isEmpty() && (!(state.getP2TopPalaceCards().isEmpty()))) {
                 if (state.getPlayPilePalaceCards().isEmpty()) {
                     cardToSelect =
                             state.getP2TopPalaceCards().
@@ -84,7 +84,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                                                 getRank()) {
                             cardToSelect =
                                     state.getP2TopPalaceCards().
-                                            get((int) (Math.random()*state.
+                                            get((int) (Math.random() * state.
                                                     getP2TopPalaceCards().size()));
                         }
                     } else {
@@ -104,6 +104,23 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             selectCardAction = new PalaceSelectCardAction(this, cardToSelect,
                     state.getSelectedPalaceCards());
             this.game.sendAction(selectCardAction);
+
+            //rerun selectCardAction if there are multiple of the same card
+            boolean selectedAllCards = false;
+            int iterations = 0;
+            int playerPile = 0;
+            ArrayList<PalaceCard> temp;
+            if (!state.getP2Hand().isEmpty()) {
+                for (int i = 0; i < state.getP2Hand().size(); i++) {
+                    if (state.getP2Hand().get(i).getRank() == cardToSelect.getRank() &&
+                            !cardToSelect.equals(state.getP2Hand().get(i))) {
+                        selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(i),
+                                state.getSelectedPalaceCards());
+                        this.game.sendAction(selectCardAction);
+                    }
+                }
+            }
+
             PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
             this.game.sendAction(playCardAction);
         }
