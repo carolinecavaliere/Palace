@@ -168,14 +168,11 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      */
     @Override
     public boolean onTouch(View palaceView, MotionEvent motionEvent) {
-        if (state == null) {
-            return true;
-        }
         float x = motionEvent.getX(); // x position on the screen of the motion event
         float y = motionEvent.getY(); // y position on the screen of motion event
         int cardToGet = state.getNumDisplayHand() * 3; // index of the card we want, 0-2
 
-        if (state.getP1Hand().size() > cardToGet) {
+        if (state.getP1Hand().size() > cardToGet || cardToGet == 0 && state.getP1Hand().size() == 0) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:  // touch/tap action
 

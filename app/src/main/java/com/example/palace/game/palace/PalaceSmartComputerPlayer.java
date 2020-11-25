@@ -44,7 +44,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 //determine if a card in the hand can beat the play pile card
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
-                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()
+                        || state.getP2Hand().get(i).getRank() == 2 || state.getP2Hand().get(i).getRank() == 10) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
@@ -58,7 +59,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
             else if ((!(state.getP2TopPalaceCards().isEmpty()))  && (!(state.getPlayPilePalaceCards().isEmpty()))){
                 for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
-                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()
+                            || state.getP2TopPalaceCards().get(i).getRank() == 2
+                            || state.getP2TopPalaceCards().get(i).getRank() == 10) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
@@ -150,9 +153,22 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                 System.out.println("compPlayer selected (a 10) " + cardToSelect);
 
                 //immediately select the next card to be played and continue through the method
-                PalaceCard temp = new PalaceCard(1,2);
-                cardToSelect = state.getP2Hand().
-                        get(findMinPlayable(state.getP2Hand(), temp));
+                if (!state.getP2Hand().isEmpty()) {
+                    PalaceCard temp = new PalaceCard(1,2);
+                    cardToSelect = state.getP2Hand().
+                            get(findMinPlayable(state.getP2Hand(), temp));
+                }
+                else if (state.getP2Hand().isEmpty() && !state.getP2TopPalaceCards().isEmpty()) {
+                    PalaceCard temp = new PalaceCard(1,2);
+                    cardToSelect = state.getP2TopPalaceCards().
+                            get(findMinPlayable(state.getP2Hand(), temp));
+                }
+                else {
+                    PalaceCard temp = new PalaceCard(1,2);
+                    cardToSelect = state.getP2BottomPalaceCards().
+                            get(findMinPlayable(state.getP2Hand(), temp));
+                }
+
             }
 
             //selectCardAction with the currently selected card
