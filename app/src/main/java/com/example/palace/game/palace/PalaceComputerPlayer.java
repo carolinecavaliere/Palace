@@ -49,13 +49,13 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
-            if (isBigger == false) {
+            if (isBigger == false && !(state.getP2Hand().isEmpty())) {
                 PalaceTakePileAction take = new PalaceTakePileAction(this);
                 Log.d("compPlayer", "took the pile");
                 this.game.sendAction(take);
             }
             PalaceCard cardToSelect = null;
-            if (!(state.getPlayPilePalaceCards().isEmpty())) {
+            if (!(state.getPlayPilePalaceCards().isEmpty())&&(!(state.getP2Hand().isEmpty()))) {
                 while (cardToSelect == null ||
                         cardToSelect.getRank() <
                                 state.getPlayPilePalaceCards().
@@ -63,7 +63,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
-            } else if (state.getP2Hand().isEmpty()) {
+            } else if (state.getP2Hand().isEmpty()&&(!(state.getP2TopPalaceCards().isEmpty()))) {
                 if (state.getPlayPilePalaceCards().isEmpty()) {
                     cardToSelect =
                             state.getP2TopPalaceCards().
@@ -96,7 +96,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             } else if (state.getP2TopPalaceCards().isEmpty()) {
                 cardToSelect =
                         state.getP2BottomPalaceCards().
-                                get((int) (Math.random() * state.getP2TopPalaceCards().size()));
+                                get((int) (Math.random() * state.getP2BottomPalaceCards().size()));
             } else {
                 cardToSelect =
                         state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
