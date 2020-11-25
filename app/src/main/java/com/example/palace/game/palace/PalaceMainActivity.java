@@ -49,7 +49,7 @@ public class PalaceMainActivity extends GameMainActivity {
         });
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
-                return new PalaceComputerPlayer(name);
+                return new PalaceSmartComputerPlayer(name);
             }
         });
 

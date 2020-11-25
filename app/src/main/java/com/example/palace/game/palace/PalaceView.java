@@ -303,9 +303,26 @@ public class PalaceView extends SurfaceView {
 
             //draw opponent's cards
 
-            drawCard(canvas, xCenter - cardWidth / 2,
-                    yMargin - displayConvert * 150,
-                    1, -1);
+            //draw their hand cards
+            if (!state.getP2Hand().isEmpty()) {
+                drawCard(canvas, xCenter - cardWidth / 2,
+                        yMargin - displayConvert * 150,
+                        1, -1);
+            }
+
+            //draw their bottom cards
+            if (state.getP2TopPalaceCards().size() == 3) {
+                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1,-1);
+                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yMargin, 1, -1);
+                drawCard(canvas, xCenter - cardWidth * 2 - cardWidth / 2, yMargin,1,-1);
+            } else if (state.getP2TopPalaceCards().size() == 2) {
+                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1, -1);
+                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yMargin, 1, -1);
+            } else if (state.getP2TopPalaceCards().size() == 1) {
+                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1, -1);
+            }
+
+            //draw their top cards
             if (state.getP2TopPalaceCards().size() == 3) {
                 drawCard(canvas, xCenter - cardWidth / 2, yMargin,
                         state.getP2TopPalaceCards().get(0).getSuit(),

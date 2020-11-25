@@ -527,6 +527,9 @@ public class PalaceGameState extends GameState {
     public void removeFromP2Bottom(int remove) {
         p2BottomPalaceCards.remove(remove);
     }
+    public void removeFromP2Bottom(PalaceCard remove) {
+        p2BottomPalaceCards.remove(remove);
+    }
 
     public ArrayList<PalaceCard> removeFromSelectedCards(PalaceCard remove) {
         selectedPalaceCards.remove(remove);
