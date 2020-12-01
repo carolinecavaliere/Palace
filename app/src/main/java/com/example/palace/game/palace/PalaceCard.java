@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  *  Resource: https://www.youtube.com/watch?v=_AUtutrnEP8
  *  Solution: Used example code from the video
  */
-public class PalaceCard extends ArrayList<PalaceCard> {
+public class PalaceCard extends ArrayList<PalaceCard> implements Comparable<PalaceCard>{
     public int suit;
     public int rank;
 
@@ -175,5 +175,17 @@ public class PalaceCard extends ArrayList<PalaceCard> {
     @Override
     public Stream<PalaceCard> parallelStream() {
         return null;
+    }
+
+    @Override
+    public int compareTo(PalaceCard palaceCard) {
+        int compRank = palaceCard.getRank();
+        int compSuit = palaceCard.getSuit();
+        if (this.rank==compRank){
+            return this.suit-compSuit;
+        }
+        else {
+            return this.rank-compRank;
+        }
     }
 }

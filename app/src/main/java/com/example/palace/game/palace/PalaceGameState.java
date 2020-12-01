@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.palace.game.infoMsg.GameState;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Chloe Gan, Nathaniel Pon, Jimi Hayes, Caroline Cavaliere
@@ -98,6 +99,7 @@ public class PalaceGameState extends GameState {
         cardToBeSelected = new PalaceCard(4, 14);//default is ace of spades
         topCardSelected = new PalaceCard(4, 14);
 
+        Collections.sort(p1Hand);
     }
 
     /**
@@ -163,6 +165,9 @@ public class PalaceGameState extends GameState {
         playPilePalaceCards = orig.getPlayPilePalaceCards();
         this.drawPileNumCards = orig.getDrawPileNumCards();
         this.playPileNumCards = orig.getPlayPileNumCards();
+
+        Collections.sort(p1Hand);
+
 
         Log.d("GameState", "Gamestate successfully created.");
     }
