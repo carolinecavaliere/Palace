@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.palace.game.GameHumanPlayer;
@@ -26,6 +26,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button nextCards;
     private Button previousCards;
     private Button switchTopCards;
+    private TextView playPileCount = null;
 
     private PalaceGameState state;
 
@@ -68,6 +69,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             state = (PalaceGameState) info;
             cardWidth = view.getCardWidth();
             cardHeight = view.getCardHeight();
+            playPileCount.setText("" + "Cards in Play Pile: " + state.getPlayPileNumCards());
         }
     }
 
@@ -92,6 +94,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         nextCards = (Button) activity.findViewById(R.id.nextThreeCards);
         previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
         switchTopCards = (Button) activity.findViewById(R.id.switchtop);
+        this.playPileCount = (TextView)activity.findViewById((R.id.cardsInPlay));
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
