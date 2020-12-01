@@ -267,9 +267,9 @@ public class PalaceView extends SurfaceView {
 
         highlightPaint.setColor(0xCC99FFF3);
         highlightPaint.setStyle(Paint.Style.FILL);
-        warningPaint.setColor(0xCC39FF14); // neon green
+        warningPaint.setColor(0xBB39FF14); // neon green
         warningPaint.setStyle(Paint.Style.FILL);
-        panicPaint.setColor(0xCCFF0000); // red
+        panicPaint.setColor(0xBBFF0000); // red
         panicPaint.setStyle(Paint.Style.FILL);
 
     }
@@ -313,12 +313,14 @@ public class PalaceView extends SurfaceView {
             // Highlight the play pile if there is between 4 and 6 cards
             if (state.getPlayPileNumCards() >= 4 && state.getPlayPileNumCards() <= 6) {
                 playPileHighlightRect = new Rect((int)xCenter - 120 - cardWidth / 2,
-                        (int)yCenter - cardHeight / 2, (int)xRight, (int)yBottom);
+                        (int)yCenter - cardHeight / 2, (int)(xCenter - 120 - cardWidth / 2) + cardWidth,
+                        (int)(yCenter - cardHeight / 2) + cardHeight);
                 canvas.drawRect(playPileHighlightRect, warningPaint);
                 // Highlight the play pile if there is greater than 6 cards
             } else if (state.getPlayPileNumCards() > 6) {
                 playPileHighlightRect = new Rect((int)xCenter - 120 - cardWidth / 2,
-                        (int)yCenter - cardHeight / 2, (int)xRight, (int)yBottom);
+                        (int)yCenter - cardHeight / 2, (int)(xCenter - 120 - cardWidth / 2) + cardWidth,
+                        (int)(yCenter - cardHeight / 2) + cardHeight);
                 canvas.drawRect(playPileHighlightRect, panicPaint);
             }
 
