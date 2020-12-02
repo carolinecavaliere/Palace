@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/textview"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -21,7 +21,7 @@
         android:scaleX="100"
         android:scaleY="100"
         android:src="@drawable/pure_white_background_85a2a7fd"
-        android:visibility="invisible"
+        android:visibility="visible"
         tools:ignore="MissingConstraints" />
 
     <TextView

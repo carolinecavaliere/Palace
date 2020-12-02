@@ -58,7 +58,29 @@ public class PalaceDisplayHelp {
 
         //Initialize the elements of our window, install the handler
         final TextView gameSummary = popupView.findViewById(R.id.gameSummary);
-        gameSummary.setText("");
+        gameSummary.setText("Game Summary: \n\n");
+        gameSummary.setTextSize(30);
+        final String summary = "Goal: Get rid of all cards in front of you and in your hand \n" +
+                "Your Face-Up Cards (or top cards) cannot be played until your hand is empty. \n" +
+                "Your Face-Down Cards (or bottom cards) cannot be played until your top cards " +
+                "are empty.\nTo play your bottom cards, tap on one of the cards and press play." +
+                "That card will be moved to your hand and you can then play from there.\n\n " +
+                "Rules: \n " +
+                "- You must play a card greater than the last card played. If you cannot \n" +
+                "beat that card, you must take the pile. By taking the pile, it is your turn to \n" +
+                "to play again. \n" +
+                "- There are two cards with special abilities: 2 and 10. \nThese cards can be" +
+                "played at any time, regardless of \nthe rank of the last played card. \n" +
+                "- 2: Resets the ranking of the pile. The next player can play any card. \n" +
+                "- 10: 'Burns' the pile, getting rid of the play pile cards, essentially \n" +
+                "restarting th pile. The player who plays the 10 immediately plays again. \n\n" +
+                "GUI Notes: \n" +
+                "- The play pile will change colors depending on how many cards are currently " +
+                "in the pile. (Yellow for 4-6 cards, Red for more than 6 cards) \n" +
+                "- The cards in your hand are automatically sorted. \n" +
+                "- Your hand cards will automatically draw a card whenever you play a card " +
+                "with 3 cards in your hand.";
+        gameSummary.setText(gameSummary.getText() + summary);
         final ImageView image = popupView.findViewById(R.id.demo);
         final ImageView whiteBackground = popupView.findViewById(R.id.whiteBackground);
 
@@ -74,41 +96,20 @@ public class PalaceDisplayHelp {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                image.setVisibility(View.INVISIBLE);
-                whiteBackground.setVisibility(View.VISIBLE);
-                gameSummary.setTextSize(48);
-                gameSummary.setText("Game Summary: \n\n");
-                gameSummary.setTextSize(30);
-                String summary = "Goal: Get rid of all cards in front of you and in your hand \n" +
-                        "Your Face-Up Cards (or top cards) cannot be played until your hand is empty. \n" +
-                        "Your Face-Down Cards (or bottom cards) cannot be played until your top cards " +
-                        "are empty.\nTo play your bottom cards, tap on one of the cards and press play." +
-                        "That card will be moved to your hand and you can then play from there.\n\n " +
-                        "Rules: \n " +
-                        "- You must play a card greater than the last card played. If you cannot \n" +
-                        "beat that card, you must take the pile. By taking the pile, it is your turn to \n" +
-                        "to play again. \n" +
-                        "- There are two cards with special abilities: 2 and 10. \nThese cards can be" +
-                        "played at any time, regardless of \nthe rank of the last played card. \n" +
-                        "- 2: Resets the ranking of the pile. The next player can play any card. \n" +
-                        "- 10: 'Burns' the pile, getting rid of the play pile cards, essentially \n" +
-                        "restarting th pile. The player who plays the 10 immediately plays again. \n\n" +
-                        "GUI Notes: \n" +
-                        "- The play pile will change colors depending on how many cards are currently " +
-                        "in the pile. (Yellow for 4-6 cards, Red for more than 6 cards) \n" +
-                        "- The cards in your hand are automatically sorted. \n" +
-                        "- Your hand cards will automatically draw a card whenever you play a card " +
-                        "with 3 cards in your hand.";
-                gameSummary.setText(gameSummary.getText() + summary);
-
+                image.setVisibility(View.VISIBLE);
+                whiteBackground.setVisibility(View.INVISIBLE);
+                gameSummary.setText("");
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                image.setVisibility(View.VISIBLE);
-                whiteBackground.setVisibility(View.INVISIBLE);
-                gameSummary.setText("");
+                image.setVisibility(View.INVISIBLE);
+                whiteBackground.setVisibility(View.VISIBLE);
+                gameSummary.setTextSize(48);
+                gameSummary.setText("Game Summary: \n\n");
+                gameSummary.setTextSize(30);
+                gameSummary.setText(gameSummary.getText() + summary);
             }
         });
     }
