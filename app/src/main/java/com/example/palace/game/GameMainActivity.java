@@ -1,6 +1,8 @@
 package com.example.palace.game;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -14,8 +16,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -42,7 +47,6 @@ import com.example.palace.game.util.MessageBox;
  */
 public abstract class GameMainActivity extends Activity implements
 View.OnClickListener {
-
 	/*
 	 * ====================================================================
 	 * Instance Variables
@@ -805,5 +809,6 @@ View.OnClickListener {
 	public void doFinish(View v) {
 		finish();
 	}
+
 }
 

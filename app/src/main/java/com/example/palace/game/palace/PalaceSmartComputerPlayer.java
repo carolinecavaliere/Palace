@@ -44,7 +44,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 //determine if a card in the hand can beat the play pile card
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
-                    if (state.getP2Hand().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2Hand().get(i).getRank() >=
+                            state.getPlayPilePalaceCards().
+                                    get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
@@ -58,7 +60,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
             else if ((!(state.getP2TopPalaceCards().isEmpty()))  && (!(state.getPlayPilePalaceCards().isEmpty()))){
                 for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
-                    if (state.getP2TopPalaceCards().get(i).getRank() >= state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                    if (state.getP2TopPalaceCards().get(i).getRank() >=
+                            state.getPlayPilePalaceCards().
+                                    get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
                         System.out.println("isBigger is true");
                         isBigger = true;
                     }
@@ -88,7 +92,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                 if (state.getPlayPilePalaceCards().isEmpty()) {
                     cardToSelect =
                             state.getP2TopPalaceCards().
-                                    get(findMinPlayable(state.getP2TopPalaceCards(), (new PalaceCard(1, 2))));
+                                    get(findMinPlayable(state.getP2TopPalaceCards(),
+                                            (new PalaceCard(1, 2))));
                     System.out.println("compPlayer selected from the top (w/o play pile) " + cardToSelect);
                 }
                 //when play pile is NOT empty
@@ -104,7 +109,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                     if (isBigger) {
                         cardToSelect =
                                 state.getP2TopPalaceCards().
-                                        get(findMinPlayable(state.getP2TopPalaceCards(), state.getPlayPilePalaceCards().get(state.getPlayPilePalaceCards().size() - 1)));
+                                        get(findMinPlayable(state.getP2TopPalaceCards(),
+                                                state.getPlayPilePalaceCards().
+                                                        get(state.getPlayPilePalaceCards().size() - 1)));
                         System.out.println("compPlayer selected from the top " + cardToSelect);
                     }
                     //take the pile if no card can beat the play pile card

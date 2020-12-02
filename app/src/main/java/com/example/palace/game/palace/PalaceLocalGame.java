@@ -309,6 +309,9 @@ public class PalaceLocalGame extends LocalGame {
                         int index = palaceGame.getP2Hand().indexOf(palaceGame.
                                 getSelectedPalaceCards().get(i));
                         int sameCards = 0;
+                        if (index < 0) {
+                            return false;
+                        }
                         //adds selected cards to play pile
                         palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                         //removes played cards from player's hand

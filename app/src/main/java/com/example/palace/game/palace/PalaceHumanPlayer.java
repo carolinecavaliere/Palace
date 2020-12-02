@@ -1,9 +1,12 @@
 package com.example.palace.game.palace;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +29,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button nextCards;
     private Button previousCards;
     private Button switchTopCards;
+    private Button help;
     private TextView playPileCount = null;
-
     private PalaceGameState state;
 
     // card dimensions
@@ -69,7 +72,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             state = (PalaceGameState) info;
             cardWidth = view.getCardWidth();
             cardHeight = view.getCardHeight();
-            playPileCount.setText("" + "Cards in Play Pile: " + state.getPlayPileNumCards());
         }
     }
 
@@ -94,7 +96,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         nextCards = (Button) activity.findViewById(R.id.nextThreeCards);
         previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
         switchTopCards = (Button) activity.findViewById(R.id.switchtop);
-        this.playPileCount = (TextView)activity.findViewById((R.id.cardsInPlay));
+        help = (Button)activity.findViewById(R.id.help);
+        playPileCount = (TextView)activity.findViewById(R.id.cardsInPlay);
+
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
@@ -105,6 +109,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         nextCards.setOnClickListener(this);
         previousCards.setOnClickListener(this);
         switchTopCards.setOnClickListener(this);
+        help.setOnClickListener(this);
 
     }
 
@@ -149,6 +154,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             button.setVisibility(View.GONE);
             Toast.makeText(myActivity, "You can't switch your top cards out anymore!",
                     Toast.LENGTH_LONG).show();
+        } else if (button.equals(help)) {
+            PalaceDisplayHelp displayHelp = new PalaceDisplayHelp();
+            displayHelp.showPopupWindow(button);
         }
 
     }
@@ -177,6 +185,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         float x = motionEvent.getX(); // x position on the screen of the motion event
         float y = motionEvent.getY(); // y position on the screen of motion event
         int cardToGet = state.getNumDisplayHand() * 3; // index of the card we want, 0-2
+        //int playerTurn = state.getTurn() + 1;
+        //playPileCount.setText("Player " + playerTurn + "'s Turn");
 
         if (state.getP1Hand().size() > cardToGet || cardToGet == 0 && state.getP1Hand().size() == 0) {
             switch (motionEvent.getAction()) {
