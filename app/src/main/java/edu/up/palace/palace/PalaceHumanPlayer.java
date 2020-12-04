@@ -77,7 +77,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
             if (((PalaceGameState) info).getP1Hand().size() > 3) {
                 nextCards.setVisibility(View.VISIBLE);
-            } else if (((PalaceGameState) info).getP1Hand().size() <= 3) {
+
+                //
+            } else if (((PalaceGameState) info).getP1Hand().size() <= 3 && currentPage == 1) {
                 nextCards.setVisibility(View.INVISIBLE);
                 previousCards.setVisibility(View.INVISIBLE);
             }
