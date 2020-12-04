@@ -284,7 +284,7 @@ public class PalaceView extends SurfaceView {
      */
     @Override
     public void onDraw(Canvas canvas) {
-        setBackgroundColor(0xFF31B94D);
+        setBackgroundResource(R.drawable.greenbackground);
         super.onDraw(canvas);
 
         xCenter = (canvas.getWidth() / 2f);

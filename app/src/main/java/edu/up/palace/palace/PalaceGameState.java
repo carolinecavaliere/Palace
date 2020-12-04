@@ -199,10 +199,6 @@ public class PalaceGameState extends GameState {
         this.selectedPalaceCards = new ArrayList<PalaceCard>(selectedPalaceCards);
     }
 
-    public void clearSelectedCards() {
-        this.selectedPalaceCards.clear();
-    }
-
     public int getNumPlayers() {
         return numPlayers;
     }
@@ -231,16 +227,8 @@ public class PalaceGameState extends GameState {
         return p3numCards;
     }
 
-    public void setP3numCards(int p3numCards) {
-        this.p3numCards = p3numCards;
-    }
-
     public int getP4numCards() {
         return p4numCards;
-    }
-
-    public void setP4numCards(int p4numCards) {
-        this.p4numCards = p4numCards;
     }
 
     public ArrayList<PalaceCard> getP1Hand() {
@@ -277,11 +265,6 @@ public class PalaceGameState extends GameState {
 
     public void setPlayPilePalaceCards(ArrayList<PalaceCard> playPilePalaceCards) {
         this.playPilePalaceCards = new ArrayList<PalaceCard>(playPilePalaceCards);
-    }
-
-    public void clearPlayPileCards() {
-        this.playPilePalaceCards.clear();
-        playPileNumCards = 0;
     }
 
     public void setDeck(PalaceDeckOfCards deck) {
@@ -408,7 +391,18 @@ public class PalaceGameState extends GameState {
         this.displayCard3P2 = displayCard3P2;
     }
 
-    //adders and removers
+    //clear methods for selected cards and play pile cards ArrayLists
+
+    public void clearSelectedCards() {
+        this.selectedPalaceCards.clear();
+    }
+
+    public void clearPlayPileCards() {
+        this.playPilePalaceCards.clear();
+        playPileNumCards = 0;
+    }
+
+    //adders and removers for Palace card ArrayLists
 
     public ArrayList<PalaceCard> addToPlayPile(PalaceCard add) {
         playPilePalaceCards.add(add);
@@ -525,6 +519,7 @@ public class PalaceGameState extends GameState {
     public void removeFromP1Bottom(int remove) {
         p1BottomPalaceCards.remove(remove);
     }
+
     public void removeFromP1Bottom(PalaceCard remove) {
         p1BottomPalaceCards.remove(remove);
     }
@@ -532,6 +527,7 @@ public class PalaceGameState extends GameState {
     public void removeFromP2Bottom(int remove) {
         p2BottomPalaceCards.remove(remove);
     }
+
     public void removeFromP2Bottom(PalaceCard remove) {
         p2BottomPalaceCards.remove(remove);
     }
@@ -543,32 +539,5 @@ public class PalaceGameState extends GameState {
             temp.add(new PalaceCard(selectedPalaceCards.get(i)));
         }
         return temp;
-    }
-
-    /**
-     * formats the state of the game in text form
-     *
-     * @return string
-     */
-    public String toString() {
-        String ret = "Number of Players: " + numPlayers + "\n" +
-                "Next Card in the Draw Pile: " + drawPileTopPalaceCard + "\n" +
-                "Number of Cards in Play Pile: " + playPileNumCards + "\n" +
-                "Current Card in Play Pile: " +
-                playPilePalaceCards.get(playPilePalaceCards.size() - 1) + "\n" +
-
-                "Player 1: \n" +
-                "Number of Cards in Hand: " + p1numCards + "\n" +
-                "Cards in Hand: " + p1Hand.toString() + "\n" +
-                "Bottom Cards: " + p1BottomPalaceCards.toString() + "\n" +
-                "Top Cards: " + p1TopPalaceCards.toString() + "\n" +
-
-                "Player 2: " + "\n" +
-                "Number of Cards in Hand: " + p2numCards + "\n" +
-                "Cards in Hand: " + p2Hand.toString() + "\n" +
-                "Bottom Cards: " + p2BottomPalaceCards.toString() + "\n" +
-                "Top Cards: " + p2TopPalaceCards.toString() + "\n";
-
-        return ret;
     }
 }
