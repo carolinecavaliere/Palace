@@ -30,7 +30,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private TextView handCount = null;
     private PalaceGameState state;
 
-    private int pageCount;
+    private int pageCount = 1;
     private int currentPage;
 
     // card dimensions
@@ -74,18 +74,19 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             cardHeight = view.getCardHeight();
 
             // count the number of pages we can hit next card to
-            pageCount = 1 + (((PalaceGameState) info).getP1Hand().size() % 3);
+            pageCount = pageCount + (((PalaceGameState) info).getP1Hand().size() % 3);
 
 
             handCount.setText("" + "Cards in Hand: " + state.getP1Hand().size());
-            if (((PalaceGameState) info).getP1Hand().size() > 3) {
+
+            if (pageCount > 1) {
                 nextCards.setVisibility(View.VISIBLE);
-            } else if (((PalaceGameState) info).getP1Hand().size() <= 3) {
+            } else if (pageCount <= 1) {
                 nextCards.setVisibility(View.INVISIBLE);
                 previousCards.setVisibility(View.INVISIBLE);
             }
 
-            if (currentPage <= 0 || ((PalaceGameState) info).getP1Hand().size() <= 3) {
+            if (currentPage <= 0 || pageCount == 1) {
                 previousCards.setVisibility(View.INVISIBLE);
             }
 
@@ -149,10 +150,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      */
     @Override
     public void onClick(View button) {
-        //if(state.getP1Hand().size() > 3) {
-          //  nextCards.setVisibility(View.VISIBLE);
-        //}
-
         if (button.equals(quit)) {
             System.exit(0);
         } else if (button.equals(restart)) {
