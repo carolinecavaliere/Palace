@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.example.palace.game.R;
 
@@ -48,6 +49,7 @@ public class PalaceView extends SurfaceView {
     private float playerHandCardLeftY;
 
     private PalaceGameState state;
+    private PalaceHumanPlayer palaceHumanPlayer;
 
     //all types of cards as Bitmap objects
     private Bitmap cardback = null;
@@ -144,6 +146,7 @@ public class PalaceView extends SurfaceView {
     public PalaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
+
 
         ace_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.a_c);
         ace_clubs = Bitmap.createScaledBitmap(ace_clubs, cardWidth, cardHeight, true);
@@ -267,9 +270,9 @@ public class PalaceView extends SurfaceView {
 
         highlightPaint.setColor(0xCC99FFF3);
         highlightPaint.setStyle(Paint.Style.FILL);
-        warningPaint.setColor(0xBB39FF14); // neon green
+        warningPaint.setColor(0xEEFAED27); // fluorescent yellow
         warningPaint.setStyle(Paint.Style.FILL);
-        panicPaint.setColor(0xBBFF0000); // red
+        panicPaint.setColor(0xCCFF0000); // red
         panicPaint.setStyle(Paint.Style.FILL);
 
     }

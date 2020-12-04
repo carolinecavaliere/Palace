@@ -37,7 +37,7 @@ import edu.up.palace.game.util.MessageBox;
  * 
  * is the main activity for the game framework. To create a new game, create a
  * sub-class of this class that implements its abstract methods below.
- * 
+ *
  * @author Andrew M. Nuxoll
  * @author Steven R. Vegdahl
  * @date Version 2013

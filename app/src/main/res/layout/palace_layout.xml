@@ -74,7 +74,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/cardsInPlay"
+                    android:id="@+id/cardsInHand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
@@ -84,13 +84,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:text="Next Cards" />
+                    android:text="Next Cards"
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/previousThreeCards"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Previous Cards" />
+                    android:text="Previous Cards"
+                    android:visibility="invisible" />
             </LinearLayout>
 
         </LinearLayout>
