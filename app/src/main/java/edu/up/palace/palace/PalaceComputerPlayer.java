@@ -21,7 +21,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         super(name);
     }
 
-
+    // method for the computer to sleep
     @Override
     protected void sleep(int milliseconds) {
         super.sleep(milliseconds);
@@ -44,7 +44,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         if (state.getTurn() != this.playerNum) {
             return;
         } else {
-            sleep(1000);
+            sleep(1000); // make the computer "think"
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
