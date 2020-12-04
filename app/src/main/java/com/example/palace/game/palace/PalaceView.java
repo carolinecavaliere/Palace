@@ -270,9 +270,9 @@ public class PalaceView extends SurfaceView {
 
         highlightPaint.setColor(0xCC99FFF3);
         highlightPaint.setStyle(Paint.Style.FILL);
-        warningPaint.setColor(0xBB39FF14); // neon green
+        warningPaint.setColor(0xEEFAED27); // fluorescent yellow
         warningPaint.setStyle(Paint.Style.FILL);
-        panicPaint.setColor(0xBBFF0000); // red
+        panicPaint.setColor(0xCCFF0000); // red
         panicPaint.setStyle(Paint.Style.FILL);
 
     }
