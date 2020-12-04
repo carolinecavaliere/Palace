@@ -14,25 +14,6 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         super(name);
     }
 
-    /**
-     * This method sets a delay in the computer player, making it look like it "thinks".
-     * The code in the GameComputerPlayer was changed so that it uses postDelayed(), handler, and
-     * runnable without explicitly pausing the thread.
-     * CAVEATS: None
-     *
-     * External Citation:
-     *  Date: 4 December 2020
-     *  Problem: How to pause/sleep thread to delay the computer player
-     *  Resource: https://stackoverflow.com/questions/1520887/how-to-pause-sleep-
-     *  thread-or-process-in-android
-     *  Solution: In the GameComputerPlayer, i initialized a new Runnable object since and then
-     *  changed the definition of the sleep() method in GameComputerPlayer so that it uses the
-     *  handler and runnable rather than Thread.sleep().
-     */
-    @Override
-    protected void sleep(int milliseconds) {
-        super.sleep(milliseconds);
-    }
 
     /**
      * callback method
@@ -65,8 +46,6 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         if (state.getTurn() != this.playerNum) {
             return;
         } else {
-            sleep(1000);// make the computer "think"
-
             boolean isBigger = false;
             //check to see if computer player hand has cards and the play pile has cards
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
@@ -280,12 +259,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
 
             }
 
-            //to add dramatic effect
-            try {
-                Thread.sleep(800);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
             //play the card
             PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
             this.game.sendAction(playCardAction);

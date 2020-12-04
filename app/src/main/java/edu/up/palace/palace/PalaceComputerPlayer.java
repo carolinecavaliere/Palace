@@ -21,21 +21,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         super(name);
     }
 
-    /**
-     * This method sets a delay in the computer player, making it look like it "thinks".
-     * The code in the GameComputerPlayer was changed so that it uses postDelayed(), handler, and
-     * runnable without explicitly pausing the thread.
-     * CAVEATS: None
-     *
-     * External Citation:
-     *  Date: 4 December 2020
-     *  Problem: How to pause/sleep thread to delay the computer player
-     *  Resource: https://stackoverflow.com/questions/1520887/how-to-pause-sleep-
-     *  thread-or-process-in-android
-     *  Solution: In the GameComputerPlayer, i initialized a new Runnable object since and then
-     *  changed the definition of the sleep() method in GameComputerPlayer so that it uses the
-     *  handler and runnable rather than Thread.sleep().
-     */
+
     @Override
     protected void sleep(int milliseconds) {
         super.sleep(milliseconds);
@@ -75,10 +61,13 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             }
             PalaceCard cardToSelect = null;
             if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
+                // while they haven't selected a card or the card they selected is less than the
                 while (cardToSelect == null ||
                         cardToSelect.getRank() <
+                                (state.getPlayPilePalaceCards().
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) &&
                                 state.getPlayPilePalaceCards().
-                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >=0) {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
@@ -91,7 +80,9 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
                         if (state.getP2TopPalaceCards().get(i).getRank() >
                                 state.getPlayPilePalaceCards().
-                                        get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() &&
+                                state.getPlayPilePalaceCards().
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >=0) {
                             isBigger = true;
                         }
                     }
@@ -100,7 +91,10 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                                 cardToSelect.getRank() <
                                         state.getPlayPilePalaceCards().
                                                 get(state.getPlayPilePalaceCards().size() - 1).
-                                                getRank()) {
+                                                getRank() &&
+                                        state.getPlayPilePalaceCards().
+                                                get(state.getPlayPilePalaceCards().size() - 1).
+                                                getRank() >=0) {
                             cardToSelect =
                                     state.getP2TopPalaceCards().
                                             get((int) (Math.random() * state.

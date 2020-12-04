@@ -38,7 +38,10 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 	private GameMainActivity myActivity; // the game's main activity, set only
 			// this game is connected to the GUI
 	private GameTimer myTimer = new GameTimer(this); // my timer
-	
+	// create a runnable object
+	private MyRunnable mRunnable = new MyRunnable(this);
+
+
 	/**
 	 * Returns this game's timer.
 	 * 
@@ -173,6 +176,7 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 
 		// run-method: executed in this player's thread, handling a message from
 		// the game, or the timer
+		@Override
 		public void run() {
 			
 			// if game is over, do nothing
@@ -245,8 +249,7 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 			}
 		}
 	}
-	// create a runnable object
-	private MyRunnable mRunnable = new MyRunnable(this);
+
 
 
 	/**
@@ -268,11 +271,11 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 	 * 			the number of milliseconds to sleep for
 	 */
 	protected void sleep(int milliseconds) {
-		myHandler.postDelayed(mRunnable, milliseconds);
-		/*try {
+		//myHandler.postDelayed(mRunnable,1000);
+		try {
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
-		}*/
+		}
 	}
 	
 	/**
