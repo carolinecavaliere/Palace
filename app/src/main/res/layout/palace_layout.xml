@@ -48,7 +48,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:background="#CC49E3"
-                    android:text="Play Card" />
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Select Card(s)" />
 
                 <Button
                     android:id="@+id/takepile"

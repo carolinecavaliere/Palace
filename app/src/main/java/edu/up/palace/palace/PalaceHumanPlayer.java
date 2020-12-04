@@ -74,6 +74,13 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             cardHeight = view.getCardHeight();
             handCount.setText("" + "Cards in Hand: " + state.getP1Hand().size());
 
+            if (((PalaceGameState) info).getSelectedPalaceCards().isEmpty()) {
+                playCard.setText("Select Card(s)");
+            } else {
+                playCard.setText("Play it!");
+            }
+
+
             if (state.getTurn() == 0) {
                 playerTurn.setText("" + "Your turn!");
             } else {
@@ -120,6 +127,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         help = (Button)activity.findViewById(R.id.help);
         handCount = (TextView)activity.findViewById(R.id.cardsInHand);
         playerTurn = (TextView)activity.findViewById(R.id.playerTurn);
+
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
