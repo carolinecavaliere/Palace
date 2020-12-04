@@ -170,7 +170,7 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 		public MyRunnable(Object data) {
 			this.data = data;
 		}
-		
+
 		// run-method: executed in this player's thread, handling a message from
 		// the game, or the timer
 		public void run() {
@@ -245,7 +245,10 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 			}
 		}
 	}
-	
+	// create a runnable object
+	private MyRunnable mRunnable = new MyRunnable(this);
+
+
 	/**
 	 * callback method--called when we are notified that the game is over
 	 * 
@@ -265,10 +268,11 @@ public abstract class GameComputerPlayer implements GamePlayer, Tickable {
 	 * 			the number of milliseconds to sleep for
 	 */
 	protected void sleep(int milliseconds) {
-		try {
+		myHandler.postDelayed(mRunnable, milliseconds);
+		/*try {
 			Thread.sleep(milliseconds);
 		} catch (InterruptedException e) {
-		}
+		}*/
 	}
 	
 	/**
