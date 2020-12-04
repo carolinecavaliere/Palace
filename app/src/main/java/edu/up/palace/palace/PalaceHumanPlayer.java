@@ -28,6 +28,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button switchTopCards;
     private Button help;
     private TextView handCount = null; // cards in the user's hand
+    private TextView playerTurn = null;
     private PalaceGameState state;
 
     private int currentPage = 1; // keeps track of which page in the hand we're in
@@ -71,9 +72,14 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             state = (PalaceGameState) info;
             cardWidth = view.getCardWidth();
             cardHeight = view.getCardHeight();
-
-
             handCount.setText("" + "Cards in Hand: " + state.getP1Hand().size());
+
+            if (state.getTurn() == 0) {
+                playerTurn.setText("" + "Your turn!");
+            } else {
+                playerTurn.setText("" + "Computers is thinking...");
+            }
+
 
             if (((PalaceGameState) info).getP1Hand().size() > 3) {
                 nextCards.setVisibility(View.VISIBLE);
@@ -113,6 +119,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         switchTopCards = (Button) activity.findViewById(R.id.switchtop);
         help = (Button)activity.findViewById(R.id.help);
         handCount = (TextView)activity.findViewById(R.id.cardsInHand);
+        playerTurn = (TextView)activity.findViewById(R.id.playerTurn);
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
