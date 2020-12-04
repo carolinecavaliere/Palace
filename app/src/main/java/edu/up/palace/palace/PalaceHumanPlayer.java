@@ -27,8 +27,11 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private Button previousCards;
     private Button switchTopCards;
     private Button help;
-    private TextView playPileCount = null;
+    private TextView handCount = null;
     private PalaceGameState state;
+
+    private int pageCount;
+    private int currentPage;
 
     // card dimensions
     private int cardWidth;
@@ -69,6 +72,23 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             state = (PalaceGameState) info;
             cardWidth = view.getCardWidth();
             cardHeight = view.getCardHeight();
+
+            // count the number of pages we can hit next card to
+            pageCount = 1 + (((PalaceGameState) info).getP1Hand().size() % 3);
+
+
+            handCount.setText("" + "Cards in Hand: " + state.getP1Hand().size());
+            if (((PalaceGameState) info).getP1Hand().size() > 3) {
+                nextCards.setVisibility(View.VISIBLE);
+            } else if (((PalaceGameState) info).getP1Hand().size() <= 3) {
+                nextCards.setVisibility(View.INVISIBLE);
+                previousCards.setVisibility(View.INVISIBLE);
+            }
+
+            if (currentPage <= 0 || ((PalaceGameState) info).getP1Hand().size() <= 3) {
+                previousCards.setVisibility(View.INVISIBLE);
+            }
+
         }
     }
 
@@ -94,8 +114,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         previousCards = (Button) activity.findViewById(R.id.previousThreeCards);
         switchTopCards = (Button) activity.findViewById(R.id.switchtop);
         help = (Button)activity.findViewById(R.id.help);
-        playPileCount = (TextView)activity.findViewById(R.id.cardsInPlay);
-
+        handCount = (TextView)activity.findViewById(R.id.cardsInHand);
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
@@ -107,6 +126,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         previousCards.setOnClickListener(this);
         switchTopCards.setOnClickListener(this);
         help.setOnClickListener(this);
+
+
 
     }
 
@@ -128,6 +149,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
      */
     @Override
     public void onClick(View button) {
+        //if(state.getP1Hand().size() > 3) {
+          //  nextCards.setVisibility(View.VISIBLE);
+        //}
+
         if (button.equals(quit)) {
             System.exit(0);
         } else if (button.equals(restart)) {
@@ -142,9 +167,15 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         } else if (button.equals(nextCards)) {
             PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
             this.game.sendAction(nextcards);
+            if (pageCount != currentPage) {
+                currentPage++;
+            }
+
+            previousCards.setVisibility(View.VISIBLE);
         } else if (button.equals((previousCards))) {
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
+            currentPage--;
         } else if (button.equals(switchTopCards)) {
             PalaceSwitchBaseCardsAction switchCards = new PalaceSwitchBaseCardsAction(this);
             this.game.sendAction(switchCards);
