@@ -270,7 +270,7 @@ public class PalaceLocalGame extends LocalGame {
                         }
 
                     }
-                    for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
+                    for (int k = 0; k < palaceGame.getPlayPileNumCards() - 1; k++) {
                         if (palaceGame.getPlayPilePalaceCards().get(k).getRank() ==
                                 palaceGame.getPlayPilePalaceCards().get(palaceGame.
                                         getPlayPilePalaceCards().size() - 1).getRank()) {

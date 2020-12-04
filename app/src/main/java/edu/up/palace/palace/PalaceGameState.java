@@ -17,8 +17,6 @@ import java.util.Collections;
  */
 public class PalaceGameState extends GameState {
 
-    private boolean flipped;
-
     private int numDisplayHand;
     private int numPlayers;
     private int p1numCards;
@@ -110,10 +108,6 @@ public class PalaceGameState extends GameState {
     public PalaceGameState(PalaceGameState orig) {
         this.numDisplayHand = orig.getNumDisplayHand();
         this.numPlayers = orig.getNumPlayers();
-        this.p1numCards = orig.getP1numCards();
-        this.p2numCards = orig.getP2numCards();
-        this.p3numCards = orig.getP3numCards();
-        this.p4numCards = orig.getP4numCards();
 
         this.p1Hand = new ArrayList<PalaceCard>();
         displayCard1P1 = new PalaceCard(orig.getDisplayCard1P1());
@@ -168,20 +162,12 @@ public class PalaceGameState extends GameState {
 
         Collections.sort(p1Hand);
 
-
-        Log.d("GameState", "Gamestate successfully created.");
+        //Log.d isn't cooperating with the PalaceGameStateTest, so using System.out
+        System.out.println("Gamestate successfully created.");
     }
 
 
     //getters and setters
-
-    public boolean isFlipped() {
-        return flipped;
-    }
-
-    public void setFlipped(boolean flipped) {
-        this.flipped = flipped;
-    }
 
     public int getNumDisplayHand() {
         return numDisplayHand;

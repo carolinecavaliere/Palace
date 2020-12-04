@@ -37,6 +37,12 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         if (state.getTurn() != this.playerNum) {
             return;
         } else {
+            //to add dramatic effect
+            try {
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {

@@ -348,14 +348,14 @@ public class PalaceView extends SurfaceView {
 
             //draw their bottom cards
             if (state.getP2BottomPalaceCards().size() == 3) {
-                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1,-1);
-                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yMargin, 1, -1);
-                drawCard(canvas, xCenter - cardWidth * 2 - cardWidth / 2, yMargin,1,-1);
+                drawCard(canvas, xCenter - cardWidth / 2 + 15, yMargin + 15,1,-1);
+                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2 + 15, yMargin +15, 1, -1);
+                drawCard(canvas, xCenter - cardWidth * 2 - cardWidth / 2 + 15, yMargin + 15,1,-1);
             } else if (state.getP2BottomPalaceCards().size() == 2) {
-                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1, -1);
-                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2, yMargin, 1, -1);
+                drawCard(canvas, xCenter - cardWidth / 2 + 15, yMargin + 15,1, -1);
+                drawCard(canvas, xCenter + cardWidth * 2 - cardWidth / 2 + 15, yMargin + 15, 1, -1);
             } else if (state.getP2BottomPalaceCards().size() == 1) {
-                drawCard(canvas, xCenter - cardWidth / 2, yMargin,1, -1);
+                drawCard(canvas, xCenter - cardWidth / 2 + 15, yMargin + 15,1, -1);
             }
 
             //draw their top cards
@@ -520,11 +520,11 @@ public class PalaceView extends SurfaceView {
 
             //draw player's hand
             playerHandCardCenterX = xCenter - cardWidth / 2;
-            playerHandCardCenterY = yBottom - yMargin - displayConvert * 130;
+            playerHandCardCenterY = yBottom - yMargin - displayConvert * 130 + 15;
             playerHandCardRightX = xCenter + cardWidth * 2 - cardWidth / 2;
-            playerHandCardRightY = yBottom - yMargin - displayConvert * 130;
+            playerHandCardRightY = yBottom - yMargin - displayConvert * 130 + 15;
             playerHandCardLeftX = xCenter - cardWidth * 2 - cardWidth / 2;
-            playerHandCardLeftY = yBottom - yMargin - displayConvert * 130;
+            playerHandCardLeftY = yBottom - yMargin - displayConvert * 130 + 15;
 
 
             int cardToGet = state.getNumDisplayHand()* 3;

@@ -12,7 +12,7 @@ public class PalaceGameStateTest {
     @Test
     public void getNumPlayers() {
         PalaceGameState state = new PalaceGameState(2);
-        assertEquals(state.getNumPlayers(), 4);
+        assertEquals(state.getNumPlayers(), 2);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class PalaceGameStateTest {
     @Test
     public void getTurn() {
         PalaceGameState state = new PalaceGameState(2);
-        assertEquals(1, state.getTurn());
+        assertEquals(0, state.getTurn());
     }
 
     @Test
@@ -37,18 +37,9 @@ public class PalaceGameStateTest {
     }
 
     @Test
-    public void removeFromPlayPile() {
-        PalaceGameState state = new PalaceGameState(2);
-        assertEquals(state.getPlayPileNumCards(), 1);
-        state.removeFromPlayPile(0);
-        assertEquals(state.getPlayPileNumCards(), 0);
-    }
-
-
-    @Test
     public void getDrawPileNumCards() {
         PalaceGameState state = new PalaceGameState(2);
-        int total = (52*2) - (state.getP1numCards() + state.getP2numCards() + state.getP3numCards()
+        int total = 52 - (state.getP1numCards() + state.getP2numCards() + state.getP3numCards()
                 + state.getP4numCards() + state.getP1TopPalaceCards().size()
                 + state.getP2TopPalaceCards().size() + state.getP1BottomPalaceCards().size()
                 + state.getP2BottomPalaceCards().size() + state.getPlayPileNumCards());
@@ -69,14 +60,6 @@ public class PalaceGameStateTest {
         PalaceGameState state = new PalaceGameState(2);
         int initNum = state.getPlayPileNumCards();
         assertEquals(1, initNum);
-    }
-
-    @Test
-    public void setPlayPileNumCards() {
-        PalaceGameState state = new PalaceGameState(2);
-        PalaceCard card = new PalaceCard(2,3);
-        state.addToPlayPile(state.getP1Hand().get(0));
-        assertEquals(2, state.getPlayPileNumCards());
     }
 
     @Test
@@ -108,13 +91,14 @@ public class PalaceGameStateTest {
         assertEquals(card, state.getCardToBeSelected());
     }
 
-    /*@Test
+    @Test
     public void addToPlayPile() {
-        PalaceGameState state = new PalaceGameState(4);
+        PalaceGameState state = new PalaceGameState(2);
         PalaceCard card = new PalaceCard(2,12);
         state.addToPlayPile(card);
-        assertEquals(card, state.getPlayPileTopPalaceCard());
-    }*/
+        //get the second card, since there's one underneath already
+        assertEquals(card, state.getPlayPilePalaceCards().get(1));
+    }
 
     @Test
     public void getP1BottomCard() {
@@ -127,6 +111,35 @@ public class PalaceGameStateTest {
     public void removeFromP2Hand() {
         PalaceGameState state = new PalaceGameState(2);
         state.removeFromP2Hand(state.getP2Hand().get(0));
-        assertEquals(2, state.getP2numCards());
+        assertEquals(2, state.getP2Hand().size());
+    }
+
+    @Test
+    public void getPlayPilePalaceCards() {
+        PalaceGameState state = new PalaceGameState(2);
+        state.removeFromPlayPile(0);
+        state.addToPlayPile(new PalaceCard(1, 3));
+        PalaceCard card = state.getPlayPilePalaceCards().get(0);
+        assertEquals(card, state.getPlayPilePalaceCards().get(0));
+        state.removeFromPlayPile(0);
+        state.addToPlayPile(new PalaceCard(1, 2));
+        assertNotEquals(card, state.getPlayPilePalaceCards().get(0));
+    }
+
+    @Test
+    public void PalaceGameState() {
+        PalaceGameState state = new PalaceGameState(2);
+        PalaceGameState newState = new PalaceGameState(state);
+        assertEquals(state.getP1Hand(), newState.getP1Hand());
+        assertEquals(state.getP2Hand(), newState.getP2Hand());
+        assertEquals(state.getP1TopPalaceCards(), newState.getP1TopPalaceCards());
+        assertEquals(state.getP2TopPalaceCards(), newState.getP2TopPalaceCards());
+        assertEquals(state.getP1BottomPalaceCards(), newState.getP1BottomPalaceCards());
+        assertEquals(state.getP2BottomPalaceCards(), newState.getP2BottomPalaceCards());
+        assertEquals(state.getNumDisplayHand(), newState.getNumDisplayHand());
+        assertEquals(state.getNumPlayers(), newState.getNumPlayers());
+        assertEquals(state.getDrawPileNumCards(), newState.getDrawPileNumCards());
+        assertEquals(state.getPlayPilePalaceCards(), newState.getPlayPilePalaceCards());
+        assertEquals(state.getPlayPileNumCards(), newState.getPlayPileNumCards());
     }
 }

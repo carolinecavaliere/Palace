@@ -154,6 +154,7 @@ public class PalaceDeckOfCards {
         }
         state.addToPlayPile(deck.get(0));
         deck.remove(0);
+        state.setDrawPileNumCards(state.getDrawPileNumCards()-1);
         state.setPlayPileNumCards(1);
     }
 

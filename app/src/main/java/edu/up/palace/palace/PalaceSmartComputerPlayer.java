@@ -260,6 +260,12 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
 
             }
 
+            //to add dramatic effect
+            try {
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             //play the card
             PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
             this.game.sendAction(playCardAction);
