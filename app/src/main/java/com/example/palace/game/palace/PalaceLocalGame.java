@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class PalaceLocalGame extends LocalGame {
 
     private PalaceGameState palaceGame;
+    private PalaceHumanPlayer palaceHumanPlayer;
     private int round = 1; // signifies that it is the VERY beginning of the game. When this
     // variable changes, the player can no longer switch their top cards.
 

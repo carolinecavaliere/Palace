@@ -99,11 +99,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         help = (Button)activity.findViewById(R.id.help);
         playPileCount = (TextView)activity.findViewById(R.id.cardsInPlay);
 
-        if(state.getP1Hand().size() > 3) {
-            nextCards.setVisibility(VIEW.v);
-            button.setVisibility(View.GONE);
-        }
-
         //listen for button presses and card taps
         view.setOnTouchListener(this);
         takePile.setOnClickListener(this);
@@ -114,6 +109,10 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         previousCards.setOnClickListener(this);
         switchTopCards.setOnClickListener(this);
         help.setOnClickListener(this);
+
+        if(state.getP1Hand().size() > 3) {
+            nextCards.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -149,6 +148,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         } else if (button.equals(nextCards)) {
             PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
             this.game.sendAction(nextcards);
+            previousCards.setVisibility(View.VISIBLE);
         } else if (button.equals((previousCards))) {
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
