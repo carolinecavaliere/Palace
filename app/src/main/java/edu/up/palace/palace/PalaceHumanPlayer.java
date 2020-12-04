@@ -87,7 +87,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             if (currentPage == 1) {
                 previousCards.setVisibility(View.INVISIBLE);
             }
-
         }
     }
 

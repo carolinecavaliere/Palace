@@ -1,5 +1,6 @@
 package edu.up.palace.palace;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -285,6 +286,7 @@ public class PalaceView extends SurfaceView {
      * @param canvas
      * @Jimi Hayes
      */
+    @SuppressLint("DrawAllocation")
     @Override
     public void onDraw(Canvas canvas) {
         setBackgroundResource(R.drawable.greenbackground);
@@ -316,14 +318,19 @@ public class PalaceView extends SurfaceView {
 
             // Highlight the play pile if there is between 4 and 6 cards
             if (state.getPlayPileNumCards() >= 4 && state.getPlayPileNumCards() <= 6) {
-                warningPaint.setAlpha(70);
+                warningPaint.setAlpha(70); // set transparency of color
+
+                //create the rectangle
                 playPileHighlightRect = new Rect((int)xCenter - 120 - cardWidth / 2,
                         (int)yCenter - cardHeight / 2, (int)(xCenter - 120 - cardWidth / 2) + cardWidth,
                         (int)(yCenter - cardHeight / 2) + cardHeight);
                 canvas.drawRect(playPileHighlightRect, warningPaint);
+
                 // Highlight the play pile if there is greater than 6 cards
             } else if (state.getPlayPileNumCards() > 6) {
-                panicPaint.setAlpha(70);
+                panicPaint.setAlpha(70); // set transparency of color
+
+                //create the rectangle
                 playPileHighlightRect = new Rect((int)xCenter - 120 - cardWidth / 2,
                         (int)yCenter - cardHeight / 2, (int)(xCenter - 120 - cardWidth / 2) + cardWidth,
                         (int)(yCenter - cardHeight / 2) + cardHeight);
@@ -386,27 +393,42 @@ public class PalaceView extends SurfaceView {
 
             //draw the player's bottom cards
             if (state.getP1BottomPalaceCards().size() == 3) {
-                drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);
+                drawCard(canvas, playerTopCardLeftX-15, playerTopCardLeftY-15,1,-1);
+
+                //if card is selected, highlight it
                 if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(0))){
-                    highlightRect = new Rect((int)playerTopCardLeftX,
-                            (int)playerTopCardLeftY,
-                            (int)playerTopCardLeftX+cardWidth,
-                            (int)playerTopCardLeftY+cardHeight);//if card is selected, highlight it
-                    canvas.drawRect(highlightRect, highlightPaint);}
-                drawCard(canvas, playerTopCardCenterX, playerTopCardCenterY,1,-1);
+                    // draw the highlight rect
+                    highlightRect = new Rect((int)playerTopCardLeftX-15,
+                            (int)playerTopCardLeftY-15,
+                            (int)playerTopCardLeftX-15+cardWidth,
+                            (int)playerTopCardLeftY-15+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint); // show it on the screen
+                }
+
+                // draw the next card
+                drawCard(canvas, playerTopCardCenterX-15, playerTopCardCenterY-15,1,-1);
+                
+                //if card is selected, highlight it
                 if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(1))) {
-                    highlightRect = new Rect((int) playerTopCardCenterX,
-                            (int) playerTopCardCenterY,
-                            (int) playerTopCardCenterX + cardWidth,
-                            (int) playerTopCardCenterY + cardHeight);
-                    canvas.drawRect(highlightRect, highlightPaint);}
-                drawCard(canvas, playerTopCardRightX, playerTopCardRightY,1,-1);
+                    highlightRect = new Rect((int) playerTopCardCenterX-15,
+                            (int) playerTopCardCenterY-15,
+                            (int) playerTopCardCenterX-15 + cardWidth,
+                            (int) playerTopCardCenterY-15 + cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);
+                }
+
+                // draw the next card
+                drawCard(canvas, playerTopCardRightX-15, playerTopCardRightY-15,1,-1);
+
+                //if card is selected, highlight it
                 if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(2))){
-                    highlightRect = new Rect((int)playerTopCardRightX,
-                            (int)playerTopCardRightY,
-                            (int)playerTopCardRightX+cardWidth,
-                            (int)playerTopCardRightY+cardHeight);
-                    canvas.drawRect(highlightRect, highlightPaint);}
+                    highlightRect = new Rect((int)playerTopCardRightX-15,
+                            (int)playerTopCardRightY-15,
+                            (int)playerTopCardRightX-15+cardWidth,
+                            (int)playerTopCardRightY-15+cardHeight);
+                    canvas.drawRect(highlightRect, highlightPaint);
+                }
+
             } else if (state.getP1BottomPalaceCards().size() == 2) {
                 drawCard(canvas, playerTopCardLeftX, playerTopCardLeftY,1,-1);
                 if(state.getSelectedPalaceCards().contains(state.getP1BottomPalaceCards().get(0))){
