@@ -3,6 +3,7 @@ package edu.up.palace.palace;
 import android.util.Log;
 
 import edu.up.palace.game.GameComputerPlayer;
+import edu.up.palace.game.GameMainActivity;
 import edu.up.palace.game.infoMsg.GameInfo;
 
 /**
@@ -18,6 +19,12 @@ import edu.up.palace.game.infoMsg.GameInfo;
 public class PalaceComputerPlayer extends GameComputerPlayer {
     public PalaceComputerPlayer(String name) {
         super(name);
+    }
+
+
+    @Override
+    protected void sleep(int milliseconds) {
+        super.sleep(milliseconds);
     }
 
     /**
@@ -37,12 +44,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
         if (state.getTurn() != this.playerNum) {
             return;
         } else {
-            //to add dramatic effect
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            sleep(1000);
             boolean isBigger = false;
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
