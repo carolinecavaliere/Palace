@@ -14,6 +14,14 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         super(name);
     }
 
+    /**
+     * Don't think overriding will do anything but it made it stable when i included it
+     * @param milliseconds
+     */
+    @Override
+    protected void sleep(int milliseconds) {
+        super.sleep(milliseconds);
+    }
 
     /**
      * callback method

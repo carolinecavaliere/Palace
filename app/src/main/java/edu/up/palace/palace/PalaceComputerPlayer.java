@@ -22,6 +22,11 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
     }
 
 
+    /**
+     * Dont think overriding does anything but i included it cuz it seemed to make it stable.
+     * We can use this method because we have drect access to the computer's thread.
+     * @param milliseconds
+     */
     @Override
     protected void sleep(int milliseconds) {
         super.sleep(milliseconds);
