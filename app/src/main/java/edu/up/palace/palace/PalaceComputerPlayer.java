@@ -63,11 +63,11 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
                 // while they haven't selected a card or the card they selected is less than the
                 while (cardToSelect == null ||
-                        cardToSelect.getRank() <
+                        (cardToSelect.getRank() <
                                 (state.getPlayPilePalaceCards().
                                         get(state.getPlayPilePalaceCards().size() - 1).getRank()) &&
                                 state.getPlayPilePalaceCards().
-                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >=0) {
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >=0)) {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
@@ -88,13 +88,13 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     }
                     if (isBigger) {
                         while (cardToSelect == null ||
-                                cardToSelect.getRank() <
+                                (cardToSelect.getRank() <
                                         state.getPlayPilePalaceCards().
                                                 get(state.getPlayPilePalaceCards().size() - 1).
                                                 getRank() &&
                                         state.getPlayPilePalaceCards().
                                                 get(state.getPlayPilePalaceCards().size() - 1).
-                                                getRank() >=0) {
+                                                getRank() >=0)) {
                             cardToSelect =
                                     state.getP2TopPalaceCards().
                                             get((int) (Math.random() * state.
