@@ -141,6 +141,7 @@ View.OnClickListener {
 	public final void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// set help menu text to essentially invisible
 		// Initialize the layout
 		setContentView(R.layout.game_config_main);
 

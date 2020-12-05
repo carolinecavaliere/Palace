@@ -1,5 +1,11 @@
 package edu.up.palace.palace;
 
+import android.widget.TextView;
+
+import com.example.palace.game.R;
+
+import org.w3c.dom.Text;
+
 import edu.up.palace.game.GameMainActivity;
 import edu.up.palace.game.LocalGame;
 import edu.up.palace.game.config.GameConfig;
@@ -20,7 +26,6 @@ public class PalaceMainActivity extends GameMainActivity {
 
     // the port number that this game will use when playing over the network
     private static final int PORT_NUMBER = 2278;
-
     /**
      * create the default configuration for this game:
      *
