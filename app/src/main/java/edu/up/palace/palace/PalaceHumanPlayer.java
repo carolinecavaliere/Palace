@@ -88,15 +88,17 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             }
 
 
+            // if the amount of cards in their hand is greater than 3, then the next button shows
             if (((PalaceGameState) info).getP1Hand().size() > 3) {
                 nextCards.setVisibility(View.VISIBLE);
-
-                //
-            } else if (((PalaceGameState) info).getP1Hand().size() <= 3 && currentPage == 1) {
+                // otherwise, if they have equal to or less than 3 cards, they buttons should
+                // disappear. But not until they reach the first page of cards!
+            } else if (((PalaceGameState) info).getP1Hand().size() <= 3 && currentPage <= 1) {
                 nextCards.setVisibility(View.INVISIBLE);
                 previousCards.setVisibility(View.INVISIBLE);
             }
 
+            // if they are on the first page of cards regardless, then they should disappear
             if (currentPage == 1) {
                 previousCards.setVisibility(View.INVISIBLE);
             }
@@ -127,7 +129,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         help = (Button)activity.findViewById(R.id.help);
         handCount = (TextView)activity.findViewById(R.id.cardsInHand);
         playerTurn = (TextView)activity.findViewById(R.id.playerTurn);
-
 
         //listen for button presses and card taps
         view.setOnTouchListener(this);
