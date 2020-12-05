@@ -792,7 +792,7 @@ public class PalaceLocalGame extends LocalGame {
         round = 0;
         if (palaceGame.getPlayPileNumCards() > 0) {
             if (palaceGame.getTurn() == 0) {
-                for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {
+                for (int i = 0; i < palaceGame.getPlayPilePalaceCards().size(); i++) {
                     //adds pile to player's hand
                     palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.
                             getPlayPilePalaceCards().get(i)));
@@ -800,7 +800,7 @@ public class PalaceLocalGame extends LocalGame {
                 }
                 palaceGame.clearPlayPileCards();//play pile is gone now
             } else if (palaceGame.getTurn() == 1) {
-                for (int i = 0; i < palaceGame.getPlayPileNumCards(); i++) {
+                for (int i = 0; i < palaceGame.getPlayPilePalaceCards().size(); i++) {
                     //adds pile to player's hand
                     palaceGame.addToP2Hand(palaceGame.
                             getPlayPilePalaceCards().get(i));
