@@ -79,11 +79,10 @@ public class PalaceGameState extends GameState {
 
         selectedPalaceCards = new ArrayList<PalaceCard>();
 
-        if (this.numPlayers <= 2) {
-            deck = new PalaceDeckOfCards(1, this);
-        } else {
-            deck = new PalaceDeckOfCards(2, this);
-        }
+
+        deck = new PalaceDeckOfCards(this);
+
+
 
         deck.DealDeck();
         displayCard1P1 = p1Hand.get(0);

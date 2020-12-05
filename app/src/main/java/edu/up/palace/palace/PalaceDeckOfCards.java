@@ -15,13 +15,11 @@ public class PalaceDeckOfCards {
     static ArrayList<PalaceCard> deck = new ArrayList<PalaceCard>();//actual array
     static PalaceGameState state;
     protected static int cardCount;
-    PalaceDeckOfCards(int numDecks, PalaceGameState palaceGameState){
+    PalaceDeckOfCards(PalaceGameState palaceGameState){
         state = palaceGameState;
         state.setDrawPileNumCards(0);
 
-        // add a card to the arrayList that represents a deck of cards. Do this twice if
-        // the number of decks we want is 2
-        for(int i = 0; i<numDecks; i++){
+        // add a card to the arrayList that represents a deck of cards.
             deck.add(new PalaceCard(1, 14));
             deck.add(new PalaceCard(2, 14));
             deck.add(new PalaceCard(3, 14));
@@ -89,7 +87,7 @@ public class PalaceDeckOfCards {
 
             // initialize the int number of cards in the deck
             state.setDrawPileNumCards(state.getDrawPileNumCards() + 52);
-        }
+
 
         ShuffleDeck(deck); // shuffle the deck of cards in a random order
     }
