@@ -206,7 +206,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             }
         } else if (button.equals((previousCards))) {
             if (state.getTurn() == 0) {
-                PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
+                PalaceDisplayPreviousCards previousCards =
+                        new PalaceDisplayPreviousCards(this);
                 this.game.sendAction(previousCards);
                 // if we're not on the first page of the cards in the hand, decrement!
                 if (currentPage > 0) {
@@ -253,7 +254,8 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         //int playerTurn = state.getTurn() + 1;
         //playPileCount.setText("Player " + playerTurn + "'s Turn");
 
-        if (state.getP1Hand().size() > cardToGet || cardToGet == 0 && state.getP1Hand().size() == 0) {
+        if (state.getP1Hand().size() > cardToGet || cardToGet == 0 &&
+                state.getP1Hand().size() == 0) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:  // touch/tap action
 

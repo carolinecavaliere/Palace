@@ -37,7 +37,8 @@ public class PalaceDisplayHelp {
 
 
         //Create a View object yourself through inflater
-        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) view.getContext().
+                getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.palace_help_menu, null);
 
         //Specify the length and width through constants
@@ -58,14 +59,14 @@ public class PalaceDisplayHelp {
         gameSummary.setText("Game Summary: \n\n");
         gameSummary.setTextSize(26);
         final String summary = "Goal: Get rid of all cards in front of you and in your hand \n" +
-                "- Your Face-Up Cards (or top cards) cannot be played until your hand is empty. \n" +
-                "- Your Face-Down Cards (or bottom cards) cannot be played until your top cards " +
-                "are empty.\nTo play your bottom cards, tap on one of the cards and press play." +
+                "- Your Face-Up Cards (or top cards) cannot be played until your hand is empty. \n"
+                + "- Your Face-Down Cards (or bottom cards) cannot be played until your top cards "
+                + "are empty.\nTo play your bottom cards, tap on one of the cards and press play." +
                 "That card will be moved to your hand and you can then play from there.\n\n " +
                 "Rules: \n " +
                 "- You must play a card greater than the last card played. If you cannot \n" +
-                "beat that card, you must take the pile. By taking the pile, it is your turn to \n" +
-                "to play again. \n" +
+                "beat that card, you must take the pile. By taking the pile, it is your turn to \n"
+                + "to play again. \n" +
                 "- There are two cards with special abilities: 2 and 10. These \ncards can be" +
                 "played at any time, regardless of the rank of \nthe last played card. \n" +
                 "- 2: Resets the ranking of the pile. The next player can play \nany card. \n" +
@@ -82,6 +83,7 @@ public class PalaceDisplayHelp {
         final ImageView image = popupView.findViewById(R.id.demo);
         final ImageView whiteBackground = popupView.findViewById(R.id.whiteBackground);
 
+        //initialize the buttons
         Button dismiss = popupView.findViewById(R.id.dismiss);
         Button next = popupView.findViewById(R.id.next);
         Button previous = popupView.findViewById(R.id.previous);
@@ -91,6 +93,8 @@ public class PalaceDisplayHelp {
                 popupWindow.dismiss();
             }
         });
+
+        //display the game demo
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +103,7 @@ public class PalaceDisplayHelp {
                 gameSummary.setText("");
             }
         });
+        //display the game summary
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

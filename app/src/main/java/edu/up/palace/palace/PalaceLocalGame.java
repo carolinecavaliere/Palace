@@ -348,7 +348,8 @@ public class PalaceLocalGame extends LocalGame {
                             sameCards++;
                         }
                     }
-                    //per the game rules, clear the play pile when there's 4 of a kind or a 10 in the pile
+                    //per the game rules, clear the play pile when there's 4 of a kind or
+                    // a 10 in the pile
                     if (palaceGame.getSelectedPalaceCards().get(i).getRank() == 10 ||
                             sameCards == 4) {
                         palaceGame.clearPlayPileCards();
@@ -375,7 +376,8 @@ public class PalaceLocalGame extends LocalGame {
                             sameCards++;
                         }
                     }
-                    //per the game rules, clear the play pile when there's 4 of a kind or a 10 in the pile
+                    //per the game rules, clear the play pile when there's 4 of a kind or
+                    // a 10 in the pile
                     if (palaceGame.getPlayPilePalaceCards().get(palaceGame.
                             getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
                             sameCards == 4) {
@@ -538,7 +540,8 @@ public class PalaceLocalGame extends LocalGame {
                                 get(palaceGame.getPlayPilePalaceCards().size() - 1).getRank() ||
                                 (chosenCard.getRank() == 10 || chosenCard.getRank() == 2)) {
                             if (!palaceGame.getSelectedPalaceCards().contains(chosenCard)) {
-                                if ((!(palaceGame.getSelectedPalaceCards().isEmpty())) && palaceGame.getSelectedPalaceCards()
+                                if ((!(palaceGame.getSelectedPalaceCards().isEmpty())) &&
+                                        palaceGame.getSelectedPalaceCards()
                                         .get(0).getRank() != chosenCard.getRank()) {
                                     return false;
                                 } else {

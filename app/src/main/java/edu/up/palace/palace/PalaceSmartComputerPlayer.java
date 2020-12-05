@@ -25,13 +25,17 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
 
     /**
      * callback method
-     * Note: temporarily, computer player will be P2
+     * Note: computer player can only be P2
      * <p>
      * CAVEATS: None
      * <p>
      * <p>
-     * 1. Computer player is not possibly sending an action?
-     * 2. The smart AI might want to do ALL the actions. --> They need to send exactly one action
+     *
+     * Deficiencies: As it stands currently, the Smart AI (and sometimes the dumb AI) will, for
+     * no reason, stop working. The program for the class will simply stop running, but will return
+     * no errors or crashes. (For reference, if it happens, check the Run logs.) It's nearly
+     * impossible to fix this bug with our current knowledge of Android Studio, since all of the
+     * fixes that we tried did not work. However, from our experience, this rarely occurs.
      *
      * @param info the information (containing the game's state)
      */
@@ -41,6 +45,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         boolean multMax = false;
         boolean isTen = false;
         boolean isTwo = false;
+        boolean hasBeenSelected = false;
         PalaceCard cardToSelect = null;
         if (!(info instanceof PalaceGameState)) {
             if (info instanceof IllegalMoveInfo) {
@@ -75,11 +80,13 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                     for(int i = 0; i < state.getP2Hand().size(); i++) {
                         if (state.getP2Hand().get(i).getRank() == 2) {
                             isTwo = true;
+                            hasBeenSelected = true;
                             cardToSelect = state.getP2Hand().get(i);
                             break;
                         }
                         else if (state.getP2Hand().get(i).getRank() == 10) {
                             isTen = true;
+                            hasBeenSelected = true;
                             cardToSelect = state.getP2Hand().get(i);
                             break;
                         }
@@ -91,7 +98,9 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                         this.game.sendAction(take);
                     }
                 }
-            } else if ((!(state.getP2TopPalaceCards().isEmpty())) && (!(state.getPlayPilePalaceCards().isEmpty()))) {
+                //for the top cards
+            } else if ((!(state.getP2TopPalaceCards().isEmpty())) &&
+                    (!(state.getPlayPilePalaceCards().isEmpty()))) {
                 //determine if a card in the top can beat the play pile card
                 for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
                     if (state.getP2TopPalaceCards().get(i).getRank() >=
@@ -106,14 +115,17 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                     for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
                         if (state.getP2TopPalaceCards().get(i).getRank() == 2) {
                             isTwo = true;
+                            hasBeenSelected = true;
                             cardToSelect = state.getP2TopPalaceCards().get(i);
                             break;
                         } else if (state.getP2TopPalaceCards().get(i).getRank() == 10) {
                             isTen = true;
+                            hasBeenSelected = true;
                             cardToSelect = state.getP2TopPalaceCards().get(i);
                             break;
                         }
                     }
+                    //if isBigger is false and has no 10's or 2's
                     if (!isTen && !isTwo) {
                         PalaceTakePileAction take = new PalaceTakePileAction(this);
                         Log.d("compPlayer", "took the pile");
@@ -127,46 +139,56 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                 if (state.getP2Hand().size() != 0) {
                     //when play pile is NOT empty
                     if (!state.getPlayPilePalaceCards().isEmpty()) {
+                        hasBeenSelected = true;
                         cardToSelect =
                                 state.getP2Hand().
-                                        get(findMinPlayable(state.getP2Hand(), state.getPlayPilePalaceCards()
+                                        get(findMinPlayable(state.getP2Hand(),
+                                                state.getPlayPilePalaceCards()
                                                 .get(state.getPlayPilePalaceCards().size() - 1)));
-                        System.out.println("compPlayer selected from the hand (w/ play pile) " + cardToSelect);
+                        System.out.println("compPlayer selected from the hand (w/ play pile) " +
+                                cardToSelect);
                     }
                     //when play pile is empty
                     else {
+                        hasBeenSelected = true;
                         cardToSelect =
                                 state.getP2Hand().
-                                        get(findMinPlayable(state.getP2Hand(), new PalaceCard(1, 2)));
-                        System.out.println("compPlayer selected from the hand (w/o play pile) " + cardToSelect);
+                                        get(findMinPlayable(state.getP2Hand(), null));
+                        System.out.println("compPlayer selected from the hand (w/o play pile) " +
+                                cardToSelect);
                     }
                 }
                 //check the top palace cards
                 else if (state.getP2Hand().isEmpty() && !(state.getP2TopPalaceCards().isEmpty())) {
                     //when play pile is empty
                     if (state.getPlayPilePalaceCards().isEmpty()) {
+                        hasBeenSelected = true;
                         cardToSelect =
                                 state.getP2TopPalaceCards().
                                         get(findMinPlayable(state.getP2TopPalaceCards(),
-                                                (new PalaceCard(1, 2))));
-                        System.out.println("compPlayer selected from the top (w/o play pile) " + cardToSelect);
+                                                null));
+                        System.out.println("compPlayer selected from the top (w/o play pile) " +
+                                cardToSelect);
                     }
                     //when play pile is NOT empty
                     else {
                         for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
                             if (state.getP2TopPalaceCards().get(i).getRank() >
                                     state.getPlayPilePalaceCards().
-                                            get(state.getPlayPilePalaceCards().size() - 1).getRank()) {
+                                            get(state.getPlayPilePalaceCards().size() - 1).
+                                                getRank()) {
                                 isBigger = true;
                             }
                         }
                         //select the card that can beat the play pile card
                         if (isBigger) {
-                            cardToSelect =
-                                    state.getP2TopPalaceCards().
-                                            get(findMinPlayable(state.getP2TopPalaceCards(),
-                                                    state.getPlayPilePalaceCards().
-                                                            get(state.getPlayPilePalaceCards().size() - 1)));
+                            hasBeenSelected = true;
+                            cardToSelect = state.getP2TopPalaceCards().
+                                    get(findMinPlayable(state.getP2TopPalaceCards(),
+                                            state.getPlayPilePalaceCards().
+                                                    get(state.getPlayPilePalaceCards().
+                                                            size() - 1)));
+
                             System.out.println("compPlayer selected from the top " + cardToSelect);
                         }
                         //take the pile if no card can beat the play pile card
@@ -181,26 +203,33 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                 else if (state.getP2TopPalaceCards().isEmpty() && state.getP2Hand().isEmpty()) {
                     //when the play pile is NOT empty
                     if (!state.getPlayPilePalaceCards().isEmpty()) {
+                        hasBeenSelected = true;
                         cardToSelect =
                                 state.getP2BottomPalaceCards().
                                         get(findMinPlayable(state.getP2BottomPalaceCards(),
                                                 state.getPlayPilePalaceCards().
-                                                        get(state.getPlayPilePalaceCards().size() - 1)));
-                        System.out.println("compPlayer selected " + cardToSelect);
+                                                        get(state.getPlayPilePalaceCards().
+                                                                size() - 1)));
+                        System.out.println("compPlayer selected from Bottom w/ Pile" +
+                                cardToSelect);
                     }
                     //when the play pile is empty
                     else {
+                        hasBeenSelected = true;
                         cardToSelect =
                                 state.getP2BottomPalaceCards().
-                                        get(findMinPlayable(state.getP2BottomPalaceCards(), (new PalaceCard(1, 2))));
-                        System.out.println("compPlayer selected " + cardToSelect);
+                                        get(findMinPlayable(state.getP2BottomPalaceCards(),
+                                                null));
+                        System.out.println("compPlayer selected from Bottom w/o Pile" +
+                                cardToSelect);
                     }
                 }
                 //emergency broad else statement: automatically tries the hand cards
                 else {
+                    hasBeenSelected = true;
                     cardToSelect =
                             state.getP2Hand().
-                                    get(findMinPlayable(state.getP2Hand(), (new PalaceCard(1, 2))));
+                                    get(findMinPlayable(state.getP2Hand(), null));
                     System.out.println("compPlayer selected (from else statement) " + cardToSelect);
                 }
             }
@@ -216,15 +245,20 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                 System.out.println("compPlayer selected (a 10) " + cardToSelect);
 
                 //immediately select the next card to be played and continue through the method
+                //for the hand cards
                 if (!state.getP2Hand().isEmpty()) {
                     PalaceCard temp = new PalaceCard(1, 2);
                     cardToSelect = state.getP2Hand().
                             get(findMinPlayable(state.getP2Hand(), temp));
-                } else if (state.getP2Hand().isEmpty() && !state.getP2TopPalaceCards().isEmpty()) {
+                }
+                //for the top cards
+                else if (state.getP2Hand().isEmpty() && !state.getP2TopPalaceCards().isEmpty()) {
                     PalaceCard temp = new PalaceCard(1, 2);
                     cardToSelect = state.getP2TopPalaceCards().
                             get(findMinPlayable(state.getP2Hand(), temp));
-                } else {
+                }
+                //for the bottom cards
+                else {
                     PalaceCard temp = new PalaceCard(1, 2);
                     cardToSelect = state.getP2BottomPalaceCards().
                             get(findMinPlayable(state.getP2Hand(), temp));
@@ -233,6 +267,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
 
             //selectCardAction with the currently selected card
+            System.out.println("Selected Card Action has been sent");
             selectCardAction = new PalaceSelectCardAction(this, cardToSelect,
                     state.getSelectedPalaceCards());
             this.game.sendAction(selectCardAction);
@@ -251,7 +286,7 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
             //rerun selectCardAction if there are multiple of the same card
             ArrayList<PalaceCard> temp;
-            //loop through the hand
+            //loop through the hand to find multiple cards of the same rank
             if ((!(state.getP2Hand().isEmpty()))
                     && cardToSelect.getRank() != 10
                     && cardToSelect.getRank() != 2) {
@@ -262,7 +297,8 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
                         }
                         if (state.getP2Hand().get(i).getRank() == cardToSelect.getRank() &&
                                 !cardToSelect.equals(state.getP2Hand().get(i))) {
-                            selectCardAction = new PalaceSelectCardAction(this, state.getP2Hand().get(i),
+                            selectCardAction = new PalaceSelectCardAction(this,
+                                    state.getP2Hand().get(i),
                                     state.getSelectedPalaceCards());
                             this.game.sendAction(selectCardAction);
                         }
@@ -272,9 +308,14 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
             }
 
             sleep(1000);
-            //play the card
-            PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
-            this.game.sendAction(playCardAction);
+            //only run if a card has been selected
+            if (hasBeenSelected) {
+                //play the card
+                System.out.println("Play Card Action has been sent");
+                PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
+                this.game.sendAction(playCardAction);
+            }
+
         }
     }
 
@@ -290,28 +331,42 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
      */
     private int findMinPlayable(ArrayList<PalaceCard> selectFrom, PalaceCard playPileTop) {
         int indexOfCurrentMin = 0;
-        if (!selectFrom.isEmpty()) {
-            while (selectFrom.get(indexOfCurrentMin).getRank() < playPileTop.getRank() &&
-                    (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
-                            selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
-                //if statement to prevent out of bounds error
-                if (indexOfCurrentMin < selectFrom.size() - 1) {
-                    indexOfCurrentMin++;
+        if (playPileTop != null) {
+            if (!selectFrom.isEmpty()) {
+                while (selectFrom.get(indexOfCurrentMin).getRank() < playPileTop.getRank() &&
+                        (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
+                                selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
+                    //if statement to prevent out of bounds error
+                    if (indexOfCurrentMin < selectFrom.size() - 1) {
+                        indexOfCurrentMin++;
+                    }
                 }
             }
+            Log.d("compPlayer", "running min playable");
+            //evaluate all the cards in the given ArrayList, finding the min value card
+            for (int i = 0; i < selectFrom.size(); i++) {
+                if (selectFrom.get(i).getRank() < selectFrom.get(indexOfCurrentMin).getRank()
+                        && selectFrom.get(i).getRank() >= playPileTop.getRank() &&
+                        (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
+                                selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
+                    indexOfCurrentMin = i;
+                }
+            }
+            Log.d("compPlayer", "completed min playable");
+            return indexOfCurrentMin;
+        }
+        else {
+            int minRank = 14;
+            for (int i = 0; i < selectFrom.size(); i++) {
+                if (selectFrom.get(i).getRank() < minRank) {
+                    indexOfCurrentMin = i;
+                    minRank = selectFrom.get(i).getRank();
+                }
+            }
+            return indexOfCurrentMin;
         }
 
-        Log.d("compPlayer", "running min playable");
-        //evaluate all the cards in the given ArrayList, finding the min value card
-        for (int i = 0; i < selectFrom.size(); i++) {
-            if (selectFrom.get(i).getRank() < selectFrom.get(indexOfCurrentMin).getRank()
-                    && selectFrom.get(i).getRank() >= playPileTop.getRank() &&
-                    (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
-                            selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
-                indexOfCurrentMin = i;
-            }
-        }
-        Log.d("compPlayer", "completed min playable");
-        return indexOfCurrentMin;
+
+
     }
 }

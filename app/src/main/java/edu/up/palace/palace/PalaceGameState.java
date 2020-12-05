@@ -21,8 +21,6 @@ public class PalaceGameState extends GameState {
     private int numPlayers;
     private int p1numCards;
     private int p2numCards;
-    private int p3numCards;
-    private int p4numCards;
 
     private ArrayList<PalaceCard> p1Hand;
 
