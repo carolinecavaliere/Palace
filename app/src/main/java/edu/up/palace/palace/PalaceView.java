@@ -203,7 +203,7 @@ public class PalaceView extends SurfaceView {
         nine_spades = BitmapFactory.decodeResource(getResources(), R.drawable.nine_s);
         nine_spades = Bitmap.createScaledBitmap(nine_spades, cardWidth, cardHeight, true);
 
-        eight_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.eight_h);
+        eight_clubs = BitmapFactory.decodeResource(getResources(), R.drawable.eight_c);
         eight_clubs = Bitmap.createScaledBitmap(eight_clubs, cardWidth, cardHeight, true);
         eight_diamonds = BitmapFactory.decodeResource(getResources(), R.drawable.eight_d);
         eight_diamonds = Bitmap.createScaledBitmap(eight_diamonds, cardWidth, cardHeight, true);
