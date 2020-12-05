@@ -796,7 +796,6 @@ public class PalaceLocalGame extends LocalGame {
                     //adds pile to player's hand
                     palaceGame.setP1Hand(palaceGame.addToP1Hand(palaceGame.
                             getPlayPilePalaceCards().get(i)));
-                    palaceGame.setP1numCards(palaceGame.getP1numCards() + 1);
                 }
                 palaceGame.clearPlayPileCards();//play pile is gone now
             } else if (palaceGame.getTurn() == 1) {
@@ -804,7 +803,6 @@ public class PalaceLocalGame extends LocalGame {
                     //adds pile to player's hand
                     palaceGame.addToP2Hand(palaceGame.
                             getPlayPilePalaceCards().get(i));
-                    palaceGame.setP2numCards(palaceGame.getP2numCards() + 1);
                 }
                 palaceGame.clearPlayPileCards();//play pile is gone now
             } else {

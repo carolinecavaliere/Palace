@@ -76,10 +76,15 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             handCount.setText("" + "Cards in Hand: " + state.getP1Hand().size());
             currentPageCt.setText("" + "Current page: " + currentPage);
 
-            if (((PalaceGameState) info).getSelectedPalaceCards().isEmpty()) {
+            if (state.getSelectedPalaceCards().isEmpty() && state.getTurn() == 0) {
+                playCard.setVisibility(View.VISIBLE);
                 playCard.setText("Select Card(s)");
-            } else {
+            } else if (!state.getSelectedPalaceCards().isEmpty() && state.getTurn() == 0){
+                playCard.setVisibility(View.VISIBLE);
                 playCard.setText("Play it!");
+            }
+            else {
+                playCard.setVisibility(View.INVISIBLE);
             }
 
             // change the text of the button
@@ -90,11 +95,11 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             }
 
             // if the amount of cards in their hand is greater than 3, then the next button shows
-            if (((PalaceGameState) info).getP1Hand().size() > 3) {
+            if (state.getP1Hand().size() > 3) {
                 nextCards.setVisibility(View.VISIBLE);
                 // otherwise, if they have equal to or less than 3 cards, they buttons should
                 // disappear. But not until they reach the first page of cards!
-            } else if (((PalaceGameState) info).getP1Hand().size() <= 3 && currentPage <= 1) {
+            } else if (state.getP1Hand().size() <= 3 && currentPage <= 1) {
                 nextCards.setVisibility(View.INVISIBLE);
                 previousCards.setVisibility(View.INVISIBLE);
             }
@@ -103,6 +108,20 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             if (currentPage == 1) {
                 previousCards.setVisibility(View.INVISIBLE);
             }
+            else if (currentPage > 1) {
+                previousCards.setVisibility(View.VISIBLE);
+            }
+            if (state.getP1Hand().size() % 3 != 0) {
+                if (currentPage == state.getP1Hand().size()/3+1) {
+                    nextCards.setVisibility(View.INVISIBLE);
+                }
+            }
+            else {
+                if (currentPage == state.getP1Hand().size()/3) {
+                    nextCards.setVisibility(View.INVISIBLE);
+                }
+            }
+
         }
     }
 
@@ -175,20 +194,24 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalacePlayCardAction playcard = new PalacePlayCardAction(this);
             this.game.sendAction(playcard);
         } else if (button.equals(nextCards)) {
-            PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
-            this.game.sendAction(nextcards);
-            // we want to stop incrementing the page we're when we've hit the max page. But how?
-            if (currentPage < state.getP1Hand().size()-2) {
-                currentPage++;
+            if (state.getTurn() == 0) {
+                PalaceDisplayNextCards nextcards = new PalaceDisplayNextCards(this);
+                this.game.sendAction(nextcards);
+                // we want to stop incrementing the page we're when we've hit the max page. But how?
+                if (currentPage < state.getP1Hand().size()-2) {
+                    currentPage++;
+                }
+                // the user moved to a new page so set previous button visible
+                previousCards.setVisibility(View.VISIBLE);
             }
-            // the user moved to a new page so set previous button visible
-            previousCards.setVisibility(View.VISIBLE);
         } else if (button.equals((previousCards))) {
-            PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
-            this.game.sendAction(previousCards);
-            // if we're not on the first page of the cards in the hand, decrement!
-            if (currentPage > 0) {
-                currentPage--;
+            if (state.getTurn() == 0) {
+                PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
+                this.game.sendAction(previousCards);
+                // if we're not on the first page of the cards in the hand, decrement!
+                if (currentPage > 0) {
+                    currentPage--;
+                }
             }
         } else if (button.equals(switchTopCards)) {
             PalaceSwitchBaseCardsAction switchCards = new PalaceSwitchBaseCardsAction(this);
