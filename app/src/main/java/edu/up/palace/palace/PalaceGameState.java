@@ -305,11 +305,11 @@ public class PalaceGameState extends GameState {
     }
 
     public int getPlayPileNumCards() {
-        return playPileNumCards;
+        return playPilePalaceCards.size();
     }
 
-    public void setPlayPileNumCards(int playPileNumCards) {
-        this.playPileNumCards = playPileNumCards;
+    public void setPlayPileNumCards(int i) {
+        this.playPileNumCards = i;
     }
 
     public PalaceCard getCardToBeSelected() {
@@ -384,7 +384,6 @@ public class PalaceGameState extends GameState {
 
     public void clearPlayPileCards() {
         this.playPilePalaceCards.clear();
-        playPileNumCards = 0;
     }
 
     //adders and removers for Palace card ArrayLists

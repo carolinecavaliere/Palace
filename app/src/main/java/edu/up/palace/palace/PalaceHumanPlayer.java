@@ -187,7 +187,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalaceDisplayPreviousCards previousCards = new PalaceDisplayPreviousCards(this);
             this.game.sendAction(previousCards);
             // if we're not on the first page of the cards in the hand, decrement!
-            if (currentPage > 0) {
+            if (currentPage > 0 ) {
                 currentPage--;
             }
         } else if (button.equals(switchTopCards)) {
@@ -200,7 +200,6 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             PalaceDisplayHelp displayHelp = new PalaceDisplayHelp();
             displayHelp.showPopupWindow(button);
         }
-
     }
 
     /**
