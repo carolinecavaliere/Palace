@@ -154,32 +154,24 @@ public class PalaceLocalGame extends LocalGame {
                         //adds selected cards to play pile
                         palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                         //removes played cards from player's hand
-                        palaceGame.setP1Hand(palaceGame.removeFromP1Hand(index));
+                        palaceGame.removeFromP1Hand(palaceGame.getSelectedPalaceCards().get(i));
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
-                        palaceGame.setP1numCards(palaceGame.getP1numCards() - 1);
                         //adds new card to the player's hand
                         if (palaceGame.getP1Hand().size() < 3) {
-                            for (int j = palaceGame.getP1numCards(); j < 3; j++) {
+                            for (int j = palaceGame.getP1Hand().size(); j < 3; j++) {
                                 palaceGame.getDeck().drawCard(0);
-                                palaceGame.setP1numCards(palaceGame.getP1Hand().size());
                             }
 
                         }
                         //for top cards
                     } else if (palaceGame.getP1Hand().isEmpty() &&
                             !palaceGame.getP1TopPalaceCards().isEmpty()) {
-                        int index = palaceGame.getP1TopPalaceCards().indexOf(palaceGame.
-                                getSelectedPalaceCards().get(i));
                         //adds selected cards to play pile
                         palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                         //removes played cards from player's Top Cards
-                        palaceGame.removeFromP1TopCards(index);
+                        palaceGame.removeFromP1TopCards(palaceGame.
+                                getSelectedPalaceCards().get(i));
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
-                    }
-                    if (bottomCard) {
-                        changeTurn = false;
-                    } else {
-                        changeTurn = true;
                     }
                 }
                 //for player 2
@@ -191,14 +183,12 @@ public class PalaceLocalGame extends LocalGame {
                         //adds selected cards to play pile
                         palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                         //removes played cards from player's hand
-                        palaceGame.setP2Hand(palaceGame.removeFromP2Hand(index));
+                        palaceGame.removeFromP2Hand(palaceGame.getSelectedPalaceCards().get(i));
                         palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
-                        palaceGame.setP2numCards(palaceGame.getP2numCards() - 1);
                         //adds new card to the player's hand if the player's hand is smaller than 3
                         if (palaceGame.getP2Hand().size() < 3) {
-                            for (int j = palaceGame.getP2numCards(); j < 3; j++) {
+                            for (int j = palaceGame.getP2Hand().size(); j < 3; j++) {
                                 palaceGame.getDeck().drawCard(1);
-                                palaceGame.setP2numCards(palaceGame.getP2Hand().size());
                             }
                         }
                     }
@@ -228,6 +218,7 @@ public class PalaceLocalGame extends LocalGame {
                     getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
                     sameCards == 4) {
                 palaceGame.clearPlayPileCards();
+                changeTurn = false;
             } else {
                 //change the turn if the play pile isn't cleared
                 changeTurn = true;
@@ -253,20 +244,16 @@ public class PalaceLocalGame extends LocalGame {
             //for player 1
             if (palaceGame.getTurn() == 0) {
                 if (palaceGame.getP1Hand().size() > 0) {
-                    int index = palaceGame.getP1Hand().indexOf(palaceGame.
-                            getSelectedPalaceCards().get(i));
                     int sameCards = 0;
                     //adds selected cards to play pile
                     palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                     //removes played cards from player's hand
-                    palaceGame.setP1Hand(palaceGame.removeFromP1Hand(index));
+                    palaceGame.removeFromP1Hand(palaceGame.getSelectedPalaceCards().get(i));
                     palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
-                    palaceGame.setP1numCards(palaceGame.getP1numCards() - 1);
                     //adds new card to the player's hand
                     if (palaceGame.getP1Hand().size() < 3) {
-                        for (int j = palaceGame.getP1numCards(); j < 3; j++) {
+                        for (int j = palaceGame.getP1Hand().size(); j < 3; j++) {
                             palaceGame.getDeck().drawCard(0);
-                            palaceGame.setP1numCards(palaceGame.getP1Hand().size());
                         }
 
                     }
@@ -280,6 +267,7 @@ public class PalaceLocalGame extends LocalGame {
                     if (palaceGame.getSelectedPalaceCards().get(i).getRank() == 10 ||
                             sameCards == 4) {
                         palaceGame.clearPlayPileCards();
+                        changeTurn = false;
                     } else {
                         changeTurn = true;
                     }
@@ -287,14 +275,13 @@ public class PalaceLocalGame extends LocalGame {
                     palaceGame.clearSelectedCards();
                     //for top cards
                 } else if (palaceGame.getP1Hand().isEmpty() &&
-                        !palaceGame.getP1TopPalaceCards().isEmpty()) {
-                    int index = palaceGame.getP1TopPalaceCards().indexOf(palaceGame.
-                            getSelectedPalaceCards().get(i));
+                        !palaceGame.getP1TopPalaceCards().isEmpty() &&
+                        !palaceGame.getSelectedPalaceCards().isEmpty()) {
                     int sameCards = 0;
                     //adds selected cards to play pile
                     palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                     //removes played cards from player's Top Cards
-                    palaceGame.removeFromP1TopCards(index);
+                    palaceGame.removeFromP1TopCards(palaceGame.getSelectedPalaceCards().get(i));
                     palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
                     palaceGame.clearSelectedCards();
                     for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
@@ -308,14 +295,15 @@ public class PalaceLocalGame extends LocalGame {
                             getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
                             sameCards == 4) {
                         palaceGame.clearPlayPileCards();
+                        changeTurn = false;
                     } else {
                         changeTurn = true;
                     }
-
                     //for bottom cards
                 } else if (palaceGame.getP1Hand().isEmpty() &&
                         palaceGame.getP1TopPalaceCards().isEmpty() &&
-                        !palaceGame.getP1BottomPalaceCards().isEmpty()) {
+                        !palaceGame.getP1BottomPalaceCards().isEmpty() &&
+                        !palaceGame.getSelectedPalaceCards().isEmpty()) {
                     int sameCards = 0;
                     PalaceCard randCard = palaceGame.getP1BottomPalaceCards().get(i);
                     //adds selected cards to play pile
@@ -353,16 +341,12 @@ public class PalaceLocalGame extends LocalGame {
                     //adds selected cards to play pile
                     palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                     //removes played cards from player's hand
-                    palaceGame.setP2Hand(palaceGame.removeFromP2Hand(index));
-                    palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
-                    palaceGame.setP2numCards(palaceGame.getP2numCards() - 1);
+                    palaceGame.removeFromP2Hand(palaceGame.getSelectedPalaceCards().get(i));
                     //adds new card to the player's hand if the player's hand is less than 3
                     if (palaceGame.getP2Hand().size() < 3) {
-                        for (int j = palaceGame.getP2numCards(); j < 3; j++) {
+                        for (int j = palaceGame.getP2Hand().size(); j < 3; j++) {
                             palaceGame.getDeck().drawCard(1);
-                            palaceGame.setP2numCards(palaceGame.getP2Hand().size());
                         }
-
                     }
                     //for-loop to check how many same value cards in the play pile
                     for (int k = 0; k < palaceGame.getPlayPileNumCards(); k++) {
@@ -375,6 +359,7 @@ public class PalaceLocalGame extends LocalGame {
                     if (palaceGame.getSelectedPalaceCards().get(i).getRank() == 10 ||
                             sameCards == 4) {
                         palaceGame.clearPlayPileCards();
+                        changeTurn = false;
                     } else {
                         changeTurn = true;
                     }
@@ -383,13 +368,11 @@ public class PalaceLocalGame extends LocalGame {
                     //for the top cards
                 } else if (palaceGame.getP2Hand().isEmpty() &&
                         !palaceGame.getP2TopPalaceCards().isEmpty()) {
-                    int index = palaceGame.getP2TopPalaceCards().indexOf(palaceGame.
-                            getSelectedPalaceCards().get(i));
                     int sameCards = 0;
                     //adds selected cards to play pile
                     palaceGame.addToPlayPile(palaceGame.getSelectedPalaceCards().get(i));
                     //removes played cards from player's Top Cards
-                    palaceGame.removeFromP2TopCards(index);
+                    palaceGame.removeFromP2TopCards(palaceGame.getSelectedPalaceCards().get(i));
                     palaceGame.setPlayPileNumCards(palaceGame.getPlayPileNumCards() + 1);
                     palaceGame.clearSelectedCards();
                     //for-loop to check how many same value cards in the play pile
@@ -405,6 +388,7 @@ public class PalaceLocalGame extends LocalGame {
                             getPlayPilePalaceCards().size() - 1).getRank() == 10 ||
                             sameCards == 4) {
                         palaceGame.clearPlayPileCards();
+                        changeTurn = false;
                     } else {
                         changeTurn = true;
                     }
