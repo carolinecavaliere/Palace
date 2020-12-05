@@ -11,7 +11,9 @@ import edu.up.palace.game.infoMsg.GameInfo;
  * it won't make any smart moves to take the pile if they wanted to build up their strong cards.
  * <p>
  * CAVEATS: Sometimes it's hard to beat b/c it always plays the card that it can and sometimes it
- * might be a high card that you can never beat lol.
+ * might be a high card that you can never beat. Sometimes it crashes due to an index out of bounds
+ * exception. We are very unsure why, as this happens on line 85 where it should not even be entering
+ * this if block if the play pile is empty.
  *
  * @author Jimi Hayes, Caroline Cavaliere, Nathaniel Pon, Chloe Gan
  */
