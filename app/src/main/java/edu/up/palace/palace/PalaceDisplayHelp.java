@@ -87,9 +87,12 @@ public class PalaceDisplayHelp {
         Button dismiss = popupView.findViewById(R.id.dismiss);
         Button next = popupView.findViewById(R.id.next);
         Button previous = popupView.findViewById(R.id.previous);
+
+        //close the help window
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gameSummary.setText("");
                 popupWindow.dismiss();
             }
         });
