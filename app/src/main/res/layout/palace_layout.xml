@@ -16,6 +16,12 @@
             android:layout_height="match_parent"
             android:layout_weight="50" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
         <LinearLayout
             android:id="@+id/playOptions"
             android:layout_width="match_parent"
@@ -83,6 +89,12 @@
 
                 <TextView
                     android:id="@+id/cardsInHand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/currentPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
