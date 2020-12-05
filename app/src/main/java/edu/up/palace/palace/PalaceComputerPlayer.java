@@ -23,8 +23,8 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
 
 
     /**
-     * Dont think overriding does anything but i included it cuz it seemed to make it stable.
-     * We can use this method because we have drect access to the computer's thread.
+     * Don't think overriding does anything but i included it because it seemed to make it stable.
+     * We can use this method because we have direct access to the computer's thread.
      * @param milliseconds
      */
     @Override
@@ -50,7 +50,9 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
             return;
         } else {
             sleep(1000); // make the computer "think"
-            boolean isBigger = false;
+            boolean isBigger = false;// variable to check if they have a valid card
+
+            //determines if the cards are valid
             if (!(state.getP2Hand().isEmpty()) && !state.getPlayPilePalaceCards().isEmpty()) {
                 for (int i = 0; i < state.getP2Hand().size(); i++) {
                     if (state.getP2Hand().get(i).getRank() > state.getPlayPilePalaceCards().
@@ -59,14 +61,22 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
+
+            //takes pile if they have no hand cards to play
             if (isBigger == false && !(state.getP2Hand().isEmpty())) {
                 PalaceTakePileAction take = new PalaceTakePileAction(this);
                 Log.d("compPlayer", "took the pile");
                 this.game.sendAction(take);
             }
+
+            //begins searching  for a card to select
             PalaceCard cardToSelect = null;
+
+            // check  in  the case when the play pile and their hand are both not empty
             if (!(state.getPlayPilePalaceCards().isEmpty()) && (!(state.getP2Hand().isEmpty()))) {
-                // while they haven't selected a card or the card they selected is less than the
+
+                // while they haven't selected a card or the card they selected is less than the top card
+                // another card is selected at random from their hand
                 while (cardToSelect == null ||
                         (cardToSelect.getRank() <
                                 (state.getPlayPilePalaceCards().
@@ -76,21 +86,32 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     cardToSelect =
                             state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
                 }
+
+                // selects a card when  they are playing from their top cards
             } else if (state.getP2Hand().isEmpty() && (!(state.getP2TopPalaceCards().isEmpty()))) {
+
+                //pick any random card if the play pile is empty
                 if (state.getPlayPilePalaceCards().isEmpty()) {
                     cardToSelect =
                             state.getP2TopPalaceCards().
                                     get((int) (Math.random() * state.getP2TopPalaceCards().size()));
-                } else {
+                }
+
+                //play pile is not empty so find a valid card
+                else {
+
+                    //checks to see if  there is a valid card
                     for (int i = 0; i < state.getP2TopPalaceCards().size(); i++) {
                         if (state.getP2TopPalaceCards().get(i).getRank() >
                                 state.getPlayPilePalaceCards().
                                         get(state.getPlayPilePalaceCards().size() - 1).getRank() &&
                                 state.getPlayPilePalaceCards().
-                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >=0) {
+                                        get(state.getPlayPilePalaceCards().size() - 1).getRank() >= 0) {
                             isBigger = true;
                         }
                     }
+
+                    //finds a random valid card because there is one that is valid
                     if (isBigger) {
                         while (cardToSelect == null ||
                                 (cardToSelect.getRank() <
@@ -99,26 +120,37 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                                                 getRank() &&
                                         state.getPlayPilePalaceCards().
                                                 get(state.getPlayPilePalaceCards().size() - 1).
-                                                getRank() >=0)) {
+                                                getRank() >= 0)) {
                             cardToSelect =
                                     state.getP2TopPalaceCards().
                                             get((int) (Math.random() * state.
                                                     getP2TopPalaceCards().size()));
                         }
-                    } else {
+                    }
+
+                    //no card to be played so take the pile
+                    else {
                         PalaceTakePileAction take = new PalaceTakePileAction(this);
                         Log.d("compPlayer", "took the pile");
                         this.game.sendAction(take);
                     }
                 }
-            } else if (state.getP2TopPalaceCards().isEmpty() ) {
+            }
+
+            //they only have bottom cards left, all are valid to be played so pick a random one
+            else if (state.getP2TopPalaceCards().isEmpty()&&state.getP2Hand().isEmpty()) {
                 cardToSelect =
                         state.getP2BottomPalaceCards().
                                 get((int) (Math.random() * state.getP2BottomPalaceCards().size()));
-            } else {
+            }
+
+            //the play pile is empty and they only have hand cards, pick one at random
+            else {
                 cardToSelect =
                         state.getP2Hand().get((int) (Math.random() * state.getP2Hand().size()));
             }
+
+            //create and send the select card action with the selected  card
             selectCardAction = new PalaceSelectCardAction(this, cardToSelect,
                     state.getSelectedPalaceCards());
             this.game.sendAction(selectCardAction);
@@ -144,6 +176,8 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
+
+            //creates and sends the playCardAction
             PalacePlayCardAction playCardAction = new PalacePlayCardAction(this);
             this.game.sendAction(playCardAction);
         }

@@ -12,8 +12,8 @@ import java.util.Collections;
  * the deck(s)
  */
 public class PalaceDeckOfCards {
-    static ArrayList<PalaceCard> deck = new ArrayList<PalaceCard>();//actual array
-    static PalaceGameState state;
+    private static ArrayList<PalaceCard> deck = new ArrayList<PalaceCard>();//actual array
+    private PalaceGameState state;
     protected static int cardCount;
     PalaceDeckOfCards(PalaceGameState palaceGameState){
         state = palaceGameState;
@@ -117,7 +117,7 @@ public class PalaceDeckOfCards {
      * User and computer gets 3 cards in their initial hand, 3 cards in their visible top hand,
      *  and 3 non-visible cards in their bottom hand
      */
-    public static void DealDeck(){
+    public void DealDeck(){
         for (int i=0; i<3; i++){
             if(state.getNumPlayers()==2){
                 state.addToP1Bottom(deck.get(0));
