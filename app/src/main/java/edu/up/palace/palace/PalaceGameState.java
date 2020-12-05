@@ -164,7 +164,9 @@ public class PalaceGameState extends GameState {
     }
 
 
-    //getters and setters
+    /**
+     * getters and setters for each game state variable
+     */
 
     public int getNumDisplayHand() {
         return numDisplayHand;
@@ -377,7 +379,9 @@ public class PalaceGameState extends GameState {
         playPileNumCards = 0;
     }
 
-    //adders and removers for Palace card ArrayLists
+    /**
+     * adders and removers for Palace card ArrayLists
+     */
 
     public ArrayList<PalaceCard> addToPlayPile(PalaceCard add) {
         playPilePalaceCards.add(add);
