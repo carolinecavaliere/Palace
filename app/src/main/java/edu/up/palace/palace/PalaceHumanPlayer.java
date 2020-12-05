@@ -351,8 +351,9 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
                         this.game.sendAction(selectcard);
                     }
+
                     // for Bottom Cards
-                    // Middle card of the top hand shown in the view
+                    // Middle card of the Bottom shown in the view
                     if (x > view.getPlayerTopCardCenterX() &&
                             x < view.getPlayerTopCardCenterX() + cardWidth &&
                             y > view.getPlayerTopCardCenterY() &&
@@ -369,7 +370,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         this.game.sendAction(selectcard);
                     }
 
-                    // First (left-most) card of the top hand shown in the view
+                    // First (left-most) card of the Bottom shown in the view
                     if (x > view.getPlayerTopCardLeftX() &&
                             x < view.getPlayerTopCardLeftX() + cardWidth &&
                             y > view.getPlayerTopCardLeftY() &&
@@ -386,7 +387,7 @@ public class PalaceHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                         this.game.sendAction(selectcard);
                     }
 
-                    //third card (right-most) of the user hand shown in the view
+                    //third card (right-most) of the Bottom shown in the view
                     if (x > view.getPlayerTopCardRightX() &&
                             x < view.getPlayerTopCardRightX() + cardWidth &&
                             y > view.getPlayerTopCardRightY() &&

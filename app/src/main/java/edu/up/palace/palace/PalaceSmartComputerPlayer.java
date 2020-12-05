@@ -289,14 +289,14 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
      * @return
      */
     private int findMinPlayable(ArrayList<PalaceCard> selectFrom, PalaceCard playPileTop) {
-        int indexOfCurrMax = 0;
+        int indexOfCurrentMin = 0;
         if (!selectFrom.isEmpty()) {
-            while (selectFrom.get(indexOfCurrMax).getRank() < playPileTop.getRank() &&
-                    (selectFrom.get(indexOfCurrMax).getRank() != 2 &&
-                            selectFrom.get(indexOfCurrMax).getRank() != 10)) {
+            while (selectFrom.get(indexOfCurrentMin).getRank() < playPileTop.getRank() &&
+                    (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
+                            selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
                 //if statement to prevent out of bounds error
-                if (indexOfCurrMax < selectFrom.size() - 1) {
-                    indexOfCurrMax++;
+                if (indexOfCurrentMin < selectFrom.size() - 1) {
+                    indexOfCurrentMin++;
                 }
             }
         }
@@ -304,14 +304,14 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         Log.d("compPlayer", "running min playable");
         //evaluate all the cards in the given ArrayList, finding the min value card
         for (int i = 0; i < selectFrom.size(); i++) {
-            if (selectFrom.get(i).getRank() < selectFrom.get(indexOfCurrMax).getRank()
+            if (selectFrom.get(i).getRank() < selectFrom.get(indexOfCurrentMin).getRank()
                     && selectFrom.get(i).getRank() >= playPileTop.getRank() &&
-                    (selectFrom.get(indexOfCurrMax).getRank() != 2 &&
-                            selectFrom.get(indexOfCurrMax).getRank() != 10)) {
-                indexOfCurrMax = i;
+                    (selectFrom.get(indexOfCurrentMin).getRank() != 2 &&
+                            selectFrom.get(indexOfCurrentMin).getRank() != 10)) {
+                indexOfCurrentMin = i;
             }
         }
         Log.d("compPlayer", "completed min playable");
-        return indexOfCurrMax;
+        return indexOfCurrentMin;
     }
 }
