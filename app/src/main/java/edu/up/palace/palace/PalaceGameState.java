@@ -208,14 +208,6 @@ public class PalaceGameState extends GameState {
         this.p2numCards = p2numCards;
     }
 
-    public int getP3numCards() {
-        return p3numCards;
-    }
-
-    public int getP4numCards() {
-        return p4numCards;
-    }
-
     public ArrayList<PalaceCard> getP1Hand() {
         return p1Hand;
     }
@@ -305,7 +297,7 @@ public class PalaceGameState extends GameState {
     }
 
     public int getPlayPileNumCards() {
-        return playPileNumCards;
+        return playPilePalaceCards.size(); // to accurately reflect number of cards in play pile
     }
 
     public void setPlayPileNumCards(int playPileNumCards) {
