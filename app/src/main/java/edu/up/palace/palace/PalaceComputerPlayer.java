@@ -23,7 +23,7 @@ public class PalaceComputerPlayer extends GameComputerPlayer {
 
 
     /**
-     * Don'tt think overriding does anything but i included it because it seemed to make it stable.
+     * Don't think overriding does anything but i included it because it seemed to make it stable.
      * We can use this method because we have direct access to the computer's thread.
      * @param milliseconds
      */
