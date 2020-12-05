@@ -43,8 +43,12 @@ public class PalaceSmartComputerPlayer extends GameComputerPlayer {
         boolean isTwo = false;
         PalaceCard cardToSelect = null;
         if (!(info instanceof PalaceGameState)) {
-            if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
-                System.out.println("Reached here");
+            if (info instanceof IllegalMoveInfo) {
+                System.out.println("Illegal Move");
+                return;
+            }
+            if (info instanceof NotYourTurnInfo) {
+                System.out.println("Not your turn");
                 return;
             }
         }
